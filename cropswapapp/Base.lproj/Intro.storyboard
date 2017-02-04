@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zb0-jt-1vl">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+        <array key="VarelaRound-Regular.ttf">
+            <string>VarelaRound-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--IntroVC-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="IntroVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-background" translatesAutoresizingMaskIntoConstraints="NO" id="6du-tq-2Zx"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cv3-Pa-gAc">
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pN2-n5-gLt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                <state key="normal" title="LOGIN VIA INSTAGRAM">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="instagramButtonTouched" destination="BYZ-38-t0r" eventType="touchUpInside" id="MlL-0t-X1W"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wSP-lY-Rzh">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Al9-nU-fMh">
+                                        <color key="backgroundColor" red="1" green="0.39651786680000001" blue="0.3844039064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="u8G-qq-PRQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                        <state key="normal" title="LOGIN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToLoginView" destination="BYZ-38-t0r" eventType="touchUpInside" id="QGk-pD-xVB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rj-D0-wsl">
+                                        <color key="backgroundColor" red="1" green="0.396078431372549" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="8d4-l5-oEi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                        <state key="normal" title="SIGN UP">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToSignupView" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Fa-pN-KYX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-logo" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-6f-gvH">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="eMa-vE-H3e"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="KGr-Zz-g9o">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="UoY-TS-T4e"/>
+                                    <constraint firstAttribute="width" constant="39" id="fDU-Mc-QsA"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KGr-Zz-g9o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="5j4-8x-Th8"/>
+                            <constraint firstItem="NeN-6f-gvH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8mN-8k-0uj"/>
+                            <constraint firstAttribute="trailing" secondItem="6du-tq-2Zx" secondAttribute="trailing" id="Flm-C0-g17"/>
+                            <constraint firstItem="Cv3-Pa-gAc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="HJd-Fz-yTu"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6du-tq-2Zx" secondAttribute="bottom" id="JE7-Yu-hls"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wSP-lY-Rzh" secondAttribute="trailing" id="L4V-wh-D69"/>
+                            <constraint firstItem="NeN-6f-gvH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="Sui-Ge-Xb9"/>
+                            <constraint firstItem="6du-tq-2Zx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UBB-dK-Pnk"/>
+                            <constraint firstItem="6du-tq-2Zx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Vwk-Vl-sGs"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Cv3-Pa-gAc" secondAttribute="bottom" constant="20" id="ZGT-WD-7h3"/>
+                            <constraint firstItem="NeN-6f-gvH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b8h-ko-zp2"/>
+                            <constraint firstItem="KGr-Zz-g9o" firstAttribute="centerY" secondItem="Cv3-Pa-gAc" secondAttribute="centerY" id="crf-7c-nax"/>
+                            <constraint firstItem="Cv3-Pa-gAc" firstAttribute="top" secondItem="wSP-lY-Rzh" secondAttribute="bottom" constant="20" id="fuy-93-XKK"/>
+                            <constraint firstItem="wSP-lY-Rzh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lBW-Wa-vZN"/>
+                            <constraint firstItem="Cv3-Pa-gAc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nwD-bl-8zY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6vV-Zj-6nB"/>
+                    <connections>
+                        <outlet property="instagramButton" destination="Cv3-Pa-gAc" id="LnQ-fS-XHk"/>
+                        <outlet property="loginButton" destination="Al9-nU-fMh" id="wi7-HM-vpH"/>
+                        <outlet property="signupButton" destination="9Rj-D0-wsl" id="dSE-dN-Iu7"/>
+                        <segue destination="p1b-1b-UIm" kind="show" identifier="IntroToLogin" id="4Mf-gC-TNV"/>
+                        <segue destination="GCI-cC-qEM" kind="show" identifier="IntroToSignup" id="qcf-d7-BAq"/>
+                        <segue destination="uIL-Qf-Wd5" kind="presentation" identifier="IntroToInstagram" id="ohJ-ej-aaf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896.79999999999995" y="293.70314842578711"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="82d-kJ-WXx">
+            <objects>
+                <tableViewController id="p1b-1b-UIm" customClass="LoginVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="C6M-WV-65m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="zfG-vS-bCt">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="aZp-Tf-ebM">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="210"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aZp-Tf-ebM" id="l97-6w-YT7">
+                                            <frame key="frameInset" width="375" height="210"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Qf-Ku-lBe">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YX-ARL">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="g6e-6k-fmH"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q22-IV-cjd">
+                                                            <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="f4J-kV-65Q"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
+                                                            <state key="normal" title="LOGIN VIA INSTAGRAM">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="instagramButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="IZy-ST-KE0"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or via Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGS-Zh-DD4">
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="EnZ-83-42x">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="39" id="Qtd-yb-NFE"/>
+                                                        <constraint firstAttribute="width" constant="39" id="x4f-3N-262"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="EnZ-83-42x" firstAttribute="centerY" secondItem="Q22-IV-cjd" secondAttribute="centerY" id="CEc-qj-SVs"/>
+                                                <constraint firstItem="3Qf-Ku-lBe" firstAttribute="leading" secondItem="l97-6w-YT7" secondAttribute="leadingMargin" id="CiA-SN-uJh"/>
+                                                <constraint firstItem="EnZ-83-42x" firstAttribute="leading" secondItem="Q22-IV-cjd" secondAttribute="leading" constant="10" id="EpL-bf-w2R"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3Qf-Ku-lBe" secondAttribute="trailing" id="fjC-Kl-Tvq"/>
+                                                <constraint firstItem="3Qf-Ku-lBe" firstAttribute="centerY" secondItem="l97-6w-YT7" secondAttribute="centerY" id="hzi-3J-8Vq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="ADF-Cz-TbO">
+                                        <rect key="frame" x="0.0" y="274" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ADF-Cz-TbO" id="jI9-MG-Xo8">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyN-jG-7ho">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="f0L-Tb-xt8"/>
+                                                    </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="p1b-1b-UIm" id="xNN-Gm-LzC"/>
+                                                        <outlet property="nextTextField" destination="pPL-rT-dpO" id="y6j-xJ-0tS"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nyN-jG-7ho" secondAttribute="trailing" id="1ON-dY-qIZ"/>
+                                                <constraint firstItem="nyN-jG-7ho" firstAttribute="centerY" secondItem="jI9-MG-Xo8" secondAttribute="centerY" id="cZh-mi-czJ"/>
+                                                <constraint firstItem="nyN-jG-7ho" firstAttribute="leading" secondItem="jI9-MG-Xo8" secondAttribute="leadingMargin" id="pNk-w3-9Ci"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="vRt-qw-Aj0">
+                                        <rect key="frame" x="0.0" y="334" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vRt-qw-Aj0" id="OrV-Ic-73l">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pPL-rT-dpO">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="iX2-nq-cgI"/>
+                                                    </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="p1b-1b-UIm" id="utb-ER-WHT"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="pPL-rT-dpO" firstAttribute="centerY" secondItem="OrV-Ic-73l" secondAttribute="centerY" id="0FF-Ex-g8N"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pPL-rT-dpO" secondAttribute="trailing" id="0qm-CH-STb"/>
+                                                <constraint firstItem="pPL-rT-dpO" firstAttribute="leading" secondItem="OrV-Ic-73l" secondAttribute="leadingMargin" id="SXU-2I-fun"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="230" id="Szz-Vd-Cs8">
+                                        <rect key="frame" x="0.0" y="394" width="375" height="230"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szz-Vd-Cs8" id="goF-v4-Mdy">
+                                            <frame key="frameInset" width="375" height="230"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oyM-sB-2g9">
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fx-Pf-gko">
+                                                            <color key="backgroundColor" red="0.89411764709999997" green="0.92549019610000005" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="T3l-Bc-rTh"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <state key="normal" title="Login">
+                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="loginButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="UPd-QJ-ZRB"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bug-VA-2yp">
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="fPk-GT-7jl"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
+                                                            <state key="normal" title="Forgot your login details?">
+                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="forgotButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="76Y-wr-gTO"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V84-62-PUh">
+                                                            <color key="backgroundColor" red="0.4941176471" green="0.68627450980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="GN0-Ue-OMz"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <state key="normal" title="Sign up">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="signupButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="j0C-W7-Dae"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="oyM-sB-2g9" firstAttribute="top" secondItem="goF-v4-Mdy" secondAttribute="topMargin" constant="20" id="6Xh-jq-J6t"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oyM-sB-2g9" secondAttribute="trailing" id="Pdv-t7-Lbb"/>
+                                                <constraint firstItem="oyM-sB-2g9" firstAttribute="leading" secondItem="goF-v4-Mdy" secondAttribute="leadingMargin" id="YEx-Lj-HTP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="p1b-1b-UIm" id="Spf-a4-Gdg"/>
+                            <outlet property="delegate" destination="p1b-1b-UIm" id="mPf-Qj-epa"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="emailTextField" destination="nyN-jG-7ho" id="8ld-Tg-9eA"/>
+                        <outlet property="loginButton" destination="1Fx-Pf-gko" id="WKu-qI-faY"/>
+                        <outlet property="loginInstagramButton" destination="Q22-IV-cjd" id="RpD-xM-lzy"/>
+                        <outlet property="passwordTextField" destination="pPL-rT-dpO" id="2OY-GE-RhI"/>
+                        <outlet property="signupButton" destination="V84-62-PUh" id="IWt-Rt-3MD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tyL-GI-0bn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2137" y="536"/>
+        </scene>
+        <!--InstagramVC-->
+        <scene sceneID="grv-cO-qRC">
+            <objects>
+                <viewController id="ImU-r8-Qk7" customClass="InstagramVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UC5-S6-NE9"/>
+                        <viewControllerLayoutGuide type="bottom" id="5KL-A6-OIa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dNq-gl-ckK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZo-El-c7E">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kZo-El-c7E" secondAttribute="trailing" id="6E3-ny-4L0"/>
+                            <constraint firstItem="kZo-El-c7E" firstAttribute="leading" secondItem="dNq-gl-ckK" secondAttribute="leading" id="BeP-8a-hV9"/>
+                            <constraint firstItem="kZo-El-c7E" firstAttribute="top" secondItem="dNq-gl-ckK" secondAttribute="top" id="xWh-vf-de2"/>
+                            <constraint firstItem="5KL-A6-OIa" firstAttribute="top" secondItem="kZo-El-c7E" secondAttribute="bottom" id="yww-M1-J7X"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NpW-dp-cQj">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="LbW-ov-3uN">
+                            <connections>
+                                <action selector="closeButtonTouched" destination="ImU-r8-Qk7" id="1wM-3E-1Av"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="kZo-El-c7E" id="7kF-jO-qZA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKr-5e-xi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1836" y="-667.91604197901052"/>
+        </scene>
+        <!--SignupVC-->
+        <scene sceneID="tm5-d0-Ejy">
+            <objects>
+                <tableViewController id="GCI-cC-qEM" customClass="SignupVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BL7-8E-Git">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="NIq-Ef-noK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="499-sU-ojf">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="210"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="499-sU-ojf" id="Cbv-H1-M7y">
+                                            <frame key="frameInset" width="375" height="210"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bon-Ou-kFX">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="lSB-TR-JMS">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="Yy4-v9-0bI"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnT-ru-NNS">
+                                                            <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="8XN-f4-AvJ"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
+                                                            <state key="normal" title="SIGN UP VIA INSTAGRAM">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="instagramButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="bhe-3x-ea9"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or via Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-Jd-wqE">
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Tx-A0n">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="39" id="3wl-7V-Jvo"/>
+                                                        <constraint firstAttribute="height" constant="39" id="CTk-rH-oio"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="bon-Ou-kFX" firstAttribute="leading" secondItem="Cbv-H1-M7y" secondAttribute="leadingMargin" id="2rU-02-0GI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bon-Ou-kFX" secondAttribute="trailing" id="Nza-8q-a8p"/>
+                                                <constraint firstItem="4ab-Tx-A0n" firstAttribute="leading" secondItem="KnT-ru-NNS" secondAttribute="leading" constant="10" id="RgS-Kz-Qip"/>
+                                                <constraint firstItem="bon-Ou-kFX" firstAttribute="centerY" secondItem="Cbv-H1-M7y" secondAttribute="centerY" id="ars-qy-Aho"/>
+                                                <constraint firstItem="4ab-Tx-A0n" firstAttribute="centerY" secondItem="KnT-ru-NNS" secondAttribute="centerY" id="kvv-wJ-E7A"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="2Ng-IG-zde">
+                                        <rect key="frame" x="0.0" y="274" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ng-IG-zde" id="EtC-dC-zZD">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7X-aL-8SS">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="mlJ-AW-V7C"/>
+                                                    </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="fjQ-EO-pkO"/>
+                                                        <outlet property="nextTextField" destination="OhT-Fh-4mW" id="p2L-uv-lLt"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="f7X-aL-8SS" firstAttribute="centerY" secondItem="EtC-dC-zZD" secondAttribute="centerY" id="9dv-d2-q7x"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="f7X-aL-8SS" secondAttribute="trailing" id="M8Y-mX-6G2"/>
+                                                <constraint firstItem="f7X-aL-8SS" firstAttribute="leading" secondItem="EtC-dC-zZD" secondAttribute="leadingMargin" id="iXl-fd-CbR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="nfq-5j-I2O">
+                                        <rect key="frame" x="0.0" y="334" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nfq-5j-I2O" id="VjA-Ca-sWG">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OhT-Fh-4mW">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="6tq-fH-6od"/>
+                                                    </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="FOj-AY-9yn"/>
+                                                        <outlet property="nextTextField" destination="HUm-WP-8Lg" id="7CN-nc-Z8c"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="OhT-Fh-4mW" firstAttribute="leading" secondItem="VjA-Ca-sWG" secondAttribute="leadingMargin" id="baj-Lu-Cmi"/>
+                                                <constraint firstItem="OhT-Fh-4mW" firstAttribute="centerY" secondItem="VjA-Ca-sWG" secondAttribute="centerY" id="i60-ST-fQ0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OhT-Fh-4mW" secondAttribute="trailing" id="nus-yP-udr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="ups-1X-zDe">
+                                        <rect key="frame" x="0.0" y="394" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ups-1X-zDe" id="EeC-PJ-gE2">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUm-WP-8Lg">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="N2s-St-bhC"/>
+                                                    </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="CDb-74-p2F"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HUm-WP-8Lg" secondAttribute="trailing" id="Rnh-Ty-fPc"/>
+                                                <constraint firstItem="HUm-WP-8Lg" firstAttribute="leading" secondItem="EeC-PJ-gE2" secondAttribute="leadingMargin" id="Tkp-Vd-xEf"/>
+                                                <constraint firstItem="HUm-WP-8Lg" firstAttribute="centerY" secondItem="EeC-PJ-gE2" secondAttribute="centerY" id="Wph-iD-fjA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="EUk-jJ-Mhx">
+                                        <rect key="frame" x="0.0" y="454" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUk-jJ-Mhx" id="z9M-Tx-cRD">
+                                            <frame key="frameInset" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pEG-ly-QV3">
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4R-qQ-f3c">
+                                                            <color key="backgroundColor" red="0.89411764709999997" green="0.92549019610000005" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="gGH-hZ-LRd"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <state key="normal" title="Sign up">
+                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="signupButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="eKc-JD-H8V"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meL-A3-1Ra">
+                                                            <color key="backgroundColor" red="0.4941176471" green="0.68627450980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="M5t-ts-Bbv"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
+                                                            <state key="normal" title="Login">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="loginButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="jFm-Pu-A7m"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="pEG-ly-QV3" firstAttribute="top" secondItem="z9M-Tx-cRD" secondAttribute="topMargin" constant="20" id="C2F-sZ-x3Q"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pEG-ly-QV3" secondAttribute="trailing" id="DTN-T9-4qg"/>
+                                                <constraint firstItem="pEG-ly-QV3" firstAttribute="leading" secondItem="z9M-Tx-cRD" secondAttribute="leadingMargin" id="JJa-kI-sJk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="GCI-cC-qEM" id="lNd-6Y-JQ4"/>
+                            <outlet property="delegate" destination="GCI-cC-qEM" id="lWU-Op-nkG"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="emailTextField" destination="OhT-Fh-4mW" id="0xo-f9-Bdo"/>
+                        <outlet property="loginButton" destination="meL-A3-1Ra" id="R4Q-WX-1oh"/>
+                        <outlet property="nameTextField" destination="f7X-aL-8SS" id="NjV-gN-4Zg"/>
+                        <outlet property="passwordTextField" destination="HUm-WP-8Lg" id="91E-Tb-6A4"/>
+                        <outlet property="signupButton" destination="S4R-qQ-f3c" id="Dqp-uN-vud"/>
+                        <outlet property="signupInstagramButton" destination="KnT-ru-NNS" id="RCK-Pd-Pjf"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IHC-oQ-FDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3076" y="-229.83508245877064"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gqM-jv-EtC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zb0-jt-1vl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZzM-r8-17X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Rcg-x9-EMz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mjT-Iy-msn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-41" y="294"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0vE-Ao-gdp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uIL-Qf-Wd5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mmy-qk-x3f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ImU-r8-Qk7" kind="relationship" relationship="rootViewController" id="vbg-uE-caH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37M-0B-Ulc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896.79999999999995" y="-668.81559220389806"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="intro-background" width="414" height="736"/>
+        <image name="intro-cropswap-logo" width="355" height="57"/>
+        <image name="intro-cropswap-white-logo" width="310" height="49"/>
+        <image name="intro-instagram-logo" width="36" height="36"/>
+    </resources>
+</document>

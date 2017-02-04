@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		691ED5CA1E43C6A0005F6E2A /* InstagramLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691ED5C91E43C6A0005F6E2A /* InstagramLoginVC.swift */; };
+		691ED5CD1E43C759005F6E2A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691ED5CC1E43C759005F6E2A /* Constants.swift */; };
+		691ED5ED1E451DCE005F6E2A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691ED5EC1E451DCE005F6E2A /* Utils.swift */; };
+		6945B5D41E39306300AA0799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945B5D31E39306300AA0799 /* AppDelegate.swift */; };
+		6945B5D91E39306300AA0799 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6945B5D71E39306300AA0799 /* Intro.storyboard */; };
+		6945B5DB1E39306300AA0799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6945B5DA1E39306300AA0799 /* Assets.xcassets */; };
+		6945B5DE1E39306300AA0799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6945B5DC1E39306300AA0799 /* LaunchScreen.storyboard */; };
+		69EE4AD91E3FCBDC00C95624 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AD81E3FCBDC00C95624 /* GoogleService-Info.plist */; };
+		69EE4AE71E3FCDE700C95624 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADC1E3FCDE700C95624 /* VarelaRound-Regular.ttf */; };
+		69EE4AE81E3FCDE700C95624 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADD1E3FCDE700C95624 /* OpenSans-Bold.ttf */; };
+		69EE4AE91E3FCDE700C95624 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADE1E3FCDE700C95624 /* OpenSans-BoldItalic.ttf */; };
+		69EE4AEA1E3FCDE700C95624 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADF1E3FCDE700C95624 /* OpenSans-ExtraBold.ttf */; };
+		69EE4AEB1E3FCDE700C95624 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE01E3FCDE700C95624 /* OpenSans-ExtraBoldItalic.ttf */; };
+		69EE4AEC1E3FCDE700C95624 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE11E3FCDE700C95624 /* OpenSans-Italic.ttf */; };
+		69EE4AED1E3FCDE700C95624 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE21E3FCDE700C95624 /* OpenSans-Light.ttf */; };
+		69EE4AEE1E3FCDE700C95624 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE31E3FCDE700C95624 /* OpenSans-LightItalic.ttf */; };
+		69EE4AEF1E3FCDE700C95624 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE41E3FCDE700C95624 /* OpenSans-Regular.ttf */; };
+		69EE4AF01E3FCDE700C95624 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE51E3FCDE700C95624 /* OpenSans-Semibold.ttf */; };
+		69EE4AF11E3FCDE700C95624 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AE61E3FCDE700C95624 /* OpenSans-SemiboldItalic.ttf */; };
+		69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4AF41E3FCFF100C95624 /* IntroVC.swift */; };
+		69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4AF71E3FD2F200C95624 /* UIViewExtension.swift */; };
+		69EE4AFA1E3FD42C00C95624 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4AF91E3FD42C00C95624 /* Storyboard.swift */; };
+		69EE4AFC1E3FD70900C95624 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4AFB1E3FD70900C95624 /* SignupVC.swift */; };
+		69EE4AFE1E3FE18400C95624 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4AFD1E3FE18300C95624 /* UITextFieldExtension.swift */; };
+		69EE4B021E3FE31300C95624 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4B011E3FE31300C95624 /* UIColorExtension.swift */; };
+		69EE4B041E3FE72D00C95624 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE4B031E3FE72D00C95624 /* LoginVC.swift */; };
+		69FE346C1E42865600F01176 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FE346B1E42865600F01176 /* UIViewControllerExtension.swift */; };
+		A1CFE35DAAFE61217BA9859D /* Pods_cropswapapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9868C3C8605A4D6D53707AE /* Pods_cropswapapp.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		691ED5C91E43C6A0005F6E2A /* InstagramLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramLoginVC.swift; sourceTree = "<group>"; };
+		691ED5CC1E43C759005F6E2A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		691ED5EC1E451DCE005F6E2A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		6945B5D01E39306300AA0799 /* cropswapapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cropswapapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6945B5D31E39306300AA0799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6945B5D81E39306300AA0799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Intro.storyboard; sourceTree = "<group>"; };
+		6945B5DA1E39306300AA0799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6945B5DD1E39306300AA0799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6945B5DF1E39306300AA0799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69EE4AD81E3FCBDC00C95624 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		69EE4ADC1E3FCDE700C95624 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
+		69EE4ADD1E3FCDE700C95624 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		69EE4ADE1E3FCDE700C95624 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		69EE4ADF1E3FCDE700C95624 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		69EE4AE01E3FCDE700C95624 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		69EE4AE11E3FCDE700C95624 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		69EE4AE21E3FCDE700C95624 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		69EE4AE31E3FCDE700C95624 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		69EE4AE41E3FCDE700C95624 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		69EE4AE51E3FCDE700C95624 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		69EE4AE61E3FCDE700C95624 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		69EE4AF41E3FCFF100C95624 /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		69EE4AF71E3FD2F200C95624 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		69EE4AF91E3FD42C00C95624 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		69EE4AFB1E3FD70900C95624 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		69EE4AFD1E3FE18300C95624 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		69EE4B011E3FE31300C95624 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		69EE4B031E3FE72D00C95624 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		69FE346B1E42865600F01176 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		93F33AC3CDE215AC463560DC /* Pods-cropswapapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cropswapapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-cropswapapp/Pods-cropswapapp.release.xcconfig"; sourceTree = "<group>"; };
+		D678AA3F3D1EE090FBEF9954 /* Pods-cropswapapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cropswapapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cropswapapp/Pods-cropswapapp.debug.xcconfig"; sourceTree = "<group>"; };
+		F9868C3C8605A4D6D53707AE /* Pods_cropswapapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cropswapapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6945B5CD1E39306300AA0799 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1CFE35DAAFE61217BA9859D /* Pods_cropswapapp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08DEC46DFA0D78A41CF81AAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9868C3C8605A4D6D53707AE /* Pods_cropswapapp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		691ED5CB1E43C747005F6E2A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				691ED5CC1E43C759005F6E2A /* Constants.swift */,
+				691ED5EC1E451DCE005F6E2A /* Utils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6945B5C71E39306300AA0799 = {
+			isa = PBXGroup;
+			children = (
+				6945B5D21E39306300AA0799 /* cropswapapp */,
+				6945B5D11E39306300AA0799 /* Products */,
+				A01F40DE849BC0E283AF94E4 /* Pods */,
+				08DEC46DFA0D78A41CF81AAB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6945B5D11E39306300AA0799 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6945B5D01E39306300AA0799 /* cropswapapp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6945B5D21E39306300AA0799 /* cropswapapp */ = {
+			isa = PBXGroup;
+			children = (
+				691ED5CB1E43C747005F6E2A /* Utils */,
+				69EE4AF61E3FD2C700C95624 /* Extensions */,
+				69EE4AF21E3FCFD300C95624 /* Modules */,
+				69EE4ADA1E3FCDD400C95624 /* Resources */,
+				6945B5D31E39306300AA0799 /* AppDelegate.swift */,
+				6945B5D71E39306300AA0799 /* Intro.storyboard */,
+				6945B5DA1E39306300AA0799 /* Assets.xcassets */,
+				6945B5DC1E39306300AA0799 /* LaunchScreen.storyboard */,
+				6945B5DF1E39306300AA0799 /* Info.plist */,
+				69EE4AD81E3FCBDC00C95624 /* GoogleService-Info.plist */,
+				69EE4AF91E3FD42C00C95624 /* Storyboard.swift */,
+			);
+			path = cropswapapp;
+			sourceTree = "<group>";
+		};
+		69EE4ADA1E3FCDD400C95624 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69EE4ADB1E3FCDDA00C95624 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		69EE4ADB1E3FCDDA00C95624 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				69EE4ADC1E3FCDE700C95624 /* VarelaRound-Regular.ttf */,
+				69EE4ADD1E3FCDE700C95624 /* OpenSans-Bold.ttf */,
+				69EE4ADE1E3FCDE700C95624 /* OpenSans-BoldItalic.ttf */,
+				69EE4ADF1E3FCDE700C95624 /* OpenSans-ExtraBold.ttf */,
+				69EE4AE01E3FCDE700C95624 /* OpenSans-ExtraBoldItalic.ttf */,
+				69EE4AE11E3FCDE700C95624 /* OpenSans-Italic.ttf */,
+				69EE4AE21E3FCDE700C95624 /* OpenSans-Light.ttf */,
+				69EE4AE31E3FCDE700C95624 /* OpenSans-LightItalic.ttf */,
+				69EE4AE41E3FCDE700C95624 /* OpenSans-Regular.ttf */,
+				69EE4AE51E3FCDE700C95624 /* OpenSans-Semibold.ttf */,
+				69EE4AE61E3FCDE700C95624 /* OpenSans-SemiboldItalic.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		69EE4AF21E3FCFD300C95624 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				69EE4AF31E3FCFE100C95624 /* Intro */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		69EE4AF31E3FCFE100C95624 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				69EE4AF41E3FCFF100C95624 /* IntroVC.swift */,
+				69EE4AFB1E3FD70900C95624 /* SignupVC.swift */,
+				69EE4B031E3FE72D00C95624 /* LoginVC.swift */,
+				691ED5C91E43C6A0005F6E2A /* InstagramLoginVC.swift */,
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
+		69EE4AF61E3FD2C700C95624 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				69EE4AF71E3FD2F200C95624 /* UIViewExtension.swift */,
+				69EE4AFD1E3FE18300C95624 /* UITextFieldExtension.swift */,
+				69EE4B011E3FE31300C95624 /* UIColorExtension.swift */,
+				69FE346B1E42865600F01176 /* UIViewControllerExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		A01F40DE849BC0E283AF94E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D678AA3F3D1EE090FBEF9954 /* Pods-cropswapapp.debug.xcconfig */,
+				93F33AC3CDE215AC463560DC /* Pods-cropswapapp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6945B5CF1E39306300AA0799 /* cropswapapp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6945B5E21E39306300AA0799 /* Build configuration list for PBXNativeTarget "cropswapapp" */;
+			buildPhases = (
+				0002338285C8300013A44A84 /* [CP] Check Pods Manifest.lock */,
+				6945B5CC1E39306300AA0799 /* Sources */,
+				6945B5CD1E39306300AA0799 /* Frameworks */,
+				6945B5CE1E39306300AA0799 /* Resources */,
+				D800E3733EDDFDF3C898CCB0 /* [CP] Embed Pods Frameworks */,
+				B439286895BB686C4B2F9AE6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cropswapapp;
+			productName = cropswapapp;
+			productReference = 6945B5D01E39306300AA0799 /* cropswapapp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6945B5C81E39306300AA0799 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = Cropswap;
+				TargetAttributes = {
+					6945B5CF1E39306300AA0799 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = N729L9HYWA;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 6945B5CB1E39306300AA0799 /* Build configuration list for PBXProject "cropswapapp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6945B5C71E39306300AA0799;
+			productRefGroup = 6945B5D11E39306300AA0799 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6945B5CF1E39306300AA0799 /* cropswapapp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6945B5CE1E39306300AA0799 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6945B5DE1E39306300AA0799 /* LaunchScreen.storyboard in Resources */,
+				69EE4AF11E3FCDE700C95624 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				69EE4AEB1E3FCDE700C95624 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				69EE4AEE1E3FCDE700C95624 /* OpenSans-LightItalic.ttf in Resources */,
+				69EE4AE71E3FCDE700C95624 /* VarelaRound-Regular.ttf in Resources */,
+				69EE4AEC1E3FCDE700C95624 /* OpenSans-Italic.ttf in Resources */,
+				69EE4AE81E3FCDE700C95624 /* OpenSans-Bold.ttf in Resources */,
+				69EE4AEA1E3FCDE700C95624 /* OpenSans-ExtraBold.ttf in Resources */,
+				69EE4AE91E3FCDE700C95624 /* OpenSans-BoldItalic.ttf in Resources */,
+				6945B5DB1E39306300AA0799 /* Assets.xcassets in Resources */,
+				6945B5D91E39306300AA0799 /* Intro.storyboard in Resources */,
+				69EE4AED1E3FCDE700C95624 /* OpenSans-Light.ttf in Resources */,
+				69EE4AEF1E3FCDE700C95624 /* OpenSans-Regular.ttf in Resources */,
+				69EE4AF01E3FCDE700C95624 /* OpenSans-Semibold.ttf in Resources */,
+				69EE4AD91E3FCBDC00C95624 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0002338285C8300013A44A84 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B439286895BB686C4B2F9AE6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cropswapapp/Pods-cropswapapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D800E3733EDDFDF3C898CCB0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cropswapapp/Pods-cropswapapp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6945B5CC1E39306300AA0799 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69EE4AFA1E3FD42C00C95624 /* Storyboard.swift in Sources */,
+				691ED5CD1E43C759005F6E2A /* Constants.swift in Sources */,
+				69EE4AFE1E3FE18400C95624 /* UITextFieldExtension.swift in Sources */,
+				691ED5CA1E43C6A0005F6E2A /* InstagramLoginVC.swift in Sources */,
+				69FE346C1E42865600F01176 /* UIViewControllerExtension.swift in Sources */,
+				69EE4AFC1E3FD70900C95624 /* SignupVC.swift in Sources */,
+				69EE4B021E3FE31300C95624 /* UIColorExtension.swift in Sources */,
+				69EE4B041E3FE72D00C95624 /* LoginVC.swift in Sources */,
+				69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */,
+				6945B5D41E39306300AA0799 /* AppDelegate.swift in Sources */,
+				69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */,
+				691ED5ED1E451DCE005F6E2A /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6945B5D71E39306300AA0799 /* Intro.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6945B5D81E39306300AA0799 /* Base */,
+			);
+			name = Intro.storyboard;
+			sourceTree = "<group>";
+		};
+		6945B5DC1E39306300AA0799 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6945B5DD1E39306300AA0799 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6945B5E01E39306300AA0799 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6945B5E11E39306300AA0799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6945B5E31E39306300AA0799 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D678AA3F3D1EE090FBEF9954 /* Pods-cropswapapp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N729L9HYWA;
+				INFOPLIST_FILE = cropswapapp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cropswap.cropswapapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3e521898-7d02-4bb7-b922-8f10a8187d8c";
+				PROVISIONING_PROFILE_SPECIFIER = CropswapAppDevelopment;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6945B5E41E39306300AA0799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93F33AC3CDE215AC463560DC /* Pods-cropswapapp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = N729L9HYWA;
+				INFOPLIST_FILE = cropswapapp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cropswap.cropswapapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1c8386c6-bc07-4f0b-a4c8-28c9a6944f21";
+				PROVISIONING_PROFILE_SPECIFIER = CropswapAppDistribution;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6945B5CB1E39306300AA0799 /* Build configuration list for PBXProject "cropswapapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6945B5E01E39306300AA0799 /* Debug */,
+				6945B5E11E39306300AA0799 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6945B5E21E39306300AA0799 /* Build configuration list for PBXNativeTarget "cropswapapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6945B5E31E39306300AA0799 /* Debug */,
+				6945B5E41E39306300AA0799 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6945B5C81E39306300AA0799 /* Project object */;
+}
