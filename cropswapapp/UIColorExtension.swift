@@ -10,6 +10,16 @@ import UIKit
 
 extension UIColor {
   
+  static var cropswapGreen: UIColor {
+    return hexStringToUIColor(hex: "#cee380")
+  }
+  static var cropswapRed: UIColor {
+    return hexStringToUIColor(hex: "#f83f39")
+  }
+  
+  static var cropswapYellow: UIColor {
+    return hexStringToUIColor(hex: "#ecaa20")
+  }
   static var cropswapBrown: UIColor {
     return hexStringToUIColor(hex: "#524c0d")
   }

@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CHTCollectionViewWaterfallLayout.xcscheme</key>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Ax.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -15,6 +20,16 @@
 			<false/>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -34,7 +49,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UITextField-Navigation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UPCarouselFlowLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>iCarousel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +72,67 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>03E6E56F8533C2E42C696D7CCAC42910</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1ED4DFAAD25E1999D0244868457A351E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D04535608058A2FABC0D16935868FB9</key>
+		<key>3634ABA74A6F41DB3C7516A583373EE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABB6BE779B371B39FE14B1869976620C</key>
+		<key>4569841EBD531E9A54C160864B418E79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3E35285C225C30F718933AD977D1AD8</key>
+		<key>59CDDB315DD2B098E0CD9ED56B026F4B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ED15CB80EED798275822649595416CA2</key>
+		<key>69855A7E658D98004F0DA9499D939110</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE5970D21DDE50BAAFD60A1149890B82</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FB2408FA6FD4D3DAC2E6F5848721D22D</key>
+		<key>8758E07878F4E2F4A78989954BF07231</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9DA2E17E1E90BB00105CE7EEDA2ED405</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAB916B118F485E640958FC55BF73A00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9CD622F66A169A3D5CF1D999325FF6C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB63A11F1A795F648A25ACB063391386</key>
 		<dict>
 			<key>primary</key>
 			<true/>

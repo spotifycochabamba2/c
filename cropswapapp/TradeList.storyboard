@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Trade ListVC-->
+        <scene sceneID="w2R-zX-7sY">
+            <objects>
+                <viewController storyboardIdentifier="TradeListVC" id="DLe-nl-5ZK" customClass="TradeListVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hp3-id-dZe"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lqy-Lx-6pZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jsK-Vx-gBL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QKV-Kl-coH">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tradeListCellId" rowHeight="100" id="bTQ-XF-gF9" customClass="TradeListCell" customModule="cropswapapp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTQ-XF-gF9" id="leP-FP-DQJ">
+                                            <frame key="frameInset" width="375" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ROr-OP-2OJ">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iB9-ow-sgd">
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="70" id="Cgv-85-nhb"/>
+                                                                <constraint firstAttribute="width" constant="70" id="vg4-j3-kyU"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yfN-G4-iaB">
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rob's Farm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Df-6w-vXz">
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 items to trade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTE-Wk-uxI">
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 min ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTz-d3-LcN">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="101" id="Eex-tb-eD2"/>
+                                                        <constraint firstAttribute="height" constant="18" id="FEO-Ts-KhT"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trade Request" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7M-LM-jhy">
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nTz-d3-LcN" firstAttribute="trailing" secondItem="leP-FP-DQJ" secondAttribute="trailingMargin" id="8lz-yT-cAA"/>
+                                                <constraint firstItem="nTz-d3-LcN" firstAttribute="leading" secondItem="ROr-OP-2OJ" secondAttribute="trailing" id="F1J-Tf-0co"/>
+                                                <constraint firstItem="ROr-OP-2OJ" firstAttribute="leading" secondItem="leP-FP-DQJ" secondAttribute="leading" constant="8" id="HEr-qE-Iwz"/>
+                                                <constraint firstItem="nTz-d3-LcN" firstAttribute="top" secondItem="ROr-OP-2OJ" secondAttribute="top" id="dVL-in-uBj"/>
+                                                <constraint firstItem="ROr-OP-2OJ" firstAttribute="centerY" secondItem="leP-FP-DQJ" secondAttribute="centerY" id="jdx-2w-3su"/>
+                                                <constraint firstItem="z7M-LM-jhy" firstAttribute="top" secondItem="ROr-OP-2OJ" secondAttribute="bottom" constant="-8" id="mhd-c6-QJg"/>
+                                                <constraint firstItem="z7M-LM-jhy" firstAttribute="leading" secondItem="iB9-ow-sgd" secondAttribute="trailing" constant="10" id="vAi-Gs-qsG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="nTz-d3-LcN" id="q1F-JS-1an"/>
+                                            <outlet property="numberProducesLabel" destination="pTE-Wk-uxI" id="WZr-SA-cKP"/>
+                                            <outlet property="stateLabel" destination="z7M-LM-jhy" id="kaz-rI-gQ3"/>
+                                            <outlet property="userImageView" destination="iB9-ow-sgd" id="r33-AO-NIF"/>
+                                            <outlet property="usernameLabel" destination="6Df-6w-vXz" id="jyT-LD-0Q1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DLe-nl-5ZK" id="lb1-5D-Vx1"/>
+                                    <outlet property="delegate" destination="DLe-nl-5ZK" id="VN8-cQ-wK1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QKV-Kl-coH" secondAttribute="trailing" id="OCE-bO-QA1"/>
+                            <constraint firstItem="Lqy-Lx-6pZ" firstAttribute="top" secondItem="QKV-Kl-coH" secondAttribute="bottom" id="ZkJ-zz-SdS"/>
+                            <constraint firstItem="QKV-Kl-coH" firstAttribute="top" secondItem="Hp3-id-dZe" secondAttribute="bottom" id="dh8-95-vew"/>
+                            <constraint firstItem="QKV-Kl-coH" firstAttribute="leading" secondItem="jsK-Vx-gBL" secondAttribute="leading" id="rLv-bB-mp6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tradesTableView" destination="QKV-Kl-coH" id="ncW-3C-PLI"/>
+                        <segue destination="vHx-Ql-TnU" kind="presentation" identifier="TradeListToTradeDetail" id="5F3-dx-5Ob"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OeN-TZ-K0K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168.80000000000001" y="124.58770614692655"/>
+        </scene>
+        <!--TradeHomeVC-->
+        <scene sceneID="CQL-ZG-PEs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="TradeHomeVC" id="cd9-ll-uFk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JF1-wp-Uma"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pzv-Fs-aoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2088.8000000000002" y="123.23838080959521"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xp1-di-xsJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vHx-Ql-TnU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdi-lk-6y5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cd9-ll-uFk" kind="relationship" relationship="rootViewController" id="m84-pV-Nka"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PZS-dy-ahk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1149.5999999999999" y="123.68815592203899"/>
+        </scene>
+    </scenes>
+</document>

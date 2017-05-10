@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-SemiBold.ttf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Make DealVC-->
+        <scene sceneID="1Zs-q2-swS">
+            <objects>
+                <viewController storyboardIdentifier="MakeDealVC" id="zXj-OW-ild" customClass="MakeDealVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QK8-77-XiX"/>
+                        <viewControllerLayoutGuide type="bottom" id="MWi-yd-eRa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a6U-gS-n8R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p59-dh-Ng7">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWI-E6-lLs">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eEn-jb-m4O">
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cfC-1i-E53">
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T7W-cV-3pa">
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fresh Corn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0u-qD-UGx">
+                                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="19"/>
+                                                                <color key="textColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dl-fJ-V4Z">
+                                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="19"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3e5-ZJ-aQi">
+                                                        <subviews>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UsW-f8-0fN">
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <collectionViewLayout key="collectionViewLayout" id="5X7-ss-QTc" customClass="UPCarouselFlowLayout" customModule="UPCarouselFlowLayout"/>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DxN-fO-qVT">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                        </view>
+                                                                        <size key="customSize" width="100" height="100"/>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.82745098039999998" green="0.68627450980000004" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="UsW-f8-0fN" firstAttribute="leading" secondItem="3e5-ZJ-aQi" secondAttribute="leading" id="8ah-85-m2x"/>
+                                                            <constraint firstAttribute="bottom" secondItem="UsW-f8-0fN" secondAttribute="bottom" id="aWO-GN-AIP"/>
+                                                            <constraint firstAttribute="trailing" secondItem="UsW-f8-0fN" secondAttribute="trailing" id="o3P-Nk-xyO"/>
+                                                            <constraint firstItem="UsW-f8-0fN" firstAttribute="top" secondItem="3e5-ZJ-aQi" secondAttribute="top" id="qFD-mm-B28"/>
+                                                            <constraint firstAttribute="height" constant="150" id="xag-iL-0UO"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcL-KU-rVM">
+                                                <color key="backgroundColor" red="0.88235294117647056" green="0.8901960784313725" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="seE-Tk-CtX"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U9N-Ih-O8a">
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkP-8W-vYl">
+                                                        <subviews>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hjM-m3-1eC">
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <collectionViewLayout key="collectionViewLayout" id="rrs-dL-vx6" customClass="UPCarouselFlowLayout" customModule="UPCarouselFlowLayout"/>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EnA-5t-bw8">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                        </view>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.89411764709999997" green="0.92549019610000005" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="hjM-m3-1eC" secondAttribute="bottom" id="1Bw-RY-i01"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hjM-m3-1eC" secondAttribute="trailing" id="37b-Dz-net"/>
+                                                            <constraint firstAttribute="height" constant="150" id="MXZ-O1-hHg"/>
+                                                            <constraint firstItem="hjM-m3-1eC" firstAttribute="top" secondItem="UkP-8W-vYl" secondAttribute="top" id="Py1-2O-v2a"/>
+                                                            <constraint firstItem="hjM-m3-1eC" firstAttribute="leading" secondItem="UkP-8W-vYl" secondAttribute="leading" id="mcr-PB-SQC"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OH4-tD-bIQ">
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fresh Corn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="335-OZ-kLt">
+                                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="19"/>
+                                                                <color key="textColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVe-5b-vIu">
+                                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="19"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make a deal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCH-0a-YVg">
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mu-CK-R2n">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="MyK-yU-SVv"/>
+                                            <constraint firstAttribute="width" constant="67" id="Sgn-U9-6Mk"/>
+                                        </constraints>
+                                        <state key="normal" image="cancel-trade-icon"/>
+                                        <connections>
+                                            <action selector="cancelButtonTouched" destination="zXj-OW-ild" eventType="touchUpInside" id="piI-Hh-cB6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyo-fy-Bsv">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="67" id="ADX-i5-Exc"/>
+                                            <constraint firstAttribute="height" constant="67" id="mBt-xh-ZRL"/>
+                                        </constraints>
+                                        <state key="normal" image="accept-trade-icon"/>
+                                        <connections>
+                                            <action selector="acceptButtonTouched" destination="zXj-OW-ild" eventType="touchUpInside" id="Mgx-W2-5ZN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="eEn-jb-m4O" firstAttribute="leading" secondItem="gWI-E6-lLs" secondAttribute="leading" id="37z-gX-kmD"/>
+                                    <constraint firstItem="NCH-0a-YVg" firstAttribute="leading" secondItem="gWI-E6-lLs" secondAttribute="leading" id="4WM-Ck-T8T"/>
+                                    <constraint firstItem="1mu-CK-R2n" firstAttribute="leading" secondItem="gWI-E6-lLs" secondAttribute="leading" constant="8" id="5Sp-H1-naS"/>
+                                    <constraint firstAttribute="bottom" secondItem="1mu-CK-R2n" secondAttribute="bottom" constant="8" id="5kP-fB-Uns"/>
+                                    <constraint firstItem="NCH-0a-YVg" firstAttribute="top" secondItem="gWI-E6-lLs" secondAttribute="top" constant="15" id="DtM-Qt-fyl"/>
+                                    <constraint firstAttribute="height" constant="520" id="bdQ-2o-EU0"/>
+                                    <constraint firstAttribute="trailing" secondItem="pyo-fy-Bsv" secondAttribute="trailing" constant="8" id="dX5-U6-nvQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="pyo-fy-Bsv" secondAttribute="bottom" constant="8" id="ggV-yR-nGc"/>
+                                    <constraint firstAttribute="trailing" secondItem="eEn-jb-m4O" secondAttribute="trailing" id="jkt-R5-Cg1"/>
+                                    <constraint firstItem="eEn-jb-m4O" firstAttribute="centerY" secondItem="gWI-E6-lLs" secondAttribute="centerY" id="tca-0e-qBm"/>
+                                    <constraint firstAttribute="trailing" secondItem="NCH-0a-YVg" secondAttribute="trailing" id="thQ-Dj-nKZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gWI-E6-lLs" firstAttribute="centerY" secondItem="a6U-gS-n8R" secondAttribute="centerY" id="1tr-w1-LhD"/>
+                            <constraint firstItem="p59-dh-Ng7" firstAttribute="top" secondItem="a6U-gS-n8R" secondAttribute="top" id="RIO-yV-iZI"/>
+                            <constraint firstItem="p59-dh-Ng7" firstAttribute="leading" secondItem="a6U-gS-n8R" secondAttribute="leading" id="cwe-ye-YR6"/>
+                            <constraint firstItem="MWi-yd-eRa" firstAttribute="top" secondItem="p59-dh-Ng7" secondAttribute="bottom" id="g30-Pi-CxY"/>
+                            <constraint firstItem="gWI-E6-lLs" firstAttribute="leading" secondItem="a6U-gS-n8R" secondAttribute="leadingMargin" id="gjR-Zm-mKu"/>
+                            <constraint firstAttribute="trailing" secondItem="p59-dh-Ng7" secondAttribute="trailing" id="lms-TE-ZfF"/>
+                            <constraint firstItem="gWI-E6-lLs" firstAttribute="trailing" secondItem="a6U-gS-n8R" secondAttribute="trailingMargin" id="oHy-YU-daS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="anotherGardenCollectionView" destination="UsW-f8-0fN" id="KcO-pK-8r9"/>
+                        <outlet property="anotherProduceTitleLabel" destination="R0u-qD-UGx" id="27X-SR-qPc"/>
+                        <outlet property="anotherProduceUnitTitleLabel" destination="0dl-fJ-V4Z" id="29i-KF-DSY"/>
+                        <outlet property="backgroundView" destination="p59-dh-Ng7" id="bTQ-lJ-sT0"/>
+                        <outlet property="myGardenCollectionView" destination="hjM-m3-1eC" id="gHq-Ix-xyL"/>
+                        <outlet property="myProduceTitleLabel" destination="335-OZ-kLt" id="DVi-7G-Zk6"/>
+                        <outlet property="myProduceUnitTitleLabel" destination="wVe-5b-vIu" id="MyP-NB-rEd"/>
+                        <outlet property="upperView" destination="gWI-E6-lLs" id="K3X-qt-Tek"/>
+                        <segue destination="SpA-3K-a8N" kind="presentation" identifier="MakeDealToAddItemToDeal" modalPresentationStyle="overCurrentContext" id="bU3-bW-9p8"/>
+                        <segue destination="uas-HC-FUL" kind="presentation" identifier="MakeDealToDealSubmitted" modalPresentationStyle="overCurrentContext" id="b7a-Iy-DWl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPk-3j-gTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-290.39999999999998" y="92.203898050974516"/>
+        </scene>
+        <!--AddItemToDealVC-->
+        <scene sceneID="dxJ-i9-81y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddItemToDeal" referencedIdentifier="AddItemToDealVC" id="SpA-3K-a8N" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d7x-XM-frF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="687" y="92"/>
+        </scene>
+        <!--DealSubmittedVC-->
+        <scene sceneID="J2m-BR-hgn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DealSubmitted" referencedIdentifier="DealSubmittedVC" id="uas-HC-FUL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfj-Tt-DIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="705" y="222"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="accept-trade-icon" width="67" height="67"/>
+        <image name="cancel-trade-icon" width="67" height="67"/>
+    </resources>
+</document>

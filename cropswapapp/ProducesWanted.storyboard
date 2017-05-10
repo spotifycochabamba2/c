@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Produces WantedVC-->
+        <scene sceneID="9Dj-nQ-kYy">
+            <objects>
+                <collectionViewController storyboardIdentifier="ProducesWantedVC" id="2kI-Af-Zs9" customClass="ProducesWantedVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="CKg-2Q-B54">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1eg-Mt-vjQ">
+                            <size key="itemSize" width="101" height="91"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProduceWantedCell" id="f9a-PZ-93J" customClass="ProduceWantedCell" customModule="cropswapapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="101" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="101" height="91"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zy8-af-NWj">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Produce type" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7lE-sr-xe3">
+                                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="7lE-sr-xe3" secondAttribute="trailing" id="9c1-S7-25E"/>
+                                                <constraint firstItem="7lE-sr-xe3" firstAttribute="centerY" secondItem="zy8-af-NWj" secondAttribute="centerY" id="Cgq-HQ-Cn5"/>
+                                                <constraint firstItem="7lE-sr-xe3" firstAttribute="leading" secondItem="zy8-af-NWj" secondAttribute="leading" id="Ww4-0z-pzh"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="zy8-af-NWj" firstAttribute="bottom" secondItem="f9a-PZ-93J" secondAttribute="bottomMargin" id="KMt-ee-pED"/>
+                                    <constraint firstItem="zy8-af-NWj" firstAttribute="leading" secondItem="f9a-PZ-93J" secondAttribute="leadingMargin" id="eS5-EL-8ct"/>
+                                    <constraint firstItem="zy8-af-NWj" firstAttribute="trailing" secondItem="f9a-PZ-93J" secondAttribute="trailingMargin" id="qMX-N6-rO9"/>
+                                    <constraint firstItem="zy8-af-NWj" firstAttribute="top" secondItem="f9a-PZ-93J" secondAttribute="topMargin" id="qcf-ZE-cXW"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="circleView" destination="zy8-af-NWj" id="IuH-zW-UNB"/>
+                                    <outlet property="nameLabel" destination="7lE-sr-xe3" id="WRO-A6-tN1"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="2kI-Af-Zs9" id="xll-G7-fg8"/>
+                            <outlet property="delegate" destination="2kI-Af-Zs9" id="xrv-hU-yAh"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wG9-Bk-Cfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-756" y="-137.18140929535232"/>
+        </scene>
+    </scenes>
+</document>

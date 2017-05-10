@@ -7,6 +7,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+        <array key="Montserrat-SemiBold.ttf">
+            <string>Montserrat-SemiBold</string>
+        </array>
         <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
         </array>
@@ -27,14 +33,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-background" translatesAutoresizingMaskIntoConstraints="NO" id="6du-tq-2Zx"/>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cv3-Pa-gAc">
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.24705882352941178" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pN2-n5-gLt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
-                                <state key="normal" title="LOGIN VIA INSTAGRAM">
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -44,26 +49,26 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wSP-lY-Rzh">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Al9-nU-fMh">
-                                        <color key="backgroundColor" red="1" green="0.39651786680000001" blue="0.3844039064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="u8G-qq-PRQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <state key="normal" title="LOGIN">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="goToLoginView" destination="BYZ-38-t0r" eventType="touchUpInside" id="QGk-pD-xVB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rj-D0-wsl">
-                                        <color key="backgroundColor" red="1" green="0.396078431372549" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8d4-l5-oEi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <state key="normal" title="SIGN UP">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="goToSignupView" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Fa-pN-KYX"/>
@@ -71,35 +76,48 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-logo" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-6f-gvH">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="z7M-0o-sTl">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="zxR-07-8dp">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Thd-tx-Um3"/>
+                                            <constraint firstAttribute="width" constant="24" id="d12-NC-uoT"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN VIA INSTAGRAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gII-GO-n0K">
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-logo" translatesAutoresizingMaskIntoConstraints="NO" id="ePL-Ot-Am3">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="eMa-vE-H3e"/>
+                                    <constraint firstAttribute="width" constant="187" id="qKC-Ua-OIY"/>
+                                    <constraint firstAttribute="height" constant="126" id="xDp-V4-bll"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="KGr-Zz-g9o">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="UoY-TS-T4e"/>
-                                    <constraint firstAttribute="width" constant="39" id="fDU-Mc-QsA"/>
-                                </constraints>
-                            </imageView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWr-k9-YyO">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KGr-Zz-g9o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="5j4-8x-Th8"/>
-                            <constraint firstItem="NeN-6f-gvH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8mN-8k-0uj"/>
-                            <constraint firstAttribute="trailing" secondItem="6du-tq-2Zx" secondAttribute="trailing" id="Flm-C0-g17"/>
+                            <constraint firstItem="z7M-0o-sTl" firstAttribute="centerY" secondItem="Cv3-Pa-gAc" secondAttribute="centerY" id="0w9-E0-cZw"/>
+                            <constraint firstAttribute="trailing" secondItem="fWr-k9-YyO" secondAttribute="trailing" id="FH6-wV-fuh"/>
                             <constraint firstItem="Cv3-Pa-gAc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="HJd-Fz-yTu"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6du-tq-2Zx" secondAttribute="bottom" id="JE7-Yu-hls"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wSP-lY-Rzh" secondAttribute="trailing" id="L4V-wh-D69"/>
-                            <constraint firstItem="NeN-6f-gvH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="Sui-Ge-Xb9"/>
-                            <constraint firstItem="6du-tq-2Zx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UBB-dK-Pnk"/>
-                            <constraint firstItem="6du-tq-2Zx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Vwk-Vl-sGs"/>
+                            <constraint firstItem="ePL-Ot-Am3" firstAttribute="centerY" secondItem="fWr-k9-YyO" secondAttribute="centerY" id="NCR-gw-wqo"/>
+                            <constraint firstItem="ePL-Ot-Am3" firstAttribute="centerX" secondItem="fWr-k9-YyO" secondAttribute="centerX" id="Qoh-S0-x9j"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Cv3-Pa-gAc" secondAttribute="bottom" constant="20" id="ZGT-WD-7h3"/>
-                            <constraint firstItem="NeN-6f-gvH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b8h-ko-zp2"/>
-                            <constraint firstItem="KGr-Zz-g9o" firstAttribute="centerY" secondItem="Cv3-Pa-gAc" secondAttribute="centerY" id="crf-7c-nax"/>
+                            <constraint firstItem="wSP-lY-Rzh" firstAttribute="top" secondItem="fWr-k9-YyO" secondAttribute="bottom" id="aho-I4-zGH"/>
                             <constraint firstItem="Cv3-Pa-gAc" firstAttribute="top" secondItem="wSP-lY-Rzh" secondAttribute="bottom" constant="20" id="fuy-93-XKK"/>
+                            <constraint firstItem="fWr-k9-YyO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hmH-5H-e9j"/>
+                            <constraint firstItem="fWr-k9-YyO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="k5v-On-ZOP"/>
                             <constraint firstItem="wSP-lY-Rzh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lBW-Wa-vZN"/>
                             <constraint firstItem="Cv3-Pa-gAc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nwD-bl-8zY"/>
+                            <constraint firstItem="z7M-0o-sTl" firstAttribute="centerX" secondItem="Cv3-Pa-gAc" secondAttribute="centerX" id="zUk-6e-kIP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6vV-Zj-6nB"/>
@@ -110,11 +128,12 @@
                         <segue destination="p1b-1b-UIm" kind="show" identifier="IntroToLogin" id="4Mf-gC-TNV"/>
                         <segue destination="GCI-cC-qEM" kind="show" identifier="IntroToSignup" id="qcf-d7-BAq"/>
                         <segue destination="uIL-Qf-Wd5" kind="presentation" identifier="IntroToInstagram" id="ohJ-ej-aaf"/>
+                        <segue destination="oHI-X0-CJJ" kind="show" identifier="IntroToHome" id="7yu-gU-WSE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896.79999999999995" y="293.70314842578711"/>
+            <point key="canvasLocation" x="1617" y="399"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="82d-kJ-WXx">
@@ -134,48 +153,17 @@
                                             <frame key="frameInset" width="375" height="210"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Qf-Ku-lBe">
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YX-ARL">
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="g6e-6k-fmH"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q22-IV-cjd">
-                                                            <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="f4J-kV-65Q"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
-                                                            <state key="normal" title="LOGIN VIA INSTAGRAM">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="instagramButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="IZy-ST-KE0"/>
-                                                            </connections>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or via Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGS-Zh-DD4">
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="EnZ-83-42x">
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-DX-cQW">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="39" id="Qtd-yb-NFE"/>
-                                                        <constraint firstAttribute="width" constant="39" id="x4f-3N-262"/>
+                                                        <constraint firstAttribute="width" constant="78" id="H41-Oj-wkC"/>
+                                                        <constraint firstAttribute="height" constant="77" id="wzP-4m-XVI"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="EnZ-83-42x" firstAttribute="centerY" secondItem="Q22-IV-cjd" secondAttribute="centerY" id="CEc-qj-SVs"/>
-                                                <constraint firstItem="3Qf-Ku-lBe" firstAttribute="leading" secondItem="l97-6w-YT7" secondAttribute="leadingMargin" id="CiA-SN-uJh"/>
-                                                <constraint firstItem="EnZ-83-42x" firstAttribute="leading" secondItem="Q22-IV-cjd" secondAttribute="leading" constant="10" id="EpL-bf-w2R"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="3Qf-Ku-lBe" secondAttribute="trailing" id="fjC-Kl-Tvq"/>
-                                                <constraint firstItem="3Qf-Ku-lBe" firstAttribute="centerY" secondItem="l97-6w-YT7" secondAttribute="centerY" id="hzi-3J-8Vq"/>
+                                                <constraint firstItem="4sf-DX-cQW" firstAttribute="centerX" secondItem="l97-6w-YT7" secondAttribute="centerX" id="Arn-JB-PYl"/>
+                                                <constraint firstItem="4sf-DX-cQW" firstAttribute="centerY" secondItem="l97-6w-YT7" secondAttribute="centerY" id="KKQ-Fe-fvs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -187,24 +175,33 @@
                                             <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyN-jG-7ho">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="f0L-Tb-xt8"/>
-                                                    </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="p1b-1b-UIm" id="xNN-Gm-LzC"/>
-                                                        <outlet property="nextTextField" destination="pPL-rT-dpO" id="y6j-xJ-0tS"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VH0-jt-diz">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-7I-MeF">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z4a-F7-Kx9">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="YKP-xH-csz"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="p1b-1b-UIm" id="PUt-Qf-Pfr"/>
+                                                                <outlet property="nextNavigationField" destination="eDf-4R-wDL" id="Lvv-sW-Pic"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="nyN-jG-7ho" secondAttribute="trailing" id="1ON-dY-qIZ"/>
-                                                <constraint firstItem="nyN-jG-7ho" firstAttribute="centerY" secondItem="jI9-MG-Xo8" secondAttribute="centerY" id="cZh-mi-czJ"/>
-                                                <constraint firstItem="nyN-jG-7ho" firstAttribute="leading" secondItem="jI9-MG-Xo8" secondAttribute="leadingMargin" id="pNk-w3-9Ci"/>
+                                                <constraint firstAttribute="trailing" secondItem="VH0-jt-diz" secondAttribute="trailing" constant="8" id="6kD-VN-0qB"/>
+                                                <constraint firstItem="VH0-jt-diz" firstAttribute="centerY" secondItem="jI9-MG-Xo8" secondAttribute="centerY" id="TWC-6g-zmd"/>
+                                                <constraint firstItem="VH0-jt-diz" firstAttribute="leading" secondItem="jI9-MG-Xo8" secondAttribute="leading" constant="8" id="wFK-QW-mlJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -216,83 +213,103 @@
                                             <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pPL-rT-dpO">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="iX2-nq-cgI"/>
-                                                    </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="p1b-1b-UIm" id="utb-ER-WHT"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4uC-Lq-sjm">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSk-VA-Cw9">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eDf-4R-wDL">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="RyY-LS-K3n"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="p1b-1b-UIm" id="0Wo-oP-pQW"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="pPL-rT-dpO" firstAttribute="centerY" secondItem="OrV-Ic-73l" secondAttribute="centerY" id="0FF-Ex-g8N"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="pPL-rT-dpO" secondAttribute="trailing" id="0qm-CH-STb"/>
-                                                <constraint firstItem="pPL-rT-dpO" firstAttribute="leading" secondItem="OrV-Ic-73l" secondAttribute="leadingMargin" id="SXU-2I-fun"/>
+                                                <constraint firstAttribute="trailing" secondItem="4uC-Lq-sjm" secondAttribute="trailing" constant="8" id="DrP-YE-HqA"/>
+                                                <constraint firstItem="4uC-Lq-sjm" firstAttribute="centerY" secondItem="OrV-Ic-73l" secondAttribute="centerY" id="IAv-Gn-bgV"/>
+                                                <constraint firstItem="4uC-Lq-sjm" firstAttribute="leading" secondItem="OrV-Ic-73l" secondAttribute="leading" constant="8" id="Zpf-dS-HzK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="230" id="Szz-Vd-Cs8">
-                                        <rect key="frame" x="0.0" y="394" width="375" height="230"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="Szz-Vd-Cs8">
+                                        <rect key="frame" x="0.0" y="394" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szz-Vd-Cs8" id="goF-v4-Mdy">
-                                            <frame key="frameInset" width="375" height="230"/>
+                                            <frame key="frameInset" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oyM-sB-2g9">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oyM-sB-2g9">
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fx-Pf-gko">
-                                                            <color key="backgroundColor" red="0.89411764709999997" green="0.92549019610000005" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="T3l-Bc-rTh"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <state key="normal" title="Login">
-                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <state key="normal" title="LOGIN">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="loginButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="UPd-QJ-ZRB"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bug-VA-2yp">
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Af6-Rn-ger">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7N-rX-e4Y">
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="fPk-GT-7jl"/>
+                                                                <constraint firstAttribute="height" constant="50" id="qEe-Zu-x5a"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
-                                                            <state key="normal" title="Forgot your login details?">
-                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="forgotButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="76Y-wr-gTO"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V84-62-PUh">
-                                                            <color key="backgroundColor" red="0.4941176471" green="0.68627450980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="GN0-Ue-OMz"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <state key="normal" title="Sign up">
+                                                            <state key="normal">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="signupButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="j0C-W7-Dae"/>
+                                                                <action selector="instagramButtonTouched" destination="p1b-1b-UIm" eventType="touchUpInside" id="D0r-1M-OlP"/>
+                                                                <action selector="instagramButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="RT9-YX-39t"/>
                                                             </connections>
                                                         </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fsj-xZ-M6y">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-logo-red" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Tx-A0n">
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="24" id="3wl-7V-Jvo"/>
+                                                                <constraint firstAttribute="height" constant="24" id="CTk-rH-oio"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN VIA INSTAGRAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7u-Vh-b6O">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                            <color key="textColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="oyM-sB-2g9" firstAttribute="top" secondItem="goF-v4-Mdy" secondAttribute="topMargin" constant="20" id="6Xh-jq-J6t"/>
+                                                <constraint firstItem="Fsj-xZ-M6y" firstAttribute="centerX" secondItem="Q7N-rX-e4Y" secondAttribute="centerX" id="HCj-mm-YLp"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="oyM-sB-2g9" secondAttribute="trailing" id="Pdv-t7-Lbb"/>
                                                 <constraint firstItem="oyM-sB-2g9" firstAttribute="leading" secondItem="goF-v4-Mdy" secondAttribute="leadingMargin" id="YEx-Lj-HTP"/>
+                                                <constraint firstItem="Fsj-xZ-M6y" firstAttribute="centerY" secondItem="Q7N-rX-e4Y" secondAttribute="centerY" id="iLH-cc-eEp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -306,16 +323,27 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="emailTextField" destination="nyN-jG-7ho" id="8ld-Tg-9eA"/>
+                        <outlet property="buttonsCell" destination="Szz-Vd-Cs8" id="1Dc-KM-l7x"/>
+                        <outlet property="emailTextField" destination="z4a-F7-Kx9" id="P8m-sG-SX2"/>
                         <outlet property="loginButton" destination="1Fx-Pf-gko" id="WKu-qI-faY"/>
-                        <outlet property="loginInstagramButton" destination="Q22-IV-cjd" id="RpD-xM-lzy"/>
-                        <outlet property="passwordTextField" destination="pPL-rT-dpO" id="2OY-GE-RhI"/>
-                        <outlet property="signupButton" destination="V84-62-PUh" id="IWt-Rt-3MD"/>
+                        <outlet property="loginInstagramButton" destination="Q7N-rX-e4Y" id="VBT-ji-4v9"/>
+                        <outlet property="logoCell" destination="aZp-Tf-ebM" id="4qt-k6-1qY"/>
+                        <outlet property="passwordTextField" destination="eDf-4R-wDL" id="bZo-7d-Zjc"/>
+                        <segue destination="oHI-X0-CJJ" kind="show" identifier="LoginToHome" id="xB3-Wy-GsM"/>
+                        <segue destination="uIL-Qf-Wd5" kind="presentation" identifier="LoginToInstagram" id="DqF-kZ-bHq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyL-GI-0bn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2137" y="536"/>
+            <point key="canvasLocation" x="2879" y="-749"/>
+        </scene>
+        <!--HomeTBC-->
+        <scene sceneID="Eiw-l1-57v">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="HomeTBC" id="oHI-X0-CJJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EW2-Ol-VjV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3731" y="411"/>
         </scene>
         <!--InstagramVC-->
         <scene sceneID="grv-cO-qRC">
@@ -354,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKr-5e-xi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="-667.91604197901052"/>
+            <point key="canvasLocation" x="2060" y="-815"/>
         </scene>
         <!--SignupVC-->
         <scene sceneID="tm5-d0-Ejy">
@@ -374,48 +402,17 @@
                                             <frame key="frameInset" width="375" height="210"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bon-Ou-kFX">
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-cropswap-white-logo" translatesAutoresizingMaskIntoConstraints="NO" id="lSB-TR-JMS">
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="Yy4-v9-0bI"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnT-ru-NNS">
-                                                            <color key="backgroundColor" red="0.92549019610000005" green="0.66666666669999997" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="8XN-f4-AvJ"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
-                                                            <state key="normal" title="SIGN UP VIA INSTAGRAM">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="instagramButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="bhe-3x-ea9"/>
-                                                            </connections>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or via Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-Jd-wqE">
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Tx-A0n">
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup-logo" translatesAutoresizingMaskIntoConstraints="NO" id="9sk-CO-q8V">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="39" id="3wl-7V-Jvo"/>
-                                                        <constraint firstAttribute="height" constant="39" id="CTk-rH-oio"/>
+                                                        <constraint firstAttribute="width" constant="78" id="Iyx-ly-Lsb"/>
+                                                        <constraint firstAttribute="height" constant="77" id="XOo-bY-Rg1"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="bon-Ou-kFX" firstAttribute="leading" secondItem="Cbv-H1-M7y" secondAttribute="leadingMargin" id="2rU-02-0GI"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="bon-Ou-kFX" secondAttribute="trailing" id="Nza-8q-a8p"/>
-                                                <constraint firstItem="4ab-Tx-A0n" firstAttribute="leading" secondItem="KnT-ru-NNS" secondAttribute="leading" constant="10" id="RgS-Kz-Qip"/>
-                                                <constraint firstItem="bon-Ou-kFX" firstAttribute="centerY" secondItem="Cbv-H1-M7y" secondAttribute="centerY" id="ars-qy-Aho"/>
-                                                <constraint firstItem="4ab-Tx-A0n" firstAttribute="centerY" secondItem="KnT-ru-NNS" secondAttribute="centerY" id="kvv-wJ-E7A"/>
+                                                <constraint firstItem="9sk-CO-q8V" firstAttribute="centerX" secondItem="Cbv-H1-M7y" secondAttribute="centerX" id="itF-kY-FDG"/>
+                                                <constraint firstItem="9sk-CO-q8V" firstAttribute="centerY" secondItem="Cbv-H1-M7y" secondAttribute="centerY" id="oxd-kT-DaM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -427,24 +424,33 @@
                                             <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7X-aL-8SS">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="mlJ-AW-V7C"/>
-                                                    </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="fjQ-EO-pkO"/>
-                                                        <outlet property="nextTextField" destination="OhT-Fh-4mW" id="p2L-uv-lLt"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zRH-1p-OmP">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-xk-hnQ">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Orx-MG-laE">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="gxT-Nn-5jh"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="XRs-U3-F08"/>
+                                                                <outlet property="nextNavigationField" destination="aao-EP-qtu" id="Fdc-iX-3rz"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="f7X-aL-8SS" firstAttribute="centerY" secondItem="EtC-dC-zZD" secondAttribute="centerY" id="9dv-d2-q7x"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="f7X-aL-8SS" secondAttribute="trailing" id="M8Y-mX-6G2"/>
-                                                <constraint firstItem="f7X-aL-8SS" firstAttribute="leading" secondItem="EtC-dC-zZD" secondAttribute="leadingMargin" id="iXl-fd-CbR"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zRH-1p-OmP" secondAttribute="trailing" id="Lam-jc-mya"/>
+                                                <constraint firstItem="zRH-1p-OmP" firstAttribute="leading" secondItem="EtC-dC-zZD" secondAttribute="leadingMargin" id="Rb2-SJ-081"/>
+                                                <constraint firstItem="zRH-1p-OmP" firstAttribute="centerY" secondItem="EtC-dC-zZD" secondAttribute="centerY" id="eXb-PC-G7V"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -456,91 +462,168 @@
                                             <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OhT-Fh-4mW">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="6tq-fH-6od"/>
-                                                    </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="FOj-AY-9yn"/>
-                                                        <outlet property="nextTextField" destination="HUm-WP-8Lg" id="7CN-nc-Z8c"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O0Q-fe-n46">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Zt-7A-5GR">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aao-EP-qtu">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="pjq-c8-DzI"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="PsV-WX-zeD"/>
+                                                                <outlet property="nextNavigationField" destination="xI8-K0-1lS" id="O60-ZF-Sf7"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="OhT-Fh-4mW" firstAttribute="leading" secondItem="VjA-Ca-sWG" secondAttribute="leadingMargin" id="baj-Lu-Cmi"/>
-                                                <constraint firstItem="OhT-Fh-4mW" firstAttribute="centerY" secondItem="VjA-Ca-sWG" secondAttribute="centerY" id="i60-ST-fQ0"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="OhT-Fh-4mW" secondAttribute="trailing" id="nus-yP-udr"/>
+                                                <constraint firstItem="O0Q-fe-n46" firstAttribute="leading" secondItem="VjA-Ca-sWG" secondAttribute="leading" constant="8" id="JT3-0n-dNs"/>
+                                                <constraint firstAttribute="trailing" secondItem="O0Q-fe-n46" secondAttribute="trailing" constant="8" id="a6y-hn-L7c"/>
+                                                <constraint firstItem="O0Q-fe-n46" firstAttribute="centerY" secondItem="VjA-Ca-sWG" secondAttribute="centerY" id="lhx-Je-pKm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Ybo-ke-aiu">
+                                        <rect key="frame" x="0.0" y="394" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ybo-ke-aiu" id="TAZ-VG-cDL">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQZ-eu-ZoK">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xG-uO-4ZC">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xI8-K0-1lS">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="aFa-4W-rxO"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="h4P-Kz-Q4X"/>
+                                                                <outlet property="nextNavigationField" destination="SEx-E0-GFy" id="6hu-N1-zWo"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="MQZ-eu-ZoK" secondAttribute="trailing" constant="8" id="e1e-bF-qdy"/>
+                                                <constraint firstItem="MQZ-eu-ZoK" firstAttribute="centerY" secondItem="TAZ-VG-cDL" secondAttribute="centerY" id="f0M-7t-H6E"/>
+                                                <constraint firstItem="MQZ-eu-ZoK" firstAttribute="leading" secondItem="TAZ-VG-cDL" secondAttribute="leading" constant="8" id="nDn-K5-l4H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="ups-1X-zDe">
-                                        <rect key="frame" x="0.0" y="394" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="454" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ups-1X-zDe" id="EeC-PJ-gE2">
                                             <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUm-WP-8Lg">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="N2s-St-bhC"/>
-                                                    </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="GCI-cC-qEM" id="CDb-74-p2F"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Qy-hUr">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat your password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUM-h9-6I4">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SEx-E0-GFy">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="5yY-iB-xvJ"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="XPv-Et-noC"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="HUm-WP-8Lg" secondAttribute="trailing" id="Rnh-Ty-fPc"/>
-                                                <constraint firstItem="HUm-WP-8Lg" firstAttribute="leading" secondItem="EeC-PJ-gE2" secondAttribute="leadingMargin" id="Tkp-Vd-xEf"/>
-                                                <constraint firstItem="HUm-WP-8Lg" firstAttribute="centerY" secondItem="EeC-PJ-gE2" secondAttribute="centerY" id="Wph-iD-fjA"/>
+                                                <constraint firstAttribute="trailing" secondItem="uFl-Qy-hUr" secondAttribute="trailing" constant="8" id="DvG-cc-Ter"/>
+                                                <constraint firstItem="uFl-Qy-hUr" firstAttribute="leading" secondItem="EeC-PJ-gE2" secondAttribute="leading" constant="8" id="Hcc-LM-072"/>
+                                                <constraint firstItem="uFl-Qy-hUr" firstAttribute="centerY" secondItem="EeC-PJ-gE2" secondAttribute="centerY" id="VpV-73-TKO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="EUk-jJ-Mhx">
-                                        <rect key="frame" x="0.0" y="454" width="375" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="EUk-jJ-Mhx">
+                                        <rect key="frame" x="0.0" y="514" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUk-jJ-Mhx" id="z9M-Tx-cRD">
-                                            <frame key="frameInset" width="375" height="150"/>
+                                            <frame key="frameInset" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pEG-ly-QV3">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pEG-ly-QV3">
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4R-qQ-f3c">
-                                                            <color key="backgroundColor" red="0.89411764709999997" green="0.92549019610000005" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="gGH-hZ-LRd"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <state key="normal" title="Sign up">
-                                                                <color key="titleColor" red="0.32156862749999998" green="0.29803921570000003" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <state key="normal" title="SIGN UP">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="signupButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="eKc-JD-H8V"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meL-A3-1Ra">
-                                                            <color key="backgroundColor" red="0.4941176471" green="0.68627450980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ul-oF-MX3">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnT-ru-NNS">
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="M5t-ts-Bbv"/>
+                                                                <constraint firstAttribute="height" constant="50" id="8XN-f4-AvJ"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="18"/>
-                                                            <state key="normal" title="Login">
+                                                            <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
+                                                            <state key="normal">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="loginButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="jFm-Pu-A7m"/>
+                                                                <action selector="instagramButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="bhe-3x-ea9"/>
                                                             </connections>
                                                         </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vJH-FV-N1e">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-logo-red" translatesAutoresizingMaskIntoConstraints="NO" id="JAs-GA-zVs">
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="24" id="S4A-Y3-734"/>
+                                                                <constraint firstAttribute="height" constant="24" id="XIM-Gb-E9K"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN VIA INSTAGRAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ba0-LO-aQ1">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                            <color key="textColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -549,6 +632,8 @@
                                                 <constraint firstItem="pEG-ly-QV3" firstAttribute="top" secondItem="z9M-Tx-cRD" secondAttribute="topMargin" constant="20" id="C2F-sZ-x3Q"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="pEG-ly-QV3" secondAttribute="trailing" id="DTN-T9-4qg"/>
                                                 <constraint firstItem="pEG-ly-QV3" firstAttribute="leading" secondItem="z9M-Tx-cRD" secondAttribute="leadingMargin" id="JJa-kI-sJk"/>
+                                                <constraint firstItem="vJH-FV-N1e" firstAttribute="centerX" secondItem="KnT-ru-NNS" secondAttribute="centerX" id="S9i-kI-2qs"/>
+                                                <constraint firstItem="vJH-FV-N1e" firstAttribute="centerY" secondItem="KnT-ru-NNS" secondAttribute="centerY" id="VQb-Su-YTQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -562,17 +647,21 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="emailTextField" destination="OhT-Fh-4mW" id="0xo-f9-Bdo"/>
-                        <outlet property="loginButton" destination="meL-A3-1Ra" id="R4Q-WX-1oh"/>
-                        <outlet property="nameTextField" destination="f7X-aL-8SS" id="NjV-gN-4Zg"/>
-                        <outlet property="passwordTextField" destination="HUm-WP-8Lg" id="91E-Tb-6A4"/>
+                        <outlet property="emailTextField" destination="aao-EP-qtu" id="A8o-uN-9TW"/>
+                        <outlet property="logoCell" destination="499-sU-ojf" id="CCb-Om-kNo"/>
+                        <outlet property="nameTextField" destination="Orx-MG-laE" id="vb8-8L-42s"/>
+                        <outlet property="passwordTextField" destination="xI8-K0-1lS" id="a9F-W9-VHl"/>
+                        <outlet property="repeatPasswordTextField" destination="SEx-E0-GFy" id="71c-Nz-Bxd"/>
                         <outlet property="signupButton" destination="S4R-qQ-f3c" id="Dqp-uN-vud"/>
                         <outlet property="signupInstagramButton" destination="KnT-ru-NNS" id="RCK-Pd-Pjf"/>
+                        <outlet property="yourNameLabel" destination="rpL-xk-hnQ" id="FOD-Kn-UqR"/>
+                        <segue destination="oHI-X0-CJJ" kind="show" identifier="SignupToHome" id="nhb-hS-Ctu"/>
+                        <segue destination="uIL-Qf-Wd5" kind="presentation" identifier="SignupToInstagram" id="Fgr-gZ-URl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHC-oQ-FDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3076" y="-229.83508245877064"/>
+            <point key="canvasLocation" x="3607" y="-779"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqM-jv-EtC">
@@ -608,13 +697,17 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37M-0B-Ulc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896.79999999999995" y="-668.81559220389806"/>
+            <point key="canvasLocation" x="1190" y="-790"/>
         </scene>
     </scenes>
     <resources>
-        <image name="intro-background" width="414" height="736"/>
-        <image name="intro-cropswap-logo" width="355" height="57"/>
-        <image name="intro-cropswap-white-logo" width="310" height="49"/>
+        <image name="instagram-logo-red" width="24" height="24"/>
         <image name="intro-instagram-logo" width="36" height="36"/>
+        <image name="intro-logo" width="187" height="126"/>
+        <image name="signup-logo" width="78" height="77"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="7yu-gU-WSE"/>
+        <segue reference="ohJ-ej-aaf"/>
+    </inferredMetricsTieBreakers>
 </document>

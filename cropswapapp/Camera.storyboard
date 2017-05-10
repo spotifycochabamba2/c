@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--CameraVC-->
+        <scene sceneID="6ou-lV-FO8">
+            <objects>
+                <viewController storyboardIdentifier="CameraVC" id="l4V-i1-k2j" customClass="CameraVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OYR-Pe-9q3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bro-F9-JID"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vVr-4U-Zi7" customClass="CameraView" customModule="cropswapapp" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps4-l5-DYu">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="FXX-t7-GVH"/>
+                                    <constraint firstAttribute="height" constant="60" id="dR1-h4-7z9"/>
+                                </constraints>
+                                <state key="normal" image="cancel-trade-icon"/>
+                                <connections>
+                                    <action selector="cancelButtonTouched" destination="l4V-i1-k2j" eventType="touchUpInside" id="vs8-I3-XYo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTQ-e3-Asn">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="8x3-hZ-aTR"/>
+                                    <constraint firstAttribute="width" constant="123" id="YLO-cU-3J4"/>
+                                </constraints>
+                                <state key="normal" image="camera-take-picture-icon"/>
+                                <connections>
+                                    <action selector="takeButtonTouched:" destination="l4V-i1-k2j" eventType="touchUpInside" id="Jjx-OI-MVC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dng-ea-dqZ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="hxz-oU-jX3"/>
+                                    <constraint firstAttribute="width" constant="58" id="j7Q-zg-ABg"/>
+                                </constraints>
+                                <state key="normal" image="camera-switch-icon-1"/>
+                                <connections>
+                                    <action selector="switchButtonTouched" destination="l4V-i1-k2j" eventType="touchUpInside" id="EMu-gd-ku2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Bro-F9-JID" firstAttribute="top" secondItem="gTQ-e3-Asn" secondAttribute="bottom" constant="20" id="2V5-En-x9L"/>
+                            <constraint firstItem="Dng-ea-dqZ" firstAttribute="trailing" secondItem="vVr-4U-Zi7" secondAttribute="trailingMargin" id="LIM-7i-Hq5"/>
+                            <constraint firstItem="Dng-ea-dqZ" firstAttribute="top" secondItem="OYR-Pe-9q3" secondAttribute="bottom" id="Zn3-D1-T18"/>
+                            <constraint firstItem="gTQ-e3-Asn" firstAttribute="centerX" secondItem="vVr-4U-Zi7" secondAttribute="centerX" id="bYJ-Tq-YrW"/>
+                            <constraint firstItem="Ps4-l5-DYu" firstAttribute="leading" secondItem="vVr-4U-Zi7" secondAttribute="leadingMargin" constant="10" id="dON-dE-NFP"/>
+                            <constraint firstItem="Bro-F9-JID" firstAttribute="top" secondItem="Ps4-l5-DYu" secondAttribute="bottom" constant="20" id="rzL-0Y-Ps6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="vVr-4U-Zi7" id="gYQ-aJ-OvB"/>
+                        <segue destination="iK8-CZ-q9S" kind="show" identifier="CameraToCameraConfirm" id="rJF-MJ-Aa1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hud-cd-Ug4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-399.19999999999999" y="36.431784107946029"/>
+        </scene>
+        <!--Camera RetakeVC-->
+        <scene sceneID="WeT-FJ-Kal">
+            <objects>
+                <viewController storyboardIdentifier="CameraRetakeVC" id="Oi2-ax-2ll" customClass="CameraRetakeVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PmH-Cf-bPh"/>
+                        <viewControllerLayoutGuide type="bottom" id="0na-IO-wRu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sJo-QZ-8Qw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hXa-qE-GWe"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cx4-Ty-EPy">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="2KZ-yo-9rw"/>
+                                    <constraint firstAttribute="height" constant="60" id="ZJr-yn-llW"/>
+                                </constraints>
+                                <state key="normal" image="cancel-trade-icon"/>
+                                <connections>
+                                    <action selector="cancelButtonTouched" destination="Oi2-ax-2ll" eventType="touchUpInside" id="15Z-Rl-1eF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zz-wN-uLf">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                <state key="normal" title="Retake">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="retakeButtonTouched" destination="Oi2-ax-2ll" eventType="touchUpInside" id="D9J-OF-abV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0na-IO-wRu" firstAttribute="top" secondItem="hXa-qE-GWe" secondAttribute="bottom" id="4ek-bf-JjR"/>
+                            <constraint firstItem="0na-IO-wRu" firstAttribute="top" secondItem="cx4-Ty-EPy" secondAttribute="bottom" constant="20" id="SkK-mr-WYe"/>
+                            <constraint firstItem="cx4-Ty-EPy" firstAttribute="leading" secondItem="sJo-QZ-8Qw" secondAttribute="leadingMargin" constant="10" id="XSZ-gX-h4C"/>
+                            <constraint firstItem="0na-IO-wRu" firstAttribute="top" secondItem="4Zz-wN-uLf" secondAttribute="bottom" constant="30" id="c6z-Tl-oTi"/>
+                            <constraint firstItem="hXa-qE-GWe" firstAttribute="leading" secondItem="sJo-QZ-8Qw" secondAttribute="leading" id="d6G-xe-pW2"/>
+                            <constraint firstItem="4Zz-wN-uLf" firstAttribute="centerX" secondItem="hXa-qE-GWe" secondAttribute="centerX" id="i8s-Z4-to3"/>
+                            <constraint firstItem="hXa-qE-GWe" firstAttribute="top" secondItem="sJo-QZ-8Qw" secondAttribute="top" id="j0z-SN-X83"/>
+                            <constraint firstAttribute="trailing" secondItem="hXa-qE-GWe" secondAttribute="trailing" id="xGN-R2-BFC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="hXa-qE-GWe" id="cNw-Y0-PDL"/>
+                        <segue destination="l4V-i1-k2j" kind="show" identifier="CameraRetakeToCamera" id="Dcx-ce-jep"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxV-hO-JSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-399.19999999999999" y="781.25937031484261"/>
+        </scene>
+        <!--Camera ConfirmVC-->
+        <scene sceneID="bVq-5W-kmk">
+            <objects>
+                <viewController id="iK8-CZ-q9S" customClass="CameraConfirmVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1RN-0p-jz7"/>
+                        <viewControllerLayoutGuide type="bottom" id="no8-dG-ECg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rpw-r4-vIQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DJR-XU-QZE"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-iP-r9C">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="O5J-7K-QF3"/>
+                                    <constraint firstAttribute="width" constant="60" id="lRo-NM-6y2"/>
+                                </constraints>
+                                <state key="normal" image="cancel-trade-icon"/>
+                                <connections>
+                                    <action selector="cancelButtonTouched:" destination="iK8-CZ-q9S" eventType="touchUpInside" id="s9z-Pz-Fq0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7Z-rg-kmF">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="HE4-yW-AW3"/>
+                                    <constraint firstAttribute="height" constant="60" id="e5y-Lb-TYL"/>
+                                </constraints>
+                                <state key="normal" image="accept-trade-icon"/>
+                                <connections>
+                                    <action selector="acceptButtonTouched:" destination="iK8-CZ-q9S" eventType="touchUpInside" id="ytR-2x-X9o"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DJR-XU-QZE" firstAttribute="top" secondItem="Rpw-r4-vIQ" secondAttribute="top" id="PBs-bb-GZt"/>
+                            <constraint firstItem="DJR-XU-QZE" firstAttribute="leading" secondItem="Rpw-r4-vIQ" secondAttribute="leading" id="PPn-ib-1iu"/>
+                            <constraint firstItem="no8-dG-ECg" firstAttribute="top" secondItem="DJR-XU-QZE" secondAttribute="bottom" id="Qk0-X2-zXw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C7Z-rg-kmF" secondAttribute="trailing" constant="10" id="duD-He-VSc"/>
+                            <constraint firstItem="no8-dG-ECg" firstAttribute="top" secondItem="EwF-iP-r9C" secondAttribute="bottom" constant="20" id="ffV-lp-EsJ"/>
+                            <constraint firstItem="no8-dG-ECg" firstAttribute="top" secondItem="C7Z-rg-kmF" secondAttribute="bottom" constant="20" id="jfu-fj-aLN"/>
+                            <constraint firstItem="EwF-iP-r9C" firstAttribute="leading" secondItem="Rpw-r4-vIQ" secondAttribute="leadingMargin" constant="10" id="wMs-bN-k8a"/>
+                            <constraint firstAttribute="trailing" secondItem="DJR-XU-QZE" secondAttribute="trailing" id="yx5-Tb-vEB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="DJR-XU-QZE" id="CpJ-1K-YkK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cAe-I4-TeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501.60000000000002" y="26.53673163418291"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="accept-trade-icon" width="67" height="67"/>
+        <image name="camera-switch-icon-1" width="20" height="22"/>
+        <image name="camera-take-picture-icon" width="100" height="100"/>
+        <image name="cancel-trade-icon" width="67" height="67"/>
+    </resources>
+</document>

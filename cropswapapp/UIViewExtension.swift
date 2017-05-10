@@ -10,7 +10,14 @@ import UIKit
 
 extension UIView {
   
-  func makeMeBordered(color: UIColor, borderWidth: CGFloat, cornerRadius: CGFloat) {
+  func applyShadowedBordered() {
+    self.layer.shadowColor = UIColor.black.cgColor
+    self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    self.layer.shadowRadius = 5
+    self.layer.shadowOpacity = 0.1
+  }
+  
+  func makeMeBordered(color: UIColor = UIColor.clear, borderWidth: CGFloat, cornerRadius: CGFloat) {
     self.layer.borderColor = color.cgColor
     self.layer.borderWidth = borderWidth
     self.layer.cornerRadius = cornerRadius
@@ -21,7 +28,7 @@ extension UIView {
   
     self.layer.borderColor = color.cgColor
     self.layer.borderWidth = 1.5
-    self.layer.cornerRadius = 4.0
+    self.layer.cornerRadius = 8.0
 
   }
   

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--GardenVC-->
+        <scene sceneID="DNM-jB-tgc">
+            <objects>
+                <viewController storyboardIdentifier="GardenVC" id="YWg-Ca-mYH" customClass="GardenVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oFn-MB-QCh"/>
+                        <viewControllerLayoutGuide type="bottom" id="IaM-tI-hZm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8zc-Ca-vgh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Skk-hX-Qui">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dhc-UJ-olA">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8An-K3-aFM">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="YWg-Ca-mYH" id="Jmd-nB-GWh"/>
+                                    <outlet property="delegate" destination="YWg-Ca-mYH" id="t86-aa-HUA"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tl6-a3-yIS">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="AGa-UA-IUQ"/>
+                                    <constraint firstAttribute="width" constant="57" id="IwV-Po-p2x"/>
+                                </constraints>
+                                <state key="normal" image="add-item-button"/>
+                                <connections>
+                                    <action selector="addItemButtonTouched" destination="YWg-Ca-mYH" eventType="touchUpInside" id="8l8-0Z-H4j"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Skk-hX-Qui" firstAttribute="top" secondItem="oFn-MB-QCh" secondAttribute="bottom" id="6De-YO-hhg"/>
+                            <constraint firstItem="Skk-hX-Qui" firstAttribute="leading" secondItem="8zc-Ca-vgh" secondAttribute="leading" id="Aia-f9-ckY"/>
+                            <constraint firstItem="IaM-tI-hZm" firstAttribute="top" secondItem="Skk-hX-Qui" secondAttribute="bottom" id="Oh4-If-2Oq"/>
+                            <constraint firstAttribute="trailing" secondItem="Skk-hX-Qui" secondAttribute="trailing" id="hwP-Hs-G7Y"/>
+                            <constraint firstItem="IaM-tI-hZm" firstAttribute="top" secondItem="Tl6-a3-yIS" secondAttribute="bottom" constant="20" id="vnN-Xx-AUq"/>
+                            <constraint firstItem="Tl6-a3-yIS" firstAttribute="trailing" secondItem="8zc-Ca-vgh" secondAttribute="trailingMargin" id="vxn-81-hqX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Skk-hX-Qui" id="rlb-kn-Ul2"/>
+                        <segue destination="sbB-lV-GXM" kind="presentation" identifier="GardenToAddProduce" id="cOO-1S-871"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5g4-NF-n4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-345" y="102"/>
+        </scene>
+        <!--AddProduceContainerVC-->
+        <scene sceneID="JAx-yt-P3W">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddProduce" referencedIdentifier="AddProduceContainerVC" id="jAA-Hf-DpT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mYs-SR-pND"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46I-3K-AyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1732" y="101"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lUP-hR-dU7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbB-lV-GXM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fxT-Aw-TBC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jAA-Hf-DpT" kind="relationship" relationship="rootViewController" id="cIJ-iS-89S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vR0-IK-ytg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="780" y="100.29985007496252"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="add-item-button" width="57" height="57"/>
+    </resources>
+</document>

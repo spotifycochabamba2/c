@@ -11,14 +11,22 @@ target 'cropswapapp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-  pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Messaging'
   
-  pod 'UITextField-Navigation'
+  pod 'UITextField-Navigation', :git => 'https://github.com/T-Pham/UITextField-Navigation', :commit => 'df4a3e2d91ca186f442c4dc8cc8d7f6d7bfb7154'
   
+  pod 'Alamofire', '~> 4.3'
+  pod 'SwiftyJSON'
   pod 'SVProgressHUD'
   pod 'SDWebImage', '~>3.8'
+  pod 'Ax'
+  
+  pod 'UPCarouselFlowLayout', :git => 'https://github.com/ink-spot/UPCarouselFlowLayout.git'
+  pod 'iCarousel'
+  
+  pod 'JSQMessagesViewController'
+  
 #  pod 'CHTCollectionViewWaterfallLayout/Swift'
-  pod 'CHTCollectionViewWaterfallLayout/Swift', :git => "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout.git", :branch => 'develop'
-
+#pod 'CHTCollectionViewWaterfallLayout/Swift', :git => "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout.git", :branch => 'develop'
 
 end

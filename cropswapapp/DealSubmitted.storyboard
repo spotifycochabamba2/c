@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+        <array key="Montserrat-SemiBold.ttf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Deal SubmittedVC-->
+        <scene sceneID="K8t-YY-pVf">
+            <objects>
+                <viewController storyboardIdentifier="DealSubmittedVC" id="ep0-TO-zZF" customClass="DealSubmittedVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QiD-EJ-rhd"/>
+                        <viewControllerLayoutGuide type="bottom" id="enN-Lm-byZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IEy-7F-VFc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkA-4A-Glf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXB-Ub-Tnv">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deal Submitted!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAK-l5-PcJ">
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxM-8Y-I7f">
+                                        <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="XOc-HY-WuP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                        <state key="normal" title="GOT IT!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="acceptButtonTouched" destination="ep0-TO-zZF" eventType="touchUpInside" id="fOy-E8-1aZ"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uad-oQ-Whe">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-defaul" translatesAutoresizingMaskIntoConstraints="NO" id="Qov-uh-T1H">
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="B1p-9E-qb0"/>
+                                                    <constraint firstAttribute="height" constant="100" id="zq3-Sm-0T8"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accept-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVQ-QW-Cee">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="6H7-9H-NaQ"/>
+                                                    <constraint firstAttribute="width" constant="22" id="uVk-y3-xHx"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-defaul" translatesAutoresizingMaskIntoConstraints="NO" id="14y-wb-yK8">
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="XuK-mW-0i0"/>
+                                                    <constraint firstAttribute="width" constant="100" id="mOU-LD-OeW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once Jack's Farm approves deal, we will send you an alert to set a meet up spot." textAlignment="center" lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ULl-wh-3nh">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="112" id="Qe8-DW-96u"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ULl-wh-3nh" firstAttribute="leading" secondItem="nXB-Ub-Tnv" secondAttribute="leading" constant="20" id="CMT-fg-Rlu"/>
+                                    <constraint firstItem="vxM-8Y-I7f" firstAttribute="leading" secondItem="nXB-Ub-Tnv" secondAttribute="leading" constant="20" id="FEA-X7-yXt"/>
+                                    <constraint firstAttribute="height" constant="380" id="Jrf-TU-dBi"/>
+                                    <constraint firstAttribute="trailing" secondItem="bAK-l5-PcJ" secondAttribute="trailing" id="OkC-9z-5k5"/>
+                                    <constraint firstAttribute="trailing" secondItem="vxM-8Y-I7f" secondAttribute="trailing" constant="20" id="TC6-g9-kFA"/>
+                                    <constraint firstItem="bAK-l5-PcJ" firstAttribute="top" secondItem="nXB-Ub-Tnv" secondAttribute="top" constant="20" id="VqQ-cZ-DXr"/>
+                                    <constraint firstItem="bAK-l5-PcJ" firstAttribute="leading" secondItem="nXB-Ub-Tnv" secondAttribute="leading" id="jTg-3r-C5C"/>
+                                    <constraint firstItem="ULl-wh-3nh" firstAttribute="top" secondItem="Uad-oQ-Whe" secondAttribute="bottom" constant="8" id="jaB-JD-aRI"/>
+                                    <constraint firstAttribute="trailing" secondItem="ULl-wh-3nh" secondAttribute="trailing" constant="20" id="khy-Bv-mDJ"/>
+                                    <constraint firstItem="Uad-oQ-Whe" firstAttribute="centerX" secondItem="nXB-Ub-Tnv" secondAttribute="centerX" id="po4-2h-Alk"/>
+                                    <constraint firstItem="Uad-oQ-Whe" firstAttribute="top" secondItem="bAK-l5-PcJ" secondAttribute="bottom" constant="20" id="r8x-V9-whW"/>
+                                    <constraint firstAttribute="bottom" secondItem="vxM-8Y-I7f" secondAttribute="bottom" constant="20" id="uyT-fz-dOD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tkA-4A-Glf" firstAttribute="top" secondItem="IEy-7F-VFc" secondAttribute="top" id="1bI-YA-sLT"/>
+                            <constraint firstItem="enN-Lm-byZ" firstAttribute="top" secondItem="tkA-4A-Glf" secondAttribute="bottom" id="AYk-aF-f12"/>
+                            <constraint firstItem="nXB-Ub-Tnv" firstAttribute="centerY" secondItem="IEy-7F-VFc" secondAttribute="centerY" id="FxJ-kY-Aqk"/>
+                            <constraint firstItem="nXB-Ub-Tnv" firstAttribute="leading" secondItem="IEy-7F-VFc" secondAttribute="leadingMargin" id="IEK-xQ-7kj"/>
+                            <constraint firstItem="nXB-Ub-Tnv" firstAttribute="trailing" secondItem="IEy-7F-VFc" secondAttribute="trailingMargin" id="JS3-kN-Vk1"/>
+                            <constraint firstItem="tkA-4A-Glf" firstAttribute="leading" secondItem="IEy-7F-VFc" secondAttribute="leading" id="Thc-1o-8ZQ"/>
+                            <constraint firstAttribute="trailing" secondItem="tkA-4A-Glf" secondAttribute="trailing" id="vAX-1s-Hhw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="acceptButton" destination="vxM-8Y-I7f" id="Ncp-Pr-Y0P"/>
+                        <outlet property="anotherImageView" destination="Qov-uh-T1H" id="Ggo-ca-RwJ"/>
+                        <outlet property="backgroundView" destination="tkA-4A-Glf" id="10S-au-Aig"/>
+                        <outlet property="descriptionLabel" destination="ULl-wh-3nh" id="eLS-Nx-Uns"/>
+                        <outlet property="myImageView" destination="14y-wb-yK8" id="ywx-v6-3sA"/>
+                        <outlet property="upperView" destination="nXB-Ub-Tnv" id="v6T-a2-Iyc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYD-U7-br9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-390" y="31"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="accept-icon-1" width="22" height="16"/>
+        <image name="user-defaul" width="91" height="100"/>
+    </resources>
+</document>

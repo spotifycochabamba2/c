@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -18,14 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="en8-Hw-vMY"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="4kB-fp-My6">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="184" id="GX5-Bg-k2E"/>
+                                    <constraint firstAttribute="width" constant="185" id="PXX-lG-bA1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="en8-Hw-vMY" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="AiM-dm-vGC"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="en8-Hw-vMY" secondAttribute="bottom" id="eTc-aa-T8a"/>
-                            <constraint firstAttribute="trailing" secondItem="en8-Hw-vMY" secondAttribute="trailing" id="kTA-Im-lYd"/>
-                            <constraint firstItem="en8-Hw-vMY" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="t6Q-X1-xKh"/>
+                            <constraint firstItem="4kB-fp-My6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MOk-ea-U7O"/>
+                            <constraint firstItem="4kB-fp-My6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xA1-bc-XD0"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-screen" width="414" height="736"/>
+        <image name="logo-launch-screen" width="185" height="184"/>
     </resources>
 </document>

@@ -8,10 +8,14 @@
 
 import UIKit
 import SVProgressHUD
+import Ax
 
 class InstagramVC: UIViewController {
   @IBOutlet weak var webView: UIWebView!
   var isCodePresent = false
+  var wasLoggedIn = false
+  
+  var performSegueToHome: (User) -> Void = { _ in print("what?") }
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -40,6 +44,8 @@ class InstagramVC: UIViewController {
   @IBAction func closeButtonTouched() {
     dismiss(animated: true, completion: nil)
   }
+  
+  
 }
 
 extension InstagramVC: UIWebViewDelegate {
@@ -48,18 +54,101 @@ extension InstagramVC: UIWebViewDelegate {
   }
   
   func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-    print(request.url)
-    if Utils.getQueryStringParameter(url: request.url, param: "code") != nil {
-//      request.url?.absoluteString
-//      Optional("http://localhost:4040/instagram-callback?code=5c3dbad353a84e8da43428c699e4862c")
+
+    print(request.url?.absoluteString)
+    if let code = Utils.getQueryStringParameter(url: request.url, param: "code") {
       isCodePresent = true
+      
+      var userFound: User? = nil
+      var isNewUser: Bool = false
+      
+      var firebaseToken: String? = nil
+      
+      Ax.serial(tasks: [
+        { done in
+          User.getFirebaseToken(with: code) { result in
+            switch result {
+            case .success(let data):
+              userFound = data["user"] as? User
+              firebaseToken = data["firebaseToken"] as? String
+              done(nil);
+              break
+            case .fail(let error):
+              done(error)
+              break
+            }
+          }
+        },
+        { done in
+          guard
+            let user = userFound,
+            let firebaseToken = firebaseToken
+          else {
+            let error = NSError(domain: "Auth", code: 0, userInfo: [NSLocalizedDescriptionKey: "No user or firebase token valid."])
+            done(error)
+            return
+          }
+          
+          User.login(with: user, firebaseToken: firebaseToken) { result in
+            switch result {
+            case .success(let result):
+              let userReturned = result["user"] as? User
+              let isNew = result["isNew"] as? Bool
+              
+              userFound = userReturned
+              isNewUser = isNew ?? false
+              print(isNewUser)
+
+              done(nil)
+              break
+            case .fail(let error):
+              done(error)
+              break
+            }
+          }
+        }
+      ], result: { [weak self] error in
+        if let error = error {
+          let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          self?.present(alert, animated: true)
+        } else {
+          if let user = userFound {
+            self?.wasLoggedIn = true
+            DispatchQueue.main.async {
+              self?.dismiss(animated: true) {
+                self?.performSegueToHome(user)
+              }
+            }
+          } else {
+            let alert = UIAlertController(title: "Error", message: "No user found.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            DispatchQueue.main.async {
+              self?.present(alert, animated: true)
+            }
+          }
+        }
+      })
+
       return false
     }
-    
+
     return true
   }
   
   func webViewDidFinishLoad(_ webView: UIWebView) {
+    let jsonString = webView.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('body')[0].getElementsByTagName('pre')[0].innerHTML")
+    if let data = jsonString?.data(using: .utf8) {
+      let dict = try? JSONSerialization.jsonObject(with: data, options: [])
+      if let dict = dict as? [String: Any],
+        let errorType = dict["error_type"] as? String,
+        errorType == "OAuthForbiddenException"
+      {
+        User.logout()
+      }
+    }
+    
     if !isCodePresent {
       SVProgressHUD.dismiss()
     }

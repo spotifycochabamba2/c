@@ -21,15 +21,33 @@ extension IntroVC {
     return true
   }
   
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    signupButton.applyShadowedBordered()
+    loginButton.applyShadowedBordered()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationController?.navigationBar.isHidden = true
-    navigationController?.isNavigationBarHidden = true
+//    User.logout()
     
+    if User.currentUser != nil {
+      self.performSegue(withIdentifier: Storyboard.IntroToHome, sender: nil)
+    }
+    
+    navigationBarIsHidden = true
+
     instagramButton.makeMeBordered(color: .white)
     signupButton.makeMeBordered(color: .white)
     loginButton.makeMeBordered(color: .white)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationBarIsHidden = true
   }
 }
 
@@ -41,7 +59,16 @@ extension IntroVC {
     } else if segue.identifier == Storyboard.IntroToSignup {
       let vc = segue.destination as? SignupVC
       vc?.showLoginView = showLoginView
+    } else if segue.identifier == Storyboard.IntroToInstagram {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? InstagramVC
+      print(vc)
+      vc?.performSegueToHome = performSegueToHome
     }
+  }
+  
+  func performSegueToHome(user: User) {
+    performSegue(withIdentifier: Storyboard.IntroToHome, sender: user)
   }
   
   func showSignupView() {

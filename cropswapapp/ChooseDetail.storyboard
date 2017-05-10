@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-SemiBold.ttf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Choose DetailVC-->
+        <scene sceneID="00T-gZ-qhC">
+            <objects>
+                <viewController storyboardIdentifier="ChooseDetailVC" id="xae-mX-5RM" customClass="ChooseDetailVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qJW-aw-Q0b"/>
+                        <viewControllerLayoutGuide type="bottom" id="PyA-F4-Sc3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iyJ-ve-z4I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iz4-6Q-LZs">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWF-zI-E2N">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-4W-je9">
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKP-U4-lHq">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="67" id="GpS-Ra-BWQ"/>
+                                            <constraint firstAttribute="height" constant="67" id="lXP-NK-Jwf"/>
+                                        </constraints>
+                                        <state key="normal" image="cancel-trade-icon"/>
+                                        <connections>
+                                            <action selector="cancelButtonTouched" destination="xae-mX-5RM" eventType="touchUpInside" id="gng-jY-SMD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUf-DZ-HiJ">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="Ohm-6W-2Fd"/>
+                                            <constraint firstAttribute="width" constant="67" id="iXm-X5-ntN"/>
+                                        </constraints>
+                                        <state key="normal" image="accept-trade-icon"/>
+                                        <connections>
+                                            <action selector="acceptButtonTouched" destination="xae-mX-5RM" eventType="touchUpInside" id="yHk-zu-QDP"/>
+                                        </connections>
+                                    </button>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC4-FO-yA5">
+                                        <connections>
+                                            <segue destination="uDZ-Di-dO4" kind="embed" id="slO-Gv-pMR"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="oKP-U4-lHq" secondAttribute="bottom" constant="8" id="0ss-xF-JS1"/>
+                                    <constraint firstAttribute="trailing" secondItem="sUa-4W-je9" secondAttribute="trailing" id="1Eh-nz-FkP"/>
+                                    <constraint firstAttribute="bottom" secondItem="AUf-DZ-HiJ" secondAttribute="bottom" constant="8" id="2PK-8b-Iax"/>
+                                    <constraint firstAttribute="height" constant="520" id="5Hu-b9-qaa"/>
+                                    <constraint firstItem="AUf-DZ-HiJ" firstAttribute="top" secondItem="MC4-FO-yA5" secondAttribute="bottom" constant="8" id="Fcc-np-vYD"/>
+                                    <constraint firstItem="sUa-4W-je9" firstAttribute="leading" secondItem="gWF-zI-E2N" secondAttribute="leading" id="IbJ-wc-Q8m"/>
+                                    <constraint firstAttribute="trailing" secondItem="MC4-FO-yA5" secondAttribute="trailing" id="SyH-kV-lZp"/>
+                                    <constraint firstItem="MC4-FO-yA5" firstAttribute="top" secondItem="sUa-4W-je9" secondAttribute="bottom" constant="8" id="WV9-dm-EwR"/>
+                                    <constraint firstAttribute="trailing" secondItem="AUf-DZ-HiJ" secondAttribute="trailing" constant="8" id="cok-vs-3NQ"/>
+                                    <constraint firstItem="MC4-FO-yA5" firstAttribute="leading" secondItem="gWF-zI-E2N" secondAttribute="leading" id="eRe-yh-gww"/>
+                                    <constraint firstItem="oKP-U4-lHq" firstAttribute="leading" secondItem="gWF-zI-E2N" secondAttribute="leading" constant="8" id="mJy-rl-20U"/>
+                                    <constraint firstItem="sUa-4W-je9" firstAttribute="top" secondItem="gWF-zI-E2N" secondAttribute="top" constant="15" id="yKo-My-RRG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PyA-F4-Sc3" firstAttribute="top" secondItem="iz4-6Q-LZs" secondAttribute="bottom" id="8BL-aT-jTo"/>
+                            <constraint firstItem="iz4-6Q-LZs" firstAttribute="leading" secondItem="iyJ-ve-z4I" secondAttribute="leading" id="AxB-QE-N0C"/>
+                            <constraint firstItem="gWF-zI-E2N" firstAttribute="trailing" secondItem="iyJ-ve-z4I" secondAttribute="trailingMargin" id="Np8-L9-8q5"/>
+                            <constraint firstItem="iz4-6Q-LZs" firstAttribute="top" secondItem="iyJ-ve-z4I" secondAttribute="top" id="T6R-Bl-KgC"/>
+                            <constraint firstAttribute="trailing" secondItem="iz4-6Q-LZs" secondAttribute="trailing" id="dDK-lQ-xzw"/>
+                            <constraint firstItem="gWF-zI-E2N" firstAttribute="leading" secondItem="iyJ-ve-z4I" secondAttribute="leadingMargin" id="fZh-KE-dgB"/>
+                            <constraint firstItem="gWF-zI-E2N" firstAttribute="centerY" secondItem="iyJ-ve-z4I" secondAttribute="centerY" id="vIa-u3-D8T"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="iz4-6Q-LZs" id="dQp-X9-lMU"/>
+                        <outlet property="upperView" destination="gWF-zI-E2N" id="LrN-zA-fBN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbg-7r-wXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-290.39999999999998" y="92.203898050974516"/>
+        </scene>
+        <!--Choose Detail ListVC-->
+        <scene sceneID="zBT-Zb-xKR">
+            <objects>
+                <tableViewController id="uDZ-Di-dO4" customClass="ChooseDetailListVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NwG-Yl-9xD">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="383"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chooseDetailId" rowHeight="100" id="eyV-7o-lZj" customClass="ChooseDetailCell" customModule="cropswapapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="343" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eyV-7o-lZj" id="k4p-kl-ctv">
+                                    <frame key="frameInset" width="343" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRf-1Y-gAv">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fyt-yi-9rG">
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-tag-not-selected" translatesAutoresizingMaskIntoConstraints="NO" id="Vdy-Da-6j1">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="4dv-HF-QLA"/>
+                                                        <constraint firstAttribute="width" constant="14" id="WEl-pR-r16"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homemade Compost2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0K-ho-PEM">
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Fyt-yi-9rG" firstAttribute="centerY" secondItem="k4p-kl-ctv" secondAttribute="centerY" id="1hX-7L-FLO"/>
+                                        <constraint firstItem="cRf-1Y-gAv" firstAttribute="leading" secondItem="k4p-kl-ctv" secondAttribute="leadingMargin" constant="5" id="3UI-6L-KV2"/>
+                                        <constraint firstItem="cRf-1Y-gAv" firstAttribute="bottom" secondItem="k4p-kl-ctv" secondAttribute="bottomMargin" constant="-5" id="8Tv-fb-59G"/>
+                                        <constraint firstItem="cRf-1Y-gAv" firstAttribute="trailing" secondItem="k4p-kl-ctv" secondAttribute="trailingMargin" constant="-5" id="Q1w-zy-S8k"/>
+                                        <constraint firstItem="cRf-1Y-gAv" firstAttribute="top" secondItem="k4p-kl-ctv" secondAttribute="topMargin" constant="5" id="VWu-kW-WGB"/>
+                                        <constraint firstItem="Fyt-yi-9rG" firstAttribute="leading" secondItem="k4p-kl-ctv" secondAttribute="leadingMargin" constant="25" id="gfd-qF-jLV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconImageView" destination="Vdy-Da-6j1" id="lzG-eJ-tpp"/>
+                                    <outlet property="roundedView" destination="cRf-1Y-gAv" id="Gju-19-W6a"/>
+                                    <outlet property="tagNameLabel" destination="Z0K-ho-PEM" id="Z1K-cf-qSP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uDZ-Di-dO4" id="0Uz-va-x5c"/>
+                            <outlet property="delegate" destination="uDZ-Di-dO4" id="rbS-Ch-e9g"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZWZ-GP-K5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592.79999999999995" y="91.529235382308855"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="accept-trade-icon" width="67" height="67"/>
+        <image name="cancel-trade-icon" width="67" height="67"/>
+        <image name="icon-tag-not-selected" width="14" height="14"/>
+    </resources>
+</document>

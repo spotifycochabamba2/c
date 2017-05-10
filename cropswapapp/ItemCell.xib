@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="itemCellId" id="jWI-31-VOf" customClass="ItemCell" customModule="cropswapapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyz-r0-Pec">
+                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="120"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yEx-Lq-bDt" customClass="UIImageViewCircular" customModule="cropswapapp" customModuleProvider="target">
+                        <color key="backgroundColor" red="0.62352941179999999" green="0.66666666669999997" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptN-Ot-SuX" customClass="ButtonCircular" customModule="cropswapapp" customModuleProvider="target">
+                        <color key="backgroundColor" red="0.2156862745" green="0.83921568629999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="UGD-j2-a7t"/>
+                            <constraint firstAttribute="height" constant="40" id="be3-hi-I5O"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="60"/>
+                        <connections>
+                            <action selector="decreaseQuantityUpButtonTouched" destination="jWI-31-VOf" eventType="touchUpInside" id="ZsV-Ku-WR9"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zyc-dB-exA" customClass="ButtonCircular" customModule="cropswapapp" customModuleProvider="target">
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.83921568627450982" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="MDT-Fz-WN7"/>
+                            <constraint firstAttribute="height" constant="40" id="eed-Ht-OcB"/>
+                        </constraints>
+                        <connections>
+                            <action selector="increaseQuantityUpButtonTouched" destination="jWI-31-VOf" eventType="touchUpInside" id="dl7-S4-zhW"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remove-item-minus-white" translatesAutoresizingMaskIntoConstraints="NO" id="Zfh-ZK-IiH">
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="KdS-Rn-A13"/>
+                            <constraint firstAttribute="height" constant="3" id="yPx-zc-W2r"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-item-plus-white" translatesAutoresizingMaskIntoConstraints="NO" id="dyw-gM-JPs">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="YRk-7g-HRC"/>
+                            <constraint firstAttribute="height" constant="17" id="ncC-tR-aMn"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuS-yB-CgI" customClass="ButtonCircular" customModule="cropswapapp" customModuleProvider="target">
+                        <color key="backgroundColor" red="0.2156862745" green="0.83921568629999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="fBp-c2-Ljc"/>
+                            <constraint firstAttribute="width" constant="40" id="taw-ii-Zoi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="60"/>
+                        <connections>
+                            <action selector="decreaseQuantityDownButtonTouched" destination="jWI-31-VOf" eventType="touchUpInside" id="W8E-gK-jtr"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhd-LD-YNv" customClass="ButtonCircular" customModule="cropswapapp" customModuleProvider="target">
+                        <color key="backgroundColor" red="0.2156862745" green="0.83921568629999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="ROV-MI-Oh2"/>
+                            <constraint firstAttribute="width" constant="40" id="Uzx-pD-aUj"/>
+                        </constraints>
+                        <connections>
+                            <action selector="increaseQuantityDownButtonTouched" destination="jWI-31-VOf" eventType="touchUpInside" id="D8r-OC-L3i"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remove-item-minus-white" translatesAutoresizingMaskIntoConstraints="NO" id="xg0-bD-ACS">
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="LVa-w3-V7A"/>
+                            <constraint firstAttribute="height" constant="3" id="hG9-aB-2W6"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-item-plus-white" translatesAutoresizingMaskIntoConstraints="NO" id="8R0-9B-XCF">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="dOo-Qn-jhv"/>
+                            <constraint firstAttribute="width" constant="17" id="xIW-Ph-2Ce"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ptN-Ot-SuX" firstAttribute="leading" secondItem="jWI-31-VOf" secondAttribute="leading" id="11Z-w5-gbm"/>
+                <constraint firstItem="yEx-Lq-bDt" firstAttribute="leading" secondItem="jWI-31-VOf" secondAttribute="leading" id="2LK-Hl-3N3"/>
+                <constraint firstItem="Jyz-r0-Pec" firstAttribute="centerX" secondItem="jWI-31-VOf" secondAttribute="centerX" id="36L-1A-tY8"/>
+                <constraint firstAttribute="bottom" secondItem="Bhd-LD-YNv" secondAttribute="bottom" id="3La-xV-WD7"/>
+                <constraint firstItem="8R0-9B-XCF" firstAttribute="centerX" secondItem="Bhd-LD-YNv" secondAttribute="centerX" id="5De-au-Iu7"/>
+                <constraint firstItem="ptN-Ot-SuX" firstAttribute="top" secondItem="jWI-31-VOf" secondAttribute="top" id="5pg-gB-ro4"/>
+                <constraint firstItem="xg0-bD-ACS" firstAttribute="centerX" secondItem="yuS-yB-CgI" secondAttribute="centerX" id="6yv-Lv-Hx2"/>
+                <constraint firstItem="xg0-bD-ACS" firstAttribute="centerY" secondItem="yuS-yB-CgI" secondAttribute="centerY" id="BS6-Zl-omm"/>
+                <constraint firstItem="Jyz-r0-Pec" firstAttribute="centerY" secondItem="jWI-31-VOf" secondAttribute="centerY" id="D8J-r1-8rl"/>
+                <constraint firstItem="8R0-9B-XCF" firstAttribute="centerY" secondItem="Bhd-LD-YNv" secondAttribute="centerY" id="EMq-nd-JrO"/>
+                <constraint firstAttribute="bottom" secondItem="yEx-Lq-bDt" secondAttribute="bottom" id="HFj-0X-gt5"/>
+                <constraint firstAttribute="trailing" secondItem="yEx-Lq-bDt" secondAttribute="trailing" id="Q0g-Lb-IvC"/>
+                <constraint firstItem="dyw-gM-JPs" firstAttribute="centerX" secondItem="Zyc-dB-exA" secondAttribute="centerX" id="Qct-Q6-3VQ"/>
+                <constraint firstAttribute="trailing" secondItem="Bhd-LD-YNv" secondAttribute="trailing" id="SoL-Td-BGC"/>
+                <constraint firstAttribute="trailing" secondItem="Zyc-dB-exA" secondAttribute="trailing" id="dNm-04-lgn"/>
+                <constraint firstItem="Zfh-ZK-IiH" firstAttribute="centerX" secondItem="ptN-Ot-SuX" secondAttribute="centerX" id="iLb-PI-avx"/>
+                <constraint firstItem="Zyc-dB-exA" firstAttribute="top" secondItem="jWI-31-VOf" secondAttribute="top" id="kgq-Jc-eXZ"/>
+                <constraint firstItem="dyw-gM-JPs" firstAttribute="centerY" secondItem="Zyc-dB-exA" secondAttribute="centerY" id="m49-ZN-e9Q"/>
+                <constraint firstItem="yEx-Lq-bDt" firstAttribute="top" secondItem="jWI-31-VOf" secondAttribute="top" id="oDO-d9-lYU"/>
+                <constraint firstItem="yuS-yB-CgI" firstAttribute="leading" secondItem="jWI-31-VOf" secondAttribute="leading" id="w3b-o1-Rpo"/>
+                <constraint firstAttribute="bottom" secondItem="yuS-yB-CgI" secondAttribute="bottom" id="xcT-aF-bzg"/>
+                <constraint firstItem="Zfh-ZK-IiH" firstAttribute="centerY" secondItem="ptN-Ot-SuX" secondAttribute="centerY" id="yLR-sV-8xw"/>
+            </constraints>
+            <size key="customSize" width="140" height="140"/>
+            <connections>
+                <outlet property="decreaseQuantityDownButton" destination="yuS-yB-CgI" id="QYl-0f-2ce"/>
+                <outlet property="decreaseQuantityUpButton" destination="ptN-Ot-SuX" id="g7r-0h-9ea"/>
+                <outlet property="downMinusIcon" destination="xg0-bD-ACS" id="v5w-YS-zRZ"/>
+                <outlet property="downPlusIcon" destination="8R0-9B-XCF" id="xTx-cM-Bep"/>
+                <outlet property="increaseQuantityDownButton" destination="Bhd-LD-YNv" id="TkI-5K-3X8"/>
+                <outlet property="increaseQuantityUpButton" destination="Zyc-dB-exA" id="tmy-of-kWd"/>
+                <outlet property="itemImageView" destination="yEx-Lq-bDt" id="hsV-eW-91Z"/>
+                <outlet property="upMinusIcon" destination="Zfh-ZK-IiH" id="nqZ-QI-vIg"/>
+                <outlet property="upPlusIcon" destination="dyw-gM-JPs" id="Hqk-KL-hlU"/>
+            </connections>
+            <point key="canvasLocation" x="-132" y="-150"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="add-item-plus-white" width="21" height="21"/>
+        <image name="remove-item-minus-white" width="21" height="3"/>
+    </resources>
+</document>
