@@ -15,12 +15,15 @@ class TradeHomeVC: UIViewController {
   var originalOwnerProducesCount = 0
   var originalAnotherProducesCount = 0
   
+  var listenChatNotificationsHandler: UInt = 0
+  
   var dealId: String?
   var anotherUserId: String?
   var anotherUsername: String?
   var dealState: DealState?
   var deselectCurrentRow: () -> Void = {}
   
+  @IBOutlet weak var chatButton: UIButton!
   @IBOutlet var chatButtonTopConstraint: NSLayoutConstraint!
   @IBOutlet var chatButtonBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var historialBottomConstraint: NSLayoutConstraint!
@@ -80,6 +83,17 @@ class TradeHomeVC: UIViewController {
       vc?.anotherUserId = anotherUserId
       vc?.anotherUsername = anotherUsername
       vc?.dealId = dealId
+      
+      if let dealId = vc?.dealId,
+        let userId = User.currentUser?.uid {
+        
+        CSNotification.clearChatNotification(
+          withDealId: dealId,
+          andUserId: userId,
+          completion: { (error) in
+            print(error)
+        })
+      }
     }
   }
   
@@ -89,7 +103,8 @@ class TradeHomeVC: UIViewController {
   }
   
   func didAcceptOffer() {
-    performSegue(withIdentifier: Storyboard.TradeHistorialToFinalizeTrade, sender: nil)
+//    performSegue(withIdentifier: Storyboard.TradeHistorialToFinalizeTrade, sender: nil)
+    didConfirmOffer("")
   }
   
   func didCancelOffer() {
@@ -170,8 +185,9 @@ class TradeHomeVC: UIViewController {
       ownerUserId: ownerId,
       anotherUserId: newAnotherId,
       dealId: dealId,
-      dateUpdated: Date(),
-      howFinalized: howFinalized) { [weak self] (error) in
+      dateUpdated: Date()
+//      howFinalized: howFinalized
+    ) { [weak self] (error) in
         DispatchQueue.main.async {
           SVProgressHUD.dismiss()
         }
@@ -308,8 +324,27 @@ class TradeHomeVC: UIViewController {
     
   }
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if let userId = User.currentUser?.uid,
+       let dealId = dealId
+    {
+      listenChatNotificationsHandler = CSNotification.listenChatNotifications(
+        byUserId: userId,
+        andDealId: dealId,
+        completion: { [weak self] (notification) in
+          DispatchQueue.main.async {
+            if notification.chat > 0 {
+              self?.chatButton.backgroundColor = .red
+            } else {
+              self?.chatButton.backgroundColor = .white
+            }
+          }
+      })
+    }
+
     
     statusContainerView.isHidden = true
     chatButtonTopConstraint.isActive = true
@@ -365,6 +400,16 @@ class TradeHomeVC: UIViewController {
     
     DispatchQueue.main.async {
       SVProgressHUD.dismiss()
+    }
+  }
+  
+  deinit {
+    if let userId = User.currentUser?.uid,
+      let dealId = dealId {
+      CSNotification.removeListenChatNotifications(
+        byUserId: userId,
+        andDealId: dealId,
+        handlerId: listenChatNotificationsHandler)
     }
   }
   

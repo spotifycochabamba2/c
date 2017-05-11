@@ -107,6 +107,17 @@ class TradeListVC: UIViewController {
       vc?.anotherUsername = deal?["anotherUsername"] as? String
       vc?.dealState = DealState(rawValue: deal?["state"] as? String ?? DealState.tradeRequest.rawValue)
       vc?.deselectCurrentRow = deselectCurrentRow
+      
+      if let dealId = vc?.dealId,
+        let userId = User.currentUser?.uid
+      {
+        CSNotification.clearTradeNotification(
+          withDealId: dealId,
+          andUserId: userId,
+          completion: { (error) in
+            print(error)
+        })
+      }
     }
   }
 }
@@ -115,9 +126,7 @@ class TradeListVC: UIViewController {
 extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     let deal = deals[indexPath.row]
-    
     performSegue(withIdentifier: Storyboard.TradeListToTradeDetail, sender: deal)
   }
   
@@ -131,11 +140,16 @@ extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
 //    let dealAnotherUserId = deal["anotherUserId"] as? String ?? ""
     let dealDate = deal["dateCreated"] as? Double ?? 0
     
+    let trade = deal["trade"] as? Int ?? 0
+    let chat = deal["chat"] as? Int ?? 0
+    
     cell.state = DealState(rawValue: dealState)
     cell.username = dealAnotherUsername
     cell.numberProduces = dealNumberProduces
     cell.date = dealDate
     cell.profilePictureURL = deal["anotherProfilePictureURL"] as? String
+    
+    cell.hasNewNotifications = trade > 0 || chat > 0
     
     return cell
   }

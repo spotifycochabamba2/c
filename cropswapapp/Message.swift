@@ -76,6 +76,14 @@ extension Message {
           
       })
       
+      CSNotification.createOrUpdateChatNotification(
+        withDealId: dealId,
+        andUserId: receiverId,
+        completion: { (error) in
+          print(error)
+        }
+      )
+      
       completion(error as NSError?)
     })
   }

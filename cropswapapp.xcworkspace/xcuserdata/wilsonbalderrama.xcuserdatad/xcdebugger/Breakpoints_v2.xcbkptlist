@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "cropswapapp/TradeStatusVC.swift"
-            timestampString = "516121133.744292"
+            filePath = "cropswapapp/CSNotification.swift"
+            timestampString = "516158788.639958"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "hasAnyChangeProduceCount(deal:detailsLabel:currentItemsCount:anotherItemsCount:username:currentUserId:originalOwnerUserId:anotherUserId:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "listenChatNotifications(byUserId:andDealId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "cropswapapp/CSNotification.swift"
+            timestampString = "516158770.13164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "listenChatNotifications(byUserId:andDealId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -176,6 +176,14 @@ extension Deal {
           print(error)
       })
       
+      CSNotification.createOrUpdateTradeNotification(
+        withDealId: dealId,
+        andUserId: ownerUserId,
+        completion: { (error) in
+          print(error)
+        }
+      )
+      
       completion(error as NSError?)
     })
     
@@ -188,7 +196,7 @@ extension Deal {
     dealId: String,
     dateUpdated: Date,
     
-    howFinalized: String,
+//    howFinalized: String,
     
     completion: @escaping (NSError?) -> Void
   ) {
@@ -224,6 +232,14 @@ extension Deal {
         completion: { (error) in
           print(error)
       })
+      
+      CSNotification.createOrUpdateTradeNotification(
+        withDealId: dealId,
+        andUserId: ownerUserId,
+        completion: { (error) in
+          print(error)
+        }
+      )
       
       completion(error as NSError?)
     })
@@ -374,6 +390,14 @@ extension Deal {
           print(error)
       })
       
+      CSNotification.createOrUpdateTradeNotification(
+        withDealId: dealId,
+        andUserId: anotherId,
+        completion: { (error) in
+          print(error)
+        }
+      )
+      
       completion(error as NSError?)
     })
   }
@@ -466,9 +490,8 @@ extension Deal {
   static func getDeals(byUserId userId: String, completion: @escaping ([[String: Any]]) -> Void) -> UInt {
     let refDatabaseDeals = refDatabaseUserDeals
                                 .child(userId)
-                                .queryOrdered(byChild: "dateCreated")    
+                                .queryOrdered(byChild: "dateCreated")
     
-//    refDatabaseDeals.observeSingleEvent(of: .value, with: { (snapshot: FIRDataSnapshot) in
     return refDatabaseDeals.observe(.value) { (snapshot: FIRDataSnapshot) in
       var deals = [[String: Any]]()
       
@@ -482,9 +505,7 @@ extension Deal {
             }
           }
           
-          print(deals.count)
           let group = DispatchGroup()
-          
           for (index, deal) in deals.enumerated() {
             group.enter()
             
@@ -505,9 +526,70 @@ extension Deal {
               group.leave()
             }
           }
-          group.notify(queue: DispatchQueue.global(qos: .background), execute: { 
+          
+          group.notify(queue: DispatchQueue.global(qos: .background), execute: {
             completion(deals)
+            
           })
+          
+          //          Ax.parallel(tasks: [
+          //            { done in
+          //              let group = DispatchGroup()
+          //              for (index, deal) in deals.enumerated() {
+          //                group.enter()
+          //
+          //                if let userId = deal["anotherUserId"] as? String {
+          //                  User.getUser(byUserId: userId, completion: { (result) in
+          //                    switch result {
+          //                    case .success(let user):
+          //                      print(index)
+          //                      deals[index]["anotherUsername"] = user.name
+          //                      deals[index]["anotherProfilePictureURL"] = user.profilePictureURL
+          //                    case .fail(let error):
+          //                      print(error)
+          //                    }
+          //
+          //                    group.leave()
+          //                  })
+          //                } else {
+          //                  group.leave()
+          //                }
+          //              }
+          //
+          //              group.notify(queue: DispatchQueue.global(qos: .background), execute: {
+          //                done(nil)
+          //
+          //              })
+          //            },
+          //
+          //            { done in
+          //              let group2 = DispatchGroup()
+          //              for (index, deal) in deals.enumerated() {
+          //                group2.enter()
+          //
+          //                if let dealId = deal["id"] as? String {
+          //                  CSNotification.getNotification(
+          //                    byUserId: userId,
+          //                    andDealId: dealId,
+          //                    completion: { (notification) in
+          //                      deals[index]["notifications"] = notification
+          //                      group2.leave()
+          //                  })
+          //                } else {
+          //                  group2.leave()
+          //                }
+          //              }
+          //              
+          //              group2.notify(queue: DispatchQueue.global(qos: .background), execute: {
+          //                done(nil)
+          //              })
+          //            }
+          //          ], result: { (error) in
+          //            print(deals)
+          //            completion(deals)
+          //          })
+        } else {
+          completion(deals)
         }
       } else {
         completion(deals)
@@ -537,8 +619,6 @@ extension Deal {
   
   
   static func create(_ deal: Deal, completion: @escaping (NSError?) -> Void) {
-    print(deal)
-    
     let refDatabaseDeal = refDatabaseDeals.childByAutoId()
     let dealKey = refDatabaseDeal.key
     
@@ -578,8 +658,6 @@ extension Deal {
     valuesForDeal["originalOwnerProducesCount"] = counterOwnerProduces
     valuesForDeal["originalAnotherProducesCount"] = counterAnotherProduces
     valuesForDeal["transactionMethod"] = deal.transactionMethod ?? ""
-    
-
     
     var valuesForUserDealOwner = [String: Any]()
     valuesForUserDealOwner["id"] = dealKey
@@ -638,11 +716,16 @@ extension Deal {
         completion: { (error) in
           print(error)
       })
+
+      CSNotification.createOrUpdateTradeNotification(
+        withDealId: dealKey,
+        andUserId: deal.anotherUserId,
+        completion: { (error) in
+          print(error)
+        }
+      )
     })
   }
-  
-  
-  
 }
 
 

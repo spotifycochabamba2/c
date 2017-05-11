@@ -221,7 +221,7 @@ class TradeStatusVC: UIViewController {
     ]
     
     let regularFontAttribuge = [
-      NSFontAttributeName: UIFont(name: "Montserrat-SemiBold", size: 18)!
+      NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 18)!
     ]
     
     let blueFontAttribute = [

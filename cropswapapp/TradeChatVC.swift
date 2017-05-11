@@ -79,6 +79,10 @@ class TradeChatVC: JSQMessagesViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
+    CSNotification.clearChatNotification(withDealId: dealId, andUserId: currentUserId) { (error) in
+      print(error)
+    }
+    
     Message.removeListenNewMessages(byDealId: dealId, date: date, handlerId: listenNewMessagesHandlerId)
   }
   

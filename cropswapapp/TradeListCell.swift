@@ -13,6 +13,16 @@ class TradeListCell: UITableViewCell {
   static let cellId = "tradeListCellId"
   @IBOutlet weak var userImageView: UIImageView!
   
+  var hasNewNotifications = false {
+    didSet {
+      if hasNewNotifications {
+        contentView.backgroundColor = .red
+      } else {
+        contentView.backgroundColor = .white
+      }
+    }
+  }
+  
   var profilePictureURL: String? {
     didSet {
       if let url = URL(string: profilePictureURL ?? "") {
