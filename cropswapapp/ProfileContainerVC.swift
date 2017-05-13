@@ -11,7 +11,7 @@ import SVProgressHUD
 
 class ProfileContainerVC: UIViewController {
   
-  var logoutButton: UIButton!
+//  var logoutButton: UIButton!
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let _ = segue.destination as? EditProfileContainerVC
@@ -25,13 +25,8 @@ class ProfileContainerVC: UIViewController {
     }
   }
   
-  func logoutButtonTouched() {
-    
-    NotificationCenter.default.post(
-      name: Notification.Name(Constants.Ids.logoutId),
-      object: nil
-    )
-    
+  func showSettingsView() {
+    performSegue(withIdentifier: Storyboard.ProfileChildToSettings, sender: nil)
   }
   
   override func viewDidLoad() {
@@ -41,8 +36,8 @@ class ProfileContainerVC: UIViewController {
     
     setNavHeaderTitle(title: "My Profile", color: UIColor.black)
     
-    logoutButton = setNavIcon(imageName: "logout-icon", size: CGSize(width: 35, height: 25), position: .right)
-    logoutButton.addTarget(self, action: #selector(logoutButtonTouched), for: .touchUpInside)
+    let settingsButton = setNavIcon(imageName: "settings-icon", size: CGSize(width: 26, height: 26), position: .right)
+    settingsButton.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
     
     navigationController?.navigationBar.isHidden = false
     navigationController?.isNavigationBarHidden = false
@@ -53,3 +48,26 @@ class ProfileContainerVC: UIViewController {
   }
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

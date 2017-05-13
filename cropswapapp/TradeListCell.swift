@@ -13,12 +13,20 @@ class TradeListCell: UITableViewCell {
   static let cellId = "tradeListCellId"
   @IBOutlet weak var userImageView: UIImageView!
   
+  let userNameSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 20)
+  let numberProduceSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 13)
+  
+  let userNameRegularFont = UIFont(name: "Montserrat-Regular", size: 20)
+  let numberProduceLightFont = UIFont(name: "Montserrat-Light", size: 13)
+  
   var hasNewNotifications = false {
     didSet {
       if hasNewNotifications {
-        contentView.backgroundColor = .red
+        usernameLabel.font = userNameSemiboldFont
+        numberProducesLabel.font = numberProduceSemiboldFont
       } else {
-        contentView.backgroundColor = .white
+        usernameLabel.font = userNameRegularFont
+        numberProducesLabel.font = numberProduceLightFont
       }
     }
   }

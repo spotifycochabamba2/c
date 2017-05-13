@@ -73,6 +73,12 @@ struct Storyboard {
   static let TradeStatusToFinalizeTrade = "TradeStatusToFinalizeTrade"
   
   static let ProduceContainerToFinalizeTrade = "ProduceContainerToFinalizeTrade"
+  
+  static let ProfileChildToSettings = "ProfileChildToSettings"
+  
+  static let LoginToForgotPassword = "LoginToForgotPassword"
+  
+  static let SignupToYourLocation = "SignupToYourLocation"
 }
 
 

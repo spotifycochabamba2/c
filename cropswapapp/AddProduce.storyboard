@@ -480,7 +480,7 @@
                                                                 <constraint firstAttribute="height" constant="105" id="p1B-4l-dQD"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                     </subviews>
                                                 </stackView>

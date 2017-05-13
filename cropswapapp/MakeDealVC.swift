@@ -434,19 +434,40 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
       print(currentPageOnAnotherGarden)
       print(index)
       if currentPageOnAnotherGarden == index {
+        print(anotherProduces[index])
+        print(anotherProduces[index]["quantity"] as? Int)
+        
+        let produceQuantity = anotherProduces[index]["quantity"] as? Int ?? 0
         let value = anotherProduces[index]["quantityAdded"] as? Int ?? 0
         let result = value + quantity
-        anotherProduces[index]["quantityAdded"] = result >= 0 ? result : 0
-        currentPageOnAnotherGarden = index
+        
+        if result <= produceQuantity {
+          anotherProduces[index]["quantityAdded"] = result >= 0 ? result : 0
+          currentPageOnAnotherGarden = index
+        } else {
+          let alert = UIAlertController(title: "Info", message: "You have reached the maximum quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+        }
       }
     case .toMyGarden:
       print(currentPageOnMyGarden)
       print(index)
       if currentPageOnMyGarden == index {
+        
+        let produceQuantity = myProduces[index]["quantity"] as? Int ?? 0
+        
         let value = myProduces[index]["quantityAdded"] as? Int ?? 0
         let result = value + quantity
-        myProduces[index]["quantityAdded"] = result >= 0 ? result : 0
-        currentPageOnMyGarden = index
+        
+        if result <= produceQuantity {
+          myProduces[index]["quantityAdded"] = result >= 0 ? result : 0
+          currentPageOnMyGarden = index
+        } else {
+          let alert = UIAlertController(title: "Info", message: "You have reached the maximum quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+        }
       }
     }
   }

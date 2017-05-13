@@ -23,9 +23,9 @@ class SignupVC: UITableViewController {
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
   
+  var userCreated: User?
+  
   var showLoginView: (() -> Void)?
-  
-  
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -68,11 +68,19 @@ class SignupVC: UITableViewController {
       let vc = segue.destination as? HomeVC
       
       vc?.currentUser = sender as? User
+    } else if segue.identifier == Storyboard.SignupToYourLocation {
+      let vc = segue.destination as? YourLocationVC
+      vc?.user = sender as? User
+      vc?.didPerformSegueToHome = performSegueToHome
     }
   }
   
   @IBAction func instagramButtonTouched() {
     performSegue(withIdentifier: Storyboard.SignupToInstagram, sender: nil)
+  }
+  
+  func performSegueToHome() {
+    performSegue(withIdentifier: Storyboard.SignupToHome, sender: userCreated)
   }
   
   @IBAction func signupButtonTouched() {
@@ -100,8 +108,10 @@ class SignupVC: UITableViewController {
             self?.present(alert, animated: true)
           }
         case .success(let user):
+          self?.userCreated = user
+          
           DispatchQueue.main.async {
-            self?.performSegue(withIdentifier: Storyboard.SignupToHome, sender: user)
+            self?.performSegue(withIdentifier: Storyboard.SignupToYourLocation, sender: user)
           }
         }
         

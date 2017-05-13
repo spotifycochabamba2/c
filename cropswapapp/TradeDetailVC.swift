@@ -153,14 +153,16 @@ class TradeDetailVC: UIViewController {
                       let name = anotherProduce["name"] as? String,
                       let firstPictureURL = anotherProduce["firstPictureURL"] as? String,
                       let quantityType = anotherProduce["quantityType"] as? String,
-                      let ownerId = anotherProduce["ownerId"] as? String
+                      let ownerId = anotherProduce["ownerId"] as? String,
+                      let quantity = anotherProduce["quantity"] as? Int
                     {
                       let produce = Produce(
                         id: id,
                         name: name,
                         firstPictureURL: firstPictureURL,
                         quantityType: quantityType,
-                        ownerId: ownerId
+                        ownerId: ownerId,
+                        quantity: quantity
                       )
                       
                       self?.anotherProduces.append((produce, 0))
@@ -183,14 +185,16 @@ class TradeDetailVC: UIViewController {
                       let name = myProduce["name"] as? String,
                       let firstPictureURL = myProduce["firstPictureURL"] as? String,
                       let quantityType = myProduce["quantityType"] as? String,
-                      let ownerId = myProduce["ownerId"] as? String
+                      let ownerId = myProduce["ownerId"] as? String,
+                      let quantity = myProduce["quantity"] as? Int
                     {
                       let produce = Produce(
                         id: id,
                         name: name,
                         firstPictureURL: firstPictureURL,
                         quantityType: quantityType,
-                        ownerId: ownerId
+                        ownerId: ownerId,
+                        quantity: quantity
                       )
                       
                       self?.myProduces.append((produce, 0))
@@ -325,22 +329,38 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
       print(currentPageOnAnotherGarden)
       print(index)
       if currentPageOnAnotherGarden == index {
+        let produce = anotherProduces[index].0
         let value = anotherProduces[index].1
         let result = value + quantity
-        anotherProduces[index].1 = result >= 0 ? result : 0
-        DispatchQueue.main.async { [weak self] in
-          self?.currentPageOnAnotherGarden = index
+        
+        if result <= produce.quantity {
+          anotherProduces[index].1 = result >= 0 ? result : 0
+          DispatchQueue.main.async { [weak self] in
+            self?.currentPageOnAnotherGarden = index
+          }
+        } else {
+          let alert = UIAlertController(title: "Info", message: "You have reached the maximum quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
         }
       }
     case .toMyGarden:
       print(currentPageOnMyGarden)
       print(index)
       if currentPageOnMyGarden == index {
+        let produce = myProduces[index].0
         let value = myProduces[index].1
         let result = value + quantity
-        myProduces[index].1 = result >= 0 ? result : 0
-        DispatchQueue.main.async { [weak self] in
-          self?.currentPageOnMyGarden = index
+        
+        if result <= produce.quantity {
+          myProduces[index].1 = result >= 0 ? result : 0
+          DispatchQueue.main.async { [weak self] in
+            self?.currentPageOnMyGarden = index
+          }
+        } else {
+          let alert = UIAlertController(title: "Info", message: "You have reached the maximum quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
         }
       }
     }

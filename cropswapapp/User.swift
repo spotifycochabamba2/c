@@ -33,6 +33,12 @@ struct User {
   var profilePictureURL: String? = nil
   var instagramToken: String? = nil
   
+  var street: String?
+  var city: String?
+  var state: String?
+  var zipCode: String?
+  var showAddress: Bool?
+  
   init?(json: [String: Any]?) {
     guard
       let json = json,
@@ -52,6 +58,12 @@ struct User {
     self.website = json["website"] as? String
     
     self.location = json["location"] as? String
+    
+    self.street = json["street"] as? String
+    self.city = json["city"] as? String
+    self.state = json["state"] as? String
+    self.zipCode = json["zipCode"] as? String
+    self.showAddress = json["showAddress"] as? Bool
   }
   
   init(email: String, name: String) {
@@ -395,6 +407,48 @@ extension User {
     
   }
   
+  static func sendResetPasswordTo(email: String, completion: @escaping (Error?) -> Void) {
+    
+    if case Result.fail(let error) = isValid(email: email) {
+      completion(error)
+      return
+    }
+    
+    FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { (error) in
+      completion(error)
+    })
+  }
+  
+  static func saveLocation(
+    byUserId userId: String,
+    street: String? = nil,
+    city: String? = nil,
+    state: String? = nil,
+    zipCode: String,
+    showAddress: Bool,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    let refUser = refDatabaseUsers.child(userId)
+    
+    if zipCode.trimmingCharacters(in: CharacterSet.whitespaces).characters.count <= 0 {
+      let error = NSError(domain: "Authentication", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please provide at least your zipcode."])
+      
+      completion(error)
+      return
+    }
+    
+    var data = [String: Any]()
+    data["street"] = street ?? ""
+    data["city"] = city ?? ""
+    data["state"] = state ?? ""
+    data["zipCode"] = zipCode
+    data["showAddress"] = showAddress
+    
+    refUser.updateChildValues(data, withCompletionBlock: {(error, ref) in
+      completion(error as? NSError)
+    })
+  }
+  
   static func signup(
     email: String,
     andName name: String,
@@ -403,6 +457,7 @@ extension User {
     completion: @escaping (Result<User>) -> Void
   ) {
     var firebaseUser: FIRUser?
+    
     if name.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
       let error = NSError(domain: "Auth", code: 0, userInfo: [
         NSLocalizedDescriptionKey: "Name value is empty."

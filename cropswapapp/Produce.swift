@@ -65,14 +65,15 @@ struct Produce {
     name: String,
     firstPictureURL: String,
     quantityType: String,
-    ownerId: String
+    ownerId: String,
+    quantity: Int
   ) {
     self.id = id
     self.name = name
     self.description = ""
     self.produceType = ""
     self.quantityType = quantityType
-    self.quantity = 0
+    self.quantity = quantity
     self.firstPictureURL = firstPictureURL
     
     self.price = 0

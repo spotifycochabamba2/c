@@ -23,6 +23,8 @@ class TradeHomeVC: UIViewController {
   var dealState: DealState?
   var deselectCurrentRow: () -> Void = {}
   
+  var badgeNumberLabel: UILabel!
+  
   @IBOutlet weak var chatButton: UIButton!
   @IBOutlet var chatButtonTopConstraint: NSLayoutConstraint!
   @IBOutlet var chatButtonBottomConstraint: NSLayoutConstraint!
@@ -328,6 +330,18 @@ class TradeHomeVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    badgeNumberLabel = UILabel(frame: CGRect(x: 40, y: 0, width: 20, height: 20))
+    badgeNumberLabel.layer.borderColor = UIColor.clear.cgColor
+    badgeNumberLabel.layer.borderWidth = 2
+    badgeNumberLabel.layer.cornerRadius = badgeNumberLabel.bounds.size.height / 2
+    badgeNumberLabel.textAlignment = .center
+    badgeNumberLabel.layer.masksToBounds = true
+    badgeNumberLabel.font = UIFont(name: "Montserrat-Light", size: 13)
+    badgeNumberLabel.textColor = .white
+    badgeNumberLabel.backgroundColor = UIColor.hexStringToUIColor(hex: "#f83f39")
+    badgeNumberLabel.isHidden = true
+    chatButton.addSubview(badgeNumberLabel)
+    
     if let userId = User.currentUser?.uid,
        let dealId = dealId
     {
@@ -336,10 +350,12 @@ class TradeHomeVC: UIViewController {
         andDealId: dealId,
         completion: { [weak self] (notification) in
           DispatchQueue.main.async {
+            self?.badgeNumberLabel.text = "\(notification.chat)"
+            
             if notification.chat > 0 {
-              self?.chatButton.backgroundColor = .red
+              self?.badgeNumberLabel.isHidden = false
             } else {
-              self?.chatButton.backgroundColor = .white
+              self?.badgeNumberLabel.isHidden = true
             }
           }
       })

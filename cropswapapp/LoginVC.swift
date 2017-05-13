@@ -21,6 +21,8 @@ class LoginVC: UITableViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
+  let totalHeightOfEmailPasswordButtonsControls: CGFloat = 320.0
+  
   var showSignupView: (() -> Void)?
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +76,10 @@ class LoginVC: UITableViewController {
       
       vc?.performSegueToHome = performSegueToHome
     }
+  }
+  
+  @IBAction func forgotPasswordButtonTouched() {
+    performSegue(withIdentifier: Storyboard.LoginToForgotPassword, sender: nil)
   }
   
   @IBAction func loginButtonTouched() {
@@ -133,7 +139,7 @@ extension LoginVC {
     var height = super.tableView(tableView, heightForRowAt: indexPath)
     
     if indexPath.row == 0 {
-      height = view.frame.size.height - CGFloat(300 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
+      height = view.frame.size.height - CGFloat(totalHeightOfEmailPasswordButtonsControls + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
     }
     
     return height

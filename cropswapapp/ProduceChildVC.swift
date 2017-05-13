@@ -17,9 +17,23 @@ class ProduceChildVC: UITableViewController {
   
   @IBOutlet weak var shadowView: UIView!
   
-  @IBOutlet weak var gardenerLabel: UILabel!
-  @IBOutlet weak var addressGardenerLabel: UILabel!
-  @IBOutlet weak var descriptionProduceTextView: UITextView!
+  @IBOutlet weak var gardenerLabel: UILabel! {
+    didSet {
+      gardenerLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var addressGardenerLabel: UILabel! {
+    didSet {
+      addressGardenerLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var descriptionProduceTextView: UITextView! {
+    didSet {
+      descriptionProduceTextView.text = ""
+    }
+  }
   
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var quantityAndTypeLabel: UILabel!
@@ -136,15 +150,16 @@ class ProduceChildVC: UITableViewController {
     pageContainer.dataSource = self
     pageContainer.delegate = self
     
+    SVProgressHUD.show()
     Ax.serial(tasks: [
       { [weak self] done in
         if
           let ownerId = self?.produce?.ownerId,
           let produceId = self?.produce?.id
         {
-          SVProgressHUD.show()
+          
           User.getProducesByUser(byUserId: ownerId, completion: { [weak self] (dictionaries) in
-            SVProgressHUD.dismiss()
+            
             self?.relatedProduces = dictionaries.filter {
               let iteratedProduceId = $0["id"] as? String ?? ""
               
@@ -171,6 +186,11 @@ class ProduceChildVC: UITableViewController {
         }
       }
     ]) { [weak self] (error) in
+      
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
+      }
+      
       if let produce = self?.produce {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in

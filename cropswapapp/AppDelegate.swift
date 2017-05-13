@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FIRApp.configure()
 //    FIRDatabase.database().persistenceEnabled = true
     
+    logoutIfFirstTimeUse()
+    
     configurePushNotifications(application)
     
 //    NotificationCenter.default.addObserver(self, selector: #selector(tokenRefreshNotification(notification:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
@@ -36,6 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     return true
+  }
+  
+  func logoutIfFirstTimeUse() {
+    let userDefaults = UserDefaults.standard
+    
+    if !userDefaults.bool(forKey: "hasRunBefore") {
+      do {
+        try FIRAuth.auth()?.signOut()
+      } catch {
+        
+      }
+      
+      userDefaults.set(true, forKey: "hasRunBefore")
+      userDefaults.synchronize()
+    }
   }
   
   func handlePushNotificationForSavingInUserDefault(_ userInfo: [String: Any]?) {
@@ -101,6 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    UIApplication.shared.applicationIconBadgeNumber = 0
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

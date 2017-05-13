@@ -20,6 +20,8 @@ class TradeStatusVC: UIViewController {
   var anotherUserId: String?
   var dealId: String?
   
+  var currentUser: User?
+  
   var dealState: DealState?
   var originalOwnerUserId: String?
   
@@ -28,6 +30,8 @@ class TradeStatusVC: UIViewController {
   
   var originalTransactionMethod: String?
   var transactionMethod: String?
+  
+  @IBOutlet weak var statusImageView: UIImageView!
   
   @IBOutlet weak var statusLabel: UILabel! {
     didSet {
@@ -124,6 +128,24 @@ class TradeStatusVC: UIViewController {
         }
       },
       
+//      { done in
+//        
+//        if let userId = User.currentUser?.uid {
+//          User.getUser(byUserId: userId, completion: { [weak self] (result) in
+//            switch result {
+//            case .success(let user):
+//              self?.currentUser = user
+//              
+//                          case .fail(let error):
+//              print(error)
+//            }
+//            
+//            done(nil)
+//          })
+//        }
+//        
+//      },
+      
       { [weak self] done in
         if let originalOwnerUserId = self?.originalOwnerUserId {
           User.getUser(byUserId: originalOwnerUserId) { [weak self] (result) in
@@ -164,8 +186,17 @@ class TradeStatusVC: UIViewController {
                     anotherUserId: anotherUserId
                   )
                   
+                  if let showAddress = user.showAddress,
+                    showAddress {
+                    let location = "\(user.street ?? "") \(user.city ?? "") \(user.state ?? "") \(user.zipCode ?? "")"
+                    
+                    self?.locationDetailLabel.text = location
+                  } else {
+                    self?.locationDetailLabel.text = "Message \(user.name) for location details."
+                  }
+
+                  
                   self?.locationTitleLabel.text = "\(user.name)'s Garden Location"
-                  self?.locationDetailLabel.text = user.location ?? "\(user.name) didn't set his location."
                 }
               }
             case .fail(let error):
@@ -279,9 +310,13 @@ class TradeStatusVC: UIViewController {
     if let dealState = dealState {
       switch dealState {
       case .tradeCancelled:
-        fallthrough
+        statusLabel.textColor = UIColor.hexStringToUIColor(hex: "#f83f39")
+        statusLabel.text = dealState.rawValue
+        editTransactionButton.isHidden = true
       case .tradeCompleted:
-        fallthrough
+        statusLabel.textColor = UIColor.hexStringToUIColor(hex: "#37d67c")
+        statusLabel.text = dealState.rawValue
+        editTransactionButton.isHidden = true
       case .tradeInProcess:
         fallthrough
       case .waitingAnswer:

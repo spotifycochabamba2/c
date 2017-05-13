@@ -22,7 +22,7 @@ struct Constants {
   struct Server {
     static var stringURL: String {
       let url = "https://aqueous-river-57184.herokuapp.com/"
-//      let url = "http://192.168.0.102:5000/"
+//      let url = "http://192.168.1.4:5000/"
       
       return url
     }
@@ -30,7 +30,7 @@ struct Constants {
   
   struct Instagram {
     private static let clientID = "265265bbe53b4934b9a30ae93597277e"
-    // http://192.168.0.101:5000/instagram-callback
+    // http://192.168.1.4:5000:5000/instagram-callback
     // https://aqueous-river-57184.herokuapp.com/instagram-callback
     private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
     

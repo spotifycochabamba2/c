@@ -274,6 +274,7 @@
                         <outlet property="editTransactionButton" destination="qGW-jk-ME0" id="2hC-mO-2Ty"/>
                         <outlet property="locationDetailLabel" destination="mu1-LS-A0p" id="zfU-ge-iCK"/>
                         <outlet property="locationTitleLabel" destination="MPf-SK-JvT" id="Pwd-ES-BGq"/>
+                        <outlet property="statusImageView" destination="pW0-Q7-Ozs" id="Lb3-vS-lxx"/>
                         <outlet property="statusLabel" destination="z1T-Iq-nhB" id="Bdu-Qu-WpD"/>
                         <outlet property="transactionMethodLabel" destination="haS-t0-oeV" id="Yft-ln-M2x"/>
                         <segue destination="cY4-M6-F3J" kind="presentation" identifier="TradeStatusToFinalizeTrade" modalPresentationStyle="overCurrentContext" id="0Ew-qW-puA"/>
@@ -437,7 +438,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PCr-TQ-ghb" id="KtT-dU-bRj">
-                                    <frame key="frameInset" width="375" height="199.5"/>
+                                    <frame key="frameInset" width="375" height="199"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-HY-QPI">
@@ -787,7 +788,7 @@ this cropswap?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dc9-5n-p7X" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yKI-mb-8VU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yKI-mb-8VU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -805,7 +806,7 @@ this cropswap?</string>
             <objects>
                 <navigationController storyboardIdentifier="NCTradeChatVC" automaticallyAdjustsScrollViewInsets="NO" id="TJn-jZ-eRL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="VHy-dF-2F1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHy-dF-2F1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -38,7 +38,9 @@ class InstagramVC: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    SVProgressHUD.dismiss()
+    DispatchQueue.main.async {
+      SVProgressHUD.dismiss()
+    }
   }
   
   @IBAction func closeButtonTouched() {
