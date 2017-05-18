@@ -23,6 +23,17 @@ class MakeDealVC: UIViewController {
   
   var transactionMethod: String?
   
+//  var pageSize: CGSize {
+//    let layout = self.collectionView.collectionViewLayout as! UPCarouselFlowLayout
+//    var pageSize = layout.itemSize
+//    if layout.scrollDirection == .horizontal {
+//      pageSize.width += layout.minimumLineSpacing
+//    } else {
+//      pageSize.height += layout.minimumLineSpacing
+//    }
+//    return pageSize
+//  }
+  
   @IBOutlet weak var anotherProduceTitleLabel: UILabel! {
     didSet {
       anotherProduceTitleLabel.text = ""
@@ -80,7 +91,7 @@ class MakeDealVC: UIViewController {
   
   var currentPageOnMyGarden: Int = 0 {
     didSet {
-      
+      print(currentPageOnMyGarden)
       if currentPageOnMyGarden >= 0 {
         let produce = myProduces[currentPageOnMyGarden]
         showProduceOnMyGardenUI(produce)
@@ -91,7 +102,7 @@ class MakeDealVC: UIViewController {
   
   var currentPageOnAnotherGarden: Int = 0 {
     didSet {
-      
+      print(currentPageOnAnotherGarden)
       if currentPageOnAnotherGarden >= 0 {
         let produce = anotherProduces[currentPageOnAnotherGarden]
         showProduceOnAnothersGardenUI(produce)
@@ -135,9 +146,22 @@ class MakeDealVC: UIViewController {
     var ownerUserFound: User?
     var anotherUserFound: User?
     
+    guard let anotherId = anotherOwnerId else {
+      let alert = UIAlertController(title: "Error", message: "Another person Id invalid.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    guard let ownerId = User.currentUser?.uid else {
+      let alert = UIAlertController(title: "Error", message: "Owner user id invalid.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
     SVProgressHUD.show()
     Ax.serial(tasks: [
-      
       { [weak self] done in
         User.getUser(completion: { (result) in
           switch result {
@@ -163,20 +187,7 @@ class MakeDealVC: UIViewController {
       },
       
       { [weak self] done in
-        guard let anotherId = self?.anotherOwnerId else {
-          let error = NSError(domain: "MakeDeal", code: 0, userInfo: [NSLocalizedDescriptionKey: "Another person Id invalid."])
-          
-          done(error)
-          return
-        }
-        
-        guard let ownerId = User.currentUser?.uid else {
-          let error = NSError(domain: "MakeDeal", code: 0, userInfo: [NSLocalizedDescriptionKey: "Owner person Id invalid."])
-          
-          done(error)
-          return
-        }
-        
+                
         guard let anotherUsername = self?.anotherUsername else {
           let error = NSError(domain: "MakeDeal", code: 0, userInfo: [NSLocalizedDescriptionKey: "Another person Username invalid."])
           
@@ -478,8 +489,18 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   }
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let width: CGFloat = (anotherGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout).itemSize.width
-    let pageSide = width
+    let layout: UPCarouselFlowLayout!
+    
+    if myGardenCollectionView === scrollView {
+      layout = myGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout
+    } else {
+      layout = anotherGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout
+    }
+    
+    var pageSize = layout.itemSize
+    pageSize.width += layout.minimumLineSpacing
+    
+    let pageSide = pageSize.width
     let offset = scrollView.contentOffset.x
     let value = Int(floor((offset - pageSide / 2) / pageSide) + 1)
     

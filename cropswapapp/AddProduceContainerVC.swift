@@ -27,10 +27,14 @@ class AddProduceContainerVC: UIViewController {
     if segue.identifier == "AddProduceContainerToAddProduceChild" {
       let vc = segue.destination as? AddProduceChildVC
       vc?.currentProduceId = currentProduceId
+      vc?.changeTitleButton = changeTitleButton
       addProduceChildVC = vc
     }
   }
   
+  func changeTitleButton(_ newTitle: String) {
+    addItemButton.setTitle(newTitle, for: .normal)
+  }
   
   @IBAction func addItemButtonTouched() {
     

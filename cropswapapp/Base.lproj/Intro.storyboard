@@ -969,7 +969,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zb0-jt-1vl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZzM-r8-17X">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZzM-r8-17X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -987,7 +987,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uIL-Qf-Wd5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Mmy-qk-x3f">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mmy-qk-x3f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

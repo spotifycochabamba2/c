@@ -58,14 +58,29 @@ class ProduceContainerVC: UIViewController {
     guard let ownerId = produce?.ownerId else {
       return
     }
+
+    guard let ownerName = produce?.ownerUsername else {
+      return
+    }
     
     guard let currenUserId = User.currentUser?.uid else {
       return
     }
     
     if ownerId != currenUserId {
-
-      performSegue(withIdentifier: Storyboard.ProduceContainerToFinalizeTrade, sender: nil)
+      Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
+        print(hoursLeft)
+        
+        if hoursLeft > 0 {
+          let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          
+          self?.present(alert, animated: true)
+        } else {
+          self?.performSegue(withIdentifier: Storyboard.ProduceContainerToFinalizeTrade, sender: nil)
+        }
+      })
+      
     } else {
       let alert = UIAlertController(title: "Info", message: "Sorry you can't make a deal with yourself", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))

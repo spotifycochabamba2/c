@@ -91,13 +91,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let dealId = userInfo["dealId"] as? String,
       let ownerUserId = userInfo["ownerUserId"] as? String,
       let dealState = userInfo["dealState"] as? String,
-      let ownerUsername = userInfo["ownerUsername"] as? String
+      let ownerUsername = userInfo["ownerUsername"] as? String,
+      let originalOwnerUserId = userInfo["originalOwnerUserId"] as? String,
+      let originalOwnerProducesCount = userInfo["originalOwnerProducesCount"] as? String,
+      let originalAnotherProducesCount = userInfo["originalAnotherProducesCount"] as? String
     {
       let defaults = UserDefaults.standard
       defaults.set(dealId, forKey: "dealId")
       defaults.set(ownerUserId, forKey: "ownerUserId")
       defaults.set(dealState, forKey: "dealState")
       defaults.set(ownerUsername, forKey: "ownerUsername")
+      defaults.set(originalOwnerUserId, forKey: "originalOwnerUserId")
+      defaults.set(Int(originalOwnerProducesCount) ?? 0, forKey: "originalOwnerProducesCount")
+      defaults.set(Int(originalAnotherProducesCount) ?? 0, forKey: "originalAnotherProducesCount")
       defaults.synchronize()
     }
   }
@@ -231,13 +237,23 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
       let dealId = userInfo["dealId"] as? String,
       let ownerUserId = userInfo["ownerUserId"] as? String,
       let dealState = userInfo["dealState"] as? String,
-      let ownerUsername = userInfo["ownerUsername"] as? String
+      let ownerUsername = userInfo["ownerUsername"] as? String,
+      let originalOwnerUserId = userInfo["originalOwnerUserId"] as? String,
+      let originalOwnerProducesCount = userInfo["originalOwnerProducesCount"] as? String,
+      let originalAnotherProducesCount = userInfo["originalAnotherProducesCount"] as? String
     {
       var data = [String: Any]()
       data["dealId"] = dealId
       data["ownerUserId"] = ownerUserId
       data["dealState"] = dealState
       data["ownerUsername"] = ownerUsername
+      data["originalOwnerUserId"] = originalOwnerUserId
+      data["originalOwnerProducesCount"] = Int(originalOwnerProducesCount) ?? 0
+      data["originalAnotherProducesCount"] = Int(originalAnotherProducesCount) ?? 0
+      
+      print(" Bob Marley originalOwnerUserId: \(originalOwnerUserId)")
+      print(" Bob Marley originalOwnerUserId: \(originalOwnerProducesCount)")
+      print(" Bob Marley originalOwnerUserId: \(originalAnotherProducesCount)")
       
       NotificationCenter.default.post(name: Notification.Name(Constants.PushNotification.tradePushNotificationId), object: data)
     }

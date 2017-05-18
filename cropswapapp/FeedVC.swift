@@ -218,7 +218,9 @@ extension FeedVC {
         isGettingPaginatedDataFromServer = true
         SVProgressHUD.show()
         User.getProducesOnce(byLimit: limitProducesBrought, startingFrom: lastProduceId, completion: { [unowned self] (broughtProduces) in
-          SVProgressHUD.dismiss()
+          DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+          }
           self.isGettingPaginatedDataFromServer = false
           
           self.collectionView.performBatchUpdates({

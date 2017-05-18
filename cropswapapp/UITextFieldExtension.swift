@@ -46,4 +46,45 @@ extension UIView {
     self.layer.addSublayer(line)
     self.layer.masksToBounds = true
   }
+  
+  func addBottomLine2(color: UIColor) {
+    let line = CALayer()
+    let borderWidth = CGFloat(1.0)
+    line.borderColor = color.cgColor
+    line.frame = CGRect(
+      x: 0,
+      y: self.frame.size.height - borderWidth,
+      width: self.frame.size.width,
+      height: borderWidth)
+    line.borderWidth = borderWidth
+    
+    self.layer.addSublayer(line)
+    self.layer.masksToBounds = true
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

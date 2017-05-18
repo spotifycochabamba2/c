@@ -243,7 +243,7 @@
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MiD-OC-Rtf">
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFS-uE-r2g">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFS-uE-r2g">
                                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -265,6 +265,129 @@ Las Vegas, NV 89119</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="fPn-y6-gDU">
+                                        <rect key="frame" x="0.0" y="700" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPn-y6-gDU" id="sbO-Zf-wPD">
+                                            <frame key="frameInset" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="V8p-t4-guW">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-xJ-RA9">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fy1-cu-BEx">
+                                                            <string key="text">1076 Hall street
+Las Vegas, NV 89119</string>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="V8p-t4-guW" secondAttribute="trailing" id="3PZ-nn-FrN"/>
+                                                <constraint firstItem="V8p-t4-guW" firstAttribute="leading" secondItem="sbO-Zf-wPD" secondAttribute="leadingMargin" id="fva-9z-r61"/>
+                                                <constraint firstItem="V8p-t4-guW" firstAttribute="top" secondItem="sbO-Zf-wPD" secondAttribute="topMargin" id="jpz-wB-dto"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="q4L-78-J3T">
+                                        <rect key="frame" x="0.0" y="790" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q4L-78-J3T" id="OnJ-Cm-A3v">
+                                            <frame key="frameInset" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bBH-tx-xkK">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QES-Xg-cwa">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFU-ZY-dlS">
+                                                            <string key="text">1076 Hall street
+Las Vegas, NV 89119</string>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bBH-tx-xkK" firstAttribute="top" secondItem="OnJ-Cm-A3v" secondAttribute="topMargin" id="ICA-2V-36y"/>
+                                                <constraint firstItem="bBH-tx-xkK" firstAttribute="leading" secondItem="OnJ-Cm-A3v" secondAttribute="leadingMargin" id="e0H-PE-nyw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bBH-tx-xkK" secondAttribute="trailing" id="jMH-wq-oxJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="VxI-Xf-zaL">
+                                        <rect key="frame" x="0.0" y="880" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VxI-Xf-zaL" id="mhS-gs-9Vm">
+                                            <frame key="frameInset" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hsj-WU-T2b">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFf-WY-wSH">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgG-e3-9ev">
+                                                            <string key="text">1076 Hall street
+Las Vegas, NV 89119</string>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hsj-WU-T2b" firstAttribute="top" secondItem="mhS-gs-9Vm" secondAttribute="topMargin" id="CRw-Dq-b8V"/>
+                                                <constraint firstItem="hsj-WU-T2b" firstAttribute="leading" secondItem="mhS-gs-9Vm" secondAttribute="leadingMargin" id="a91-xz-Dfa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hsj-WU-T2b" secondAttribute="trailing" id="zXv-8G-9aH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="08V-Fg-7dy">
+                                        <rect key="frame" x="0.0" y="970" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="08V-Fg-7dy" id="ZSd-Dg-9EJ">
+                                            <frame key="frameInset" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rWk-rd-AoA">
+                                                    <subviews>
+                                                        <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MRP-oO-0bZ">
+                                                            <color key="onTintColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </switch>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrD-kS-F0h">
+                                                            <string key="text">Show address after accepting
+trade requests</string>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rWk-rd-AoA" secondAttribute="trailing" constant="4" id="1Sk-2c-mit"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="rWk-rd-AoA" secondAttribute="bottom" id="N7O-yj-Esg"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="rWk-rd-AoA" secondAttribute="leading" constant="-4" id="dXZ-jG-8hO"/>
+                                                <constraint firstItem="rWk-rd-AoA" firstAttribute="top" secondItem="ZSd-Dg-9EJ" secondAttribute="topMargin" id="yeK-dy-CEM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -274,12 +397,16 @@ Las Vegas, NV 89119</string>
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="cityLabel" destination="fy1-cu-BEx" id="fUl-sA-LNG"/>
                         <outlet property="emailLabel" destination="UL7-tO-cM2" id="RTD-ie-b3W"/>
-                        <outlet property="locationLabel" destination="tds-hk-lhZ" id="sCz-Xc-Yd9"/>
                         <outlet property="nameLabel" destination="sOm-i8-PDE" id="WlF-Jz-I8O"/>
                         <outlet property="phoneNumberLabel" destination="3Sz-QK-Tlu" id="W1V-dp-98a"/>
                         <outlet property="profileImageView" destination="ZbD-tB-o1u" id="lYt-yp-d6C"/>
+                        <outlet property="showAddressSwitch" destination="MRP-oO-0bZ" id="wUR-61-yDQ"/>
+                        <outlet property="stateLabel" destination="SFU-ZY-dlS" id="0jy-ef-5z7"/>
+                        <outlet property="streetLabel" destination="tds-hk-lhZ" id="Z0U-sI-1sf"/>
                         <outlet property="websiteLabel" destination="px3-k2-kFK" id="2HR-4b-bJf"/>
+                        <outlet property="zipCodeLabel" destination="bgG-e3-9ev" id="qBN-8L-fFl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RL8-ZN-p5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -371,7 +498,7 @@ Las Vegas, NV 89119</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qcd-L1-8BO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

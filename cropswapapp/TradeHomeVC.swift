@@ -67,14 +67,13 @@ class TradeHomeVC: UIViewController {
       let vc = segue.destination as? TradeStatusVC
       tradeStatusVC = vc
       vc?.dealState = dealState
-      
       vc?.dealId = dealId
       vc?.anotherUserId = anotherUserId
+      vc?.anotherUsername = anotherUsername
+      
       vc?.originalOwnerUserId = originalOwnerUserId
       vc?.originalOwnerProducesCount = originalOwnerProducesCount
       vc?.originalAnotherProducesCount = originalAnotherProducesCount
-      
-      vc?.anotherUsername = anotherUsername
     } else if segue.identifier == Storyboard.TradeHistorialToFinalizeTrade {
       let vc = segue.destination as? FinalizeTradeVC
       vc?.didConfirmOffer = didConfirmOffer
@@ -209,29 +208,50 @@ class TradeHomeVC: UIViewController {
   }
   
   @IBAction func cancelDealButtonTouched() {
-    didCancelOffer()
+//    didCancelOffer()
+    segmentedControl.selectedSegmentIndex = 2
+    segmentedControl.sendActions(for: .valueChanged)
   }
   
   @IBAction func processButtonTouched() {
     guard let newOwnerId = User.currentUser?.uid
-    else {
-      return
+      else {
+        let alert = UIAlertController(title: "Error", message: "Owner user id not provided.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+        return
     }
     
     guard let originalOwnerUserId = originalOwnerUserId
-    else {
+      else {
+        let alert = UIAlertController(title: "Error", message: "Original owner user id not provided.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+        
         return
     }
     
     guard let dealId = dealId else {
+      let alert = UIAlertController(title: "Error", message: "Deal id not provided.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      
       return
     }
     
     guard let newAnotherId = anotherUserId else {
+      let alert = UIAlertController(title: "Error", message: "New another user id not provided.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      
       return
     }
     
     guard let tradeDetailVC = tradeDetailVC else {
+      let alert = UIAlertController(title: "Error", message: "Trade Detail View Controller doesn't exist.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      
       return
     }
     
@@ -273,14 +293,12 @@ class TradeHomeVC: UIViewController {
 //      present(alert, animated: true)
 //      return
 //    }
+
     
-    print(originalOwnerUserId)
-    print(originalOwnerProducesCount)
-    print(originalAnotherProducesCount)
-    print(newOwnerProduces)
-    print(newAnotherProduces)
+    DispatchQueue.main.async {
+      SVProgressHUD.show()
+    }
     
-    SVProgressHUD.show()
     Offer.makeAnotherOffer(
       originalOwnerUserId: originalOwnerUserId,
       newOwnerId: newOwnerId,
@@ -502,7 +520,7 @@ class TradeHomeVC: UIViewController {
 //      chatButtonBottomConstraint.isActive = true
 //      chatButtonTopConstraint.isActive = false
       
-      processButton.setTitle("UPDATE DEAL", for: .normal)
+      processButton.setTitle("UPDATE", for: .normal)
 //      processButtonContainerView.isHidden = false
       
       view.layoutIfNeeded()

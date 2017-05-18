@@ -52,20 +52,28 @@ class HomeTBC: UITabBarController {
         let dealId = defaults.object(forKey: "dealId") as? String,
         let ownerUserId = defaults.object(forKey: "ownerUserId") as? String,
         let ownerUsername = defaults.object(forKey: "ownerUsername") as? String,
-        let dealState = defaults.object(forKey: "dealState") as? String
+        let dealState = defaults.object(forKey: "dealState") as? String,
+        let originalOwnerUserId = defaults.object(forKey: "originalOwnerUserId") as? String,
+        let originalOwnerProducesCount = defaults.object(forKey: "originalOwnerProducesCount") as? Int,
+        let originalAnotherProducesCount = defaults.object(forKey: "originalAnotherProducesCount") as? Int
       {
         var data = [String: Any]()
         data["dealId"] = dealId
         data["ownerUserId"] = ownerUserId
         data["ownerUsername"] = ownerUsername
         data["dealState"] = dealState
-        
+        data["originalOwnerUserId"] = originalOwnerUserId
+        data["originalOwnerProducesCount"] = originalOwnerProducesCount
+        data["originalAnotherProducesCount"] = originalAnotherProducesCount
         showTradeDetail(data)
         
         defaults.set(nil, forKey: "dealId")
         defaults.set(nil, forKey: "ownerUserId")
         defaults.set(nil, forKey: "ownerUsername")
         defaults.set(nil, forKey: "dealState")
+        defaults.set(nil, forKey: "originalOwnerUserId")
+        defaults.set(nil, forKey: "originalOwnerProducesCount")
+        defaults.set(nil, forKey: "originalAnotherProducesCount")
         defaults.synchronize()
       }
     }
@@ -148,6 +156,10 @@ class HomeTBC: UITabBarController {
       print(vc)
       let data = sender as? [String: Any]
       print(data)
+      
+      vc?.originalOwnerUserId = data?["originalOwnerUserId"] as? String
+      vc?.originalOwnerProducesCount = data?["originalOwnerProducesCount"] as? Int ?? 0
+      vc?.originalAnotherProducesCount = data?["originalAnotherProducesCount"] as? Int ?? 0
       vc?.dealId = data?["dealId"] as? String
       vc?.anotherUserId = data?["ownerUserId"] as? String
       vc?.dealState = DealState(rawValue: data?["state"] as? String ?? DealState.tradeRequest.rawValue)

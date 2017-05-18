@@ -65,18 +65,69 @@ class EditProfileContainerVC: UIViewController {
       imageData = UIImageJPEGRepresentation(image, 0.2)
     }
     
-    let userId = User.currentUser?.uid
+    guard let userId = User.currentUser?.uid else {
+      let alert = UIAlertController(title: "Error", message: "User id not found.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      
+      present(alert, animated: true)
+      return
+    }
     
     SVProgressHUD.show()
+    
     Ax.serial(tasks: [
       { done in
-        if let imageData = imageData,
-          let userId = userId
-        {
+        let street = editProfileChildVC.street
+        let city = editProfileChildVC.city
+        let state = editProfileChildVC.state
+        let zipCode = editProfileChildVC.zipCode
+        let showAddress = editProfileChildVC.showAddress
+        
+        User.saveLocation(
+          byUserId: userId,
+          street: street,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          showAddress: showAddress,
+          completion: { (error) in
+            done(error)
+        })
+      },
+      
+      { done in
+        do {
+          let firstName = try editProfileChildVC.getFirstName()
+          let lastName = editProfileChildVC.lastName
+          let phoneNumber = editProfileChildVC.phoneNumber
+          let website = editProfileChildVC.website
+          let location = ""
+          
+          User.updateUser(
+            userId: userId,
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber,
+            website: website,
+            location: location,
+            completion: { (error) in
+              done(error)
+          })
+
+        } catch ValidationFormError.error(let errorMessage) {
+          let error = NSError(domain: "EditProfile", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+          done(error)
+        } catch {
+          done(error as NSError?)
+        }
+      },
+      
+      { done in
+        if let imageData = imageData {
           User.updateUserPicture(
             pictureData: imageData,
             userId: userId) { (result) in
-              SVProgressHUD.dismiss()
+              
               
               switch result {
               case .fail(let error):
@@ -90,35 +141,11 @@ class EditProfileContainerVC: UIViewController {
           done(nil)
         }
       },
-      
-      { done in
-        do {
-          let firstName = try editProfileChildVC.getFirstName()
-          let lastName = editProfileChildVC.lastName
-          let phoneNumber = editProfileChildVC.phoneNumber
-          let website = editProfileChildVC.website
-          let location = editProfileChildVC.location
-          
-          if let userId = userId {
-            User.updateUser(
-              userId: userId,
-              firstName: firstName,
-              lastName: lastName,
-              phoneNumber: phoneNumber,
-              website: website,
-              location: location,
-              completion: { (error) in
-                done(error)
-              })
-          }
-        } catch ValidationFormError.error(let errorMessage) {
-          let error = NSError(domain: "EditProfile", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-          done(error)
-        } catch {
-          done(error as NSError?)
-        }
-      }
     ]) { [weak self] (error) in
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
+      }
+      
       if let error = error {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))

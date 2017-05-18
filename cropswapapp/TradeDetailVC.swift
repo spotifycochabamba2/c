@@ -49,7 +49,7 @@ class TradeDetailVC: UIViewController {
   
   var currentPageOnMyGarden: Int = 0 {
     didSet {
-      
+      print(currentPageOnMyGarden)
       if currentPageOnMyGarden >= 0 {
         let produce = myProduces[currentPageOnMyGarden]
         showProduceOnMyGardenUI(produce)
@@ -60,11 +60,11 @@ class TradeDetailVC: UIViewController {
   
   var currentPageOnAnotherGarden: Int = 0 {
     didSet {
+      print(currentPageOnAnotherGarden)
       if currentPageOnAnotherGarden >= 0 {
         let produce = anotherProduces[currentPageOnAnotherGarden]
         showProduceOnAnothersGardenUI(produce)
       }
-      
     }
   }
   
@@ -371,8 +371,18 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
   }
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let width: CGFloat = (anotherGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout).itemSize.width
-    let pageSide = width
+    let layout: UPCarouselFlowLayout!
+    
+    if myGardenCollectionView === scrollView {
+      layout = myGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout
+    } else {
+      layout = anotherGardenCollectionView.collectionViewLayout as! UPCarouselFlowLayout
+    }
+    
+    var pageSize = layout.itemSize
+    pageSize.width += layout.minimumLineSpacing
+    
+    let pageSide = pageSize.width
     let offset = scrollView.contentOffset.x
     let value = Int(floor((offset - pageSide / 2) / pageSide) + 1)
 

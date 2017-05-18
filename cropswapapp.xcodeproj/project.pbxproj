@@ -123,6 +123,7 @@
 		69EF6E631E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E621E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift */; };
 		69EF6E651E699E6B0033454F /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E641E699E6B0033454F /* HomeCell.swift */; };
 		69EF6E671E6AF24F0033454F /* UITableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E661E6AF24F0033454F /* UITableViewControllerExtension.swift */; };
+		69F85D7F1ECA24E6008E3835 /* CSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F85D7E1ECA24E6008E3835 /* CSTextView.swift */; };
 		69FB72511E9294C100D053FB /* ProfileChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB72501E9294C100D053FB /* ProfileChildVC.swift */; };
 		69FB72531E92D09700D053FB /* EditProfileContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB72521E92D09700D053FB /* EditProfileContainerVC.swift */; };
 		69FB72551E92D0A900D053FB /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FB72541E92D0A900D053FB /* EditProfile.storyboard */; };
@@ -250,6 +251,7 @@
 		69EF6E621E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHTCollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
 		69EF6E641E699E6B0033454F /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		69EF6E661E6AF24F0033454F /* UITableViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewControllerExtension.swift; sourceTree = "<group>"; };
+		69F85D7E1ECA24E6008E3835 /* CSTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSTextView.swift; sourceTree = "<group>"; };
 		69FB72501E9294C100D053FB /* ProfileChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileChildVC.swift; sourceTree = "<group>"; };
 		69FB72521E92D09700D053FB /* EditProfileContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileContainerVC.swift; sourceTree = "<group>"; };
 		69FB72541E92D0A900D053FB /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				6982CC941E854CC500A41E8D /* FeedCell.xib */,
 				6974BC8D1EA02D7100126732 /* ButtonCircular.swift */,
 				69B6855D1EAA4A93003C8188 /* UIImageViewCircular.swift */,
+				69F85D7E1ECA24E6008E3835 /* CSTextView.swift */,
 			);
 			name = "Reusable Views";
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				69B6855E1EAA4A93003C8188 /* UIImageViewCircular.swift in Sources */,
 				69C4013C1E82023200F5F5D8 /* ProfileContainerVC.swift in Sources */,
 				69EE4B021E3FE31300C95624 /* UIColorExtension.swift in Sources */,
+				69F85D7F1ECA24E6008E3835 /* CSTextView.swift in Sources */,
 				69941DC81E8432170073760F /* TagsFlowLayout.swift in Sources */,
 				690A52231E9EB8660074DE52 /* DealSubmittedVC.swift in Sources */,
 				691FE0FB1E60BA530031DAA0 /* CameraRetakeVC.swift in Sources */,

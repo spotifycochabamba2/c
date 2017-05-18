@@ -36,11 +36,37 @@ class ProfileChildVC: UITableViewController {
   }
   
   
-  @IBOutlet weak var locationLabel: UILabel! {
+//  @IBOutlet weak var locationLabel: UILabel! {
+//    didSet {
+//      locationLabel.text = ""
+//    }
+//  }
+  
+  @IBOutlet weak var streetLabel: UILabel! {
     didSet {
-      locationLabel.text = ""
+      streetLabel.text = ""
     }
   }
+  
+  @IBOutlet weak var cityLabel: UILabel! {
+    didSet {
+      cityLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var stateLabel: UILabel! {
+    didSet {
+      stateLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var zipCodeLabel: UILabel! {
+    didSet {
+      zipCodeLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var showAddressSwitch: UISwitch!
   
   @IBOutlet weak var profileImageView: UIImageView!{
     didSet {
@@ -104,10 +130,17 @@ class ProfileChildVC: UITableViewController {
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"
     phoneNumberLabel.text = "\(user.phoneNumber ?? "")"
     websiteLabel.text = "\(user.website ?? "")"
-    locationLabel.text = "\(user.location ?? "")"
+//    locationLabel.text = "\(user.location ?? "")"
     emailLabel.text = user.email
     
     profileImageURL = user.profilePictureURL
+    
+    streetLabel.text = user.street
+    cityLabel.text = user.city
+    stateLabel.text = user.state
+    zipCodeLabel.text = user.zipCode
+    
+    showAddressSwitch.isOn = user.showAddress ?? false
   }
 }
 

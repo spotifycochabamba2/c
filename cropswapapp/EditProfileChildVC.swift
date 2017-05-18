@@ -27,8 +27,14 @@ class EditProfileChildVC: UITableViewController {
   @IBOutlet weak var phoneNumberTextField: UITextField!
   @IBOutlet weak var emailAddressTextField: UITextField!
   
+  @IBOutlet weak var streetTextField: UITextField!
+  @IBOutlet weak var cityTextField: UITextField!
+  @IBOutlet weak var stateTextField: UITextField!
+  @IBOutlet weak var zipCodeTextField: UITextField!
+  @IBOutlet weak var switchShowAddress: UISwitch!
+  
   @IBOutlet weak var websiteTextField: UITextField!
-  @IBOutlet weak var locationTextView: UITextView!
+//  @IBOutlet weak var locationTextView: UITextView!
   
   var profilePicture: UIImage?
   
@@ -50,11 +56,41 @@ class EditProfileChildVC: UITableViewController {
     }
   }
   
-  var location: String {
+  var street: String {
     get {
-      return locationTextView.text
+      return streetTextField.text ?? ""
     }
   }
+  
+  var city: String {
+    get {
+      return cityTextField.text ?? ""
+    }
+  }
+  
+  var state: String {
+    get {
+      return stateTextField.text ?? ""
+    }
+  }
+  
+  var zipCode: String {
+    get {
+      return zipCodeTextField.text ?? ""
+    }
+  }
+  
+  var showAddress: Bool {
+    get {
+      return switchShowAddress.isOn
+    }
+  }
+  
+//  var location: String {
+//    get {
+//      return locationTextView.text
+//    }
+//  }
   
   func getFirstName() throws -> String {
     let firstName = firstNameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
@@ -65,6 +101,7 @@ class EditProfileChildVC: UITableViewController {
       throw ValidationFormError.error(Constants.ErrorMessages.firstNameNotProvided)
     }
   }
+  
   
   var profileImageURL: String? {
     didSet {
@@ -104,8 +141,8 @@ class EditProfileChildVC: UITableViewController {
       }
     }
     
-    locationTextView.textContainer.maximumNumberOfLines = 2
-    locationTextView.delegate = self
+//    locationTextView.textContainer.maximumNumberOfLines = 2
+//    locationTextView.delegate = self
   }
   
   func loadUserInfoToUI(user: User) {
@@ -113,8 +150,14 @@ class EditProfileChildVC: UITableViewController {
     lastNameTextField.text = user.lastName
     phoneNumberTextField.text = "\(user.phoneNumber ?? "")"
     websiteTextField.text = "\(user.website ?? "")"
-    locationTextView.text = "\(user.location ?? "")"
+//    locationTextView.text = "\(user.location ?? "")"
     emailAddressTextField.text = user.email
+    
+    streetTextField.text = user.street
+    cityTextField.text = user.city
+    stateTextField.text = user.state
+    zipCodeTextField.text = user.zipCode
+    switchShowAddress.isOn = user.showAddress ?? false
     
     profileImageURL = user.profilePictureURL
   }
@@ -127,7 +170,14 @@ class EditProfileChildVC: UITableViewController {
     phoneNumberTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     emailAddressTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     websiteTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
-    locationTextView.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    
+    streetTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    cityTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    stateTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    zipCodeTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    
+    
+//    locationTextView.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
   }
   
   func pictureTaken(image: UIImage, _: ProducePhotoNumber) {
@@ -164,17 +214,17 @@ class EditProfileChildVC: UITableViewController {
 
 extension EditProfileChildVC {
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    if indexPath.row == 5 {
-      selectInMapButton.layoutIfNeeded()
-      
-      shadowOfSelectInMapButton.layoutIfNeeded()
-      shadowOfSelectInMapButton.makeMeBordered()
-      
-      shadowOfSelectInMapButton.layer.shadowColor = UIColor.lightGray.cgColor
-      shadowOfSelectInMapButton.layer.shadowOffset = CGSize(width: 0, height: 0)
-      shadowOfSelectInMapButton.layer.shadowRadius = 3
-      shadowOfSelectInMapButton.layer.shadowOpacity = 0.5
-    }
+//    if indexPath.row == 5 {
+//      selectInMapButton.layoutIfNeeded()
+//      
+//      shadowOfSelectInMapButton.layoutIfNeeded()
+//      shadowOfSelectInMapButton.makeMeBordered()
+//      
+//      shadowOfSelectInMapButton.layer.shadowColor = UIColor.lightGray.cgColor
+//      shadowOfSelectInMapButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+//      shadowOfSelectInMapButton.layer.shadowRadius = 3
+//      shadowOfSelectInMapButton.layer.shadowOpacity = 0.5
+//    }
   }
 }
 

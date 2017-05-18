@@ -30,9 +30,8 @@ struct Constants {
   
   struct Instagram {
     private static let clientID = "265265bbe53b4934b9a30ae93597277e"
-    // http://192.168.1.4:5000:5000/instagram-callback
-    // https://aqueous-river-57184.herokuapp.com/instagram-callback
     private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
+//    private static let redirectURI = "http://192.168.1.4:5000:5000/instagram-callback"
     
     static var authURL: String {
       let url = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=code"

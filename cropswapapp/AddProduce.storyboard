@@ -82,7 +82,7 @@
             <objects>
                 <tableViewController id="Vsk-L1-Hua" customClass="AddProduceChildVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BlK-iX-n6e">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -474,7 +474,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iqv-LO-CPI">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iqv-LO-CPI" customClass="CSTextView" customModule="cropswapapp" customModuleProvider="target">
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="105" id="p1B-4l-dQD"/>
@@ -501,13 +501,13 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1000"/>
+                    <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="categoriesTableView" destination="lnZ-sp-jFs" id="gRg-qb-Mw3"/>
                         <outlet property="categoriesViewBottomConstraint" destination="C0Y-f7-eyk" id="66l-TR-hHc"/>
                         <outlet property="chooseCategoryTextField" destination="5VF-SU-Rra" id="lZu-Zq-R45"/>
+                        <outlet property="csDescriptionTextView" destination="iqv-LO-CPI" id="E8E-id-fqZ"/>
                         <outlet property="deletePictureButton" destination="jDA-s3-qUG" id="0Q0-fV-Zbm"/>
-                        <outlet property="descriptionTextView" destination="iqv-LO-CPI" id="cbh-Db-ij3"/>
                         <outlet property="firstCell" destination="KPu-H7-PAf" id="of1-WQ-KB3"/>
                         <outlet property="nextButton" destination="f2D-Xb-z68" id="wwS-dX-BFk"/>
                         <outlet property="pickProductsButton" destination="l08-s3-qjK" id="d0p-a4-4iM"/>

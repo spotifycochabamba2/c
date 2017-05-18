@@ -54,6 +54,8 @@ class AddProduceChildVC: UITableViewController {
   var fourthPhotoEdited = false
   var fifthPhotoEdited = false
   
+  var changeTitleButton: (String) -> Void = { _ in }
+  
   @IBOutlet weak var nextButton: UIButton!
   
   
@@ -143,6 +145,7 @@ class AddProduceChildVC: UITableViewController {
   @IBOutlet weak var priceUnitTextField: UITextField!
 //  @IBOutlet weak var descriptionTextField: UITextField!
   @IBOutlet weak var descriptionTextView: UITextView!
+  @IBOutlet weak var csDescriptionTextView: CSTextView!
   
   @IBOutlet weak var shadowViewForPickProductsButton: UIView!
   @IBOutlet weak var shadowViewForPickStateButton: UIView!
@@ -173,33 +176,41 @@ class AddProduceChildVC: UITableViewController {
   func loadProduceToUI(_ produce: Produce?) {
     if let produce = produce {
       
-      deletePictureButton.isHidden = false
-      
-      if let firstPicURL = produce.firstPictureURL {
+      if let firstPicURL = produce.firstPictureURL?.trimmingCharacters(in: CharacterSet.whitespaces),
+        !firstPicURL.isEmpty
+      {
         let vc = produceImagesViewControllers[0] as! ProduceImageVC
         vc.produceImageURL = firstPicURL
         firstPhotoSaved = true
       }
       
-      if let secondPicURL = produce.secondPictureURL {
+      if let secondPicURL = produce.secondPictureURL?.trimmingCharacters(in: CharacterSet.whitespaces),
+        !secondPicURL.isEmpty
+      {
         let vc = produceImagesViewControllers[1] as! ProduceImageVC
         vc.produceImageURL = secondPicURL
         secondPhotoSaved = true
       }
       
-      if let thirdPicURL = produce.thirdPictureURL {
+      if let thirdPicURL = produce.thirdPictureURL?.trimmingCharacters(in: CharacterSet.whitespaces),
+        !thirdPicURL.isEmpty
+      {
         let vc = produceImagesViewControllers[2] as! ProduceImageVC
         vc.produceImageURL = thirdPicURL
         thirdPhotoSaved = true
       }
       
-      if let fourthPicURL = produce.fourthPictureURL {
+      if let fourthPicURL = produce.fourthPictureURL?.trimmingCharacters(in: CharacterSet.whitespaces),
+        !fourthPicURL.isEmpty
+      {
         let vc = produceImagesViewControllers[3] as! ProduceImageVC
         vc.produceImageURL = fourthPicURL
         fourthPhotoSaved = true
       }
       
-      if let fifthPicURL = produce.fifthPictureURL {
+      if let fifthPicURL = produce.fifthPictureURL?.trimmingCharacters(in: CharacterSet.whitespaces),
+        !fifthPicURL.isEmpty
+      {
         let vc = produceImagesViewControllers[4] as! ProduceImageVC
         vc.produceImageURL = fifthPicURL
         fifthPhotoSaved = true
@@ -219,7 +230,8 @@ class AddProduceChildVC: UITableViewController {
       priceUnitLabel.text = "Price per \(produce.quantityType)"
       priceUnitLabel.textColor = .black
 //      descriptionTextField.text = "\(produce.description)"
-      descriptionTextView.text = "\(produce.description)"
+//      descriptionTextView.text = "\(produce.description)"
+      csDescriptionTextView.text = "\(produce.description)"
       
       tagsSelected = produce.tags.map {
         print($0)
@@ -253,8 +265,8 @@ class AddProduceChildVC: UITableViewController {
 //    stateCollectionView.delegate = self
 //    stateCollectionView.dataSource = self
     
-    descriptionTextView.delegate = self
-    descriptionTextView.textContainer.maximumNumberOfLines = 4
+//    descriptionTextView.delegate = self
+//    descriptionTextView.textContainer.maximumNumberOfLines = 4
     
     deletePictureButton.isHidden = true
     
@@ -308,7 +320,8 @@ class AddProduceChildVC: UITableViewController {
     chooseCategoryTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     quantityTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     priceUnitTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
-    descriptionTextView.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+//    descriptionTextView.addBottomLine2(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+//    csDescriptionTextView.addLineToBottom()
     
     stateLabelView.layer.borderColor = UIColor.black.cgColor
     stateLabelView.layer.masksToBounds = true
@@ -426,6 +439,7 @@ class AddProduceChildVC: UITableViewController {
   }
   
   @IBAction func choosePictureButtonTouched() {
+    changeTitleButton("SAVE")
     
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
       let imagePicker = UIImagePickerController()
@@ -488,7 +502,7 @@ class AddProduceChildVC: UITableViewController {
   }
   
   func getDescription() throws -> String {
-    let descriptionText = descriptionTextView.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
+    let descriptionText = csDescriptionTextView.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
     
     if descriptionText.characters.count > 0 {
       return descriptionText
@@ -498,6 +512,8 @@ class AddProduceChildVC: UITableViewController {
   }
   
   @IBAction func deletePictureButtonTouched() {
+    changeTitleButton("SAVE")
+    
     let vc = produceImagesViewControllers[currentIndex] as! ProduceImageVC
     vc.image = nil
     deletePictureButton.isHidden = true
@@ -520,6 +536,7 @@ class AddProduceChildVC: UITableViewController {
   
   
   @IBAction func takePictureButtonTouched() {
+    changeTitleButton("SAVE")
     var currentPhotoNumber: ProducePhotoNumber?
     
     switch currentIndex {
@@ -664,11 +681,13 @@ class AddProduceChildVC: UITableViewController {
   }
   
   @IBAction func pickStateButtonTouched() {
+    changeTitleButton("SAVE")
     performSegue(withIdentifier: Storyboard.AddProduceChildToChooseState, sender: nil)
   }
   
   
   @IBAction func pickProductsButtonTouched() {
+    changeTitleButton("SAVE")
     performSegue(withIdentifier: Storyboard.AddProduceChildToChooseDetails, sender: nil)
   }
   
@@ -787,7 +806,8 @@ extension AddProduceChildVC: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    
+//    addItemButton.setTitle("EDIT", for: .normal)addItemButton.setTitle("EDIT", for: .normal)
+    changeTitleButton("SAVE")
     if textField === chooseCategoryTextField {
 //      tableView.scrollRectToVisible(categoriesTableView.frame, animated: true)
       textField.text = ""
@@ -892,14 +912,11 @@ extension AddProduceChildVC: UIImagePickerControllerDelegate, UINavigationContro
 }
 
 extension AddProduceChildVC: UITextViewDelegate {
-  
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    let existingLines = textView.text.components(separatedBy: CharacterSet.newlines)
-    let newLines = text.components(separatedBy: CharacterSet.newlines)
-    let linesAfterChange = existingLines.count + newLines.count - 1
-    return linesAfterChange <= textView.textContainer.maximumNumberOfLines
+
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    changeTitleButton("SAVE")
+//    addItemButton.setTitle("EDIT", for: .normal)
   }
-  
 }
 
 extension AddProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

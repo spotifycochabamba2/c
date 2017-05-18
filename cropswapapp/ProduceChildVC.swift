@@ -57,48 +57,47 @@ class ProduceChildVC: UITableViewController {
   var tags = [(name: String, priority: Int)]() {
     didSet {
       DispatchQueue.main.async { [weak self] in
-        
-        
-        
-        self?.tagsCollectionView.layoutIfNeeded()
-        self?.tagsCollectionView.layoutSubviews()
-        
-        self?.tableView.reloadData()
-        
-//        let indexPath = IndexPath(row: 2, section: 0)
-//        self?.tableView.reloadRows(at: [indexPath], with: .none)
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//          let indexPath = IndexPath(row: 2, section: 0)
-//          self?.tableView.reloadRows(at: [indexPath], with: .none)
-//        }
+        self?.tagsCollectionView.reloadData()
+        self?.tagsCollectionView.performBatchUpdates({
+          }, completion: { (finished) in
+            if finished {
+              DispatchQueue.main.async {
+                self?.tableView.reloadData()
+              }
+//              DispatchQueue.main.async { [weak self] in
+//                let indexPath = IndexPath(row: 2, section: 0)
+//                self?.tableView.reloadRows(at: [indexPath], with: .none)
+//              }
+            }
+        })
       }
     }
   }
   
   var relatedProduces = [[String: Any]]() {
     didSet {
-      DispatchQueue.main.async { [weak self] in
-//        self?.tagsCollectionView.layoutIfNeeded()
-//        self?.tagsCollectionView.layoutSubviews()
-//        
-//        let indexPath = IndexPath(row: 4, section: 0)
-//        self?.tableView.reloadRows(at: [indexPath], with: .none)
-        self?.relatedProducesCollectionView.layoutIfNeeded()
-        self?.relatedProducesCollectionView.layoutSubviews()
-        self?.producesRelatedFirstTimeLoaded = false
-        
-        self?.relatedProducesCollectionView.reloadData()
-        self?.relatedProducesCollectionView.performBatchUpdates({ 
-          
-          }, completion: { (finished) in
-            if finished {
-              self?.tableView.reloadData()
-            }
-        })
-      }
+//      DispatchQueue.main.async { [weak self] in
+        self.relatedProducesCollectionView.reloadData()
+//      }
     }
   }
+  
+  func updateRelatedProducesOnUI(completion: @escaping () -> Void) {
+    relatedProducesCollectionView.layoutIfNeeded()
+    relatedProducesCollectionView.layoutSubviews()
+    producesRelatedFirstTimeLoaded = false
+    
+    relatedProducesCollectionView.reloadData()
+    relatedProducesCollectionView.performBatchUpdates({
+      
+    }, completion: { (finished) in
+      if finished {
+        completion()
+      }
+    })
+  }
+  
+
   
   let montserratFont = UIFont(name: "Montserrat-Regular", size: 9)
   var tagFontAttributes: [String: UIFont]?
@@ -150,7 +149,9 @@ class ProduceChildVC: UITableViewController {
     pageContainer.dataSource = self
     pageContainer.delegate = self
     
-    SVProgressHUD.show()
+    DispatchQueue.main.async {
+      SVProgressHUD.show()
+    }
     Ax.serial(tasks: [
       { [weak self] done in
         if
@@ -165,7 +166,12 @@ class ProduceChildVC: UITableViewController {
               
               return iteratedProduceId != produceId
             }
+            
             done(nil)
+            
+//            self?.updateRelatedProducesOnUI {
+//              done(nil)
+//            }
           })
         } else {
           done(nil)
@@ -174,7 +180,6 @@ class ProduceChildVC: UITableViewController {
       
       { [weak self] done in
         if
-          let ownerId = self?.produce?.ownerId,
           let produceId = self?.produce?.id
         {
           Produce.getProduce(byProduceId: produceId, completion: { [weak self] (produce) in
@@ -193,9 +198,10 @@ class ProduceChildVC: UITableViewController {
       
       if let produce = self?.produce {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+//        DispatchQueue.main.async {
           self?.tags = produce.tags.map { return (name: $0.name, priority: $0.priority) }
-        }
+//        }
         
         DispatchQueue.main.async {
           if let firstPictureURL = produce.firstPictureURL, firstPictureURL.characters.count > 0 {
@@ -301,19 +307,10 @@ extension ProduceChildVC {
         isFirstimeLoaded = false
       }
     } else if indexPath.row == 4 {
-      cell.contentView.layoutIfNeeded()
-      
-      if !producesRelatedFirstTimeLoaded {
-        producesRelatedFirstTimeLoaded = true
-        
-        let indexPath = IndexPath(row: 4, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .none)
-      }
+      print(" willDisplay picky frame: \(relatedProducesCollectionView.frame)")
+      print(" willDisplay picky bounds: \(relatedProducesCollectionView.bounds)")
     } else if indexPath.row == 1 {
-      print("dalmata descriptionProduceTextView.frame.size.height: \(descriptionProduceTextView.frame.size.height)")
-      print("dalmata cell.contentView.frame.size.height: \(cell.contentView.frame.size.height)")
-//      cell.contentView.layoutIfNeeded()
-//      print(" \(cell.contentView.frame.size)")
+
     }
   }
   
@@ -325,7 +322,6 @@ extension ProduceChildVC {
       return descriptionProduceTextView.frame.size.height + 54 + 13 + 50
     } else if indexPath.row == 2 {
       if tags.count > 0  {
-        
         tagsCollectionView.collectionViewLayout.invalidateLayout()
         tagsCollectionView.collectionViewLayout.prepare()
         tagsCollectionView.layoutIfNeeded()
@@ -336,9 +332,13 @@ extension ProduceChildVC {
         return 0
       }
     } else if indexPath.row == 4 {
-      
       if relatedProduces.count > 0 {
-
+        relatedProducesCollectionView.collectionViewLayout.invalidateLayout()
+        relatedProducesCollectionView.collectionViewLayout.prepare()
+        relatedProducesCollectionView.layoutIfNeeded()
+        relatedProducesCollectionView.layoutSubviews()
+        print(" heightForRowAt picky frame: \(relatedProducesCollectionView.frame)")
+        print(" heightForRowAt picky bounds: \(relatedProducesCollectionView.bounds)")
         return relatedProducesCollectionView.collectionViewLayout.collectionViewContentSize.height
       } else {
         return 0
@@ -350,6 +350,7 @@ extension ProduceChildVC {
 }
 
 extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView === tagsCollectionView {
       return tags.count
@@ -369,6 +370,7 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
       cell = tagCell
     } else {
       let relatedProduceCell = collectionView.dequeueReusableCell(withReuseIdentifier: relatedProducesCellId, for: indexPath) as! RelatedProduceCell
+      print(indexPath.row)
       let relatedProduce = relatedProduces[indexPath.row]
       let picURL = relatedProduce["firstPictureURL"] as? String
       

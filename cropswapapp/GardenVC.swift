@@ -45,7 +45,9 @@ class GardenVC: UIViewController {
       
       SVProgressHUD.show()
       User.getProducesByUser(byUserId: userId) { [weak self] produces in
-        SVProgressHUD.dismiss()
+        DispatchQueue.main.async {
+          SVProgressHUD.dismiss()
+        }
         
         self?.dataGotFromServer = true
         self?.produces = produces

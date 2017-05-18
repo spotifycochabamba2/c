@@ -138,6 +138,50 @@ extension Deal {
   static var refDatabase = FIRDatabase.database().reference()
   static var refDatabaseDeals = refDatabase.child("deals")
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
+  static var refDatabaseUserToUserDeals = refDatabase.child("user-to-user-deals")
+  
+  static func canUserMakeADeal(
+    fromUserId: String,
+    toUserId: String,
+    completion: @escaping (Int) -> Void
+  ) {
+    
+    let refDatabaseUserToUserDeal = refDatabaseUserToUserDeals
+                                      .child(fromUserId)
+                                      .child(toUserId)
+    
+    refDatabaseUserToUserDeal.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+      if snap.exists() {
+        if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
+          var hoursLeftToReturn = 0
+          
+          for json in dictionaries {
+            if let deal = json.value as? [String: Any] {
+              let state = deal["state"] as? String ?? ""
+              let utc = deal["date"] as? Double ?? 0
+              let date = Date(timeIntervalSince1970: utc * -1)
+              let seconds = date.timeIntervalSinceNow * -1
+              let hours = 24 - (seconds / 3600)
+              
+              if DealState.waitingAnswer.rawValue == state,
+                  (50 - seconds) > 0 {
+//                hours > 0 {
+//                hoursLeftToReturn = lround(hours)
+                hoursLeftToReturn = lround(50 - seconds)
+                break
+              }
+            }
+          }
+          
+          completion(hoursLeftToReturn)
+        } else {
+          completion(0)
+        }
+      } else {
+        completion(0)
+      }
+    }
+  }
   
   static func cancelDeal(
     ownerUserId: String,
@@ -148,6 +192,24 @@ extension Deal {
     
     completion: @escaping (NSError?) -> Void
   ) {
+    
+    let refDatabseUserOneToUserTwoDeal = refDatabaseUserToUserDeals
+      .child(ownerUserId)
+      .child(anotherUserId)
+      .child(dealId)
+    
+    let refDatabaseUserTwoToUserOneDeal = refDatabaseUserToUserDeals
+      .child(anotherUserId)
+      .child(ownerUserId)
+      .child(dealId)
+    
+    var valuesForUserToUserDeal = [String: Any]()
+    valuesForUserToUserDeal["state"] = DealState.tradeCancelled.rawValue
+    valuesForUserToUserDeal["date"] = dateUpdated.timeIntervalSince1970 * -1
+    
+    refDatabseUserOneToUserTwoDeal.updateChildValues(valuesForUserToUserDeal)
+    refDatabaseUserTwoToUserOneDeal.updateChildValues(valuesForUserToUserDeal)
+    
     let refDatabaseDeal = refDatabaseDeals.child(dealId)
     
     let refDatabaseUserDealOwner = refDatabaseUserDeals.child(ownerUserId).child(dealId)
@@ -205,10 +267,24 @@ extension Deal {
     
     let refDatabaseUserDealOwner = refDatabaseUserDeals.child(ownerUserId).child(dealId)
     let refDatabaseUserDealAnother = refDatabaseUserDeals.child(anotherUserId).child(dealId)
+
+    let refDatabseUserOneToUserTwoDeal = refDatabaseUserToUserDeals
+      .child(ownerUserId)
+      .child(anotherUserId)
+      .child(dealId)
     
-    print(refDatabaseDeal.url)
-    print(refDatabaseUserDealOwner.url)
-    print(refDatabaseUserDealAnother.url)
+    let refDatabaseUserTwoToUserOneDeal = refDatabaseUserToUserDeals
+      .child(anotherUserId)
+      .child(ownerUserId)
+      .child(dealId)
+    
+    var valuesForUserToUserDeal = [String: Any]()
+    valuesForUserToUserDeal["state"] = DealState.tradeCompleted.rawValue
+    valuesForUserToUserDeal["date"] = dateUpdated.timeIntervalSince1970 * -1
+    
+    refDatabseUserOneToUserTwoDeal.updateChildValues(valuesForUserToUserDeal)
+    refDatabaseUserTwoToUserOneDeal.updateChildValues(valuesForUserToUserDeal)
+    
     var valuesForDeal = [String: Any]()
     valuesForDeal["state"] = DealState.tradeCompleted.rawValue
 //    valuesForDeal["howFinalized"] = howFinalized
@@ -272,6 +348,23 @@ extension Deal {
     var anotherProduces = [String: Int]()
     
     var valuesForDeal = [String: Any]()
+    
+    let refDatabseUserOneToUserTwoDeal = refDatabaseUserToUserDeals
+      .child(ownerId)
+      .child(anotherId)
+      .child(dealId)
+    
+    let refDatabaseUserTwoToUserOneDeal = refDatabaseUserToUserDeals
+      .child(anotherId)
+      .child(ownerId)
+      .child(dealId)
+    
+    var valuesForUserToUserDeal = [String: Any]()
+    valuesForUserToUserDeal["state"] = DealState.waitingAnswer.rawValue
+    valuesForUserToUserDeal["date"] = dateCreated.timeIntervalSince1970 * -1
+    
+    refDatabseUserOneToUserTwoDeal.updateChildValues(valuesForUserToUserDeal)
+    refDatabaseUserTwoToUserOneDeal.updateChildValues(valuesForUserToUserDeal)
     
     valuesForDeal["ownerUserId"] = ownerId
     valuesForDeal["anotherUserId"] = anotherId
@@ -625,6 +718,16 @@ extension Deal {
     let refDatabaseUserDealOwner = refDatabaseUserDeals.child(deal.ownerUserId).child(dealKey)
     let refDatabaseUserDealAnother = refDatabaseUserDeals.child(deal.anotherUserId).child(dealKey)
     
+    let refDatabseUserOneToUserTwoDeal = refDatabaseUserToUserDeals
+                                          .child(deal.ownerUserId)
+                                          .child(deal.anotherUserId)
+                                          .child(dealKey)
+    
+    let refDatabaseUserTwoToUserOneDeal = refDatabaseUserToUserDeals
+                                          .child(deal.anotherUserId)
+                                          .child(deal.ownerUserId)
+                                          .child(dealKey)
+    
     var offer = Offer(
       dealId: dealKey,
       dateCreated: deal.dateCreated,
@@ -646,6 +749,14 @@ extension Deal {
     }
     
     let numberProducesTrade = counterOwnerProduces + counterAnotherProduces
+    
+    var valuesForUserToUserDeal = [String: Any]()
+    valuesForUserToUserDeal["id"] = dealKey
+    valuesForUserToUserDeal["state"] = DealState.waitingAnswer.rawValue
+    valuesForUserToUserDeal["date"] = Date().timeIntervalSince1970 * -1
+    
+    refDatabseUserOneToUserTwoDeal.setValue(valuesForUserToUserDeal)
+    refDatabaseUserTwoToUserOneDeal.setValue(valuesForUserToUserDeal)
     
     var valuesForDeal = [String: Any]()
     valuesForDeal["id"] = dealKey
@@ -669,7 +780,8 @@ extension Deal {
     valuesForUserDealOwner["numberProducesTrade"] = numberProducesTrade
     valuesForUserDealOwner["originalOwnerProducesCount"] = counterOwnerProduces
     valuesForUserDealOwner["originalAnotherProducesCount"] = counterAnotherProduces
-    print(valuesForUserDealOwner)
+    
+    
     
     var valuesForUserDealAnother = [String: Any]()
     valuesForUserDealAnother["id"] = dealKey
