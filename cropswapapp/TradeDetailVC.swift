@@ -17,6 +17,8 @@ class TradeDetailVC: UIViewController {
   var anotherUserId: String?
   var dealState: DealState?
   
+  var userUpdatedStateDeal: () -> Void = { }
+  
   @IBOutlet weak var anotherProduceTitleLabel: UILabel! {
     didSet {
       anotherProduceTitleLabel.text = ""
@@ -334,8 +336,10 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let result = value + quantity
         
         if result <= produce.quantity {
+          
           anotherProduces[index].1 = result >= 0 ? result : 0
           DispatchQueue.main.async { [weak self] in
+            self?.userUpdatedStateDeal()
             self?.currentPageOnAnotherGarden = index
           }
         } else {
@@ -351,10 +355,10 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let produce = myProduces[index].0
         let value = myProduces[index].1
         let result = value + quantity
-        
         if result <= produce.quantity {
           myProduces[index].1 = result >= 0 ? result : 0
           DispatchQueue.main.async { [weak self] in
+            self?.userUpdatedStateDeal()
             self?.currentPageOnMyGarden = index
           }
         } else {

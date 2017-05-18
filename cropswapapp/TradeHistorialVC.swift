@@ -130,51 +130,9 @@ extension TradeHistorialVC {
     let offerOwnerId = offer["ownerUserId"] as? String ?? ""
     
     if indexPath.row == 0 {
-      if currenUserId == offerOwnerId {
-        cell.processButtonViews(hidden: true)
-        DispatchQueue.main.async {
-          cell.processButtonViews(hidden: true)
-        }
-      } else {
-        
-        if let deal = deal {
-          let dealState = deal.state ?? DealState.tradeRequest
-          
-          switch dealState {
-          case .tradeCancelled:
-            fallthrough
-          case .tradeCompleted:
-            cell.processButtonViews(hidden: true)
-            DispatchQueue.main.async {
-              cell.processButtonViews(hidden: true)
-            }
-          case .tradeInProcess:
-            fallthrough
-          case .tradeRequest:
-            fallthrough
-          case .waitingAnswer:
-            cell.processButtonViews(hidden: false)
-            DispatchQueue.main.async {
-              cell.processButtonViews(hidden: false)
-              cell.setNeedsDisplay()
-            }
-          }
-        } else {
-          cell.processButtonViews(hidden: false)
-          DispatchQueue.main.async {
-            cell.processButtonViews(hidden: false)
-          }
-        }
-        
-        cell.didMakeAnotherOffer = didMakeAnotherOffer
-        cell.didAcceptOffer = didAcceptOffer
-        cell.didCancelOffer = didCancelOffer
-      }
+      cell.contentView.alpha = 1.0
     } else {
-      cell.processButtonViews(hidden: true)
-      DispatchQueue.main.async {
-        cell.processButtonViews(hidden: true)
-      }
+      cell.contentView.alpha = 0.5
     }
     
     if offerOwnerId != currenUserId {
@@ -194,6 +152,11 @@ extension TradeHistorialVC {
         cell.myProduces = myProduces
       }
     }
+    
+//    print(" cielo ---------------------------------")
+//    print(" cielo \(anotherProduces)")
+//    print(" cielo \(myProduces)")
+//    print(" cielo ---------------------------------")
     
     DispatchQueue.main.async {
       cell.dateCreated = offer["dateCreated"] as? Double

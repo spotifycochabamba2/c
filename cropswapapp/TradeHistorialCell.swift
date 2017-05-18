@@ -68,14 +68,14 @@ class TradeHistorialCell: UITableViewCell {
   @IBOutlet weak var baseStackView: UIStackView!
   @IBOutlet weak var anotherStackView: UIStackView!
   @IBOutlet weak var myStackView: UIStackView!
-  @IBOutlet weak var buttonsStackView: UIStackView!
-  @IBOutlet weak var finalizeTradeButton: UIButton!
-  @IBOutlet weak var makeOfferButton: UIButton!
-  @IBOutlet weak var cancelButton: UIButton!
+//  @IBOutlet weak var buttonsStackView: UIStackView!
+//  @IBOutlet weak var finalizeTradeButton: UIButton!
+//  @IBOutlet weak var makeOfferButton: UIButton!
+//  @IBOutlet weak var cancelButton: UIButton!
   
-  @IBOutlet weak var finalizeTradeShadowView: UIView!
-  @IBOutlet weak var makeOfferShadowView: UIView!
-  @IBOutlet weak var cancelShadowView: UIView!
+//  @IBOutlet weak var finalizeTradeShadowView: UIView!
+//  @IBOutlet weak var makeOfferShadowView: UIView!
+//  @IBOutlet weak var cancelShadowView: UIView!
   
   var myViews = [UIView]()
   var anotherViews = [UIView]()
@@ -140,51 +140,51 @@ class TradeHistorialCell: UITableViewCell {
   }
   
   func processButtonViews(hidden: Bool) {
-    buttonsStackView.isHidden = hidden
-    finalizeTradeShadowView.isHidden = hidden
-    makeOfferShadowView.isHidden = hidden
-    cancelShadowView.isHidden = hidden
+//    buttonsStackView.isHidden = hidden
+//    finalizeTradeShadowView.isHidden = hidden
+//    makeOfferShadowView.isHidden = hidden
+//    cancelShadowView.isHidden = hidden
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    print(finalizeTradeButton.frame.size)
+//    print(finalizeTradeButton.frame.size)
+//    
+//    finalizeTradeButton.makeMeBordered()
+//    makeOfferButton.makeMeBordered()
+//    cancelButton.makeMeBordered()
     
-    finalizeTradeButton.makeMeBordered()
-    makeOfferButton.makeMeBordered()
-    cancelButton.makeMeBordered()
-    
-    finalizeTradeShadowView.makeMeBordered()
-    finalizeTradeShadowView.layer.shadowColor = UIColor.lightGray.cgColor
-    finalizeTradeShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-    finalizeTradeShadowView.layer.shadowRadius = 3
-    finalizeTradeShadowView.layer.shadowOpacity = 0.5
-    
-    makeOfferShadowView.makeMeBordered()
-    makeOfferShadowView.layer.shadowColor = UIColor.lightGray.cgColor
-    makeOfferShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-    makeOfferShadowView.layer.shadowRadius = 3
-    makeOfferShadowView.layer.shadowOpacity = 0.5
-    
-    cancelShadowView.makeMeBordered()
-    cancelShadowView.layer.shadowColor = UIColor.lightGray.cgColor
-    cancelShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-    cancelShadowView.layer.shadowRadius = 3
-    cancelShadowView.layer.shadowOpacity = 0.5
+//    finalizeTradeShadowView.makeMeBordered()
+//    finalizeTradeShadowView.layer.shadowColor = UIColor.lightGray.cgColor
+//    finalizeTradeShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//    finalizeTradeShadowView.layer.shadowRadius = 3
+//    finalizeTradeShadowView.layer.shadowOpacity = 0.5
+//    
+//    makeOfferShadowView.makeMeBordered()
+//    makeOfferShadowView.layer.shadowColor = UIColor.lightGray.cgColor
+//    makeOfferShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//    makeOfferShadowView.layer.shadowRadius = 3
+//    makeOfferShadowView.layer.shadowOpacity = 0.5
+//    
+//    cancelShadowView.makeMeBordered()
+//    cancelShadowView.layer.shadowColor = UIColor.lightGray.cgColor
+//    cancelShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//    cancelShadowView.layer.shadowRadius = 3
+//    cancelShadowView.layer.shadowOpacity = 0.5
   }
   
-  @IBAction func finalizeTradeButtonTouched() {
-    didAcceptOffer()
-  }
-  
-  @IBAction func makeOfferButtonTouched() {
-    didMakeAnotherOffer()
-  }
-  
-  @IBAction func cancelButtonTouched() {
-    didCancelOffer()
-  }
+//  @IBAction func finalizeTradeButtonTouched() {
+//    didAcceptOffer()
+//  }
+//  
+//  @IBAction func makeOfferButtonTouched() {
+//    didMakeAnotherOffer()
+//  }
+//  
+//  @IBAction func cancelButtonTouched() {
+//    didCancelOffer()
+//  }
   
   
 }

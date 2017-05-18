@@ -35,6 +35,7 @@ class TradeHomeVC: UIViewController {
   @IBOutlet weak var processButtonContainerView: UIView!
   @IBOutlet weak var processButton: UIButton!
   @IBOutlet weak var cancelDealButton: UIButton!
+  @IBOutlet weak var acceptDealButton: UIButton!
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var tradeContainerView: UIView!
@@ -45,17 +46,46 @@ class TradeHomeVC: UIViewController {
   var tradeHistorialVC: TradeHistorialVC?
   var tradeStatusVC: TradeStatusVC?
   
+  func changeUpdateButton(enable: Bool) {
+    if enable {
+      processButton.isEnabled = true
+      processButton.alpha = 1.0
+    } else {
+      processButton.isEnabled = false
+      processButton.alpha = 0.5
+    }
+  }
+  
+  func changeAcceptButton(enable: Bool) {
+    if enable {
+      acceptDealButton.isEnabled = true
+      acceptDealButton.alpha = 1.0
+    } else {
+      acceptDealButton.isEnabled = false
+      acceptDealButton.alpha = 0.5
+    }
+  }
+  
+  func userUpdatedStateDeal() {
+    changeAcceptButton(enable: false)
+    changeUpdateButton(enable: true)
+  }
+  
   @IBAction func openChatButtonTouched() {
     performSegue(withIdentifier: Storyboard.TradeHomeToTradeChat, sender: nil)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    // items screen
     if segue.identifier == Storyboard.TradeHomeToTradeDetail {
       let vc = segue.destination as? TradeDetailVC
       tradeDetailVC = vc
       vc?.dealId = dealId
       vc?.anotherUserId = anotherUserId
       vc?.dealState = dealState
+      vc?.userUpdatedStateDeal = userUpdatedStateDeal
+    // historial screen
     } else if segue.identifier == Storyboard.TradeHomeToTradeHistorial {
       let vc = segue.destination as? TradeHistorialVC
       vc?.dealId = dealId
@@ -63,6 +93,8 @@ class TradeHomeVC: UIViewController {
       vc?.didMakeAnotherOffer = didMakeAnotherOffer
       vc?.didAcceptOffer = didAcceptOffer
       vc?.didCancelOffer = didCancelOffer
+      
+    // status screen
     } else if segue.identifier == Storyboard.TradeHomeToTradeStatus {
       let vc = segue.destination as? TradeStatusVC
       tradeStatusVC = vc
@@ -70,6 +102,7 @@ class TradeHomeVC: UIViewController {
       vc?.dealId = dealId
       vc?.anotherUserId = anotherUserId
       vc?.anotherUsername = anotherUsername
+      vc?.userUpdatedStateDeal = userUpdatedStateDeal
       
       vc?.originalOwnerUserId = originalOwnerUserId
       vc?.originalOwnerProducesCount = originalOwnerProducesCount
@@ -207,10 +240,12 @@ class TradeHomeVC: UIViewController {
     }
   }
   
+  @IBAction func acceptDealButtonTouched() {
+    didConfirmOffer("")
+  }
+  
   @IBAction func cancelDealButtonTouched() {
-//    didCancelOffer()
-    segmentedControl.selectedSegmentIndex = 2
-    segmentedControl.sendActions(for: .valueChanged)
+    didCancelOffer()
   }
   
   @IBAction func processButtonTouched() {
@@ -348,6 +383,9 @@ class TradeHomeVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    changeUpdateButton(enable: false)
+    changeAcceptButton(enable: true)
+    
     badgeNumberLabel = UILabel(frame: CGRect(x: 40, y: 0, width: 20, height: 20))
     badgeNumberLabel.layer.borderColor = UIColor.clear.cgColor
     badgeNumberLabel.layer.borderWidth = 2
@@ -417,8 +455,14 @@ class TradeHomeVC: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
+    processButtonContainerView.layer.shadowOffset = CGSize(width: 0, height: 0);
+    processButtonContainerView.layer.shadowRadius = 2;
+    processButtonContainerView.layer.shadowColor = UIColor.black.cgColor
+    processButtonContainerView.layer.shadowOpacity = 0.3;
+    
     processButton.makeMeBordered(borderWidth: 1, cornerRadius: 3)
     
+    acceptDealButton.makeMeBordered(borderWidth: 1, cornerRadius: 3)
     cancelDealButton.layer.borderWidth = 1
     cancelDealButton.layer.cornerRadius = 5.0
     
@@ -535,7 +579,39 @@ class TradeHomeVC: UIViewController {
       chatButtonBottomConstraint.isActive = true
       chatButtonTopConstraint.isActive = false
       
-      processButtonContainerView.isHidden = true
+//      historialBottomConstraint.constant = 8
+//      statusBottomConstraint.constant = 8
+//      itemsBottomConstraint.constant = 8
+//      
+//      processButtonContainerView.isHidden = false
+      
+      
+      if let dealState = dealState {
+        switch dealState {
+        case .tradeCancelled:
+          fallthrough
+        case .tradeCompleted:
+          fallthrough
+        case .tradeInProcess:
+          fallthrough
+        case .waitingAnswer:
+          
+          historialBottomConstraint.constant = -60
+          statusBottomConstraint.constant = -60
+          itemsBottomConstraint.constant = -60
+          
+          processButtonContainerView.isHidden = true
+          break
+        case .tradeRequest:
+          historialBottomConstraint.constant = 8
+          statusBottomConstraint.constant = 8
+          itemsBottomConstraint.constant = 8
+          
+          processButtonContainerView.isHidden = false
+          break
+        }
+      }
+      
       view.layoutIfNeeded()
     }
   }

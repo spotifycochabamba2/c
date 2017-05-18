@@ -31,6 +31,8 @@ class TradeStatusVC: UIViewController {
   var originalTransactionMethod: String?
   var transactionMethod: String?
   
+  var userUpdatedStateDeal: () -> Void = { }
+  
   @IBOutlet weak var statusImageView: UIImageView!
   
   @IBOutlet weak var statusLabel: UILabel! {
@@ -66,6 +68,7 @@ class TradeStatusVC: UIViewController {
   @IBOutlet weak var editTransactionButton: UIButton!
   
   func didConfirmOffer(_ howFinalized: String) {
+    userUpdatedStateDeal()
     transactionMethod = howFinalized
     DispatchQueue.main.async {
       self.transactionMethodLabel.text = "\(self.ownerUserName) says: \(howFinalized)"

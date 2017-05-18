@@ -218,7 +218,12 @@ extension Offer {
           }
           
           baseGroup.notify(queue: DispatchQueue.global(qos: .background), execute: { 
-            completion(offers)
+            completion(offers.sorted(by: { (offerA, offerB) -> Bool in
+              let offerADate = offerA["dateCreated"] as? Double ?? 0
+              let offerBDate = offerB["dateCreated"] as? Double ?? 0
+              
+              return offerADate < offerBDate
+            }))
           })
         }
       }

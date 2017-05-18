@@ -48,6 +48,19 @@
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sBF-ZQ-HBd">
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPe-we-TMJ">
+                                                <color key="backgroundColor" red="0.2156862745" green="0.83921568629999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="q8N-Qu-nH7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <state key="normal" title="ACCEPT">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="acceptDealButtonTouched" destination="661-hg-AFZ" eventType="touchUpInside" id="zKH-WQ-1ZS"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AhG-Od-nbD">
                                                 <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -137,6 +150,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="acceptDealButton" destination="QPe-we-TMJ" id="C3s-jM-ABT"/>
                         <outlet property="cancelDealButton" destination="7FN-fK-0Xc" id="rp0-Jo-6Ew"/>
                         <outlet property="chatButton" destination="IXY-oa-4br" id="Q6U-fo-j0N"/>
                         <outlet property="chatButtonBottomConstraint" destination="Dth-8a-s3B" id="Tda-oq-UEz"/>
@@ -434,20 +448,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tradeHistorialCellId" rowHeight="200" id="PCr-TQ-ghb" customClass="TradeHistorialCell" customModule="cropswapapp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tradeHistorialCellId" rowHeight="150" id="PCr-TQ-ghb" customClass="TradeHistorialCell" customModule="cropswapapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PCr-TQ-ghb" id="KtT-dU-bRj">
-                                    <frame key="frameInset" width="375" height="199"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-HY-QPI">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-HY-QPI">
+                                            <frame key="frameInset" minX="8" minY="160" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-Se-eZH">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-Se-eZH">
+                                            <frame key="frameInset" minX="152" minY="160" width="108" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eif-Ce-0xv">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eif-Ce-0xv">
+                                            <frame key="frameInset" minX="280" minY="160" width="87" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-rI-BS3">
@@ -490,61 +510,6 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DJw-sQ-w5D">
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you agree?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNu-vJ-etu">
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="12.5" id="QuO-QW-fD3"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="11"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YuQ-8t-6A6">
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFx-yQ-P3O">
-                                                                    <color key="backgroundColor" red="0.2156862745" green="0.83921568629999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="cix-xu-CR8"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                    <state key="normal" title="ACCEPT OFFER">
-                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </state>
-                                                                    <connections>
-                                                                        <action selector="finalizeTradeButtonTouched" destination="PCr-TQ-ghb" eventType="touchUpInside" id="jIE-bR-Dq5"/>
-                                                                    </connections>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gap-m1-CCK">
-                                                                    <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="ZhH-MJ-0MB"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                    <state key="normal" title="MAKE OFFER">
-                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </state>
-                                                                    <connections>
-                                                                        <action selector="makeOfferButtonTouched" destination="PCr-TQ-ghb" eventType="touchUpInside" id="mjb-R3-VF9"/>
-                                                                    </connections>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXk-yF-Jxg">
-                                                                    <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="ZBu-Jt-ABC"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                    <state key="normal" title="CANCEL">
-                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </state>
-                                                                    <connections>
-                                                                        <action selector="cancelButtonTouched" destination="PCr-TQ-ghb" eventType="touchUpInside" id="kAc-By-Etl"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ZeL-NU-mJs" secondAttribute="trailing" id="8L3-df-D37"/>
@@ -553,37 +518,18 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Eif-Ce-0xv" firstAttribute="top" secondItem="MXk-yF-Jxg" secondAttribute="top" id="2IJ-9K-Hjn"/>
-                                        <constraint firstItem="Eif-Ce-0xv" firstAttribute="trailing" secondItem="MXk-yF-Jxg" secondAttribute="trailing" id="7KT-mp-u6l"/>
-                                        <constraint firstItem="Eif-Ce-0xv" firstAttribute="bottom" secondItem="MXk-yF-Jxg" secondAttribute="bottom" id="8je-Bk-gns"/>
-                                        <constraint firstItem="sDc-Se-eZH" firstAttribute="leading" secondItem="gap-m1-CCK" secondAttribute="leading" id="Dw4-Ho-NQx"/>
-                                        <constraint firstItem="bs0-HY-QPI" firstAttribute="leading" secondItem="uFx-yQ-P3O" secondAttribute="leading" id="HAe-9y-d8U"/>
-                                        <constraint firstItem="sDc-Se-eZH" firstAttribute="top" secondItem="gap-m1-CCK" secondAttribute="top" id="HU3-1O-beM"/>
-                                        <constraint firstItem="bs0-HY-QPI" firstAttribute="trailing" secondItem="uFx-yQ-P3O" secondAttribute="trailing" id="Isb-nl-V7e"/>
                                         <constraint firstItem="XvO-rI-BS3" firstAttribute="leading" secondItem="KtT-dU-bRj" secondAttribute="leading" constant="8" id="Q7f-R3-t4m"/>
                                         <constraint firstAttribute="trailing" secondItem="XvO-rI-BS3" secondAttribute="trailing" constant="8" id="ave-Mf-XNB"/>
-                                        <constraint firstItem="Eif-Ce-0xv" firstAttribute="leading" secondItem="MXk-yF-Jxg" secondAttribute="leading" id="cVy-Dm-emL"/>
-                                        <constraint firstItem="bs0-HY-QPI" firstAttribute="bottom" secondItem="uFx-yQ-P3O" secondAttribute="bottom" id="eSb-f8-YdV"/>
                                         <constraint firstItem="XvO-rI-BS3" firstAttribute="top" secondItem="KtT-dU-bRj" secondAttribute="top" constant="10" id="gzn-Z2-eYS"/>
                                         <constraint firstAttribute="bottom" secondItem="XvO-rI-BS3" secondAttribute="bottom" constant="10" id="iKv-pa-EVc"/>
-                                        <constraint firstItem="sDc-Se-eZH" firstAttribute="bottom" secondItem="gap-m1-CCK" secondAttribute="bottom" id="iVm-0a-HJa"/>
-                                        <constraint firstItem="bs0-HY-QPI" firstAttribute="top" secondItem="uFx-yQ-P3O" secondAttribute="top" id="oq7-uX-ri5"/>
-                                        <constraint firstItem="sDc-Se-eZH" firstAttribute="trailing" secondItem="gap-m1-CCK" secondAttribute="trailing" id="x53-cJ-0YI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="anotherStackView" destination="ikh-da-50l" id="rUE-nv-PJg"/>
                                     <outlet property="anotherUsernameLabel" destination="7rz-Zu-0Ot" id="giM-zf-k6a"/>
                                     <outlet property="baseStackView" destination="XvO-rI-BS3" id="Xof-iV-fN3"/>
-                                    <outlet property="buttonsStackView" destination="DJw-sQ-w5D" id="Ced-Cg-w1t"/>
-                                    <outlet property="cancelButton" destination="MXk-yF-Jxg" id="ztm-uu-69n"/>
-                                    <outlet property="cancelShadowView" destination="Eif-Ce-0xv" id="GmE-cN-x8q"/>
                                     <outlet property="dateCreatedLabel" destination="l1d-1H-fke" id="bci-Wr-mQw"/>
-                                    <outlet property="finalizeTradeButton" destination="uFx-yQ-P3O" id="KOy-Rx-diN"/>
-                                    <outlet property="finalizeTradeShadowView" destination="bs0-HY-QPI" id="Ds8-xB-hAA"/>
-                                    <outlet property="makeOfferButton" destination="gap-m1-CCK" id="cFf-hR-Za2"/>
-                                    <outlet property="makeOfferShadowView" destination="sDc-Se-eZH" id="FQ9-Im-8Rf"/>
-                                    <outlet property="myStackView" destination="qwK-H7-4vf" id="U72-Hs-D3W"/>
+                                    <outlet property="myStackView" destination="qwK-H7-4vf" id="eZj-jR-cCi"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
