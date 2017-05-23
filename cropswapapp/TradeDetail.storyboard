@@ -37,7 +37,7 @@
                                 <segments>
                                     <segment title="STATUS"/>
                                     <segment title="ITEMS"/>
-                                    <segment title="HISTORIAL"/>
+                                    <segment title="HISTORICAL"/>
                                 </segments>
                                 <color key="tintColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -67,7 +67,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="QuU-wG-kbj"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                <state key="normal" title="UPDATE">
+                                                <state key="normal" title="CHANGE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>

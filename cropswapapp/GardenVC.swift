@@ -126,7 +126,10 @@ class GardenVC: UIViewController {
     if segue.identifier == Storyboard.GardenToAddProduce {
       let nc = segue.destination as? UINavigationController
       let vc = nc?.viewControllers.first as? AddProduceContainerVC
-      vc?.currentProduceId = sender as? String
+      let produce = sender as? [String: Any]
+      
+      vc?.currentProduceId = produce?["id"] as? String
+      vc?.currentProduceState = produce?["liveState"] as? String
     }
   }
 }
@@ -142,6 +145,14 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
     cell.produceName = produce["produceType"] as? String ?? ""
     cell.price = produce["price"] as? Double ?? 0
     cell.distance = 0
+    
+    if let state = produce["liveState"] as? String,
+      state == ProduceState.archived.rawValue
+    {
+      cell.contentView.alpha = 0.5
+    } else {
+      cell.contentView.alpha = 1
+    }
 //    if
 //      let imageURL = produce["firstPictureURL"] as? String,
 //      let produceType = produce["produceType"] as? String
@@ -185,7 +196,7 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let produce = produces[indexPath.row]
     
-    performSegue(withIdentifier: Storyboard.GardenToAddProduce, sender: produce["id"])
+    performSegue(withIdentifier: Storyboard.GardenToAddProduce, sender: produce)
   }
 }
 

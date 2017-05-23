@@ -79,6 +79,13 @@ struct Storyboard {
   static let LoginToForgotPassword = "LoginToForgotPassword"
   
   static let SignupToYourLocation = "SignupToYourLocation"
+  
+  static let ProduceChildToPhotoViewer = "ProduceChildToPhotoViewer"
+  
+  static let TradeListToProfile = "TradeListToProfile"
+  
+  static let ProfileContainerToProfileChild = "ProfileContainerToProfileChild"
+  static let ProduceChildToProfileChild = "ProduceChildToProfileChild"
 }
 
 

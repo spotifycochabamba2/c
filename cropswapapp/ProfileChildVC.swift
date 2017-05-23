@@ -11,6 +11,17 @@ import SVProgressHUD
 
 class ProfileChildVC: UITableViewController {
   
+  var currentUserId: String?
+  var currentUsername: String?
+  
+  @IBOutlet weak var streetCell: UITableViewCell!
+  @IBOutlet weak var cityCell: UITableViewCell!
+  @IBOutlet weak var stateCell: UITableViewCell!
+  @IBOutlet weak var zipCodeCell: UITableViewCell!
+  @IBOutlet weak var showAddressCell: UITableViewCell!
+  
+  var showBackButton = false
+  
   @IBOutlet weak var nameLabel: UILabel! {
     didSet {
       nameLabel.text = ""
@@ -88,7 +99,27 @@ class ProfileChildVC: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let height = super.tableView(tableView, heightForRowAt: indexPath)
     
+    if showBackButton {
+      let cell = super.tableView(tableView, cellForRowAt: indexPath)
+      
+      if cell === streetCell {
+        return 0
+      } else if cell === cityCell {
+        return 0
+      } else if cell === stateCell {
+        return 0
+      } else if cell === zipCodeCell {
+        return 0
+      } else if cell === showAddressCell {
+        return 0
+      }
+    }
+    
+    return height
+  }
   
   
 //  @IBAction func takePictureButtonTouched() {
@@ -101,10 +132,21 @@ class ProfileChildVC: UITableViewController {
 //  
 //  @IBAction func deletePictureButtonTouched() {
 //    
-//  }
+  //  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if showBackButton {
+      setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
+      
+      let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
+      leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
+    }
+  }
+  
+  func backButtonTouched() {
+    dismiss(animated: true)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -114,7 +156,7 @@ class ProfileChildVC: UITableViewController {
       SVProgressHUD.show()
     }
     
-    User.getUser { [weak self] (result) in
+    User.getUser(byUserId: currentUserId) { [weak self] (result) in
       SVProgressHUD.dismiss()
       switch result {
       case .success(let user):
@@ -125,6 +167,7 @@ class ProfileChildVC: UITableViewController {
       }
     }
   }
+  
   
   func loadUserInfoToUI(user: User) {
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"

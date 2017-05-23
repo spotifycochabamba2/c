@@ -115,7 +115,12 @@ class MakeDealVC: UIViewController {
     dismiss(animated: true)
   }
   
+  @IBOutlet weak var acceptButton: UIButton!
+  
   @IBAction func acceptButtonTouched() {
+    acceptButton.isEnabled = false
+    acceptButton.alpha = 0.5
+    
     let anotherProducesSelected = anotherProduces.filter { (produce) -> Bool in  // true include and false exclude
       let quantityAdded = produce["quantityAdded"] as? Int ?? 0
       
@@ -130,6 +135,9 @@ class MakeDealVC: UIViewController {
 
     
     if anotherProducesSelected.count <= 0  {
+      acceptButton.isEnabled = true
+      acceptButton.alpha = 1
+      
       let alert = UIAlertController(title: "Error", message: "At least add quantity of one produce of another's garden you want to trade", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -137,6 +145,9 @@ class MakeDealVC: UIViewController {
     }
     
     if myProducesSelected.count <= 0 {
+      acceptButton.isEnabled = true
+      acceptButton.alpha = 1
+      
       let alert = UIAlertController(title: "Error", message: "At least add quantity of one produce of your garden you want to trade", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -147,6 +158,9 @@ class MakeDealVC: UIViewController {
     var anotherUserFound: User?
     
     guard let anotherId = anotherOwnerId else {
+      acceptButton.isEnabled = true
+      acceptButton.alpha = 1
+      
       let alert = UIAlertController(title: "Error", message: "Another person Id invalid.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -154,6 +168,9 @@ class MakeDealVC: UIViewController {
     }
     
     guard let ownerId = User.currentUser?.uid else {
+      acceptButton.isEnabled = true
+      acceptButton.alpha = 1
+      
       let alert = UIAlertController(title: "Error", message: "Owner user id invalid.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -219,7 +236,12 @@ class MakeDealVC: UIViewController {
       }
       
     ]) { [weak self] (error) in
-      SVProgressHUD.dismiss()
+      DispatchQueue.main.async { [weak self] in
+        self?.acceptButton.isEnabled = true
+        self?.acceptButton.alpha = 1
+        
+        SVProgressHUD.dismiss()
+      }
       
       if let error = error {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -229,7 +251,9 @@ class MakeDealVC: UIViewController {
           self?.present(alert, animated: true)
         }
       } else {
-        self?.performSegue(withIdentifier: Storyboard.MakeDealToDealSubmitted, sender: anotherUserFound)
+        DispatchQueue.main.async {
+          self?.performSegue(withIdentifier: Storyboard.MakeDealToDealSubmitted, sender: anotherUserFound)
+        }
       }
     }
   }
@@ -245,7 +269,11 @@ class MakeDealVC: UIViewController {
       { [weak self] done in
         if let myUserId = User.currentUser?.uid {
           User.getProducesByUser(byUserId: myUserId, completion: { (myProduces) in
-            self?.myProduces = myProduces
+            self?.myProduces = myProduces.filter {
+              let liveState = $0["liveState"] as? String ?? ""
+              
+              return liveState != ProduceState.archived.rawValue
+            }
 
             DispatchQueue.main.async {
               self?.myGardenCollectionView.reloadData()
@@ -264,7 +292,11 @@ class MakeDealVC: UIViewController {
       { [weak self] done in
         if let anotherOwnerId = self?.anotherOwnerId {
           User.getProducesByUser(byUserId: anotherOwnerId, completion: { (anotherProduces) in
-            self?.anotherProduces = anotherProduces
+            self?.anotherProduces = anotherProduces.filter {
+              let liveState = $0["liveState"] as? String ?? ""
+              
+              return liveState != ProduceState.archived.rawValue
+            }
             
             let produceIndex = self?.anotherProduces.index(where: { (produce) -> Bool in
               let produceId = produce["id"] as! String
@@ -448,9 +480,24 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         print(anotherProduces[index])
         print(anotherProduces[index]["quantity"] as? Int)
         
+        let liveState = anotherProduces[index]["liveState"] as? String ?? ""
         let produceQuantity = anotherProduces[index]["quantity"] as? Int ?? 0
         let value = anotherProduces[index]["quantityAdded"] as? Int ?? 0
         let result = value + quantity
+        
+        if liveState == ProduceState.archived.rawValue {
+          let alert = UIAlertController(title: "Info", message: "You can't trade this item anymore since it was removed.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
+        if result < 0 {
+          let alert = UIAlertController(title: "Info", message: "You have reached the minimun quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
         
         if result <= produceQuantity {
           anotherProduces[index]["quantityAdded"] = result >= 0 ? result : 0
@@ -470,6 +517,21 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         let value = myProduces[index]["quantityAdded"] as? Int ?? 0
         let result = value + quantity
+        let liveState = myProduces[index]["liveState"] as? String ?? ""
+        
+        if liveState == ProduceState.archived.rawValue {
+          let alert = UIAlertController(title: "Info", message: "You can't trade this item anymore since it was removed.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
+        if result < 0 {
+          let alert = UIAlertController(title: "Info", message: "You have reached the minimun quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
         
         if result <= produceQuantity {
           myProduces[index]["quantityAdded"] = result >= 0 ? result : 0

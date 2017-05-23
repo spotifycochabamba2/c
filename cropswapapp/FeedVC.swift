@@ -78,7 +78,10 @@ class FeedVC: UIViewController {
       
       self?.ignoreItems = false
       
-      self?.produces = produces
+      self?.produces = produces.filter({ (produce) -> Bool in
+        return produce.liveState ?? "" != ProduceState.archived.rawValue
+      })      
+    
       self?.isGettingFirstDataFromServer = false
       
       if let this = self {
@@ -128,17 +131,26 @@ class FeedVC: UIViewController {
     
     
     getUpdatedProducesHandlerId = User.getProducesByListeningUpdatedOnes(completion: { (produceUpdated) in
-      print(produceUpdated)
+      
       let produceIndex = self.produces.index(where: { (produce) -> Bool in
         return produce.id == produceUpdated.id
       })
       
       if let produceIndex = produceIndex {
-        self.collectionView.performBatchUpdates({
-          self.produces[produceIndex] = produceUpdated
-          let indexPath = IndexPath(item: produceIndex, section: 0)
-          self.collectionView.reloadItems(at: [indexPath])
-          }, completion: nil)
+        
+        if produceUpdated.liveState ?? "" == ProduceState.archived.rawValue {
+          self.collectionView.performBatchUpdates({
+            self.produces.remove(at: produceIndex)
+            let indexPath = IndexPath(item: produceIndex, section: 0)
+            self.collectionView.deleteItems(at: [indexPath])
+            }, completion: nil)
+        } else {
+          self.collectionView.performBatchUpdates({
+            self.produces[produceIndex] = produceUpdated
+            let indexPath = IndexPath(item: produceIndex, section: 0)
+            self.collectionView.reloadItems(at: [indexPath])
+            }, completion: nil)
+        }
       }
     })
     

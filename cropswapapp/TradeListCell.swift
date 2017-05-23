@@ -11,13 +11,31 @@ import UIKit
 class TradeListCell: UITableViewCell {
   
   static let cellId = "tradeListCellId"
-  @IBOutlet weak var userImageView: UIImageView!
+  @IBOutlet weak var userImageView: UIImageView! {
+    didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action:
+        #selector(userImageViewTapped))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      userImageView.isUserInteractionEnabled = true
+      userImageView.addGestureRecognizer(tapGesture)
+    }
+  }
+  
+  var userImageTapped: (String, String) -> Void = { _ in }
+  
+  var anotherUserId: String = ""
   
   let userNameSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 20)
   let numberProduceSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 13)
   
   let userNameRegularFont = UIFont(name: "Montserrat-Regular", size: 20)
   let numberProduceLightFont = UIFont(name: "Montserrat-Light", size: 13)
+  
+  func userImageViewTapped() {
+    userImageTapped(anotherUserId, username ?? "")
+    print("user id touched was: \(anotherUserId)")
+  }
   
   var hasNewNotifications = false {
     didSet {

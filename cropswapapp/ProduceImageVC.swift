@@ -12,9 +12,8 @@ class ProduceImageVC: UIViewController {
   
   var containsCustomImage = false
   
-  @IBOutlet private weak var imageView: UIImageView! {
+  @IBOutlet weak var imageView: UIImageView! {
     didSet {
-      imageView.contentMode = .center
       imageView.backgroundColor = UIColor.hexStringToUIColor(hex: "#e1e3e5")
       imageView.image = UIImage(named: "cropswap-gray-logo")
     }
@@ -58,18 +57,58 @@ class ProduceImageVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-
   }
   
 }
+
+extension ProduceImageVC: UIGestureRecognizerDelegate {
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

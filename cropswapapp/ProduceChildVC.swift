@@ -14,8 +14,25 @@ class ProduceChildVC: UITableViewController {
   
   @IBOutlet weak var relatedProducesCell: UITableViewCell!
   
+  var pageContainerTapGesture: UITapGestureRecognizer!
+  
+  @IBOutlet weak var userNameStackView: UIStackView! {
+    didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userNameStackViewTapped))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      userNameStackView.isUserInteractionEnabled = true
+      userNameStackView.addGestureRecognizer(tapGesture)
+    }
+  }
   
   @IBOutlet weak var shadowView: UIView!
+  
+  var enableMakeDealButton: () -> Void = { }
+  
+  func userNameStackViewTapped() {
+    performSegue(withIdentifier: Storyboard.ProduceChildToProfileChild, sender: nil)
+  }
   
   @IBOutlet weak var gardenerLabel: UILabel! {
     didSet {
@@ -130,6 +147,37 @@ class ProduceChildVC: UITableViewController {
     
   }
   
+  func pictureIndexLeft(index: Int) {
+    if index >= 0 && index <= (produceImagesViewControllers.count - 1) {
+      currentIndex = index
+      pageContainer.setViewControllers([produceImagesViewControllers[index]], direction: .forward, animated: false, completion: nil)
+    }
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Storyboard.ProduceChildToPhotoViewer {
+      let vc = segue.destination as? PhotoViewerVC
+      let images = produceImagesViewControllers.flatMap { ($0 as? ProduceImageVC)?.image }
+      vc?.images = images
+      vc?.currentIndex = currentIndex
+      vc?.pictureIndexLeft = pictureIndexLeft
+    } else if segue.identifier == Storyboard.ProduceChildToProfileChild {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProfileChildVC
+//      let values = sender as? [String: Any]
+//      
+      vc?.currentUserId = produce?.ownerId
+      vc?.currentUsername = produce?.ownerUsername
+      vc?.showBackButton = true
+//      produce?.ownerId
+//      produce.ownerUsername
+    }
+  }
+  
+  func pageContainerTapped() {
+    performSegue(withIdentifier: Storyboard.ProduceChildToPhotoViewer, sender: nil)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -142,6 +190,13 @@ class ProduceChildVC: UITableViewController {
     relatedProducesCollectionView.backgroundColor = .clear
     
     pageContainer = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    
+    pageContainerTapGesture = UITapGestureRecognizer(target: self, action: #selector(pageContainerTapped))
+    pageContainerTapGesture.numberOfTapsRequired = 1
+    pageContainerTapGesture.numberOfTouchesRequired = 1
+    pageContainerTapGesture.isEnabled = false
+    
+    pageContainer.view.addGestureRecognizer(pageContainerTapGesture)
     
     tagsCollectionView.delegate = self
     tagsCollectionView.dataSource = self
@@ -192,8 +247,9 @@ class ProduceChildVC: UITableViewController {
       }
     ]) { [weak self] (error) in
       
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [weak self] in
         SVProgressHUD.dismiss()
+        self?.pageContainerTapGesture.isEnabled = true
       }
       
       if let produce = self?.produce {
@@ -254,6 +310,7 @@ class ProduceChildVC: UITableViewController {
           self?.categoryLabel.text = produce.produceType
           self?.quantityAndTypeLabel.text = "\(produce.quantity) \(produce.quantityType)"
           self?.priceLabel.text = self?.numberFormatter.string(from: NSNumber(value: produce.price))
+          self?.enableMakeDealButton()
         }
       }
 
@@ -287,6 +344,10 @@ class ProduceChildVC: UITableViewController {
 
 extension ProduceChildVC {
   
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+  }
+  
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if indexPath.row == 0 {
       if isFirstimeLoaded {
@@ -313,7 +374,7 @@ extension ProduceChildVC {
 
     }
   }
-  
+
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)
     

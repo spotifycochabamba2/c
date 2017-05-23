@@ -12,6 +12,10 @@ import FirebaseStorage
 import FirebaseDatabase
 import Ax
 
+enum ProduceState: String {
+  case archived = "archived"
+}
+
 enum ProducePhotoNumber: String {
   case first = "firstPictureURL"
   case second = "secondPictureURL"
@@ -58,6 +62,8 @@ struct Produce {
   
   var state = "Seed"
   
+  var liveState: String?
+  
   var tags = [(name: String, priority: Int, key: String)]()
   
   init(
@@ -66,7 +72,8 @@ struct Produce {
     firstPictureURL: String,
     quantityType: String,
     ownerId: String,
-    quantity: Int
+    quantity: Int,
+    liveState: String?
   ) {
     self.id = id
     self.name = name
@@ -75,7 +82,7 @@ struct Produce {
     self.quantityType = quantityType
     self.quantity = quantity
     self.firstPictureURL = firstPictureURL
-    
+    self.liveState = liveState
     self.price = 0
     
     self.ownerId = ownerId
@@ -115,6 +122,8 @@ struct Produce {
     self.fifthPictureURL = json["fifthPictureURL"] as? String
     
     self.state = json["state"] as? String ?? "Seed"
+    
+    self.liveState = json["liveState"] as? String
     
     self.ownerId = ownerId
     self.ownerUsername = ownerUsername
@@ -160,6 +169,31 @@ extension Produce {
   static var refStorage = FIRStorage.storage().reference()
   
   static var refDetails = refDatabase.child("details-tags")
+  
+  static func archiveProduce(
+    produceId: String,
+    ownerUserId: String,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    let refDatabaseProduces = refDatabase.child("produces")
+    let refDatabaseProduce = refDatabaseProduces.child(produceId)
+    
+    let refDatabaseUserProduce = refDatabase
+      .child("produces-by-user")
+      .child(ownerUserId)
+      .child(produceId)
+    
+    var values = [String: Any]()
+    values["liveState"] = ProduceState.archived.rawValue
+    values["quantity"] = 0
+    
+    refDatabaseUserProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+    }
+    
+    refDatabaseProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+      completion(error as NSError?)
+    }
+  }
   
   static func deleteProduce(
     id: String,

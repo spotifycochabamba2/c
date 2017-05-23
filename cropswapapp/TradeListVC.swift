@@ -118,12 +118,28 @@ class TradeListVC: UIViewController {
             print(error)
         })
       }
+    } else if segue.identifier == Storyboard.TradeListToProfile {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProfileChildVC
+      let values = sender as? [String: Any]
+      
+      vc?.currentUserId = values?["userId"] as? String
+      vc?.currentUsername = values?["username"] as? String
+      vc?.showBackButton = true
     }
   }
 }
 
 
 extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
+  
+  func userImageTapped(userId: String, username: String) {
+    var values = [String: Any]()
+    values["userId"] = userId
+    values["username"] = username
+    
+    performSegue(withIdentifier: Storyboard.TradeListToProfile, sender: values)
+  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let deal = deals[indexPath.row]
@@ -136,6 +152,7 @@ extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
     
     let dealState = deal["state"] as? String ?? ""
     let dealAnotherUsername = deal["anotherUsername"] as? String ?? ""
+    let dealAnotherUserId = deal["anotherUserId"] as? String ?? ""
     let dealNumberProduces = deal["numberProducesTrade"] as? Int ?? 0
 //    let dealAnotherUserId = deal["anotherUserId"] as? String ?? ""
     let dealDate = deal["dateCreated"] as? Double ?? 0
@@ -143,12 +160,13 @@ extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
     let trade = deal["trade"] as? Int ?? 0
     let chat = deal["chat"] as? Int ?? 0
     
+    cell.anotherUserId = dealAnotherUserId
     cell.state = DealState(rawValue: dealState)
     cell.username = dealAnotherUsername
     cell.numberProduces = dealNumberProduces
     cell.date = dealDate
     cell.profilePictureURL = deal["anotherProfilePictureURL"] as? String
-    
+    cell.userImageTapped = userImageTapped
     cell.hasNewNotifications = trade > 0 || chat > 0
     
     return cell

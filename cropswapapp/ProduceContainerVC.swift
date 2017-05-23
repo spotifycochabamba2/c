@@ -23,9 +23,11 @@ class ProduceContainerVC: UIViewController {
     }
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    makeDealButton.isEnabled = false
+    makeDealButton.alpha = 0.5
     
     if isReadOnly {
       makeDealView.isHidden = true
@@ -45,6 +47,11 @@ class ProduceContainerVC: UIViewController {
     }
   }
   
+  func enableMakeDealButton() {
+    makeDealButton.isEnabled = true
+    makeDealButton.alpha = 1
+  }
+  
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
@@ -55,6 +62,9 @@ class ProduceContainerVC: UIViewController {
   }
   
   @IBAction func makeDealButtonTouched(_ sender: AnyObject) {
+    makeDealButton.isEnabled = false
+    makeDealButton.alpha = 0.5
+    
     guard let ownerId = produce?.ownerId else {
       return
     }
@@ -69,6 +79,7 @@ class ProduceContainerVC: UIViewController {
     
     if ownerId != currenUserId {
       Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
+        self?.enableMakeDealButton()
         print(hoursLeft)
         
         if hoursLeft > 0 {
@@ -80,12 +91,11 @@ class ProduceContainerVC: UIViewController {
           self?.performSegue(withIdentifier: Storyboard.ProduceContainerToFinalizeTrade, sender: nil)
         }
       })
-      
     } else {
       let alert = UIAlertController(title: "Info", message: "Sorry you can't make a deal with yourself", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
-      
       present(alert, animated: true)
+      enableMakeDealButton()
     }
   }
   
@@ -117,6 +127,7 @@ class ProduceContainerVC: UIViewController {
       let vc = segue.destination as? ProduceChildVC
       produceChildVC = vc
       vc?.produce = produce
+      vc?.enableMakeDealButton = enableMakeDealButton
     }
   }
   

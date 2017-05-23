@@ -164,7 +164,8 @@ class TradeDetailVC: UIViewController {
                         firstPictureURL: firstPictureURL,
                         quantityType: quantityType,
                         ownerId: ownerId,
-                        quantity: quantity
+                        quantity: quantity,
+                        liveState: anotherProduce["liveState"] as? String
                       )
                       
                       self?.anotherProduces.append((produce, 0))
@@ -196,7 +197,8 @@ class TradeDetailVC: UIViewController {
                         firstPictureURL: firstPictureURL,
                         quantityType: quantityType,
                         ownerId: ownerId,
-                        quantity: quantity
+                        quantity: quantity,
+                        liveState: myProduce["liveState"] as? String
                       )
                       
                       self?.myProduces.append((produce, 0))
@@ -335,6 +337,20 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let value = anotherProduces[index].1
         let result = value + quantity
         
+        if produce.liveState ?? "" == ProduceState.archived.rawValue {
+          let alert = UIAlertController(title: "Info", message: "You can't trade this item anymore since it was removed.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
+        if result < 0 {
+          let alert = UIAlertController(title: "Info", message: "You have reached the minimun quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
         if result <= produce.quantity {
           
           anotherProduces[index].1 = result >= 0 ? result : 0
@@ -355,6 +371,21 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let produce = myProduces[index].0
         let value = myProduces[index].1
         let result = value + quantity
+        
+        if produce.liveState ?? "" == ProduceState.archived.rawValue {
+          let alert = UIAlertController(title: "Info", message: "You can't trade this item anymore since it was removed.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
+        if result < 0 {
+          let alert = UIAlertController(title: "Info", message: "You have reached the minimun quantity for this produce.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          present(alert, animated: true)
+          return
+        }
+        
         if result <= produce.quantity {
           myProduces[index].1 = result >= 0 ? result : 0
           DispatchQueue.main.async { [weak self] in

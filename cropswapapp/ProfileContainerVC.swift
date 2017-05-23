@@ -14,7 +14,10 @@ class ProfileContainerVC: UIViewController {
 //  var logoutButton: UIButton!
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let _ = segue.destination as? EditProfileContainerVC
+    if segue.identifier == Storyboard.ProfileContainerToProfileChild {
+      let vc = segue.destination as? ProfileChildVC
+      vc?.currentUserId = User.currentUser?.uid
+    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {

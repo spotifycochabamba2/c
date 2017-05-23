@@ -12,6 +12,7 @@ import Ax
 
 class AddProduceContainerVC: UIViewController {
   var currentProduceId: String?
+  var currentProduceState: String?
   
   weak var addProduceChildVC: AddProduceChildVC?
   var currentUser: User?
@@ -27,8 +28,23 @@ class AddProduceContainerVC: UIViewController {
     if segue.identifier == "AddProduceContainerToAddProduceChild" {
       let vc = segue.destination as? AddProduceChildVC
       vc?.currentProduceId = currentProduceId
+      vc?.currentProduceState = currentProduceState
       vc?.changeTitleButton = changeTitleButton
+      vc?.enableProcessButton = enableProcessButton
       addProduceChildVC = vc
+    }
+  }
+  
+  func enableProcessButton() {
+    if let currentProduceState = currentProduceState,
+      currentProduceState == ProduceState.archived.rawValue {
+      
+      addItemButton.isEnabled = false
+      addItemButton.alpha = 0.5
+    } else {
+
+      addItemButton.isEnabled = true
+      addItemButton.alpha = 1
     }
   }
   
@@ -37,8 +53,12 @@ class AddProduceContainerVC: UIViewController {
   }
   
   @IBAction func addItemButtonTouched() {
+    addItemButton.isEnabled = false
+    addItemButton.alpha = 0.5
     
     guard let addProduceChildVC = addProduceChildVC else {
+      addItemButton.isEnabled = true
+      addItemButton.alpha = 1
       return
     }
     
@@ -46,6 +66,9 @@ class AddProduceContainerVC: UIViewController {
       let ownerId = currentUser?.id,
       let ownerUsername = currentUser?.name
       else {
+        addItemButton.isEnabled = true
+        addItemButton.alpha = 1
+        
         let alert = UIAlertController(title: "Error", message: "No user id or name valid was found.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
@@ -307,14 +330,23 @@ class AddProduceContainerVC: UIViewController {
         },
         
       ], result: { [weak self] (error) in
-        SVProgressHUD.dismiss()
+        DispatchQueue.main.async {
+          SVProgressHUD.dismiss()
+          
+          self?.addItemButton.isEnabled = true
+          self?.addItemButton.alpha = 1
+        }
         
         if let error = error {
           let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: "OK", style: .default))
-          self?.present(alert, animated: true)
+          DispatchQueue.main.async {
+            self?.present(alert, animated: true)
+          }
         } else {
-          self?.dismiss(animated: true)
+          DispatchQueue.main.async {
+            self?.dismiss(animated: true)
+          }
         }
       })
       
@@ -322,12 +354,18 @@ class AddProduceContainerVC: UIViewController {
     } catch ValidationFormError.error(let errorMessage) {
       SVProgressHUD.dismiss()
       
+      addItemButton.isEnabled = true
+      addItemButton.alpha = 1
+      
       let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
       
     } catch {
       SVProgressHUD.dismiss()
+      
+      addItemButton.isEnabled = true
+      addItemButton.alpha = 1
       
       let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -340,10 +378,10 @@ class AddProduceContainerVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    unowned let `self` = self
+    addItemButton.isEnabled = false
+    addItemButton.alpha = 0.5
     
     SVProgressHUD.show()
-    
     if self.currentUser == nil {
       User.getUser { [weak self] (result) in
         SVProgressHUD.dismiss()
@@ -351,6 +389,13 @@ class AddProduceContainerVC: UIViewController {
         switch result {
         case .success(let userFound):
           self?.currentUser = userFound
+          
+          if self?.currentProduceId == nil {
+            DispatchQueue.main.async {
+              self?.addItemButton.isEnabled = true
+              self?.addItemButton.alpha = 1
+            }
+          }
         case .fail(let error):
           print(error)
         }
@@ -363,9 +408,19 @@ class AddProduceContainerVC: UIViewController {
     } else {
       setNavHeaderTitle(title: "Edit Item", color: UIColor.black)
       addItemButton.setTitle("EDIT", for: .normal)
+      
+      if let currentProduceState = currentProduceState,
+        currentProduceState == ProduceState.archived.rawValue {
+        setNavHeaderTitle(title: "Archived Item", color: UIColor.black)
+        
+      } else {
+        let rightButtonIcon = setNavIcon(imageName: "delete-button-icon", size: CGSize(width: 42, height: 52), position: .right)
+        rightButtonIcon.addTarget(self, action: #selector(deleteButtonTouched), for: .touchUpInside)
+      }
     }
     
-    let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
+//    (width: 10, height: 17)
+    let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 40, height: 47), position: .left)
     leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
   }
   
@@ -378,8 +433,53 @@ class AddProduceContainerVC: UIViewController {
     bottomBarView.layer.shadowOpacity = 0.3;
   }
   
+  func deleteButtonTouched() {
+    print("delete button touched")
+    guard let produceId = currentProduceId else {
+      return
+    }
+    
+    guard let ownerUserId = User.currentUser?.uid else {
+      return
+    }
+    
+    let alert = UIAlertController(title: "Info", message: "Are you sure you want to delete this produce?", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
+      print("OK button option selected.")
+      
+      DispatchQueue.main.async {
+        SVProgressHUD.show()
+      }
+      
+      Produce.archiveProduce(
+        produceId: produceId,
+        ownerUserId: ownerUserId,
+        completion: { [weak self] (error) in
+          DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            self?.dismiss(animated: true)
+          }
+        })
+    }))
+    
+    present(alert, animated: true, completion: nil)
+  }
+  
   func backButtonTouched() {
     dismiss(animated: true, completion: nil)
   }
   
 }
+
+
+
+
+
+
+
+
+
+
+
+

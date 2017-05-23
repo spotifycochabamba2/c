@@ -12,6 +12,10 @@ import SVProgressHUD
 class AddProduceChildVC: UITableViewController {
   var currentProduceId: String?
   var currentProduce: Produce?
+  var currentProduceState: String?
+  
+  @IBOutlet weak var takePictureButton: UIButton!
+  @IBOutlet weak var choosePictureButton: UIButton!
   
   @IBOutlet weak var stateLabelView: UIView!
   @IBOutlet weak var stateLabelViewConstraint: NSLayoutConstraint!
@@ -55,6 +59,7 @@ class AddProduceChildVC: UITableViewController {
   var fifthPhotoEdited = false
   
   var changeTitleButton: (String) -> Void = { _ in }
+  var enableProcessButton: () -> Void = { _ in }
   
   @IBOutlet weak var nextButton: UIButton!
   
@@ -239,6 +244,7 @@ class AddProduceChildVC: UITableViewController {
       }
       
       DispatchQueue.main.async { [weak self] in
+        self?.enableProcessButton()
         self?.tagsCollectionView.reloadData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -247,9 +253,30 @@ class AddProduceChildVC: UITableViewController {
       }
     }
   }
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if let currentProduceState = currentProduceState,
+      currentProduceState == ProduceState.archived.rawValue {
+      deletePictureButton.isEnabled = false
+      deletePictureButton.alpha = 0.5
+      
+      choosePictureButton.isEnabled = false
+      choosePictureButton.alpha = 0.5
+      
+      takePictureButton.isEnabled = false
+      takePictureButton.alpha = 0.5
+    } else {
+      deletePictureButton.isEnabled = true
+      deletePictureButton.alpha = 1
+      
+      choosePictureButton.isEnabled = true
+      choosePictureButton.alpha = 1
+      
+      takePictureButton.isEnabled = true
+      takePictureButton.alpha = 1
+    }
     
     stateLabelView.isHidden = true
     stateLabel.isHidden = true
@@ -689,7 +716,7 @@ class AddProduceChildVC: UITableViewController {
   @IBAction func pickProductsButtonTouched() {
     changeTitleButton("SAVE")
     performSegue(withIdentifier: Storyboard.AddProduceChildToChooseDetails, sender: nil)
-  }
+  }  
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
@@ -727,6 +754,10 @@ class AddProduceChildVC: UITableViewController {
 }
 
 extension AddProduceChildVC {
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    view.endEditing(true)
+  }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)

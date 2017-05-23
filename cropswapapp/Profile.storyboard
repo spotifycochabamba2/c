@@ -32,7 +32,7 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-c0-8PH">
                                 <connections>
-                                    <segue destination="aEc-3E-CaH" kind="embed" id="MwA-e7-afv"/>
+                                    <segue destination="aEc-3E-CaH" kind="embed" identifier="ProfileContainerToProfileChild" id="MwA-e7-afv"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIQ-iS-1wF">
@@ -74,7 +74,7 @@
         <!--Profile ChildVC-->
         <scene sceneID="mlP-AZ-8yC">
             <objects>
-                <tableViewController id="aEc-3E-CaH" customClass="ProfileChildVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProfileChildVC" id="aEc-3E-CaH" customClass="ProfileChildVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g9f-4B-nD1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -397,15 +397,20 @@ trade requests</string>
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="cityCell" destination="fPn-y6-gDU" id="LDP-Bf-SLv"/>
                         <outlet property="cityLabel" destination="fy1-cu-BEx" id="fUl-sA-LNG"/>
                         <outlet property="emailLabel" destination="UL7-tO-cM2" id="RTD-ie-b3W"/>
                         <outlet property="nameLabel" destination="sOm-i8-PDE" id="WlF-Jz-I8O"/>
                         <outlet property="phoneNumberLabel" destination="3Sz-QK-Tlu" id="W1V-dp-98a"/>
                         <outlet property="profileImageView" destination="ZbD-tB-o1u" id="lYt-yp-d6C"/>
+                        <outlet property="showAddressCell" destination="08V-Fg-7dy" id="XgP-Mg-eXe"/>
                         <outlet property="showAddressSwitch" destination="MRP-oO-0bZ" id="wUR-61-yDQ"/>
+                        <outlet property="stateCell" destination="q4L-78-J3T" id="9qd-Wm-VG0"/>
                         <outlet property="stateLabel" destination="SFU-ZY-dlS" id="0jy-ef-5z7"/>
+                        <outlet property="streetCell" destination="6ZA-Zh-Nah" id="Shj-w3-pQR"/>
                         <outlet property="streetLabel" destination="tds-hk-lhZ" id="Z0U-sI-1sf"/>
                         <outlet property="websiteLabel" destination="px3-k2-kFK" id="2HR-4b-bJf"/>
+                        <outlet property="zipCodeCell" destination="VxI-Xf-zaL" id="bSd-I8-xox"/>
                         <outlet property="zipCodeLabel" destination="bgG-e3-9ev" id="qBN-8L-fFl"/>
                     </connections>
                 </tableViewController>
@@ -498,7 +503,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qcd-L1-8BO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

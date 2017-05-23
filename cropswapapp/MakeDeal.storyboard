@@ -180,6 +180,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="pyo-fy-Bsv" id="tgj-0y-n3G"/>
                         <outlet property="anotherGardenCollectionView" destination="UsW-f8-0fN" id="KcO-pK-8r9"/>
                         <outlet property="anotherProduceTitleLabel" destination="R0u-qD-UGx" id="27X-SR-qPc"/>
                         <outlet property="anotherProduceUnitTitleLabel" destination="0dl-fJ-V4Z" id="29i-KF-DSY"/>

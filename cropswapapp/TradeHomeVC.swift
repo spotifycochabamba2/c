@@ -48,10 +48,10 @@ class TradeHomeVC: UIViewController {
   
   func changeUpdateButton(enable: Bool) {
     if enable {
-      processButton.isEnabled = true
+//      processButton.isEnabled = true
       processButton.alpha = 1.0
     } else {
-      processButton.isEnabled = false
+//      processButton.isEnabled = false
       processButton.alpha = 0.5
     }
   }
@@ -145,7 +145,7 @@ class TradeHomeVC: UIViewController {
     let alert = UIAlertController(title: "Confirmation", message: "Are you sure you want to cancel the offer?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
       
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] (alert) in
+    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] (alert) in
       
       guard let ownerId = self?.anotherUserId
         else {
@@ -249,8 +249,19 @@ class TradeHomeVC: UIViewController {
   }
   
   @IBAction func processButtonTouched() {
+    
+    if processButton.alpha == 0.5 {
+      segmentedControl.selectedSegmentIndex = 1
+      segmentedControl.sendActions(for: .valueChanged)
+      return
+    }
+    
+    changeUpdateButton(enable: false)
+    
     guard let newOwnerId = User.currentUser?.uid
       else {
+        changeUpdateButton(enable: true)
+        
         let alert = UIAlertController(title: "Error", message: "Owner user id not provided.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
@@ -259,6 +270,8 @@ class TradeHomeVC: UIViewController {
     
     guard let originalOwnerUserId = originalOwnerUserId
       else {
+        changeUpdateButton(enable: true)
+        
         let alert = UIAlertController(title: "Error", message: "Original owner user id not provided.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
@@ -267,6 +280,8 @@ class TradeHomeVC: UIViewController {
     }
     
     guard let dealId = dealId else {
+      changeUpdateButton(enable: true)
+      
       let alert = UIAlertController(title: "Error", message: "Deal id not provided.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -275,6 +290,8 @@ class TradeHomeVC: UIViewController {
     }
     
     guard let newAnotherId = anotherUserId else {
+      changeUpdateButton(enable: true)
+      
       let alert = UIAlertController(title: "Error", message: "New another user id not provided.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -283,6 +300,8 @@ class TradeHomeVC: UIViewController {
     }
     
     guard let tradeDetailVC = tradeDetailVC else {
+      changeUpdateButton(enable: true)
+      
       let alert = UIAlertController(title: "Error", message: "Trade Detail View Controller doesn't exist.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
@@ -291,10 +310,10 @@ class TradeHomeVC: UIViewController {
     }
     
     let newOwnerProduces = tradeDetailVC.myProduces.filter { return $0.1 > 0 }
-    let newAnotherProduces = tradeDetailVC.anotherProduces.filter { return $0.1 > 0 }
+    let newAnotherProduces = tradeDetailVC.anotherProduces.filter { return $0.1 > 0 }    
     
-    print(newOwnerProduces.count)
-    print(newAnotherProduces.count)
+    print(newOwnerProduces)
+    print(newAnotherProduces)
     
     var transactionMethod = tradeStatusVC?.transactionMethod
     
@@ -319,15 +338,15 @@ class TradeHomeVC: UIViewController {
 //        break
 //      }
 //    }
-//    
-//    print(invalidUpdate)
-//    
-//    if invalidUpdate {
-//      let alert = UIAlertController(title: "Error", message: "Some of the items you want to trade has zero units.", preferredStyle: .alert)
-//      alert.addAction(UIAlertAction(title: "OK", style: .default))
-//      present(alert, animated: true)
-//      return
-//    }
+    
+    if newOwnerProduces.count <= 0 ||
+        newAnotherProduces.count <= 0
+    {
+      let alert = UIAlertController(title: "Error", message: "You need to trade at least one or more items.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
 
     
     DispatchQueue.main.async {
@@ -347,6 +366,7 @@ class TradeHomeVC: UIViewController {
       originalAnotherProducesCount: originalAnotherProducesCount
     ) { [weak self] (error) in
       DispatchQueue.main.async {
+        self?.changeUpdateButton(enable: true)
         SVProgressHUD.dismiss()
         self?.dismiss(animated: true)
       }
@@ -564,7 +584,7 @@ class TradeHomeVC: UIViewController {
 //      chatButtonBottomConstraint.isActive = true
 //      chatButtonTopConstraint.isActive = false
       
-      processButton.setTitle("UPDATE", for: .normal)
+      processButton.setTitle("CHANGE", for: .normal)
 //      processButtonContainerView.isHidden = false
       
       view.layoutIfNeeded()

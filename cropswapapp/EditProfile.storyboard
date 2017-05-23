@@ -85,7 +85,7 @@
         <scene sceneID="l4r-Ml-4xF">
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="96M-wg-yq7" customClass="EditProfileChildVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="So6-x3-HwK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="So6-x3-HwK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -81,7 +81,7 @@
         <scene sceneID="PyO-xq-Z8h">
             <objects>
                 <tableViewController id="Vsk-L1-Hua" customClass="AddProduceChildVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BlK-iX-n6e">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BlK-iX-n6e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -506,6 +506,7 @@
                         <outlet property="categoriesTableView" destination="lnZ-sp-jFs" id="gRg-qb-Mw3"/>
                         <outlet property="categoriesViewBottomConstraint" destination="C0Y-f7-eyk" id="66l-TR-hHc"/>
                         <outlet property="chooseCategoryTextField" destination="5VF-SU-Rra" id="lZu-Zq-R45"/>
+                        <outlet property="choosePictureButton" destination="rHb-nc-haZ" id="iBb-7j-h79"/>
                         <outlet property="csDescriptionTextView" destination="iqv-LO-CPI" id="E8E-id-fqZ"/>
                         <outlet property="deletePictureButton" destination="jDA-s3-qUG" id="0Q0-fV-Zbm"/>
                         <outlet property="firstCell" destination="KPu-H7-PAf" id="of1-WQ-KB3"/>
@@ -522,6 +523,7 @@
                         <outlet property="stateLabelView" destination="j53-1O-7Gd" id="1GD-B5-iAG"/>
                         <outlet property="stateLabelViewConstraint" destination="Hre-Yx-pLK" id="A83-6x-WiJ"/>
                         <outlet property="tagsCollectionView" destination="KY5-T9-dsX" id="58u-sm-AHq"/>
+                        <outlet property="takePictureButton" destination="Jtv-wH-dZE" id="0I7-KE-LTN"/>
                         <outlet property="thirdCell" destination="hCV-a2-rCm" id="qJY-s0-XYe"/>
                         <segue destination="8Uk-UP-lpU" kind="presentation" identifier="AddProduceChildToCamera" id="9Ml-En-jg9"/>
                         <segue destination="KyQ-HF-oYT" kind="presentation" identifier="AddProduceChildToRetakeCamera" id="Glj-la-deW"/>
