@@ -36,7 +36,7 @@ struct ProduceWanted {
 
 extension ProduceWanted {
   
-  static let refDatabase = FIRDatabase.database().reference()
+  static let refDatabase = CSFirebase.refDatabase
   static let refDatabaseProduceTypes = refDatabase.child("produce-types")
   static let refDatabaseProducesWanted = refDatabase.child("produces-wanted")
   

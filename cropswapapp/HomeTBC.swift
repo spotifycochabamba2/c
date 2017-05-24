@@ -12,8 +12,33 @@ import UserNotifications
 
 class HomeTBC: UITabBarController {
   
+  var label = UILabel(frame: CGRect(x: 10, y: -10, width: 20, height: 20))
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    label.layer.borderColor = UIColor.clear.cgColor
+    label.layer.borderWidth = 2
+    label.layer.cornerRadius = label.bounds.size.height / 2
+    label.textAlignment = .center
+    label.layer.masksToBounds = true
+    label.font = UIFont(name: "Montserrat-Light", size: 13)
+    label.textColor = .white
+    label.backgroundColor = UIColor.red
+    label.text = "80"
+    
+    let tradeListTabBarItem = tabBar.items?[1]
+    
+    print(tradeListTabBarItem)
+    
+    let tabBarFont = UIFont(name: "Montserrat-Light", size: 13)
+    
+    let tabBarAttributesDictionary: [String: AnyObject]? = [
+      NSForegroundColorAttributeName: UIColor.white,
+      NSFontAttributeName: tabBarFont!
+    ]
+    
+    tradeListTabBarItem?.setBadgeTextAttributes(tabBarAttributesDictionary, for: .normal)
     
     navigationBarIsHidden = true
     
@@ -101,7 +126,21 @@ class HomeTBC: UITabBarController {
     tabBar.tintColor = UIColor.cropswapRed
     tabBar.unselectedItemTintColor = UIColor.hexStringToUIColor(hex: "#bbbbbb")
     tabBar.barTintColor = .white
-    tabBar.isTranslucent = true    
+    tabBar.isTranslucent = true
+    
+    if let userId = User.currentUser?.uid {
+      _ = CSNotification.listenTradeNotifications(byUserId: userId, completion: { (counter) in
+        DispatchQueue.main.async {
+          if counter <= 0 {
+            tradeListTabBarItem?.badgeValue = nil
+            UIApplication.shared.applicationIconBadgeNumber = 0
+          } else {
+            tradeListTabBarItem?.badgeValue = "\(counter)"
+            UIApplication.shared.applicationIconBadgeNumber = counter
+          }
+        }
+      })
+    }
   }
   
   func logoutNotification() {

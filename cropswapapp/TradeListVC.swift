@@ -59,6 +59,8 @@ class TradeListVC: UIViewController {
 //        }
 //      })
       
+      
+      
       SVProgressHUD.show()
       _ = Deal.getDeals(byUserId: userId, completion: { [weak self] (deals) in
         self?.dataGotFromServer = true
@@ -91,7 +93,6 @@ class TradeListVC: UIViewController {
       }
     }
   }
-  
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Storyboard.TradeListToTradeDetail {

@@ -33,9 +33,68 @@ struct CSNotification {
 }
 
 extension CSNotification {
-  static let refDatabase = FIRDatabase.database().reference()
+  static let refDatabase = CSFirebase.refDatabase
   static let refDatabaseNotifications = refDatabase.child("notifications")
+  
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
+  
+  static func saveOrUpdateTradeNotification(
+    byUserId userId: String,
+    dealId: String,
+    field: String, // chat or trade
+    withValue value: Int,
+    completion: @escaping (NSError?) -> Void
+  ) -> Void {
+    
+    let refDatabaseUserNotification = refDatabaseNotifications
+                                        .child(userId)
+                                        .child(dealId)
+    var values = [String: Any]()
+    values[field] = value
+    
+    refDatabaseUserNotification.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+      completion(error as NSError?)
+    }
+  }
+  
+  static func listenTradeNotifications(
+    byUserId userId: String,
+    completion: @escaping (Int) -> Void
+  ) -> UInt {
+    let refDatabaseUserNotification = refDatabaseNotifications
+                                      .child(userId)
+    
+    return refDatabaseUserNotification.observe(.value) { (snap: FIRDataSnapshot) in
+      var totalTradeNotifications = 0
+      
+      if snap.exists() {
+        print(snap.children.allObjects.count)
+        if let children = snap.children.allObjects as? [FIRDataSnapshot] {
+          
+          print(children.count)
+          
+          for dictionary in children {
+            if let child = dictionary.value as? [String: Any] {
+              print(child)
+              let chat = child["chat"] as? Int ?? 0
+              let trade = child["trade"] as? Int ?? 0
+              
+              print(chat)
+              print(trade)
+              
+              let value = (chat + trade) > 0 ? 1 : 0
+              print(value)
+              
+              totalTradeNotifications += value
+            }
+          }
+        }
+        
+      }
+      
+      completion(totalTradeNotifications)
+    }
+  }
   
   static func listenChatNotifications(
     byUserId userId: String,
@@ -144,14 +203,20 @@ extension CSNotification {
     andUserId userId: String,
     completion: @escaping (NSError?) -> Void
   ) {
-//    let refDatabaseNotification = refDatabaseNotifications.child(dealId)
-//    let refDatabaseNotificationUser = refDatabaseNotification.child(userId)
-    
     let refDatabaseNotification = refDatabaseUserDeals.child(userId)
     let refDatabaseNotificationUser = refDatabaseNotification.child(dealId)
     
     var values = [String: Any]()
     values["chat"] = 0
+    
+    saveOrUpdateTradeNotification(
+      byUserId: userId,
+      dealId: dealId,
+      field: "chat",
+      withValue: 0
+    ) { (error) in
+      print(error)
+    }
     
     refDatabaseNotificationUser.updateChildValues(values, withCompletionBlock: { (error: Error?, ref: FIRDatabaseReference) in
       completion(error as? NSError)
@@ -163,9 +228,6 @@ extension CSNotification {
     andUserId userId: String,
     completion: @escaping (NSError?) -> Void
   ) {
-//    let refDatabaseNotification = refDatabaseNotifications.child(dealId)
-//    let refDatabaseNotificationUser = refDatabaseNotification.child(userId)
-    
     let refDatabaseNotification = refDatabaseUserDeals.child(userId)
     let refDatabaseNotificationUser = refDatabaseNotification.child(dealId)
     
@@ -180,10 +242,6 @@ extension CSNotification {
         currentData.value = notification
         return FIRTransactionResult.success(withValue: currentData)
       } else {
-//        var values = [String: Any]()
-//        values["chat"] = 1
-//        
-//        currentData.value = values
         return FIRTransactionResult.success(withValue: currentData)
       }
     }) { (error, commited, snap) in
@@ -198,14 +256,20 @@ extension CSNotification {
     andUserId userId: String,
     completion: @escaping (NSError?) -> Void
   ) {
-//    let refDatabaseNotification = refDatabaseNotifications.child(dealId)
-//    let refDatabaseNotificationUser = refDatabaseNotification.child(userId)
-    
     let refDatabaseNotification = refDatabaseUserDeals.child(userId)
     let refDatabaseNotificationUser = refDatabaseNotification.child(dealId)
     
     var values = [String: Any]()
     values["trade"] = 0
+    
+    saveOrUpdateTradeNotification(
+      byUserId: userId,
+      dealId: dealId,
+      field: "trade",
+      withValue: 0
+    ) { (error) in
+        print(error)
+    }
     
     refDatabaseNotificationUser.updateChildValues(values, withCompletionBlock: { (error: Error?, ref: FIRDatabaseReference) in
       completion(error as? NSError)
@@ -217,12 +281,8 @@ extension CSNotification {
     andUserId userId: String,
     completion: @escaping (NSError?) -> Void
   ) {
-//    let refDatabaseNotification = refDatabaseNotifications.child(dealId)
-//    let refDatabaseNotificationUser = refDatabaseNotification.child(userId)
-    
     let refDatabaseNotification = refDatabaseUserDeals.child(userId)
     let refDatabaseNotificationUser = refDatabaseNotification.child(dealId)
-    
     
     var values = [String: Any]()
     values["trade"] = 1

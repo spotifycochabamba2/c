@@ -43,7 +43,7 @@ struct Message {
 }
 
 extension Message {
-  static let refDatabase = FIRDatabase.database().reference()
+  static let refDatabase = CSFirebase.refDatabase
   static let refChat = refDatabase.child("chat")
   
   
@@ -83,6 +83,15 @@ extension Message {
           print(error)
         }
       )
+      
+      CSNotification.saveOrUpdateTradeNotification(
+        byUserId: receiverId,
+        dealId: dealId,
+        field: "chat",
+        withValue: 1,
+        completion: { (error) in
+          print(error)
+      })
       
       completion(error as NSError?)
     })

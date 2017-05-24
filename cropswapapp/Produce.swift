@@ -165,7 +165,7 @@ struct Produce {
 
 extension Produce {
   
-  static var refDatabase = FIRDatabase.database().reference()
+  static var refDatabase = CSFirebase.refDatabase
   static var refStorage = FIRStorage.storage().reference()
   
   static var refDetails = refDatabase.child("details-tags")

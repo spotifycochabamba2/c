@@ -52,6 +52,7 @@
 		692E7AF21E97183F001ABF36 /* ProduceContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692E7AF11E97183F001ABF36 /* ProduceContainerVC.swift */; };
 		6932B9D01E7AC51D001626F2 /* ProduceWanted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932B9CF1E7AC51D001626F2 /* ProduceWanted.swift */; };
 		6934322A1ED32AC2005C2B48 /* ProduceImageZoomableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693432291ED32AC2005C2B48 /* ProduceImageZoomableVC.swift */; };
+		6934322C1ED4D7D9005C2B48 /* CSFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6934322B1ED4D7D9005C2B48 /* CSFirebase.swift */; };
 		693DFA071E92D48F00C2FD6C /* EditProfileChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693DFA061E92D48F00C2FD6C /* EditProfileChildVC.swift */; };
 		6945B5D41E39306300AA0799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945B5D31E39306300AA0799 /* AppDelegate.swift */; };
 		6945B5D91E39306300AA0799 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6945B5D71E39306300AA0799 /* Intro.storyboard */; };
@@ -179,6 +180,7 @@
 		692E7AF11E97183F001ABF36 /* ProduceContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceContainerVC.swift; sourceTree = "<group>"; };
 		6932B9CF1E7AC51D001626F2 /* ProduceWanted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceWanted.swift; sourceTree = "<group>"; };
 		693432291ED32AC2005C2B48 /* ProduceImageZoomableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceImageZoomableVC.swift; sourceTree = "<group>"; };
+		6934322B1ED4D7D9005C2B48 /* CSFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSFirebase.swift; sourceTree = "<group>"; };
 		693DFA061E92D48F00C2FD6C /* EditProfileChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileChildVC.swift; sourceTree = "<group>"; };
 		6945B5D01E39306300AA0799 /* cropswapapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cropswapapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6945B5D31E39306300AA0799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				69B6855F1EAAC06D003C8188 /* Message.swift */,
 				691282371EAFD8BC0053290B /* Offer.swift */,
 				698241981EC366E900F9B37D /* CSNotification.swift */,
+				6934322B1ED4D7D9005C2B48 /* CSFirebase.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				691B6B0D1ECF38FE00FAC876 /* PhotoViewerVC.swift in Sources */,
 				69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */,
 				691FE0FF1E60EAFC0031DAA0 /* CameraView.swift in Sources */,
+				6934322C1ED4D7D9005C2B48 /* CSFirebase.swift in Sources */,
 				691ED5ED1E451DCE005F6E2A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

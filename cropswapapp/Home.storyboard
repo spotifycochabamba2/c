@@ -369,7 +369,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WUk-um-lDf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="FEED" image="tabbar-feed-icon" id="shO-ID-cOq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="b2w-Tq-pkH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="b2w-Tq-pkH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -388,7 +388,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fEZ-2d-pmC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="TRADE LIST" image="tabbar-tradelist-icon" id="N1W-op-OmG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="svb-oy-dne">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="svb-oy-dne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -417,7 +417,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AcQ-h1-s9h" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="MY GARDEN" image="tabbar-mygarden-icon" id="sfo-rT-94Y"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wgq-bm-bXk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Wgq-bm-bXk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -446,7 +446,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gw8-XH-bzP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="MY PROFILE" image="tabbar-myprofile-icon" id="Ani-PX-fVM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pFf-9X-IC3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pFf-9X-IC3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -474,7 +474,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hW7-Np-1pw" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ruq-yt-eiK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ruq-yt-eiK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -492,7 +492,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OPg-9X-Fxe" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uPl-Gw-we3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uPl-Gw-we3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -135,7 +135,7 @@ enum HowFinalized: String {
 
 extension Deal {
   
-  static var refDatabase = FIRDatabase.database().reference()
+  static var refDatabase = CSFirebase.refDatabase
   static var refDatabaseDeals = refDatabase.child("deals")
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
   static var refDatabaseUserToUserDeals = refDatabase.child("user-to-user-deals")

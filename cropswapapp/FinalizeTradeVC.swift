@@ -26,11 +26,12 @@ class FinalizeTradeVC: UIViewController {
   var isFirstOptionSelected = false {
     didSet {
       if isFirstOptionSelected {
-        firstOptionImageView.image = UIImage(named: "icon-tag-selected")
-        firstOptionView.layer.borderColor = UIColor.red.cgColor
+        firstOptionImageView.image = UIImage(named: "illdrive-color-image")
+//        firstOptionView.layer.borderColor = UIColor.red.cgColor
       } else {
-        firstOptionImageView.image = UIImage(named: "icon-tag-not-selected")
-        firstOptionView.layer.borderColor = UIColor.clear.cgColor
+        firstOptionImageView.image = UIImage(named: "illdrive-gray-image")
+//        firstOptionImageView.image = UIImage(named: "icon-tag-not-selected")
+//        firstOptionView.layer.borderColor = UIColor.clear.cgColor
       }
     }
   }
@@ -38,11 +39,11 @@ class FinalizeTradeVC: UIViewController {
   var isSecondOptionSelected = false {
     didSet {
       if isSecondOptionSelected {
-        secondOptionImageView.image = UIImage(named: "icon-tag-selected")
-        secondOptionView.layer.borderColor = UIColor.red.cgColor
+        secondOptionImageView.image = UIImage(named: "youdrive-color-image")
+//        secondOptionView.layer.borderColor = UIColor.red.cgColor
       } else {
-        secondOptionImageView.image = UIImage(named: "icon-tag-not-selected")
-        secondOptionView.layer.borderColor = UIColor.clear.cgColor
+        secondOptionImageView.image = UIImage(named: "youdrive-gray-image")
+//        secondOptionView.layer.borderColor = UIColor.clear.cgColor
       }
     }
   }
@@ -50,11 +51,11 @@ class FinalizeTradeVC: UIViewController {
   var isThirdOptionSelected = false {
     didSet {
       if isThirdOptionSelected {
-        thirdOptionImageView.image = UIImage(named: "icon-tag-selected")
-        thirdOptionView.layer.borderColor = UIColor.red.cgColor
+        thirdOptionImageView.image = UIImage(named: "letsmeet-color-image")
+//        thirdOptionView.layer.borderColor = UIColor.red.cgColor
       } else {
-        thirdOptionImageView.image = UIImage(named: "icon-tag-not-selected")
-        thirdOptionView.layer.borderColor = UIColor.clear.cgColor
+        thirdOptionImageView.image = UIImage(named: "letsmeet-gray-image")
+//        thirdOptionView.layer.borderColor = UIColor.clear.cgColor
       }
     }
   }

@@ -71,7 +71,7 @@ struct Offer {
 
 extension Offer {
   
-  static var refDatabase = FIRDatabase.database().reference()
+  static var refDatabase = CSFirebase.refDatabase
   static var refDatabaseOffers = refDatabase.child("offers")  
   
   static func makeAnotherOffer(

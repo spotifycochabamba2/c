@@ -129,7 +129,7 @@ extension User {
 
 extension User {
   
-  static var refDatabase = FIRDatabase.database().reference()
+  static var refDatabase = CSFirebase.refDatabase
   static var refDatabaseUsers = refDatabase.child("users")
   
   static var refDatabaseProducesByUser = refDatabase.child("produces-by-user")
@@ -781,6 +781,14 @@ extension User {
   ) {
     
     let url = "\(Constants.Server.stringURL)send-deal-push"
+    
+    CSNotification.saveOrUpdateTradeNotification(
+      byUserId: anotherUserId,
+      dealId: dealId,
+      field: "trade",
+      withValue: 1) { (error) in
+        print(error)
+    }
     
     var data = [String: Any]()
     data["ownerUserId"] = ownerUserId

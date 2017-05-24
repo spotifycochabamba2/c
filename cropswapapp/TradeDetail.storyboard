@@ -579,13 +579,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPN-Z0-W3i">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkC-3u-d4I">
-                                        <string key="text">How will finalize
-this cropswap?</string>
-                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WD2-VY-p4n">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" id="WRH-r5-IC2"/>
@@ -606,102 +599,75 @@ this cropswap?</string>
                                             <action selector="acceptButtonTouched" destination="cY4-M6-F3J" eventType="touchUpInside" id="foS-3S-UPM"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RsN-92-kEp">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xsp-xs-f2p">
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Lc-YH-Y8h">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RsN-92-kEp">
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="stv-rK-t8D">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="rkC-3u-d4I">
+                                                        <string key="text">How will finalize
+this cropswap?</string>
+                                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Lc-YH-Y8h">
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-tag-not-selected" translatesAutoresizingMaskIntoConstraints="NO" id="3bJ-dK-k42">
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="14" id="Wcr-Ja-Ftr"/>
-                                                                    <constraint firstAttribute="height" constant="14" id="fbZ-3C-lhx"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'll drive!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-dr-U9a">
-                                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illdrive-gray-image" translatesAutoresizingMaskIntoConstraints="NO" id="D7V-GV-xAH"/>
                                                         </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="57b-4Y-JNN"/>
-                                                    <constraint firstItem="stv-rK-t8D" firstAttribute="leading" secondItem="7Lc-YH-Y8h" secondAttribute="leading" constant="15" id="CP9-CT-RVs"/>
-                                                    <constraint firstAttribute="trailing" secondItem="stv-rK-t8D" secondAttribute="trailing" id="dE0-Lf-QT9"/>
-                                                    <constraint firstItem="stv-rK-t8D" firstAttribute="centerY" secondItem="7Lc-YH-Y8h" secondAttribute="centerY" id="pIy-9v-sIA"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H01-ge-AmL">
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uo9-8m-xo2">
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="D7V-GV-xAH" secondAttribute="bottom" id="4vC-hf-Ne1"/>
+                                                            <constraint firstItem="D7V-GV-xAH" firstAttribute="top" secondItem="7Lc-YH-Y8h" secondAttribute="top" id="up2-eT-m0l"/>
+                                                            <constraint firstItem="D7V-GV-xAH" firstAttribute="leading" secondItem="7Lc-YH-Y8h" secondAttribute="leading" id="wg5-X0-n3x"/>
+                                                            <constraint firstAttribute="trailing" secondItem="D7V-GV-xAH" secondAttribute="trailing" id="x1a-5B-XWY"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H01-ge-AmL">
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-tag-not-selected" translatesAutoresizingMaskIntoConstraints="NO" id="dQF-R3-YTh">
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="14" id="vUg-Gh-cjF"/>
-                                                                    <constraint firstAttribute="height" constant="14" id="xJf-8u-8QU"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You drive, I'll tip!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHV-TQ-5mb">
-                                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youdrive-gray-image" translatesAutoresizingMaskIntoConstraints="NO" id="Fph-cQ-a25"/>
                                                         </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstItem="uo9-8m-xo2" firstAttribute="leading" secondItem="H01-ge-AmL" secondAttribute="leading" constant="15" id="7kC-63-Ouk"/>
-                                                    <constraint firstItem="uo9-8m-xo2" firstAttribute="centerY" secondItem="H01-ge-AmL" secondAttribute="centerY" id="9A6-mY-g7i"/>
-                                                    <constraint firstAttribute="height" constant="50" id="Bdp-9V-BZX"/>
-                                                    <constraint firstAttribute="trailing" secondItem="uo9-8m-xo2" secondAttribute="trailing" id="Vjq-kH-5tU"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4fg-m4-EYB">
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-mk-07b">
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Fph-cQ-a25" firstAttribute="leading" secondItem="H01-ge-AmL" secondAttribute="leading" id="365-jJ-omf"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Fph-cQ-a25" secondAttribute="bottom" id="Dtg-fj-999"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Fph-cQ-a25" secondAttribute="trailing" id="eih-Ts-Kfh"/>
+                                                            <constraint firstItem="Fph-cQ-a25" firstAttribute="top" secondItem="H01-ge-AmL" secondAttribute="top" id="fRK-wO-ZF1"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4fg-m4-EYB">
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-tag-not-selected" translatesAutoresizingMaskIntoConstraints="NO" id="SmM-FU-ntl">
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="14" id="ncp-RB-hNE"/>
-                                                                    <constraint firstAttribute="width" constant="14" id="vHE-RX-ePI"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's meet halfway!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzR-xc-4Nr">
-                                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="letsmeet-gray-image" translatesAutoresizingMaskIntoConstraints="NO" id="gPJ-iZ-ngl"/>
                                                         </subviews>
-                                                    </stackView>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstItem="gPJ-iZ-ngl" firstAttribute="leading" secondItem="4fg-m4-EYB" secondAttribute="leading" id="731-8z-rHv"/>
+                                                            <constraint firstAttribute="trailing" secondItem="gPJ-iZ-ngl" secondAttribute="trailing" id="Gco-So-XYy"/>
+                                                            <constraint firstAttribute="bottom" secondItem="gPJ-iZ-ngl" secondAttribute="bottom" id="H6h-Ev-mT3"/>
+                                                            <constraint firstItem="gPJ-iZ-ngl" firstAttribute="top" secondItem="4fg-m4-EYB" secondAttribute="top" id="nY0-Cs-bmv"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstItem="VJ6-mk-07b" firstAttribute="centerY" secondItem="4fg-m4-EYB" secondAttribute="centerY" id="Cu6-aU-SUo"/>
-                                                    <constraint firstAttribute="height" constant="50" id="Zle-ck-FfU"/>
-                                                    <constraint firstAttribute="trailing" secondItem="VJ6-mk-07b" secondAttribute="trailing" id="aVF-Pa-yWG"/>
-                                                    <constraint firstItem="VJ6-mk-07b" firstAttribute="leading" secondItem="4fg-m4-EYB" secondAttribute="leading" constant="15" id="qQ6-AR-Yzh"/>
-                                                </constraints>
-                                            </view>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="RsN-92-kEp" firstAttribute="top" secondItem="Xsp-xs-f2p" secondAttribute="top" constant="10" id="UjX-zX-v5S"/>
+                                            <constraint firstItem="RsN-92-kEp" firstAttribute="leading" secondItem="Xsp-xs-f2p" secondAttribute="leading" id="WSa-aI-Paf"/>
+                                            <constraint firstAttribute="bottom" secondItem="RsN-92-kEp" secondAttribute="bottom" id="krR-2P-R8f"/>
+                                            <constraint firstAttribute="trailing" secondItem="RsN-92-kEp" secondAttribute="trailing" id="vi6-dw-pQj"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="WD2-VY-p4n" firstAttribute="leading" secondItem="WPN-Z0-W3i" secondAttribute="leading" constant="8" id="App-6e-K03"/>
                                     <constraint firstAttribute="bottom" secondItem="YaK-8n-JJg" secondAttribute="bottom" constant="8" id="C7h-z7-ZBZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xsp-xs-f2p" secondAttribute="trailing" id="FgU-TP-w1Z"/>
                                     <constraint firstAttribute="bottom" secondItem="WD2-VY-p4n" secondAttribute="bottom" constant="8" id="N9T-zc-d0g"/>
-                                    <constraint firstAttribute="height" constant="520" id="RTI-yW-N2p"/>
-                                    <constraint firstItem="RsN-92-kEp" firstAttribute="leading" secondItem="WPN-Z0-W3i" secondAttribute="leading" constant="15" id="Sx4-00-elL"/>
-                                    <constraint firstItem="rkC-3u-d4I" firstAttribute="top" secondItem="WPN-Z0-W3i" secondAttribute="top" constant="15" id="WJA-5T-5pu"/>
-                                    <constraint firstAttribute="trailing" secondItem="RsN-92-kEp" secondAttribute="trailing" constant="15" id="c2l-h0-cTf"/>
-                                    <constraint firstItem="rkC-3u-d4I" firstAttribute="leading" secondItem="WPN-Z0-W3i" secondAttribute="leading" id="gTP-S9-FzA"/>
-                                    <constraint firstAttribute="trailing" secondItem="rkC-3u-d4I" secondAttribute="trailing" id="rIe-aa-gt1"/>
+                                    <constraint firstItem="YaK-8n-JJg" firstAttribute="top" secondItem="Xsp-xs-f2p" secondAttribute="bottom" constant="4" id="NBA-QG-o0H"/>
+                                    <constraint firstItem="Xsp-xs-f2p" firstAttribute="top" secondItem="WPN-Z0-W3i" secondAttribute="top" id="fO5-T5-t6Q"/>
+                                    <constraint firstItem="Xsp-xs-f2p" firstAttribute="leading" secondItem="WPN-Z0-W3i" secondAttribute="leading" id="jg5-2Y-Dc1"/>
                                     <constraint firstAttribute="trailing" secondItem="YaK-8n-JJg" secondAttribute="trailing" constant="8" id="sN3-jH-MZV"/>
-                                    <constraint firstItem="RsN-92-kEp" firstAttribute="top" secondItem="rkC-3u-d4I" secondAttribute="bottom" constant="15" id="wGz-gf-XUF"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -709,27 +675,29 @@ this cropswap?</string>
                         <constraints>
                             <constraint firstItem="oiF-D8-iGa" firstAttribute="leading" secondItem="oLH-8a-53j" secondAttribute="leading" id="5ng-Cp-SD1"/>
                             <constraint firstItem="CEA-gZ-s1f" firstAttribute="top" secondItem="oiF-D8-iGa" secondAttribute="bottom" id="81f-xB-tUY"/>
+                            <constraint firstItem="WPN-Z0-W3i" firstAttribute="top" secondItem="hjt-Vd-qqJ" secondAttribute="bottom" id="AXc-iz-80l"/>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="trailing" secondItem="oLH-8a-53j" secondAttribute="trailingMargin" id="Z9p-zo-6cO"/>
                             <constraint firstItem="oiF-D8-iGa" firstAttribute="top" secondItem="oLH-8a-53j" secondAttribute="top" id="cJR-Cd-lwt"/>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="centerY" secondItem="oLH-8a-53j" secondAttribute="centerY" id="eQF-hB-zdg"/>
+                            <constraint firstItem="CEA-gZ-s1f" firstAttribute="top" secondItem="WPN-Z0-W3i" secondAttribute="bottom" id="fNX-Ox-g6P"/>
                             <constraint firstAttribute="trailing" secondItem="oiF-D8-iGa" secondAttribute="trailing" id="jfV-ji-pBq"/>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="leading" secondItem="oLH-8a-53j" secondAttribute="leadingMargin" id="qim-gZ-vTr"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="oiF-D8-iGa" id="LY8-RH-gGV"/>
-                        <outlet property="firstOptionImageView" destination="3bJ-dK-k42" id="Arj-Ce-13F"/>
+                        <outlet property="firstOptionImageView" destination="D7V-GV-xAH" id="1Nt-wZ-D7F"/>
                         <outlet property="firstOptionView" destination="7Lc-YH-Y8h" id="AGF-vj-xfH"/>
-                        <outlet property="secondOptionImageView" destination="dQF-R3-YTh" id="h1Z-QZ-fta"/>
+                        <outlet property="secondOptionImageView" destination="Fph-cQ-a25" id="Q5Y-xb-QpT"/>
                         <outlet property="secondOptionView" destination="H01-ge-AmL" id="0JY-hC-HHi"/>
-                        <outlet property="thirdOptionImageView" destination="SmM-FU-ntl" id="Yw7-OY-3s2"/>
+                        <outlet property="thirdOptionImageView" destination="gPJ-iZ-ngl" id="N6c-Jz-uba"/>
                         <outlet property="thirdOptionView" destination="4fg-m4-EYB" id="oIp-nK-dVW"/>
                         <outlet property="upperView" destination="WPN-Z0-W3i" id="sZg-qq-Bic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5D-zp-0ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2164" y="-1102"/>
+            <point key="canvasLocation" x="2164" y="-1102.3988005997003"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ktE-0f-biX">
@@ -772,7 +740,9 @@ this cropswap?</string>
         <image name="accept-trade-icon" width="67" height="67"/>
         <image name="cancel-trade-icon" width="67" height="67"/>
         <image name="icon-button-chat" width="67" height="67"/>
-        <image name="icon-tag-not-selected" width="14" height="14"/>
+        <image name="illdrive-gray-image" width="315" height="148"/>
+        <image name="letsmeet-gray-image" width="315" height="148"/>
         <image name="waiting-answer-icon" width="34" height="34"/>
+        <image name="youdrive-gray-image" width="315" height="148"/>
     </resources>
 </document>
