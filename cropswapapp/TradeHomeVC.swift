@@ -450,6 +450,8 @@ class TradeHomeVC: UIViewController {
     
     if let dealState = dealState {
       switch dealState {
+      case .tradeDeleted:
+        fallthrough
       case .tradeCancelled:
         fallthrough
       case .tradeCompleted:
@@ -524,6 +526,8 @@ class TradeHomeVC: UIViewController {
       
       if let dealState = dealState {
         switch dealState {
+        case .tradeDeleted:
+          fallthrough
         case .tradeCancelled:
           fallthrough
         case .tradeCompleted:
@@ -557,6 +561,8 @@ class TradeHomeVC: UIViewController {
       
       if let dealState = dealState {
         switch dealState {
+        case .tradeDeleted:
+          fallthrough
         case .tradeCancelled:
           fallthrough
         case .tradeCompleted:
@@ -608,6 +614,8 @@ class TradeHomeVC: UIViewController {
       
       if let dealState = dealState {
         switch dealState {
+        case .tradeDeleted:
+          fallthrough
         case .tradeCancelled:
           fallthrough
         case .tradeCompleted:

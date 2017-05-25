@@ -124,6 +124,8 @@ class TradeListCell: UITableViewCell {
           stateLabel.layer.masksToBounds = true
         case .tradeInProcess:
           break
+        case .tradeDeleted:
+          break
         case .tradeCancelled:
           stateLabel.textColor = .white
           stateLabel.backgroundColor = UIColor.hexStringToUIColor(hex: "#f83f39")

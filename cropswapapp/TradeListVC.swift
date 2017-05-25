@@ -66,7 +66,12 @@ class TradeListVC: UIViewController {
         self?.dataGotFromServer = true
         
         SVProgressHUD.dismiss()
-        self?.deals = deals
+        self?.deals = deals.filter({ (deal) -> Bool in
+          let dealState = deal["state"] as? String ?? ""
+          
+          return dealState != DealState.tradeDeleted.rawValue
+        })
+        
         DispatchQueue.main.async {
           self?.tradesTableView.reloadData()
         }
@@ -140,6 +145,66 @@ extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
     values["username"] = username
     
     performSegue(withIdentifier: Storyboard.TradeListToProfile, sender: values)
+  }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    let deal = deals[indexPath.row]
+    let dealState = deal["state"] as? String ?? ""
+    
+    return dealState != DealState.tradeCompleted.rawValue
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      print("delete at indexPath.row: \(indexPath.row)")
+      
+      let confirmationAlert = UIAlertController(title: "Confirmation", message: "Are you sure to delete this trade?", preferredStyle: .alert)
+      confirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak self] (_) in
+//        self?.tradesTableView.beginUpdates()
+        DispatchQueue.main.async {
+          self?.tradesTableView.setEditing(false, animated: true)
+//          self?.tradesTableView.setEditing(true, animated: false)
+        }
+//        self?.tradesTableView.endUpdates()
+      }))
+      
+      confirmationAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] (_) in
+        if indexPath.row >= 0 {
+          if let deal = self?.deals[indexPath.row] {
+            let ownerUserId = User.currentUser?.uid ?? ""
+            let anotherUserId = deal["anotherUserId"] as? String ?? ""
+            let dealId = deal["id"] as? String ?? ""
+            
+            DispatchQueue.main.async {
+              SVProgressHUD.show()
+            }
+            
+            Deal.deleteDeal(
+              byOwnerUserId: ownerUserId,
+              andAnotherUserId: anotherUserId,
+              andDealId: dealId,
+              completion: { (error) in
+                DispatchQueue.main.async {
+                  SVProgressHUD.dismiss()
+                }
+                
+                if let errorDesc = error?.localizedDescription {
+                  let errorAlert = UIAlertController(title: "Error", message: errorDesc, preferredStyle: .alert)
+                  errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                  
+                  DispatchQueue.main.async {
+                    self?.present(errorAlert, animated: true)
+                  }
+                } else {
+//                  self?.deals.remove(at: indexPath.row)
+                }
+            })
+          }
+        }
+      }))
+      
+      present(confirmationAlert, animated: true)
+    }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

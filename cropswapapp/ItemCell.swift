@@ -19,6 +19,8 @@ class ItemCell: UICollectionViewCell {
       if isAnotherProduce {
         if let dealState = dealState {
           switch dealState {
+          case .tradeDeleted:
+            fallthrough
           case .tradeCancelled:
             fallthrough
           case .tradeCompleted:
@@ -55,6 +57,8 @@ class ItemCell: UICollectionViewCell {
       } else {
         if let dealState = dealState {
           switch dealState {
+          case .tradeDeleted:
+            fallthrough
           case .tradeCancelled:
             fallthrough
           case .tradeCompleted:

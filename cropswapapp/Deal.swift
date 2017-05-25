@@ -125,6 +125,7 @@ enum DealState: String {
   case tradeInProcess = "Trade in process"
   case tradeCompleted = "Trade completed"
   case tradeCancelled = "Trade cancelled"
+  case tradeDeleted = "Trade deleted"
 }
 
 enum HowFinalized: String {
@@ -139,6 +140,99 @@ extension Deal {
   static var refDatabaseDeals = refDatabase.child("deals")
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
   static var refDatabaseUserToUserDeals = refDatabase.child("user-to-user-deals")
+  
+  static func deleteDeal(
+    byOwnerUserId ownerUserId: String,
+    andAnotherUserId anotherUserId: String,
+    andDealId dealId: String,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    
+    var dealFound: Deal?
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        Deal.getDeal(byId: dealId, completion: { (result) in
+          switch result {
+          case .success(let deal):
+            dealFound = deal
+            done(nil)
+          case .fail(let error):
+            done(error)
+          }
+        })
+      },
+      
+      { done in
+        if let deal = dealFound {
+          let dealState = deal.state ?? DealState.tradeDeleted
+          
+          CSNotification.saveOrUpdateTradeNotification(
+            byUserId: ownerUserId,
+            dealId: dealId,
+            field: "trade",
+            withValue: 0) { (error) in
+              print(error)
+          }
+          
+          if case DealState.tradeDeleted = dealState {
+            //empty
+
+            
+            done(nil)
+          } else{
+            Deal.cancelDeal(
+              ownerUserId: anotherUserId,
+              anotherUserId: ownerUserId,
+              dealId: dealId,
+              dateUpdated: Date(),
+              notifyUser: false,
+              completion: { (error) in
+                
+                if error == nil {
+                  let refDatabaseDeal = refDatabaseDeals.child(dealId)
+                  
+                  var values = [String: Any]()
+                  values["state"] = DealState.tradeDeleted.rawValue
+                  
+                  refDatabaseDeal.updateChildValues(values)
+                }
+                
+                done(error)
+            })
+          }
+        } else {
+          done(nil)
+        }
+      },
+      
+      { done in
+        if dealFound != nil {
+          let refDatabseUserDeal = refDatabaseUserDeals
+                                                  .child(ownerUserId)
+                                                  .child(dealId)
+          
+          var values = [String: Any]()
+          values["state"] = DealState.tradeDeleted.rawValue
+          
+          refDatabseUserDeal.updateChildValues(values)
+        }
+        
+        done(nil)
+      }
+      
+    ]) { (error) in
+      completion(error)
+    }
+    
+    // get current state of deal
+    //   - if state is not deleted
+    //      - call Deal.cancelDeal then
+    //      - set base Deal to deleted
+    //   - set my deal side to deleted
+    // NOTE: Check that in Trade List, deal deleted are not showed.
+  }
   
   static func canUserMakeADeal(
     fromUserId: String,
@@ -190,6 +284,8 @@ extension Deal {
     dealId: String,
     dateUpdated: Date,
     
+    notifyUser: Bool = true,
+    
     completion: @escaping (NSError?) -> Void
   ) {
     
@@ -229,6 +325,10 @@ extension Deal {
     refDatabaseDeal.updateChildValues(valuesForDeal, withCompletionBlock: {
       (error: Error?, ref: FIRDatabaseReference) in
       
+      
+      print(ownerUserId)
+      print(anotherUserId)
+      
       User.sendDealPushNotification(
         ownerUserId: anotherUserId,
         anotherUserId: ownerUserId,
@@ -238,6 +338,14 @@ extension Deal {
           print(error)
       })
       
+      CSNotification.saveOrUpdateTradeNotification(
+        byUserId: ownerUserId,
+        dealId: dealId,
+        field: "trade",
+        withValue: 1) { (error) in
+          print(error)
+      }
+      
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
         andUserId: ownerUserId,
@@ -245,6 +353,59 @@ extension Deal {
           print(error)
         }
       )
+      
+//      if notifyUser {
+//        User.sendDealPushNotification(
+//          ownerUserId: anotherUserId,
+//          anotherUserId: ownerUserId,
+//          dealId: dealId,
+//          dealState: DealState.tradeCancelled.rawValue,
+//          completion: { (error) in
+//            print(error)
+//        })
+//
+//        CSNotification.saveOrUpdateTradeNotification(
+//          byUserId: ownerUserId,
+//          dealId: dealId,
+//          field: "trade",
+//          withValue: 1) { (error) in
+//            print(error)
+//        }
+//        
+//        CSNotification.createOrUpdateTradeNotification(
+//          withDealId: dealId,
+//          andUserId: ownerUserId,
+//          completion: { (error) in
+//            print(error)
+//          }
+//        )
+//      } else {
+//        // testing this part
+//        User.sendDealPushNotification(
+//          ownerUserId: anotherUserId,
+//          anotherUserId: ownerUserId,
+//          dealId: dealId,
+//          dealState: DealState.tradeCancelled.rawValue,
+//          completion: { (error) in
+//            print(error)
+//        })
+//        
+//        CSNotification.saveOrUpdateTradeNotification(
+//          byUserId: ownerUserId,
+//          dealId: dealId,
+//          field: "trade",
+//          withValue: 1) { (error) in
+//            print(error)
+//        }
+//        
+//        CSNotification.createOrUpdateTradeNotification(
+//          withDealId: dealId,
+//          andUserId: ownerUserId,
+//          completion: { (error) in
+//            print(error)
+//          }
+//        )
+//      }
       
       completion(error as NSError?)
     })
@@ -308,6 +469,14 @@ extension Deal {
         completion: { (error) in
           print(error)
       })
+      
+      CSNotification.saveOrUpdateTradeNotification(
+        byUserId: ownerUserId,
+        dealId: dealId,
+        field: "trade",
+        withValue: 1) { (error) in
+          print(error)
+      }
       
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
@@ -482,6 +651,14 @@ extension Deal {
         completion: { (error) in
           print(error)
       })
+      
+      CSNotification.saveOrUpdateTradeNotification(
+        byUserId: anotherId,
+        dealId: dealId,
+        field: "trade",
+        withValue: 1) { (error) in
+          print(error)
+      }
       
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
@@ -828,6 +1005,14 @@ extension Deal {
         completion: { (error) in
           print(error)
       })
+      
+      CSNotification.saveOrUpdateTradeNotification(
+        byUserId: deal.anotherUserId,
+        dealId: dealKey,
+        field: "trade",
+        withValue: 1) { (error) in
+          print(error)
+      }
 
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealKey,

@@ -312,6 +312,8 @@ class TradeStatusVC: UIViewController {
     
     if let dealState = dealState {
       switch dealState {
+      case .tradeDeleted:
+        fallthrough
       case .tradeCancelled:
         statusLabel.textColor = UIColor.hexStringToUIColor(hex: "#f83f39")
         statusLabel.text = dealState.rawValue

@@ -782,14 +782,6 @@ extension User {
     
     let url = "\(Constants.Server.stringURL)send-deal-push"
     
-    CSNotification.saveOrUpdateTradeNotification(
-      byUserId: anotherUserId,
-      dealId: dealId,
-      field: "trade",
-      withValue: 1) { (error) in
-        print(error)
-    }
-    
     var data = [String: Any]()
     data["ownerUserId"] = ownerUserId
     data["anotherUserId"] = anotherUserId

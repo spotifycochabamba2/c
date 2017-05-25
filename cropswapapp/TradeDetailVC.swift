@@ -209,6 +209,8 @@ class TradeDetailVC: UIViewController {
                 fallthrough
               case .tradeCompleted:
                 fallthrough
+              case .tradeDeleted:
+                fallthrough
               case .tradeCancelled:
                 self?.anotherProduces = anotherProduces
                 self?.myProduces = ownerProduces
