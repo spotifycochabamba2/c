@@ -12,6 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import Ax
 
+
 enum ProduceState: String {
   case archived = "archived"
 }
@@ -25,8 +26,10 @@ enum ProducePhotoNumber: String {
 }
 
 enum ProduceStartType: String {
-  case plant
-  case seed
+  case seed = "seed"
+  case plant = "plant"
+  case harvest = "harvest"
+  case other = "other"
 }
 
 enum ProduceMethods: String {

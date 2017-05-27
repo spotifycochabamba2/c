@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,76 +89,229 @@
                         <sections>
                             <tableViewSection id="J7z-fj-7YW">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="300" id="KPu-H7-PAf">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KPu-H7-PAf">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KPu-H7-PAf" id="gAc-53-CcZ">
-                                            <frame key="frameInset" width="375" height="300"/>
+                                            <frame key="frameInset" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropswap-gray-logo" translatesAutoresizingMaskIntoConstraints="NO" id="oMb-gh-EhN">
-                                                    <color key="backgroundColor" red="0.88235294119999996" green="0.89019607840000003" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="SOi-7A-n0b">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dzv-Rs-Wst">
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDA-s3-qUG">
-                                                            <state key="normal" image="delete-picture-icon"/>
-                                                            <connections>
-                                                                <action selector="deletePictureButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="fe5-Ip-IJW"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-nc-haZ">
-                                                            <state key="normal" image="pick-picture-icon"/>
-                                                            <connections>
-                                                                <action selector="choosePictureButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="qKm-mc-MJs"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtv-wH-dZE">
-                                                            <state key="normal" image="take-picture-icon"/>
-                                                            <connections>
-                                                                <action selector="takePictureButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="t6L-2b-h8Y"/>
-                                                            </connections>
-                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Fb-gz-GJK">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="61h-6t-EMy">
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-j0-aWS">
+                                                                    <color key="backgroundColor" red="0.80392156862745101" green="0.81960784313725488" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="3ZG-j0-aWS" secondAttribute="height" multiplier="65:67" id="SFc-ie-G85"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="45"/>
+                                                                    <state key="normal" title="+">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="firstPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="1Gy-uA-oVG"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7d-z6-OIb">
+                                                                    <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="a7d-z6-OIb" secondAttribute="height" multiplier="65:67" id="Hqy-Vb-Uv3"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="45"/>
+                                                                    <state key="normal" title="+">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="secondPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="Jpp-Bi-ZQc"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcA-8v-lEk">
+                                                                    <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="hcA-8v-lEk" secondAttribute="height" multiplier="65:67" id="L2K-wl-ncB"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="45"/>
+                                                                    <state key="normal" title="+">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="thirdPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="Np3-Bc-hlv"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-K5-lw8">
+                                                                    <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="8Vw-K5-lw8" secondAttribute="height" multiplier="65:67" id="daQ-UC-QBU"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="45"/>
+                                                                    <state key="normal" title="+">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="fourthPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="FdB-dd-ZcZ"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6O-ra-X9n">
+                                                                    <color key="backgroundColor" red="0.80392156859999997" green="0.81960784310000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="E6O-ra-X9n" secondAttribute="height" multiplier="65:67" id="nWG-CI-BJM"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="45"/>
+                                                                    <state key="normal" title="+">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="fifthPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="dYR-ok-nI9"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2D-Xb-z68">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDR-5y-ZLZ">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="h9b-Zc-L7X"/>
-                                                        <constraint firstAttribute="height" constant="40" id="oOR-sF-gTD"/>
+                                                        <constraint firstAttribute="height" constant="30" id="UTs-IX-V7y"/>
+                                                        <constraint firstAttribute="width" constant="40" id="lVN-jg-Ns5"/>
                                                     </constraints>
-                                                    <state key="normal" image="icon-right-arrow"/>
                                                     <connections>
-                                                        <action selector="nextButtonTouched:" destination="Vsk-L1-Hua" eventType="touchUpInside" id="1q3-mB-y0y"/>
+                                                        <action selector="firstPhotoDeleteButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="ii8-Pp-vfg"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kw3-We-uHl">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xc-hp-tEW">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="0hq-sH-t0v"/>
-                                                        <constraint firstAttribute="width" constant="40" id="ySP-cw-juA"/>
+                                                        <constraint firstAttribute="width" constant="40" id="HiU-90-ANc"/>
+                                                        <constraint firstAttribute="height" constant="30" id="M8M-5C-7Gz"/>
                                                     </constraints>
-                                                    <state key="normal" image="icon-left-arrow"/>
                                                     <connections>
-                                                        <action selector="previousButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="YbZ-b2-m30"/>
+                                                        <action selector="secondPhotoDeleteButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="z5h-gi-DO7"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tg-kG-svG">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="1Xz-VG-ruW"/>
+                                                        <constraint firstAttribute="height" constant="30" id="DjH-3H-ARt"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="thirdPhotoDeleteButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="764-15-dXG"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9p-3z-hnH">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="DyJ-J3-FAr"/>
+                                                        <constraint firstAttribute="height" constant="30" id="o0z-rq-3Yx"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="fourthPhotoDeleteButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="0od-TY-PVD"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-rY-23o">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5S4-Ti-gQG"/>
+                                                        <constraint firstAttribute="width" constant="40" id="dbA-aS-XxW"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="fifthPhotoDeleteButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="4Ym-mT-EPB"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equis-icon" translatesAutoresizingMaskIntoConstraints="NO" id="1ne-AJ-ncL"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equis-icon" translatesAutoresizingMaskIntoConstraints="NO" id="keb-F7-ht0"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equis-icon" translatesAutoresizingMaskIntoConstraints="NO" id="eyw-et-KMz"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equis-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZyF-VF-QWN"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equis-icon" translatesAutoresizingMaskIntoConstraints="NO" id="4wd-Hu-3wy"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCE-V2-U05">
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i72-p1-Vwr">
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hhX-uz-wBO">
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdy-dO-u3a">
+                                                                            <state key="normal" image="take-picture-icon2"/>
+                                                                            <connections>
+                                                                                <action selector="takePhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="NJi-EU-2bJ"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cL-f1-B9D">
+                                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                            <state key="normal" title="TAKE PHOTO">
+                                                                                <color key="titleColor" red="0.97254901960784312" green="0.24705882352941178" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            </state>
+                                                                            <connections>
+                                                                                <action selector="takePhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="6Mb-Jl-qgA"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KEE-nW-ncO">
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5l-rU-QhW">
+                                                                            <state key="normal" image="choose-picture-icon"/>
+                                                                            <connections>
+                                                                                <action selector="uploadPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="Qjn-8c-OoH"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVO-8i-i2h">
+                                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                            <state key="normal" title="UPLOAD PHOTO">
+                                                                                <color key="titleColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            </state>
+                                                                            <connections>
+                                                                                <action selector="uploadPhotoButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="abe-Fl-Sxn"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="99" id="H9q-IA-xx9"/>
+                                                        <constraint firstItem="i72-p1-Vwr" firstAttribute="centerX" secondItem="BCE-V2-U05" secondAttribute="centerX" id="RaS-iM-3GD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="i72-p1-Vwr" secondAttribute="bottom" id="fxV-mG-7Up"/>
+                                                        <constraint firstItem="i72-p1-Vwr" firstAttribute="top" secondItem="BCE-V2-U05" secondAttribute="top" id="mKG-0g-jO6"/>
+                                                        <constraint firstAttribute="width" constant="193" id="xvV-Wf-tV4"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="f2D-Xb-z68" firstAttribute="centerY" secondItem="oMb-gh-EhN" secondAttribute="centerY" id="2PB-iI-rRM"/>
-                                                <constraint firstAttribute="trailing" secondItem="oMb-gh-EhN" secondAttribute="trailing" id="4OS-yk-d3T"/>
-                                                <constraint firstAttribute="bottom" secondItem="oMb-gh-EhN" secondAttribute="bottom" id="5OO-kK-vf0"/>
-                                                <constraint firstAttribute="bottom" secondItem="SOi-7A-n0b" secondAttribute="bottom" id="9K6-ZY-WTv"/>
-                                                <constraint firstItem="SOi-7A-n0b" firstAttribute="centerX" secondItem="oMb-gh-EhN" secondAttribute="centerX" id="RDK-KZ-ayX"/>
-                                                <constraint firstItem="f2D-Xb-z68" firstAttribute="trailing" secondItem="gAc-53-CcZ" secondAttribute="trailingMargin" id="ST7-ix-n2Q"/>
-                                                <constraint firstItem="kw3-We-uHl" firstAttribute="leading" secondItem="gAc-53-CcZ" secondAttribute="leadingMargin" id="SXe-C7-zjZ"/>
-                                                <constraint firstItem="oMb-gh-EhN" firstAttribute="top" secondItem="gAc-53-CcZ" secondAttribute="top" id="cDV-6A-4m8"/>
-                                                <constraint firstItem="oMb-gh-EhN" firstAttribute="leading" secondItem="gAc-53-CcZ" secondAttribute="leading" id="gid-6J-gTP"/>
-                                                <constraint firstItem="kw3-We-uHl" firstAttribute="centerY" secondItem="oMb-gh-EhN" secondAttribute="centerY" id="l4t-Ob-uyy"/>
+                                                <constraint firstItem="sDR-5y-ZLZ" firstAttribute="trailing" secondItem="3ZG-j0-aWS" secondAttribute="trailing" id="5OT-qS-PGI"/>
+                                                <constraint firstItem="1ne-AJ-ncL" firstAttribute="trailing" secondItem="sDR-5y-ZLZ" secondAttribute="trailing" constant="-10" id="5hf-ls-jsk"/>
+                                                <constraint firstItem="8Xc-hp-tEW" firstAttribute="trailing" secondItem="a7d-z6-OIb" secondAttribute="trailing" id="5qc-37-e6J"/>
+                                                <constraint firstItem="ZyF-VF-QWN" firstAttribute="top" secondItem="h9p-3z-hnH" secondAttribute="top" constant="10" id="Bin-9d-P4O"/>
+                                                <constraint firstItem="9tg-kG-svG" firstAttribute="trailing" secondItem="hcA-8v-lEk" secondAttribute="trailing" id="E8D-qI-oWY"/>
+                                                <constraint firstItem="BCE-V2-U05" firstAttribute="centerX" secondItem="gAc-53-CcZ" secondAttribute="centerX" id="Ekg-7s-FZI"/>
+                                                <constraint firstItem="sDR-5y-ZLZ" firstAttribute="top" secondItem="3ZG-j0-aWS" secondAttribute="top" id="Kan-Tv-fed"/>
+                                                <constraint firstItem="keb-F7-ht0" firstAttribute="top" secondItem="a7d-z6-OIb" secondAttribute="top" constant="10" id="Ljb-Xp-vgY"/>
+                                                <constraint firstItem="keb-F7-ht0" firstAttribute="trailing" secondItem="a7d-z6-OIb" secondAttribute="trailing" constant="-10" id="LmV-j0-nme"/>
+                                                <constraint firstItem="BCE-V2-U05" firstAttribute="centerY" secondItem="gAc-53-CcZ" secondAttribute="centerY" id="Mtg-Bn-5XG"/>
+                                                <constraint firstItem="1ne-AJ-ncL" firstAttribute="top" secondItem="sDR-5y-ZLZ" secondAttribute="top" constant="10" id="Nxg-hX-nVa"/>
+                                                <constraint firstItem="yU6-rY-23o" firstAttribute="trailing" secondItem="E6O-ra-X9n" secondAttribute="trailing" id="Qax-g9-OTu"/>
+                                                <constraint firstItem="yU6-rY-23o" firstAttribute="top" secondItem="E6O-ra-X9n" secondAttribute="top" id="Ygu-YU-fTs"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dzv-Rs-Wst" secondAttribute="trailing" constant="8" id="bek-Pg-XFh"/>
+                                                <constraint firstItem="eyw-et-KMz" firstAttribute="trailing" secondItem="9tg-kG-svG" secondAttribute="trailing" constant="-10" id="hic-rQ-IuV"/>
+                                                <constraint firstItem="dzv-Rs-Wst" firstAttribute="leading" secondItem="gAc-53-CcZ" secondAttribute="leadingMargin" constant="8" id="hr8-3T-cBP"/>
+                                                <constraint firstItem="ZyF-VF-QWN" firstAttribute="trailing" secondItem="h9p-3z-hnH" secondAttribute="trailing" constant="-10" id="jF0-Uz-1vj"/>
+                                                <constraint firstItem="9tg-kG-svG" firstAttribute="top" secondItem="hcA-8v-lEk" secondAttribute="top" id="jSk-43-hDh"/>
+                                                <constraint firstItem="h9p-3z-hnH" firstAttribute="top" secondItem="8Vw-K5-lw8" secondAttribute="top" id="jew-ny-lyP"/>
+                                                <constraint firstItem="4wd-Hu-3wy" firstAttribute="top" secondItem="E6O-ra-X9n" secondAttribute="top" constant="10" id="lA6-Dr-hoY"/>
+                                                <constraint firstItem="4wd-Hu-3wy" firstAttribute="trailing" secondItem="E6O-ra-X9n" secondAttribute="trailing" constant="-10" id="rWg-gy-Ybk"/>
+                                                <constraint firstItem="dzv-Rs-Wst" firstAttribute="top" secondItem="gAc-53-CcZ" secondAttribute="topMargin" constant="10" id="s4m-QX-YXn"/>
+                                                <constraint firstItem="8Xc-hp-tEW" firstAttribute="top" secondItem="a7d-z6-OIb" secondAttribute="top" id="vz4-tC-OQ6"/>
+                                                <constraint firstItem="h9p-3z-hnH" firstAttribute="trailing" secondItem="8Vw-K5-lw8" secondAttribute="trailing" id="yvJ-g4-Nuo"/>
+                                                <constraint firstItem="eyw-et-KMz" firstAttribute="top" secondItem="9tg-kG-svG" secondAttribute="top" constant="10" id="zX8-OK-0CD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="3PP-Bb-KFl">
-                                        <rect key="frame" x="0.0" y="300" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="110" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3PP-Bb-KFl" id="eio-6V-bQi">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -193,7 +347,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="hCV-a2-rCm">
-                                        <rect key="frame" x="0.0" y="380" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="190" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCV-a2-rCm" id="vJX-Xt-5Sg">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -201,7 +355,7 @@
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-ZH-WlT">
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ie-fN-9SC">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ie-fN-9SC">
                                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -215,7 +369,7 @@
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="Vsk-L1-Hua" id="UsW-3b-uaF"/>
-                                                                <outlet property="nextNavigationField" destination="xtE-q9-b7W" id="BNJ-cV-ddT"/>
+                                                                <outlet property="nextNavigationField" destination="dxf-YS-XaK" id="Nmf-PQ-tYy"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -229,7 +383,7 @@
                                                                     <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mjc-u2-kdE" id="Np1-ZR-Aq7">
-                                                                        <frame key="frameInset" width="375" height="43.5"/>
+                                                                        <frame key="frameInset" width="375" height="43"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </tableViewCellContentView>
                                                                 </tableViewCell>
@@ -256,15 +410,99 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="FDj-u5-TaT">
+                                        <rect key="frame" x="0.0" y="270" width="375" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FDj-u5-TaT" id="mIE-sI-xXG">
+                                            <frame key="frameInset" width="375" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nXh-z1-WDc">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10H-53-Ixk">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="HlN-ZQ-Cbn">
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4H-6p-cCh">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="U4H-6p-cCh" secondAttribute="height" multiplier="86:81" id="neX-SL-LSP"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="seed-type-icon"/>
+                                                                    <connections>
+                                                                        <action selector="seedButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="XRW-L9-sJl"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIE-GX-eeF">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="AIE-GX-eeF" secondAttribute="height" multiplier="86:81" id="7Yl-Je-JqV"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="plant-type-icon"/>
+                                                                    <connections>
+                                                                        <action selector="plantButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="PKa-Pw-g7f"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFk-M2-Gp7">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="dFk-M2-Gp7" secondAttribute="height" multiplier="86:81" id="Q1a-iy-kXC"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="harvest-type-icon"/>
+                                                                    <connections>
+                                                                        <action selector="harvestButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="rOK-xg-Qrh"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1m-Ow-vei">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="O1m-Ow-vei" secondAttribute="height" multiplier="86:81" id="fbM-L9-Pzn"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="other-type-icon"/>
+                                                                    <connections>
+                                                                        <action selector="otherButtonTouched" destination="Vsk-L1-Hua" eventType="touchUpInside" id="1pR-JX-ks2"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nXh-z1-WDc" firstAttribute="top" secondItem="mIE-sI-xXG" secondAttribute="topMargin" id="RNf-KO-W8j"/>
+                                                <constraint firstItem="nXh-z1-WDc" firstAttribute="leading" secondItem="mIE-sI-xXG" secondAttribute="leadingMargin" constant="8" id="aQa-4U-aR0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nXh-z1-WDc" secondAttribute="trailing" constant="8" id="riy-0F-gUg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="nXI-fI-Igz">
-                                        <rect key="frame" x="0.0" y="460" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="390" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nXI-fI-Igz" id="X5O-aB-j2E">
                                             <frame key="frameInset" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9xD-wf-xzb">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9xD-wf-xzb">
                                                     <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-Xi-i7m">
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTo-5F-azH">
+                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dxf-YS-XaK">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="68F-98-60A"/>
+                                                                    </constraints>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="Vsk-L1-Hua" id="2cM-u3-GXb"/>
+                                                                        <outlet property="nextNavigationField" destination="xtE-q9-b7W" id="ZA9-ys-gqj"/>
+                                                                    </connections>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mhv-xH-H8K">
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fo-ui-9Cg">
@@ -281,28 +519,7 @@
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                     <connections>
                                                                         <outlet property="delegate" destination="Vsk-L1-Hua" id="3RB-F9-SZA"/>
-                                                                        <outlet property="nextNavigationField" destination="dxf-YS-XaK" id="v7F-W0-jcI"/>
-                                                                    </connections>
-                                                                </textField>
-                                                            </subviews>
-                                                        </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-Xi-i7m">
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price per unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTo-5F-azH">
-                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
-                                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dxf-YS-XaK">
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="68F-98-60A"/>
-                                                                    </constraints>
-                                                                    <nil key="textColor"/>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
-                                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                                    <connections>
-                                                                        <outlet property="delegate" destination="Vsk-L1-Hua" id="2cM-u3-GXb"/>
-                                                                        <outlet property="nextNavigationField" destination="iqv-LO-CPI" id="ewe-pH-uB3"/>
+                                                                        <outlet property="nextNavigationField" destination="FiC-2c-nrA" id="zA1-hS-Eqr"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -317,8 +534,47 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="cpG-Fn-8oI">
+                                        <rect key="frame" x="0.0" y="470" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cpG-Fn-8oI" id="KGY-Bq-gyf">
+                                            <frame key="frameInset" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-2h-oye">
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xfb-yg-HmU">
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price per unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2M-SP-les">
+                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FiC-2c-nrA">
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="sXn-ce-em9"/>
+                                                                    </constraints>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="Vsk-L1-Hua" id="u39-4c-cbQ"/>
+                                                                        <outlet property="nextNavigationField" destination="iqv-LO-CPI" id="ijL-Sb-NI0"/>
+                                                                    </connections>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gvw-2h-oye" firstAttribute="centerY" secondItem="KGY-Bq-gyf" secondAttribute="centerY" id="OcA-lF-rBb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gvw-2h-oye" secondAttribute="trailing" constant="8" id="m4a-az-fFb"/>
+                                                <constraint firstItem="gvw-2h-oye" firstAttribute="leading" secondItem="KGY-Bq-gyf" secondAttribute="leadingMargin" constant="8" id="qxA-ex-yYq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="7Rf-Xn-Qen">
-                                        <rect key="frame" x="0.0" y="540" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="550" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rf-Xn-Qen" id="qpr-Ex-HdD">
                                             <frame key="frameInset" width="375" height="110"/>
@@ -380,7 +636,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="300" id="goI-gR-ooc">
-                                        <rect key="frame" x="0.0" y="650" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="660" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="goI-gR-ooc" id="htL-Mt-TWe">
                                             <frame key="frameInset" width="375" height="300"/>
@@ -461,7 +717,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="7gg-UR-0T5">
-                                        <rect key="frame" x="0.0" y="950" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="960" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7gg-UR-0T5" id="NjG-Nf-mag">
                                             <frame key="frameInset" width="375" height="150"/>
@@ -506,34 +762,59 @@
                         <outlet property="categoriesTableView" destination="lnZ-sp-jFs" id="gRg-qb-Mw3"/>
                         <outlet property="categoriesViewBottomConstraint" destination="C0Y-f7-eyk" id="66l-TR-hHc"/>
                         <outlet property="chooseCategoryTextField" destination="5VF-SU-Rra" id="lZu-Zq-R45"/>
-                        <outlet property="choosePictureButton" destination="rHb-nc-haZ" id="iBb-7j-h79"/>
                         <outlet property="csDescriptionTextView" destination="iqv-LO-CPI" id="E8E-id-fqZ"/>
-                        <outlet property="deletePictureButton" destination="jDA-s3-qUG" id="0Q0-fV-Zbm"/>
+                        <outlet property="fifthPhotoButton" destination="E6O-ra-X9n" id="xHa-Pr-kH8"/>
+                        <outlet property="fifthPhotoDeleteButton" destination="yU6-rY-23o" id="Vao-ka-WcE"/>
+                        <outlet property="fifthPhotoDeleteImageView" destination="4wd-Hu-3wy" id="gbF-oX-sKB"/>
                         <outlet property="firstCell" destination="KPu-H7-PAf" id="of1-WQ-KB3"/>
-                        <outlet property="nextButton" destination="f2D-Xb-z68" id="wwS-dX-BFk"/>
+                        <outlet property="firstPhotoButton" destination="3ZG-j0-aWS" id="14h-oC-0Ao"/>
+                        <outlet property="firstPhotoDeleteButton" destination="sDR-5y-ZLZ" id="hLl-xk-YiB"/>
+                        <outlet property="firstPhotoDeleteImageView" destination="1ne-AJ-ncL" id="iOZ-GU-tz5"/>
+                        <outlet property="fourthPhotoButton" destination="8Vw-K5-lw8" id="Pfk-yG-44t"/>
+                        <outlet property="fourthPhotoDeleteButton" destination="h9p-3z-hnH" id="D45-bG-nfU"/>
+                        <outlet property="fourthPhotoDeleteImageView" destination="ZyF-VF-QWN" id="0sC-1J-kgb"/>
+                        <outlet property="harvestTypeButton" destination="dFk-M2-Gp7" id="SFu-Vx-Fzq"/>
+                        <outlet property="otherTypeButton" destination="O1m-Ow-vei" id="QND-fi-bCy"/>
+                        <outlet property="photoOptionsView" destination="BCE-V2-U05" id="Vri-AQ-lOz"/>
                         <outlet property="pickProductsButton" destination="l08-s3-qjK" id="d0p-a4-4iM"/>
                         <outlet property="pickStateButton" destination="kPm-IQ-dPY" id="HRf-BT-ym9"/>
-                        <outlet property="priceUnitLabel" destination="lTo-5F-azH" id="7fF-tV-Nbf"/>
-                        <outlet property="priceUnitTextField" destination="dxf-YS-XaK" id="TJf-4H-Wgu"/>
+                        <outlet property="plantTypeButton" destination="AIE-GX-eeF" id="I4A-P6-QFR"/>
+                        <outlet property="priceUnitTextField" destination="FiC-2c-nrA" id="63u-Nh-dp9"/>
                         <outlet property="produceNameTextField" destination="ve9-tJ-CwL" id="ruz-Rw-twU"/>
                         <outlet property="quantityTextField" destination="xtE-q9-b7W" id="TlY-pt-aQc"/>
+                        <outlet property="secondPhotoButton" destination="a7d-z6-OIb" id="TZG-e3-hKI"/>
+                        <outlet property="secondPhotoDeleteButton" destination="8Xc-hp-tEW" id="sKc-4o-SJy"/>
+                        <outlet property="secondPhotoDeleteImageView" destination="keb-F7-ht0" id="P5y-bE-CoF"/>
+                        <outlet property="seedTypeButton" destination="U4H-6p-cCh" id="QJH-4Y-oic"/>
                         <outlet property="shadowViewForPickProductsButton" destination="s90-fC-Hxg" id="Bip-Ta-cGo"/>
                         <outlet property="shadowViewForPickStateButton" destination="AIf-nB-T9j" id="6CU-Mg-2Kg"/>
                         <outlet property="stateLabel" destination="gRB-Ns-lZE" id="zHC-zl-AD2"/>
                         <outlet property="stateLabelView" destination="j53-1O-7Gd" id="1GD-B5-iAG"/>
                         <outlet property="stateLabelViewConstraint" destination="Hre-Yx-pLK" id="A83-6x-WiJ"/>
                         <outlet property="tagsCollectionView" destination="KY5-T9-dsX" id="58u-sm-AHq"/>
-                        <outlet property="takePictureButton" destination="Jtv-wH-dZE" id="0I7-KE-LTN"/>
                         <outlet property="thirdCell" destination="hCV-a2-rCm" id="qJY-s0-XYe"/>
+                        <outlet property="thirdPhotoButton" destination="hcA-8v-lEk" id="aQK-pI-UqN"/>
+                        <outlet property="thirdPhotoDeleteButton" destination="9tg-kG-svG" id="TED-fQ-6BN"/>
+                        <outlet property="thirdPhotoDeleteImageView" destination="eyw-et-KMz" id="xW7-VO-CzG"/>
+                        <outlet property="unitTextField" destination="dxf-YS-XaK" id="Qfz-cI-gPp"/>
                         <segue destination="8Uk-UP-lpU" kind="presentation" identifier="AddProduceChildToCamera" id="9Ml-En-jg9"/>
                         <segue destination="KyQ-HF-oYT" kind="presentation" identifier="AddProduceChildToRetakeCamera" id="Glj-la-deW"/>
                         <segue destination="Aks-LN-Op2" kind="presentation" identifier="AddProduceChildToChooseDetails" modalPresentationStyle="overCurrentContext" id="Lg2-Hn-JKN"/>
                         <segue destination="qdU-RN-6Rw" kind="presentation" identifier="AddProduceChildToChooseState" id="wVe-7d-Kb7"/>
+                        <segue destination="abZ-oC-3DF" kind="presentation" identifier="AddProduceChildToImageDetail" id="Etr-dl-kCT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifv-0N-Slk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="901.60000000000002" y="-160.11994002998503"/>
+        </scene>
+        <!--ProduceImageZoomableVC-->
+        <scene sceneID="Qqz-Kd-kUa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Produce" referencedIdentifier="ProduceImageZoomableVC" id="abZ-oC-3DF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zbd-wT-Pxo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1760" y="-267"/>
         </scene>
         <!--CameraVC-->
         <scene sceneID="Sv8-wF-B9d">
@@ -569,11 +850,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cropswap-gray-logo" width="106" height="105"/>
-        <image name="delete-picture-icon" width="67" height="67"/>
-        <image name="icon-left-arrow" width="23" height="33"/>
-        <image name="icon-right-arrow" width="23" height="33"/>
-        <image name="pick-picture-icon" width="69" height="69"/>
-        <image name="take-picture-icon" width="69" height="69"/>
+        <image name="choose-picture-icon" width="18" height="12"/>
+        <image name="equis-icon" width="8" height="8"/>
+        <image name="harvest-type-icon" width="81" height="81"/>
+        <image name="other-type-icon" width="81" height="81"/>
+        <image name="plant-type-icon" width="81" height="81"/>
+        <image name="seed-type-icon" width="81" height="81"/>
+        <image name="take-picture-icon2" width="18" height="14"/>
     </resources>
 </document>

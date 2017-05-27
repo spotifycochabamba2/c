@@ -9,6 +9,12 @@
 import UIKit
 
 class ProduceImageZoomableVC: UIViewController {
+  
+  @IBOutlet weak var closeButton: UIButton!
+  
+  var hideCloseButton = true
+  var customImage: UIImage?
+  
   @IBOutlet weak var produceScrollView: UIScrollView!
   @IBOutlet weak var produceImageView: UIImageView! {
     didSet {
@@ -16,15 +22,27 @@ class ProduceImageZoomableVC: UIViewController {
       produceImageView.backgroundColor = .black
     }
   }
+  
+  @IBAction func closeButtonTouched() {
+    dismiss(animated: true)
+  }
+  
 }
 
 extension ProduceImageZoomableVC {
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print(hideCloseButton)
+    closeButton.isHidden = hideCloseButton
     view.backgroundColor = .black
     produceScrollView.minimumZoomScale = 1.0
     produceScrollView.maximumZoomScale = 6.0
     produceScrollView.contentSize = produceImageView.frame.size
+    
+    if let image = customImage {
+      produceImageView.image = image
+    }
   }
 }
 
@@ -33,3 +51,19 @@ extension ProduceImageZoomableVC: UIScrollViewDelegate {
     return produceImageView
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,17 +12,19 @@ import Ax
 
 class ProduceChildVC: UITableViewController {
   
+  @IBOutlet weak var imagesPageControl: UIPageControl!
+  
   @IBOutlet weak var relatedProducesCell: UITableViewCell!
   
   var pageContainerTapGesture: UITapGestureRecognizer!
   
   @IBOutlet weak var userNameStackView: UIStackView! {
     didSet {
-      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userNameStackViewTapped))
-      tapGesture.numberOfTapsRequired = 1
-      tapGesture.numberOfTouchesRequired = 1
-      userNameStackView.isUserInteractionEnabled = true
-      userNameStackView.addGestureRecognizer(tapGesture)
+//      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userNameStackViewTapped))
+//      tapGesture.numberOfTapsRequired = 1
+//      tapGesture.numberOfTouchesRequired = 1
+//      userNameStackView.isUserInteractionEnabled = true
+//      userNameStackView.addGestureRecognizer(tapGesture)
     }
   }
   
@@ -30,21 +32,31 @@ class ProduceChildVC: UITableViewController {
   
   var enableMakeDealButton: () -> Void = { }
   
-  func userNameStackViewTapped() {
+  func showProfileFromChild() {
     performSegue(withIdentifier: Storyboard.ProduceChildToProfileChild, sender: nil)
   }
   
-  @IBOutlet weak var gardenerLabel: UILabel! {
+//  @IBOutlet weak var gardenerLabel: UILabel! {
+//    didSet {
+//      gardenerLabel.text = ""
+//    }
+//  }
+  
+  @IBOutlet weak var produceNameLabel: UILabel! {
     didSet {
-      gardenerLabel.text = ""
+      produceNameLabel.text = ""
     }
   }
   
-  @IBOutlet weak var addressGardenerLabel: UILabel! {
-    didSet {
-      addressGardenerLabel.text = ""
-    }
-  }
+  @IBOutlet weak var perQuantityTypeLabel: UILabel!
+  @IBOutlet weak var quantityTypeAvailableLabel: UILabel!
+  
+  
+//  @IBOutlet weak var addressGardenerLabel: UILabel! {
+//    didSet {
+//      addressGardenerLabel.text = ""
+//    }
+//  }
   
   @IBOutlet weak var descriptionProduceTextView: UITextView! {
     didSet {
@@ -180,9 +192,15 @@ class ProduceChildVC: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    descriptionProduceTextView.isScrollEnabled = false
     
+    imagesPageControl.isUserInteractionEnabled = false
+    imagesPageControl.transform = CGAffineTransform(scaleX: 2, y: 2)
+    
+    
+    tableView.estimatedRowHeight = 80
     tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = UITableViewAutomaticDimension
     
     tagFontAttributes = [NSFontAttributeName: montserratFont!]
     
@@ -303,12 +321,26 @@ class ProduceChildVC: UITableViewController {
             self?.produceImagesViewControllers.append(produceImageFive)
           }
           
+          self?.imagesPageControl.numberOfPages = self?.produceImagesViewControllers.count ?? 0
+          self?.imagesPageControl.currentPage = 0
           
-          self?.gardenerLabel.text = "\(produce.ownerUsername)'s Garden"
+          self?.imagesPageControl.currentPageIndicatorTintColor = UIColor.hexStringToUIColor(hex: "#f83f39")
+          self?.imagesPageControl.pageIndicatorTintColor = UIColor.white
+          
+//          @IBOutlet weak var perQuantityTypeLabel: UILabel!
+//          @IBOutlet weak var quantityTypeAvailableLabel: UILabel!
+          
+//          self?.gardenerLabel.text = "\(produce.ownerUsername)'s Garden"
+          
+          self?.perQuantityTypeLabel.text = "Per \(produce.quantityType.capitalized)"
+          
+          self?.quantityTypeAvailableLabel.text = "\(produce.quantityType.capitalized) Available"
+          
           self?.descriptionProduceTextView.text = produce.description
-          
+          self?.produceNameLabel.text = produce.name
           self?.categoryLabel.text = produce.produceType
-          self?.quantityAndTypeLabel.text = "\(produce.quantity) \(produce.quantityType)"
+          self?.quantityAndTypeLabel.text = "\(produce.quantity)"
+          // \(produce.quantityType)
           self?.priceLabel.text = self?.numberFormatter.string(from: NSNumber(value: produce.price))
           self?.enableMakeDealButton()
         }
@@ -367,10 +399,10 @@ extension ProduceChildVC {
         
         isFirstimeLoaded = false
       }
-    } else if indexPath.row == 4 {
+    } else if indexPath.row == 5 {
       print(" willDisplay picky frame: \(relatedProducesCollectionView.frame)")
       print(" willDisplay picky bounds: \(relatedProducesCollectionView.bounds)")
-    } else if indexPath.row == 1 {
+    } else if indexPath.row == 2 {
 
     }
   }
@@ -378,21 +410,50 @@ extension ProduceChildVC {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)
     
-    if indexPath.row == 1 {
-      print("dalmata from heightForRowAt descriptionProduceTextView.frame.size.height: \(descriptionProduceTextView.frame.size.height)")
-      return descriptionProduceTextView.frame.size.height + 54 + 13 + 50
-    } else if indexPath.row == 2 {
+    if indexPath.row == 2 {
+      
+//      return descriptionProduceTextView.frame.size.height + 54 + 13 + 50
+//      descriptionProduceTextView.layoutIfNeeded()
+//      descriptionProduceTextView.layoutManager.allowsNonContiguousLayout = false
+//      descriptionProduceTextView.isScrollEnabled = false
+//      descriptionProduceTextView.sizeToFit()
+      
+//      print("row 2 (description) chinese from descriptionProduceTextView.text: \(descriptionProduceTextView.text)")
+//      
+//      print("row 2 (description) chinese from descriptionProduceTextView.contentSize.height: \(descriptionProduceTextView.contentSize.height)")
+//      
+//      print("row 2 (description) chinese from heightForRowAt descriptionProduceTextView.frame.size.height: \(descriptionProduceTextView.frame.size.height)")
+//            print("row 2 (description) chinese from heightForRowAt descriptionProduceTextView.bounds.size.height: \(descriptionProduceTextView.bounds.size.height)")
+      
+//      let size2 = descriptionProduceTextView.sizeThatFits(CGSize(width: descriptionProduceTextView.frame.width, height: CGFloat(MAXFLOAT)))
+//      print("chinese size2: \(size2)")
+//      
+//      let calculationView = UITextView()
+//      calculationView.attributedText = descriptionProduceTextView.attributedText
+//      let size = calculationView.sizeThatFits(CGSize(width: descriptionProduceTextView.frame.width, height: CGFloat(MAXFLOAT)))
+//      print("chinese size: \(size.height)")
+//      print("chinese size frame.height: \(descriptionProduceTextView.frame.size.height)")
+      
+
+//      return height
+      return descriptionProduceTextView.frame.size.height + 13 + 20 + 10
+      
+//      return UITableViewAutomaticDimension
+//      return UITableView
+//      return 100
+    } else if indexPath.row == 3 {
       if tags.count > 0  {
         tagsCollectionView.collectionViewLayout.invalidateLayout()
         tagsCollectionView.collectionViewLayout.prepare()
         tagsCollectionView.layoutIfNeeded()
         tagsCollectionView.layoutSubviews()
         
-        return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
+        print("row 3 (tags) chinese from heightForRowAt tagsCollectionView.collectionViewLayout.collectionViewContentSize.height: \(tagsCollectionView.collectionViewLayout.collectionViewContentSize.height)")
+        return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height + 10
       } else {
         return 0
       }
-    } else if indexPath.row == 4 {
+    } else if indexPath.row == 5 {
       if relatedProduces.count > 0 {
         relatedProducesCollectionView.collectionViewLayout.invalidateLayout()
         relatedProducesCollectionView.collectionViewLayout.prepare()
@@ -448,7 +509,7 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
     if collectionView === tagsCollectionView {
       let tag = tags[indexPath.row]
       let tagSize = (tag.name as NSString).size(attributes: self.tagFontAttributes!)
-      size = CGSize(width: tagSize.width + 10, height: tagSize.height + 10)
+      size = CGSize(width: tagSize.width + 10, height: tagSize.height + 10) //10
     } else {
       size = CGSize(width: 60, height: 60)
     }
@@ -467,6 +528,7 @@ extension ProduceChildVC: UIPageViewControllerDataSource, UIPageViewControllerDe
   func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     if completed {
       currentIndex = pendingIndex
+      imagesPageControl.currentPage = pendingIndex
     }
   }
   

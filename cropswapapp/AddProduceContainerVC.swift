@@ -82,6 +82,7 @@ class AddProduceContainerVC: UIViewController {
       let images = addProduceChildVC.getProduceImages()
       let produceName = try addProduceChildVC.getProduceName()
       let category = try addProduceChildVC.getProduceCategory()
+      let stateSelected = try addProduceChildVC.getStateSelected()
       let categoryName = category.name
       let quantityType = category.quantityType
       let quantity = try addProduceChildVC.getQuantity()
@@ -90,7 +91,7 @@ class AddProduceContainerVC: UIViewController {
       
       let tags = addProduceChildVC.tagsSelected
       
-      let stateSelected = try addProduceChildVC.getStateSelected()
+      
       
       print("images: \(images)")
       print("produce name: \(produceName)")
@@ -309,11 +310,11 @@ class AddProduceContainerVC: UIViewController {
               quantity: quantity,
               price: price,
               ownerId: ownerId,
-              firstPicURL: firstPicURL,
-              secondPicURL: secondPicURL,
-              thirdPicURL: thirdPicURL,
-              fourthPicURL: fourthPicURL,
-              fifthPicURL: fifthPicURL,
+              firstPicURL: firstPicURL ?? "",
+              secondPicURL: secondPicURL ?? "",
+              thirdPicURL: thirdPicURL ?? "",
+              fourthPicURL: fourthPicURL ?? "",
+              fifthPicURL: fifthPicURL ?? "",
               
               tags: tags.map { return $0 },
               state: stateSelected,

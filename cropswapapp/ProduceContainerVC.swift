@@ -14,6 +14,8 @@ class ProduceContainerVC: UIViewController {
   var isReadOnly = false
   var transactionMethod: String?
   
+  var userImageView: UIImageView!
+  
   @IBOutlet weak var produceChildBottomConstraint: NSLayoutConstraint!
   
   @IBOutlet weak var makeDealView: UIView!
@@ -21,6 +23,29 @@ class ProduceContainerVC: UIViewController {
     didSet {
       makeDealButton.makeMeBordered(borderWidth: 1, cornerRadius: 3)
     }
+  }
+  
+  var showProfileFromChild: (() -> Void)? = { }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    User.getUser(byUserId: produce?.ownerId) { [weak self] (result) in
+      switch result {
+      case .success(let user):
+        if let url = URL(string: user.profilePictureURL ?? "") {
+          DispatchQueue.main.async {
+            self?.userImageView.sd_setImage(with: url)
+          }
+        }
+      case .fail(let error):
+        print(error)
+      }
+    }
+  }
+  
+  func userImageViewTapped() {
+    showProfileFromChild?()
   }
   
   override func viewDidLoad() {
@@ -40,6 +65,28 @@ class ProduceContainerVC: UIViewController {
     
     let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
     leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
+    
+    let userImageViewFrame = CGRect(x: 0, y: 0, width: 40, height: 40)
+    userImageView = UIImageView(frame: userImageViewFrame)
+    userImageView.backgroundColor = .lightGray
+    userImageView.layer.cornerRadius = 40 / 2
+    userImageView.layer.borderWidth = 1
+    userImageView.layer.borderColor = UIColor.clear.cgColor
+    userImageView.layer.masksToBounds = true
+    userImageView.contentMode = .scaleAspectFit
+    
+    let userImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(userImageViewTapped))
+    userImageViewTapGesture.numberOfTapsRequired = 1
+    userImageViewTapGesture.numberOfTouchesRequired = 1
+    userImageView.addGestureRecognizer(userImageViewTapGesture)
+    userImageView.isUserInteractionEnabled = true
+    
+    let userImageViewBar = UIBarButtonItem(customView: userImageView)
+    navigationItem.rightBarButtonItem = userImageViewBar
+    
+    
+//    let rightButtonIcon = setNavIcon(imageName: "delete-button-icon", size: CGSize(width: 42, height: 52), position: .right)
+//    rightButtonIcon.addTarget(self, action: #selector(deleteButtonTouched), for: .touchUpInside)
     
     if let produce = produce {
       let title = "\(produce.name)"
@@ -128,6 +175,8 @@ class ProduceContainerVC: UIViewController {
       produceChildVC = vc
       vc?.produce = produce
       vc?.enableMakeDealButton = enableMakeDealButton
+      showProfileFromChild = vc?.showProfileFromChild
+      print(showProfileFromChild)
     }
   }
   

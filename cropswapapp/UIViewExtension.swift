@@ -24,11 +24,14 @@ extension UIView {
 
   }
   
-  func makeMeBordered(color: UIColor = UIColor.clear) {
+  func makeMeBordered(
+    color: UIColor = UIColor.clear,
+    cornerRadius: CGFloat = 8.0
+  ) {
   
     self.layer.borderColor = color.cgColor
     self.layer.borderWidth = 1.5
-    self.layer.cornerRadius = 8.0
+    self.layer.cornerRadius = cornerRadius
 
   }
   

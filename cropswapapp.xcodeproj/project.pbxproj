@@ -104,6 +104,9 @@
 		69CEE10B1E85AF72004E0725 /* AddProduceChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEE10A1E85AF72004E0725 /* AddProduceChildVC.swift */; };
 		69D7F36A1EC542D400C6A288 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D7F3691EC542D400C6A288 /* ModalViewController.swift */; };
 		69D7F36C1EC551A300C6A288 /* YourLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D7F36B1EC551A300C6A288 /* YourLocationVC.swift */; };
+		69DB63EF1EDA0E5B007D7170 /* ChooseUnit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69DB63EE1EDA0E5B007D7170 /* ChooseUnit.storyboard */; };
+		69DB63F11EDA0E9F007D7170 /* ChooseUnitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB63F01EDA0E9F007D7170 /* ChooseUnitVC.swift */; };
+		69DB63F31EDA0ED0007D7170 /* ChooseUnitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB63F21EDA0ED0007D7170 /* ChooseUnitListVC.swift */; };
 		69EE4AD91E3FCBDC00C95624 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4AD81E3FCBDC00C95624 /* GoogleService-Info.plist */; };
 		69EE4AE71E3FCDE700C95624 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADC1E3FCDE700C95624 /* VarelaRound-Regular.ttf */; };
 		69EE4AE81E3FCDE700C95624 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EE4ADD1E3FCDE700C95624 /* OpenSans-Bold.ttf */; };
@@ -235,6 +238,9 @@
 		69CEE10A1E85AF72004E0725 /* AddProduceChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProduceChildVC.swift; sourceTree = "<group>"; };
 		69D7F3691EC542D400C6A288 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModalViewController.swift; path = ../../../Documents/ModalViewController.swift; sourceTree = "<group>"; };
 		69D7F36B1EC551A300C6A288 /* YourLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourLocationVC.swift; sourceTree = "<group>"; };
+		69DB63EE1EDA0E5B007D7170 /* ChooseUnit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseUnit.storyboard; sourceTree = "<group>"; };
+		69DB63F01EDA0E9F007D7170 /* ChooseUnitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUnitVC.swift; sourceTree = "<group>"; };
+		69DB63F21EDA0ED0007D7170 /* ChooseUnitListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUnitListVC.swift; sourceTree = "<group>"; };
 		69EE4AD81E3FCBDC00C95624 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69EE4ADC1E3FCDE700C95624 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 		69EE4ADD1E3FCDE700C95624 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -492,6 +498,9 @@
 				699838711EA80C520018502D /* ChooseStateListVC.swift */,
 				691B6B0C1ECF38FE00FAC876 /* PhotoViewerVC.swift */,
 				693432291ED32AC2005C2B48 /* ProduceImageZoomableVC.swift */,
+				69DB63EE1EDA0E5B007D7170 /* ChooseUnit.storyboard */,
+				69DB63F01EDA0E9F007D7170 /* ChooseUnitVC.swift */,
+				69DB63F21EDA0ED0007D7170 /* ChooseUnitListVC.swift */,
 			);
 			name = Produce;
 			sourceTree = "<group>";
@@ -758,6 +767,7 @@
 				69EE4AED1E3FCDE700C95624 /* OpenSans-Light.ttf in Resources */,
 				692E7AF01E9716C7001ABF36 /* MakeDeal.storyboard in Resources */,
 				69EE4AEF1E3FCDE700C95624 /* OpenSans-Regular.ttf in Resources */,
+				69DB63EF1EDA0E5B007D7170 /* ChooseUnit.storyboard in Resources */,
 				69EE4AF01E3FCDE700C95624 /* OpenSans-Semibold.ttf in Resources */,
 				692169811E6EDDE70053C0C8 /* ProduceDetail.storyboard in Resources */,
 				690A52211E9EB85A0074DE52 /* DealSubmitted.storyboard in Resources */,
@@ -846,6 +856,7 @@
 				69C4013F1E82028600F5F5D8 /* FeedVC.swift in Sources */,
 				6914F2871EA54B7100142CB8 /* ChooseDetailVC.swift in Sources */,
 				6913AD181E5E41DB002EB1BC /* MyGardenHeaderCell.swift in Sources */,
+				69DB63F31EDA0ED0007D7170 /* ChooseUnitListVC.swift in Sources */,
 				696024ED1E9D80F2006766AF /* ItemCell.swift in Sources */,
 				69CEE1091E85AF36004E0725 /* AddProduceContainerVC.swift in Sources */,
 				6913AD1C1E5F2EED002EB1BC /* AddProduceVC.swift in Sources */,
@@ -871,6 +882,7 @@
 				69EE4AFC1E3FD70900C95624 /* SignupVC.swift in Sources */,
 				69C4013A1E82021600F5F5D8 /* TradeListVC.swift in Sources */,
 				6974BC8E1EA02D7100126732 /* ButtonCircular.swift in Sources */,
+				69DB63F11EDA0E9F007D7170 /* ChooseUnitVC.swift in Sources */,
 				69B6855E1EAA4A93003C8188 /* UIImageViewCircular.swift in Sources */,
 				69C4013C1E82023200F5F5D8 /* ProfileContainerVC.swift in Sources */,
 				69EE4B021E3FE31300C95624 /* UIColorExtension.swift in Sources */,

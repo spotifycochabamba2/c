@@ -86,6 +86,8 @@ struct Storyboard {
   
   static let ProfileContainerToProfileChild = "ProfileContainerToProfileChild"
   static let ProduceChildToProfileChild = "ProduceChildToProfileChild"
+  
+  static let AddProduceChildToImageDetail = "AddProduceChildToImageDetail"
 }
 
 

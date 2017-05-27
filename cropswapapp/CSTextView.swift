@@ -16,7 +16,7 @@ class CSTextView: UITextView {
   func addLineToBottom() {
     bottomLineLayer = CALayer()
     
-    bottomLineLayer?.borderColor = UIColor.black.cgColor
+    bottomLineLayer?.borderColor = UIColor.hexStringToUIColor(hex: "#cacdcf").cgColor
 //    bottomLineLayer?.frame = CGRect(
 //      x: 0,
 //      y: self.frame.size.height - borderWidth,

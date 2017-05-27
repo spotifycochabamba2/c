@@ -15,6 +15,7 @@ class CameraVC: UIViewController {
   
   var pictureTaken: (UIImage, ProducePhotoNumber) -> Void = {_,_ in}
   var pictureTaken2: (UIImage) -> Void = {_ in }
+  var cancelled: () -> Void = {}
 
   @IBOutlet var cameraView: CameraView!
   var cameraController = Camera()
@@ -97,6 +98,7 @@ class CameraVC: UIViewController {
   
   
   @IBAction func cancelButtonTouched() {
+    self.cancelled()
     dismiss(animated: true)
   }
 }
