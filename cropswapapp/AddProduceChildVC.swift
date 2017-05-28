@@ -131,6 +131,8 @@ class AddProduceChildVC: UITableViewController {
   @IBOutlet weak var stateLabelViewConstraint: NSLayoutConstraint!
   let tagCellId = "TagCellId"
   
+  var unitSelected: String?
+  
   var tagsSelected = [(String, Bool, Int, String)]()
   var stateSelected: String? {
     didSet {
@@ -873,6 +875,7 @@ class AddProduceChildVC: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
     let firstCellTapGesture = UITapGestureRecognizer(target: self, action: #selector(firstCellTapped))
     firstCellTapGesture.numberOfTapsRequired = 1
     firstCellTapGesture.numberOfTouchesRequired = 1
@@ -1067,6 +1070,17 @@ class AddProduceChildVC: UITableViewController {
       let vc = segue.destination as? ProduceImageZoomableVC
       vc?.customImage = sender as? UIImage
       vc?.hideCloseButton = false
+    } else if segue.identifier == Storyboard.AddProduceChildToChooseUnit {
+      let vc = segue.destination as? ChooseUnitVC
+      vc?.didSelectUnit = didSelectUnit
+    }
+  }
+  
+  func didSelectUnit(unit: String) {
+    self.unitSelected = unit
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.unitTextField.text = unit
     }
   }
   
@@ -1153,6 +1167,14 @@ class AddProduceChildVC: UITableViewController {
       return produceTypeSelected
     } else {
       throw ValidationFormError.error(Constants.ErrorMessages.typeOfProduceNotProvided)
+    }
+  }
+  
+  func getUnitSelected() throws -> String {
+    if let unitSelected = unitSelected {
+      return unitSelected
+    } else {
+      throw ValidationFormError.error(Constants.ErrorMessages.unitNotSelected)
     }
   }
 
@@ -1487,6 +1509,15 @@ extension AddProduceChildVC: UITextFieldDelegate {
       produceTypeSelected = nil
       
       categoriesTableViewDelegate.filterProduces(byText: newString)
+    }
+    
+    return true
+  }
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    if textField === unitTextField {
+      performSegue(withIdentifier: Storyboard.AddProduceChildToChooseUnit, sender: nil)
+      return false
     }
     
     return true

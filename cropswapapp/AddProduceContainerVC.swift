@@ -84,7 +84,7 @@ class AddProduceContainerVC: UIViewController {
       let category = try addProduceChildVC.getProduceCategory()
       let stateSelected = try addProduceChildVC.getStateSelected()
       let categoryName = category.name
-      let quantityType = category.quantityType
+      let quantityType = try addProduceChildVC.getUnitSelected()
       let quantity = try addProduceChildVC.getQuantity()
       let price = try addProduceChildVC.getPrice()
       let description = try addProduceChildVC.getDescription()

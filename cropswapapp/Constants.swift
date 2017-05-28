@@ -61,6 +61,7 @@ struct Constants {
     
     static let stateNotSelected = "Please select a state for the produce."
     
+    static let unitNotSelected = "Please choose a unit for the produce."
   }
 }
 

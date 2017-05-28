@@ -44,12 +44,21 @@ class ProduceChildVC: UITableViewController {
   
   @IBOutlet weak var produceNameLabel: UILabel! {
     didSet {
-      produceNameLabel.text = ""
+      produceNameLabel.text = "Produce Name"
     }
   }
   
-  @IBOutlet weak var perQuantityTypeLabel: UILabel!
-  @IBOutlet weak var quantityTypeAvailableLabel: UILabel!
+  @IBOutlet weak var perQuantityTypeLabel: UILabel! {
+    didSet {
+      perQuantityTypeLabel.text = "Per Unit"
+    }
+  }
+  
+  @IBOutlet weak var quantityTypeAvailableLabel: UILabel! {
+    didSet {
+      quantityTypeAvailableLabel.text = "Units Available"
+    }
+  }
   
   
 //  @IBOutlet weak var addressGardenerLabel: UILabel! {
@@ -60,13 +69,27 @@ class ProduceChildVC: UITableViewController {
   
   @IBOutlet weak var descriptionProduceTextView: UITextView! {
     didSet {
-      descriptionProduceTextView.text = ""
+      descriptionProduceTextView.text = "Description"
     }
   }
   
-  @IBOutlet weak var categoryLabel: UILabel!
-  @IBOutlet weak var quantityAndTypeLabel: UILabel!
-  @IBOutlet weak var priceLabel: UILabel!
+  @IBOutlet weak var categoryLabel: UILabel! {
+    didSet {
+      categoryLabel.text = "Category"
+    }
+  }
+  
+  @IBOutlet weak var quantityAndTypeLabel: UILabel! {
+    didSet {
+      quantityAndTypeLabel.text = "0"
+    }
+  }
+  
+  @IBOutlet weak var priceLabel: UILabel! {
+    didSet {
+      priceLabel.text = "$0.0"
+    }
+  }
   
   var producesRelatedFirstTimeLoaded = false
   
@@ -332,9 +355,11 @@ class ProduceChildVC: UITableViewController {
           
 //          self?.gardenerLabel.text = "\(produce.ownerUsername)'s Garden"
           
-          self?.perQuantityTypeLabel.text = "Per \(produce.quantityType.capitalized)"
+          let quantityType = self?.getQuantityType(quantityType: produce.quantityType)
           
-          self?.quantityTypeAvailableLabel.text = "\(produce.quantityType.capitalized) Available"
+          self?.perQuantityTypeLabel.text = "Per \(quantityType?.singular.capitalized ?? "Unit")"
+          
+          self?.quantityTypeAvailableLabel.text = "\(quantityType?.plural.capitalized ?? "Units") Available"
           
           self?.descriptionProduceTextView.text = produce.description
           self?.produceNameLabel.text = produce.name
@@ -347,6 +372,144 @@ class ProduceChildVC: UITableViewController {
       }
 
     }
+  }
+  
+  func getQuantityType(quantityType: String) -> (singular: String, plural: String) {
+    var singular = ""
+    var plural = ""
+    
+    if
+      quantityType == "each"
+    {
+      singular = "each"
+      plural = "each"
+    } else if
+              quantityType == "bunches" ||
+              quantityType == "bunch"
+    {
+      singular = "bunch"
+      plural = "bunches"
+    } else if
+              quantityType == "handfuls" ||
+              quantityType == "handful"
+    {
+      singular = "handful"
+      plural = "handfuls"
+    } else if
+              quantityType == "cups" ||
+              quantityType == "cup"
+    {
+      singular = "cup"
+      plural = "cups"
+    } else if
+              quantityType == "leaves" ||
+              quantityType == "leaf"
+    {
+      singular = "leaf"
+      plural = "leaves"
+    } else if
+              quantityType == "stems" ||
+              quantityType == "stem"
+    {
+      singular = "stem"
+      plural = "stems"
+    } else if
+              quantityType == "stalks" ||
+              quantityType == "stalk"
+    {
+      singular = "stalk"
+      plural = "stalks"
+    } else if
+              quantityType == "shoots" ||
+              quantityType == "shoot"
+    {
+      singular = "shoot"
+      plural = "shoots"
+    } else if
+              quantityType == "flowers" ||
+              quantityType == "flower"
+    {
+      singular = "flower"
+      plural = "flowers"
+    } else if
+              quantityType == "tubers" ||
+              quantityType == "tuber"
+    {
+      singular = "tuber"
+      plural = "tubers"
+    } else if
+              quantityType == "ears" ||
+              quantityType == "ear"
+    {
+      singular = "ear"
+      plural = "ears"
+    } else if
+              quantityType == "roots" ||
+              quantityType == "root"
+    {
+      singular = "root"
+      plural = "roots"
+    } else if
+              quantityType == "bulbs" ||
+              quantityType == "bulb"
+    {
+      singular = "bulb"
+      plural = "bulbs"
+    } else if
+              quantityType == "head" ||
+              quantityType == "heads"
+    {
+      singular = "head"
+      plural = "heads"
+    } else if
+              quantityType == "ounces" ||
+              quantityType == "ounce"
+    {
+      singular = "ounce"
+      plural = "ounces"
+    } else if
+              quantityType == "grams" ||
+              quantityType == "gram"
+    {
+      singular = "gram"
+      plural = "grams"
+    } else if
+              quantityType == "pounds" ||
+              quantityType == "pound"
+    {
+      singular = "pound"
+      plural = "pounds"
+    } else if
+              quantityType == "kilos" ||
+              quantityType == "kilo"
+    {
+      singular = "kilo"
+      plural = "kilos"
+    } else if
+              quantityType == "knot" ||
+              quantityType == "knots"
+    {
+      singular = "knot"
+      plural = "knots"
+    } else if
+              quantityType == "cluster" ||
+              quantityType == "clusters"
+    {
+      singular = "cluster"
+      plural = "clusters"
+    } else if
+              quantityType == "bean" ||
+              quantityType == "beans"
+    {
+      singular = "bean"
+      plural = "beans"
+    }
+    else {
+      singular = "unit"
+      plural = "units"
+    }
+    
+    return (singular: singular, plural: plural)
   }
   
   
