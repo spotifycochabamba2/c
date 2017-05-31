@@ -33,10 +33,17 @@ class EditProfileChildVC: UITableViewController {
   @IBOutlet weak var zipCodeTextField: UITextField!
   @IBOutlet weak var switchShowAddress: UISwitch!
   
+  @IBOutlet weak var aboutTextView: CSTextView!
   @IBOutlet weak var websiteTextField: UITextField!
 //  @IBOutlet weak var locationTextView: UITextView!
   
   var profilePicture: UIImage?
+  
+  var about: String {
+    get {
+      return aboutTextView.text ?? ""
+    }
+  }
   
   var lastName: String {
     get {
@@ -103,6 +110,7 @@ class EditProfileChildVC: UITableViewController {
   }
   
   
+  
   var profileImageURL: String? {
     didSet {
       print(profileImageURL)
@@ -160,6 +168,8 @@ class EditProfileChildVC: UITableViewController {
     switchShowAddress.isOn = user.showAddress ?? false
     
     profileImageURL = user.profilePictureURL
+    
+    aboutTextView.text = user.about ?? ""
   }
   
   override func viewWillLayoutSubviews() {

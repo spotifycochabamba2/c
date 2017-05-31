@@ -285,7 +285,7 @@
                                                             <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="96M-wg-yq7" id="eaF-WG-6LY"/>
-                                                                <outlet property="nextNavigationField" destination="yx4-qy-mWo" id="zzY-zo-sUE"/>
+                                                                <outlet property="nextNavigationField" destination="duY-GF-edw" id="X1W-Ei-9O8"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -298,8 +298,43 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="lEH-PV-VVe">
-                                        <rect key="frame" x="0.0" y="620" width="375" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="Jo1-Hc-rwE" userLabel="About Text Field" colorLabel="IBBuiltInLabel-Red">
+                                        <rect key="frame" x="0.0" y="620" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jo1-Hc-rwE" id="W71-Df-VlH">
+                                            <frame key="frameInset" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qbq-hx-PGo">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKQ-CT-1BL">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="duY-GF-edw" customClass="CSTextView" customModule="cropswapapp" customModuleProvider="target">
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="105" id="QLA-S1-qpE"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            <connections>
+                                                                <outlet property="nextNavigationField" destination="yx4-qy-mWo" id="ONC-dl-Tj5"/>
+                                                            </connections>
+                                                        </textView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Qbq-hx-PGo" firstAttribute="leading" secondItem="W71-Df-VlH" secondAttribute="leadingMargin" constant="8" id="AUC-Fz-fEE"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qbq-hx-PGo" secondAttribute="trailing" constant="8" id="PKs-e5-Twy"/>
+                                                <constraint firstItem="Qbq-hx-PGo" firstAttribute="centerY" secondItem="W71-Df-VlH" secondAttribute="centerY" id="bn3-bV-JcH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="lEH-PV-VVe" userLabel="Street Text Field">
+                                        <rect key="frame" x="0.0" y="770" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lEH-PV-VVe" id="ntR-Z4-WAH">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -335,7 +370,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="L4g-cq-Z68">
-                                        <rect key="frame" x="0.0" y="700" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="850" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L4g-cq-Z68" id="dZ3-kk-Yes">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -371,7 +406,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="v8h-3M-j1W">
-                                        <rect key="frame" x="0.0" y="780" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="930" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v8h-3M-j1W" id="uc4-cS-Jpi">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -407,7 +442,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="uxJ-3T-qmw">
-                                        <rect key="frame" x="0.0" y="860" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="1010" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uxJ-3T-qmw" id="B6l-hw-AS8">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -442,7 +477,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="Vyb-nb-i4P">
-                                        <rect key="frame" x="0.0" y="940" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="1090" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vyb-nb-i4P" id="C8U-Y2-Y6j">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -472,7 +507,7 @@ trade requests</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="4ax-W5-BgF">
-                                        <rect key="frame" x="0.0" y="1020" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="1170" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ax-W5-BgF" id="icN-A8-At8">
                                             <frame key="frameInset" width="375" height="100"/>
@@ -520,6 +555,7 @@ trade requests</string>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="aboutTextView" destination="duY-GF-edw" id="Gqx-cT-9as"/>
                         <outlet property="cityTextField" destination="c8D-GU-O3c" id="TcY-nq-xsf"/>
                         <outlet property="emailAddressTextField" destination="PYN-ev-mfa" id="GWn-eP-cP7"/>
                         <outlet property="firstNameTextField" destination="X6E-fF-pfw" id="h5S-mc-vGz"/>

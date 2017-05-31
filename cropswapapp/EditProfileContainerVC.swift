@@ -102,6 +102,7 @@ class EditProfileContainerVC: UIViewController {
           let phoneNumber = editProfileChildVC.phoneNumber
           let website = editProfileChildVC.website
           let location = ""
+          let about = editProfileChildVC.about
           
           User.updateUser(
             userId: userId,
@@ -110,6 +111,7 @@ class EditProfileContainerVC: UIViewController {
             phoneNumber: phoneNumber,
             website: website,
             location: location,
+            about: about,
             completion: { (error) in
               done(error)
           })

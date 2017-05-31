@@ -34,6 +34,12 @@ class TradeListVC: UIViewController {
     if let userId = User.currentUser?.uid {
       Deal.removeListentingDealsUpdated(byUserId: userId, handlerId: getUpdatedDealsHandlerId)
     }
+    
+    NotificationCenter.default.removeObserver(
+      self,
+      name: NSNotification.Name(rawValue: "dismissModals"),
+      object: nil
+    )
   }
   
   override func viewDidLoad() {
@@ -99,6 +105,16 @@ class TradeListVC: UIViewController {
     }
   }
   
+  func dismissModals(notification: Notification) {
+    self.dismiss(animated: true)
+    NotificationCenter.default.removeObserver(
+      self,
+      name: NSNotification.Name(rawValue: "dismissModals"),
+      object: nil
+    )
+  }
+  
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Storyboard.TradeListToTradeDetail {
       let nv = segue.destination as? UINavigationController
@@ -126,12 +142,19 @@ class TradeListVC: UIViewController {
       }
     } else if segue.identifier == Storyboard.TradeListToProfile {
       let nv = segue.destination as? UINavigationController
-      let vc = nv?.viewControllers.first as? ProfileChildVC
+      let vc = nv?.viewControllers.first as? ProfileContainerVC
       let values = sender as? [String: Any]
       
       vc?.currentUserId = values?["userId"] as? String
       vc?.currentUsername = values?["username"] as? String
       vc?.showBackButton = true
+      
+      NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(dismissModals(notification:)),
+        name: NSNotification.Name(rawValue: "dismissModals"),
+        object: nil
+      )
     }
   }
 }

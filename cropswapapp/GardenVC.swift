@@ -11,6 +11,10 @@ import SVProgressHUD
 
 class GardenVC: UIViewController {
   
+  var currentUserId: String?
+  var isCurrentOwner = true
+  
+  @IBOutlet weak var addProduceButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
   let cellIdentifier = "FeedCellId"
   var produces = Array<[String: Any]>()
@@ -22,7 +26,7 @@ class GardenVC: UIViewController {
   var dataGotFromServer = false
   
   deinit {
-    if let userId = User.currentUser?.uid {
+    if let userId = currentUserId {
       User.stopListeningToGetProducesByUserByListeningAddedOnes(handlerId: addedOnesHandlerId, fromTime: time, fromUserId: userId)
       User.stopListeningToGetProducesByUserByListeningUpdatedOnes(handlerId: updatedOnesHandlerId, fromUserId: userId)
     }
@@ -41,7 +45,15 @@ class GardenVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let userId = User.currentUser?.uid {
+    if !isCurrentOwner {
+      addProduceButton.isHidden = true
+    }
+    
+    if currentUserId == nil {
+      currentUserId = User.currentUser?.uid
+    }
+    
+    if let userId = currentUserId {
       
       SVProgressHUD.show()
       User.getProducesByUser(byUserId: userId) { [weak self] produces in
@@ -50,7 +62,10 @@ class GardenVC: UIViewController {
         }
         
         self?.dataGotFromServer = true
-        self?.produces = produces
+        self?.produces = produces.filter({ (produce) -> Bool in
+          let liveState = produce["liveState"] as? String ?? ""
+          return liveState != ProduceState.archived.rawValue
+        })
         
         if let this = self {
           DispatchQueue.main.async {
@@ -130,8 +145,13 @@ class GardenVC: UIViewController {
       
       vc?.currentProduceId = produce?["id"] as? String
       vc?.currentProduceState = produce?["liveState"] as? String
+    } else if segue.identifier == Storyboard.GardenToProduceContainer {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProduceContainerVC
+      vc?.produce = sender as? Produce
     }
   }
+
 }
 
 extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -194,9 +214,45 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let produce = produces[indexPath.row]
+    let produceJson = produces[indexPath.row]
     
-    performSegue(withIdentifier: Storyboard.GardenToAddProduce, sender: produce)
+    if isCurrentOwner {
+      performSegue(withIdentifier: Storyboard.GardenToAddProduce, sender: produceJson)
+    } else {
+      if let ownerId = produceJson["ownerId"] as? String {
+        SVProgressHUD.show()
+        User.getUser(byUserId: ownerId, completion: { (result) in
+          DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+          }
+          switch result {
+          case .success(let user):
+            guard
+              let produceId = produceJson["id"] as? String,
+              let produceName = produceJson["name"] as? String
+            else {
+             return
+            }
+            
+            let produce = Produce(
+              id: produceId,
+              name: produceName,
+              ownerId: ownerId,
+              ownerUsername: user.name
+            )
+            
+            DispatchQueue.main.async { [weak self] in
+              self?.performSegue(
+                withIdentifier: Storyboard.GardenToProduceContainer,
+                sender: produce
+              )
+            }
+          case .fail(let error):
+            print(error)
+          }
+        })
+      }
+    }
   }
 }
 

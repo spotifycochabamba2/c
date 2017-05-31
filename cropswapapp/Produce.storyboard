@@ -564,15 +564,15 @@ df dsfsdf</string>
             </objects>
             <point key="canvasLocation" x="878" y="-490"/>
         </scene>
-        <!--ProfileChildVC-->
+        <!--ProfileContainerVC-->
         <scene sceneID="EEC-vB-qpH">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileChildVC" id="qOd-o1-qJq" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="qOd-o1-qJq" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="8U6-oz-tyK"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE8-KL-gdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1372" y="374"/>
+            <point key="canvasLocation" x="674" y="404"/>
         </scene>
         <!--MakeDealVC-->
         <scene sceneID="ll2-OS-xgD">
@@ -595,7 +595,7 @@ df dsfsdf</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AAs-Fc-kkv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s8H-qb-MtL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s8H-qb-MtL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -606,7 +606,7 @@ df dsfsdf</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGv-lt-kLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="375"/>
+            <point key="canvasLocation" x="-186" y="405"/>
         </scene>
     </scenes>
     <resources>

@@ -38,6 +38,7 @@ struct User {
   var state: String?
   var zipCode: String?
   var showAddress: Bool?
+  var about: String?
   
   init?(json: [String: Any]?) {
     guard
@@ -64,6 +65,7 @@ struct User {
     self.state = json["state"] as? String
     self.zipCode = json["zipCode"] as? String
     self.showAddress = json["showAddress"] as? Bool
+    self.about = json["about"] as? String
   }
   
   init(email: String, name: String) {
@@ -688,6 +690,7 @@ extension User {
     phoneNumber: String,
     website: String,
     location: String,
+    about: String,
     completion: @escaping (NSError?) -> Void
   ) {
   
@@ -699,6 +702,7 @@ extension User {
     data["phoneNumber"] = phoneNumber
     data["website"] = website
     data["location"] = location
+    data["about"] = about
     
     refDatabaseUser.updateChildValues(data, withCompletionBlock: { (error: Error?, ref: FIRDatabaseReference) in
       completion(error as NSError?)

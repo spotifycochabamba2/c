@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="2088.8000000000002" y="123.23838080959521"/>
         </scene>
-        <!--ProfileChildVC-->
+        <!--ProfileContainerVC-->
         <scene sceneID="nFG-co-JYQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileChildVC" id="gsN-8x-NVs" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="gsN-8x-NVs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="mhK-0J-UWd"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jat-Db-lfa" userLabel="First Responder" sceneMemberID="firstResponder"/>

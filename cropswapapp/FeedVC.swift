@@ -12,6 +12,9 @@ import SVProgressHUD
 class FeedVC: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   
+  var searchResultFeedVC: SearchResultFeedVC!
+  var produceSearchController: UISearchController!
+  
   let cellIdentifier = "FeedCellId"
   
   var produces = [Produce]()
@@ -36,6 +39,12 @@ class FeedVC: UIViewController {
   deinit {
     User.stopListeningToGetProducesByListeningAddedNewOnes(handlerId: getNewProducesHandlerId, fromTime: time)
     User.stopListeningToGetProducesByListeningRemovedOnes(handlerId: getRemovedProducesHandlerId)
+    
+    NotificationCenter.default.removeObserver(
+      self,
+      name: NSNotification.Name(rawValue: "dismissModals"),
+      object: nil
+    )
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,7 +54,23 @@ class FeedVC: UIViewController {
       let vc = nv?.viewControllers.first as? ProduceContainerVC
       
       vc?.produce = sender as? Produce
+      
+      NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(dismissModals(notification:)),
+        name: NSNotification.Name(rawValue: "dismissModals"),
+        object: nil
+      )
     }
+  }
+  
+  func dismissModals(notification: Notification) {
+    self.dismiss(animated: true)
+    NotificationCenter.default.removeObserver(
+      self,
+      name: NSNotification.Name(rawValue: "dismissModals"),
+      object: nil
+    )
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -66,6 +91,30 @@ class FeedVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print(tabBarController)
+    
+    let storyboard = UIStoryboard(name: "SearchResultFeed", bundle: nil)
+    searchResultFeedVC = storyboard.instantiateViewController(withIdentifier: "SearchResultFeedVC") as! SearchResultFeedVC
+    print(self.view.frame)
+    print(searchResultFeedVC.view.frame)
+    
+    searchResultFeedVC.view.frame = view.frame
+    
+    print(self.view.frame)
+    print(searchResultFeedVC.view.frame)
+    
+    
+//    searchResultFeedVC = SearchResultFeedVC(
+    
+    produceSearchController = UISearchController(searchResultsController: searchResultFeedVC)
+    //    produceSearchController.searchResultsUpdater = self
+    produceSearchController.dimsBackgroundDuringPresentation = true
+    produceSearchController.searchBar.sizeToFit()
+    
+//    produceSearchController.modalPresentationStyle = .overFullScreen
+//    produceSearchController.delegate = self
+    definesPresentationContext = false
     
     self.collectionView.register(UINib(nibName: "FeedCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
     
@@ -157,7 +206,8 @@ class FeedVC: UIViewController {
     
     _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
     
-    _ = setNavIcon(imageName: "search-icon", size: CGSize(width: 17, height: 17), position: .right)
+    let rightBarButton = setNavIcon(imageName: "search-icon", size: CGSize(width: 17, height: 17), position: .right)
+    rightBarButton.addTarget(self, action: #selector(rightBarButtonTouched), for: .touchUpInside)
     
     setNavHeaderIcon(imageName: "navbar-title-feed", size: CGSize(width: 124, height: 22))
     
@@ -167,6 +217,16 @@ class FeedVC: UIViewController {
     automaticallyAdjustsScrollViewInsets = false
     
     collectionView.alwaysBounceVertical = true
+  }
+  
+  func rightBarButtonTouched() {
+//    navigationController?.pushViewController(produceSearchController, animated: true)
+    print(presentedViewController)
+    print(presentingViewController)
+    
+    tabBarController?.present(produceSearchController, animated: true) {
+      
+    }
   }
 }
 
@@ -268,6 +328,10 @@ extension FeedVC {
   }
 }
 
+
+extension FeedVC {
+  
+}
 
 
 

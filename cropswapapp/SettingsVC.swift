@@ -18,6 +18,10 @@ extension SettingsVC {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+
+//    navigationController?.navigationBar.isTranslucent = false
+//    navigationController?.navigationBar.barTintColor = UIColor.hexStringToUIColor(hex: "#f9f9f9")
+    
     setNavHeaderTitle(title: "Settings", color: UIColor.black)
     
     _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .right)
@@ -27,6 +31,12 @@ extension SettingsVC {
     
     navigationController?.navigationBar.isHidden = false
     navigationController?.isNavigationBarHidden = false
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.navigationBar.setValue(false, forKey: "hidesShadow")
   }
   
   func backButtonTouched() {

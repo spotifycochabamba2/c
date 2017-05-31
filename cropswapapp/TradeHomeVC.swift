@@ -399,9 +399,10 @@ class TradeHomeVC: UIViewController {
     
   }
   
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     
     changeUpdateButton(enable: false)
     changeAcceptButton(enable: true)

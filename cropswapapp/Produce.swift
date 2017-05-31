@@ -72,6 +72,24 @@ struct Produce {
   init(
     id: String,
     name: String,
+    ownerId: String,
+    ownerUsername: String
+  )
+  {
+    self.id = id
+    self.name = name
+    self.ownerId = ownerId
+    self.ownerUsername = ownerUsername
+    self.description = ""
+    self.produceType = ""
+    self.quantityType = ""
+    self.quantity = 0
+    self.price = 0
+  }
+  
+  init(
+    id: String,
+    name: String,
     firstPictureURL: String,
     quantityType: String,
     ownerId: String,
@@ -172,6 +190,7 @@ extension Produce {
   static var refStorage = FIRStorage.storage().reference()
   
   static var refDetails = refDatabase.child("details-tags")
+  static var refProduceTypes = refDatabase.child("produce-types")
   
   static func archiveProduce(
     produceId: String,
@@ -732,181 +751,204 @@ extension Produce {
   }
   
   
-  static func getProduceTypes(completion: ([(name: String, quantityType: String)]) -> Void) {
-    var produceTypes = [(name: String, quantityType: String)]()
+  static func getProduceTypes(
+    completion: @escaping ([(name: String, quantityType: String)]
+  ) -> Void) {
     
-    produceTypes.append((name: "Abiu", quantityType: "unit"))
-    produceTypes.append((name: "Acai", quantityType: "cup"))
-    produceTypes.append((name: "Agave", quantityType: "leaf"))
+    refProduceTypes.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+      var produceTypes = [(name: String, quantityType: String)]()
+      
+      if snap.exists() {
+        if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
+          produceTypes = dictionaries.flatMap {
+            let val = $0.value as? [String: Any]
+            print(val)
+            if let name = val?["name"] as? String {
+              return (name: name, quantityType: "")
+            } else {
+              return nil
+            }
+          }
+        }
+      }
+      
+      completion(produceTypes)
+    }
     
-    produceTypes.append((name: "Apricot", quantityType: "unit"))
-    produceTypes.append((name: "Apple", quantityType: "unit"))
-    produceTypes.append((name: "Almond", quantityType: "cup"))
-    produceTypes.append((name: "Amaranth", quantityType: "unit"))
-    produceTypes.append((name: "Artichoke", quantityType: "unit"))
-    produceTypes.append((name: "Arugula", quantityType: "bunch"))
-    produceTypes.append((name: "Asparagus", quantityType: "stem"))
-    produceTypes.append((name: "Avocado", quantityType: "unit"))
-    produceTypes.append((name: "Bananas", quantityType: "unit"))
-    
-    produceTypes.append((name: "Basil", quantityType: "handful"))
-    produceTypes.append((name: "Bay Leaf", quantityType: "unit"))
-    produceTypes.append((name: "Beans (bush)", quantityType: "handful"))
-    produceTypes.append((name: "Bananas (pole)", quantityType: "handful"))
-    produceTypes.append((name: "Beet", quantityType: "unit"))
-    produceTypes.append((name: "Blackberry", quantityType: "cup"))
-    produceTypes.append((name: "Blueberry", quantityType: "cup"))
-    produceTypes.append((name: "Bok Choy", quantityType: "cup"))
-    produceTypes.append((name: "Borage", quantityType: "unit"))
-    produceTypes.append((name: "Broccoli", quantityType: "bunch"))
-    
-    produceTypes.append((name: "Brussels Sprouts", quantityType: "unit"))
-    produceTypes.append((name: "Cabbage", quantityType: "head"))
-    produceTypes.append((name: "Cantaloupe", quantityType: "unit"))
-    produceTypes.append((name: "Carrot", quantityType: "unit"))
-    produceTypes.append((name: "Catnip", quantityType: "handful"))
-    produceTypes.append((name: "Cauliflower", quantityType: "unit"))
-    produceTypes.append((name: "Celeriac", quantityType: "knot"))
-    produceTypes.append((name: "Celery", quantityType: "stalk"))
-    produceTypes.append((name: "Chamomile", quantityType: "handful"))
-    produceTypes.append((name: "Cherimoya", quantityType: "unit"))
-    
-    produceTypes.append((name: "Cherry", quantityType: "cup"))
-    produceTypes.append((name: "Chestnut", quantityType: "cup"))
-    produceTypes.append((name: "Chili Pepper", quantityType: "unit"))
-    produceTypes.append((name: "Chinese Cabbage", quantityType: "head"))
-    produceTypes.append((name: "Chives", quantityType: "bunch"))
-    produceTypes.append((name: "Cilantro", quantityType: "bunch"))
-    produceTypes.append((name: "Collards", quantityType: "unit"))
-    produceTypes.append((name: "Comfrey", quantityType: "unit"))
-    produceTypes.append((name: "Corn", quantityType: "ear"))
-    produceTypes.append((name: "Cranberry", quantityType: "cup"))
-    
-    produceTypes.append((name: "Cucumber", quantityType: "unit"))
-    produceTypes.append((name: "Currants", quantityType: "cup"))
-    produceTypes.append((name: "Dates", quantityType: "cup"))
-    produceTypes.append((name: "Dill", quantityType: "handful"))
-    produceTypes.append((name: "Echinacea", quantityType: "unit"))
-    produceTypes.append((name: "Edamame", quantityType: "cup"))
-    produceTypes.append((name: "Eggplant", quantityType: "unit"))
-    produceTypes.append((name: "Elderberries", quantityType: "cup"))
-    produceTypes.append((name: "Endive", quantityType: "bunch"))
-    produceTypes.append((name: "Fennel", quantityType: "unit"))
-    
-    produceTypes.append((name: "Fig", quantityType: "unit"))
-    produceTypes.append((name: "Garlic", quantityType: "bulb"))
-    produceTypes.append((name: "Ginger", quantityType: "finger"))
-    produceTypes.append((name: "Gooseberry", quantityType: "cup"))
-    produceTypes.append((name: "Gourds", quantityType: "unit"))
-    produceTypes.append((name: "Grape", quantityType: "cluster"))
-    produceTypes.append((name: "Grapefruit", quantityType: "unit"))
-    produceTypes.append((name: "Greens", quantityType: "unit"))
-    produceTypes.append((name: "Guava", quantityType: "unit"))
-    produceTypes.append((name: "Honeydew", quantityType: "unit"))
-    
-    produceTypes.append((name: "Horseradish", quantityType: "finger"))
-    produceTypes.append((name: "Huckleberry", quantityType: "cup"))
-    produceTypes.append((name: "Jackfruit", quantityType: "unit"))
-    produceTypes.append((name: "Jeruselem Artichoke", quantityType: "unit"))
-    produceTypes.append((name: "Jicama", quantityType: "tuber"))
-    produceTypes.append((name: "Jostaberry", quantityType: "cup"))
-    produceTypes.append((name: "Kale", quantityType: "bunch"))
-    produceTypes.append((name: "Kiwi", quantityType: "unit"))
-    produceTypes.append((name: "Kohlrabi", quantityType: "stem"))
-    produceTypes.append((name: "Lavender", quantityType: "bunch"))
-    
-    produceTypes.append((name: "Leek", quantityType: "bunch"))
-    produceTypes.append((name: "Lemon", quantityType: "unit"))
-    produceTypes.append((name: "LemonBalm", quantityType: "handful"))
-    produceTypes.append((name: "Lemon Verbena", quantityType: "handful"))
-    produceTypes.append((name: "Lettuce", quantityType: "bunch"))
-    produceTypes.append((name: "Lime", quantityType: "unit"))
-    produceTypes.append((name: "Loganberry", quantityType: "cup"))
-    produceTypes.append((name: "Lovage", quantityType: "bunch"))
-    produceTypes.append((name: "Mache", quantityType: "bunch"))
-    produceTypes.append((name: "Majoram", quantityType: "handful"))
-    
-    produceTypes.append((name: "Malanga", quantityType: "unit"))
-    produceTypes.append((name: "Mango", quantityType: "unit"))
-    produceTypes.append((name: "Medlar", quantityType: "unit"))
-    produceTypes.append((name: "Melon", quantityType: "unit"))
-    produceTypes.append((name: "Mint", quantityType: "handful"))
-    produceTypes.append((name: "Mulberry", quantityType: "cup"))
-    produceTypes.append((name: "Mushrooms", quantityType: "cup"))
-    produceTypes.append((name: "Musketmelon", quantityType: "unit"))
-    produceTypes.append((name: "Mustard greens", quantityType: "bunch"))
-    produceTypes.append((name: "Nectarines", quantityType: "unit"))
-    
-    produceTypes.append((name: "Oats", quantityType: "cup"))
-    produceTypes.append((name: "Okra", quantityType: "handful"))
-    produceTypes.append((name: "Olives", quantityType: "cup"))
-    produceTypes.append((name: "Onion", quantityType: "unit"))
-    produceTypes.append((name: "Orange", quantityType: "unit"))
-    produceTypes.append((name: "Oregano", quantityType: "handful"))
-    produceTypes.append((name: "Papaya", quantityType: "unit"))
-    produceTypes.append((name: "Parsley", quantityType: "bunch"))
-    produceTypes.append((name: "Parsnip", quantityType: "unit"))
-    produceTypes.append((name: "Passion Fruit", quantityType: "unit"))
-    
-    produceTypes.append((name: "Peach", quantityType: "unit"))
-    produceTypes.append((name: "Peanut", quantityType: "cup"))
-    produceTypes.append((name: "Pear", quantityType: "unit"))
-    produceTypes.append((name: "Peas", quantityType: "handful"))
-    produceTypes.append((name: "Pecan", quantityType: "cup"))
-    produceTypes.append((name: "Pepper", quantityType: "unit"))
-    produceTypes.append((name: "Persimmon", quantityType: "unit"))
-    produceTypes.append((name: "Pineapple", quantityType: "unit"))
-    produceTypes.append((name: "Plum", quantityType: "unit"))
-    produceTypes.append((name: "Pomegranate", quantityType: "unit"))
-    
-    produceTypes.append((name: "Prickly Pear", quantityType: "unit"))
-    produceTypes.append((name: "Pumpkin", quantityType: "unit"))
-    produceTypes.append((name: "Radicchio", quantityType: "head"))
-    produceTypes.append((name: "Radish", quantityType: "unit"))
-    produceTypes.append((name: "Raspberry", quantityType: "cup"))
-    produceTypes.append((name: "Rhubarb", quantityType: "bunch"))
-    produceTypes.append((name: "Roselle", quantityType: "cup"))
-    produceTypes.append((name: "Rosemary", quantityType: "handful"))
-    produceTypes.append((name: "Rutabaga", quantityType: "unit"))
-    produceTypes.append((name: "Rye", quantityType: "unit"))
-    
-    produceTypes.append((name: "Sage", quantityType: "leaf"))
-    produceTypes.append((name: "Salsify", quantityType: "unit"))
-    produceTypes.append((name: "Sapote", quantityType: "unit"))
-    produceTypes.append((name: "Scallions", quantityType: "bunch"))
-    produceTypes.append((name: "Shallots", quantityType: "cup"))
-    produceTypes.append((name: "Sorghum", quantityType: "unit"))
-    produceTypes.append((name: "Sorrel", quantityType: "bunch"))
-    produceTypes.append((name: "Soybeans", quantityType: "cup"))
-    produceTypes.append((name: "Spinach", quantityType: "bunch"))
-    produceTypes.append((name: "Squash (winter)", quantityType: "unit"))
-    
-    produceTypes.append((name: "Squash (summer)", quantityType: "unit"))
-    produceTypes.append((name: "Starfruit", quantityType: "unit"))
-    produceTypes.append((name: "Stevia", quantityType: "bunch"))
-    produceTypes.append((name: "Strawberry", quantityType: "unit"))
-    produceTypes.append((name: "Sweet Potato", quantityType: "unit"))
-    produceTypes.append((name: "Swiss Chard", quantityType: "bunch"))
-    produceTypes.append((name: "Tamarind", quantityType: "cup"))
-    produceTypes.append((name: "Tangerine", quantityType: "unit"))
-    produceTypes.append((name: "Tarragon", quantityType: "handful"))
-    produceTypes.append((name: "Tatsoi", quantityType: "bunch"))
-    
-    produceTypes.append((name: "Thyme", quantityType: "handful"))
-    produceTypes.append((name: "Tomatillo", quantityType: "unit"))
-    produceTypes.append((name: "Tomato", quantityType: "unit"))
-    produceTypes.append((name: "Turnip", quantityType: "unit"))
-    produceTypes.append((name: "Valerian", quantityType: "unit"))
-    produceTypes.append((name: "Vanilla", quantityType: "bean"))
-    produceTypes.append((name: "Walnut", quantityType: "unit"))
-    produceTypes.append((name: "Watercress", quantityType: "bunch"))
-    produceTypes.append((name: "Watermelon", quantityType: "unit"))
-    produceTypes.append((name: "Wheat", quantityType: "unit"))
-    
-    produceTypes.append((name: "Yam", quantityType: "unit"))
-    produceTypes.append((name: "Zucchini", quantityType: "unit"))
-    
-    completion(produceTypes)
+//    var produceTypes = [(name: String, quantityType: String)]()
+//    
+//    produceTypes.append((name: "Abiu", quantityType: "unit"))
+//    produceTypes.append((name: "Acai", quantityType: "cup"))
+//    produceTypes.append((name: "Agave", quantityType: "leaf"))
+//    
+//    produceTypes.append((name: "Apricot", quantityType: "unit"))
+//    produceTypes.append((name: "Apple", quantityType: "unit"))
+//    produceTypes.append((name: "Almond", quantityType: "cup"))
+//    produceTypes.append((name: "Amaranth", quantityType: "unit"))
+//    produceTypes.append((name: "Artichoke", quantityType: "unit"))
+//    produceTypes.append((name: "Arugula", quantityType: "bunch"))
+//    produceTypes.append((name: "Asparagus", quantityType: "stem"))
+//    produceTypes.append((name: "Avocado", quantityType: "unit"))
+//    produceTypes.append((name: "Bananas", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Basil", quantityType: "handful"))
+//    produceTypes.append((name: "Bay Leaf", quantityType: "unit"))
+//    produceTypes.append((name: "Beans (bush)", quantityType: "handful"))
+//    produceTypes.append((name: "Bananas (pole)", quantityType: "handful"))
+//    produceTypes.append((name: "Beet", quantityType: "unit"))
+//    produceTypes.append((name: "Blackberry", quantityType: "cup"))
+//    produceTypes.append((name: "Blueberry", quantityType: "cup"))
+//    produceTypes.append((name: "Bok Choy", quantityType: "cup"))
+//    produceTypes.append((name: "Borage", quantityType: "unit"))
+//    produceTypes.append((name: "Broccoli", quantityType: "bunch"))
+//    
+//    produceTypes.append((name: "Brussels Sprouts", quantityType: "unit"))
+//    produceTypes.append((name: "Cabbage", quantityType: "head"))
+//    produceTypes.append((name: "Cantaloupe", quantityType: "unit"))
+//    produceTypes.append((name: "Carrot", quantityType: "unit"))
+//    produceTypes.append((name: "Catnip", quantityType: "handful"))
+//    produceTypes.append((name: "Cauliflower", quantityType: "unit"))
+//    produceTypes.append((name: "Celeriac", quantityType: "knot"))
+//    produceTypes.append((name: "Celery", quantityType: "stalk"))
+//    produceTypes.append((name: "Chamomile", quantityType: "handful"))
+//    produceTypes.append((name: "Cherimoya", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Cherry", quantityType: "cup"))
+//    produceTypes.append((name: "Chestnut", quantityType: "cup"))
+//    produceTypes.append((name: "Chili Pepper", quantityType: "unit"))
+//    produceTypes.append((name: "Chinese Cabbage", quantityType: "head"))
+//    produceTypes.append((name: "Chives", quantityType: "bunch"))
+//    produceTypes.append((name: "Cilantro", quantityType: "bunch"))
+//    produceTypes.append((name: "Collards", quantityType: "unit"))
+//    produceTypes.append((name: "Comfrey", quantityType: "unit"))
+//    produceTypes.append((name: "Corn", quantityType: "ear"))
+//    produceTypes.append((name: "Cranberry", quantityType: "cup"))
+//    
+//    produceTypes.append((name: "Cucumber", quantityType: "unit"))
+//    produceTypes.append((name: "Currants", quantityType: "cup"))
+//    produceTypes.append((name: "Dates", quantityType: "cup"))
+//    produceTypes.append((name: "Dill", quantityType: "handful"))
+//    produceTypes.append((name: "Echinacea", quantityType: "unit"))
+//    produceTypes.append((name: "Edamame", quantityType: "cup"))
+//    produceTypes.append((name: "Eggplant", quantityType: "unit"))
+//    produceTypes.append((name: "Elderberries", quantityType: "cup"))
+//    produceTypes.append((name: "Endive", quantityType: "bunch"))
+//    produceTypes.append((name: "Fennel", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Fig", quantityType: "unit"))
+//    produceTypes.append((name: "Garlic", quantityType: "bulb"))
+//    produceTypes.append((name: "Ginger", quantityType: "finger"))
+//    produceTypes.append((name: "Gooseberry", quantityType: "cup"))
+//    produceTypes.append((name: "Gourds", quantityType: "unit"))
+//    produceTypes.append((name: "Grape", quantityType: "cluster"))
+//    produceTypes.append((name: "Grapefruit", quantityType: "unit"))
+//    produceTypes.append((name: "Greens", quantityType: "unit"))
+//    produceTypes.append((name: "Guava", quantityType: "unit"))
+//    produceTypes.append((name: "Honeydew", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Horseradish", quantityType: "finger"))
+//    produceTypes.append((name: "Huckleberry", quantityType: "cup"))
+//    produceTypes.append((name: "Jackfruit", quantityType: "unit"))
+//    produceTypes.append((name: "Jeruselem Artichoke", quantityType: "unit"))
+//    produceTypes.append((name: "Jicama", quantityType: "tuber"))
+//    produceTypes.append((name: "Jostaberry", quantityType: "cup"))
+//    produceTypes.append((name: "Kale", quantityType: "bunch"))
+//    produceTypes.append((name: "Kiwi", quantityType: "unit"))
+//    produceTypes.append((name: "Kohlrabi", quantityType: "stem"))
+//    produceTypes.append((name: "Lavender", quantityType: "bunch"))
+//    
+//    produceTypes.append((name: "Leek", quantityType: "bunch"))
+//    produceTypes.append((name: "Lemon", quantityType: "unit"))
+//    produceTypes.append((name: "LemonBalm", quantityType: "handful"))
+//    produceTypes.append((name: "Lemon Verbena", quantityType: "handful"))
+//    produceTypes.append((name: "Lettuce", quantityType: "bunch"))
+//    produceTypes.append((name: "Lime", quantityType: "unit"))
+//    produceTypes.append((name: "Loganberry", quantityType: "cup"))
+//    produceTypes.append((name: "Lovage", quantityType: "bunch"))
+//    produceTypes.append((name: "Mache", quantityType: "bunch"))
+//    produceTypes.append((name: "Majoram", quantityType: "handful"))
+//    
+//    produceTypes.append((name: "Malanga", quantityType: "unit"))
+//    produceTypes.append((name: "Mango", quantityType: "unit"))
+//    produceTypes.append((name: "Medlar", quantityType: "unit"))
+//    produceTypes.append((name: "Melon", quantityType: "unit"))
+//    produceTypes.append((name: "Mint", quantityType: "handful"))
+//    produceTypes.append((name: "Mulberry", quantityType: "cup"))
+//    produceTypes.append((name: "Mushrooms", quantityType: "cup"))
+//    produceTypes.append((name: "Musketmelon", quantityType: "unit"))
+//    produceTypes.append((name: "Mustard greens", quantityType: "bunch"))
+//    produceTypes.append((name: "Nectarines", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Oats", quantityType: "cup"))
+//    produceTypes.append((name: "Okra", quantityType: "handful"))
+//    produceTypes.append((name: "Olives", quantityType: "cup"))
+//    produceTypes.append((name: "Onion", quantityType: "unit"))
+//    produceTypes.append((name: "Orange", quantityType: "unit"))
+//    produceTypes.append((name: "Oregano", quantityType: "handful"))
+//    produceTypes.append((name: "Papaya", quantityType: "unit"))
+//    produceTypes.append((name: "Parsley", quantityType: "bunch"))
+//    produceTypes.append((name: "Parsnip", quantityType: "unit"))
+//    produceTypes.append((name: "Passion Fruit", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Peach", quantityType: "unit"))
+//    produceTypes.append((name: "Peanut", quantityType: "cup"))
+//    produceTypes.append((name: "Pear", quantityType: "unit"))
+//    produceTypes.append((name: "Peas", quantityType: "handful"))
+//    produceTypes.append((name: "Pecan", quantityType: "cup"))
+//    produceTypes.append((name: "Pepper", quantityType: "unit"))
+//    produceTypes.append((name: "Persimmon", quantityType: "unit"))
+//    produceTypes.append((name: "Pineapple", quantityType: "unit"))
+//    produceTypes.append((name: "Plum", quantityType: "unit"))
+//    produceTypes.append((name: "Pomegranate", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Prickly Pear", quantityType: "unit"))
+//    produceTypes.append((name: "Pumpkin", quantityType: "unit"))
+//    produceTypes.append((name: "Radicchio", quantityType: "head"))
+//    produceTypes.append((name: "Radish", quantityType: "unit"))
+//    produceTypes.append((name: "Raspberry", quantityType: "cup"))
+//    produceTypes.append((name: "Rhubarb", quantityType: "bunch"))
+//    produceTypes.append((name: "Roselle", quantityType: "cup"))
+//    produceTypes.append((name: "Rosemary", quantityType: "handful"))
+//    produceTypes.append((name: "Rutabaga", quantityType: "unit"))
+//    produceTypes.append((name: "Rye", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Sage", quantityType: "leaf"))
+//    produceTypes.append((name: "Salsify", quantityType: "unit"))
+//    produceTypes.append((name: "Sapote", quantityType: "unit"))
+//    produceTypes.append((name: "Scallions", quantityType: "bunch"))
+//    produceTypes.append((name: "Shallots", quantityType: "cup"))
+//    produceTypes.append((name: "Sorghum", quantityType: "unit"))
+//    produceTypes.append((name: "Sorrel", quantityType: "bunch"))
+//    produceTypes.append((name: "Soybeans", quantityType: "cup"))
+//    produceTypes.append((name: "Spinach", quantityType: "bunch"))
+//    produceTypes.append((name: "Squash (winter)", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Squash (summer)", quantityType: "unit"))
+//    produceTypes.append((name: "Starfruit", quantityType: "unit"))
+//    produceTypes.append((name: "Stevia", quantityType: "bunch"))
+//    produceTypes.append((name: "Strawberry", quantityType: "unit"))
+//    produceTypes.append((name: "Sweet Potato", quantityType: "unit"))
+//    produceTypes.append((name: "Swiss Chard", quantityType: "bunch"))
+//    produceTypes.append((name: "Tamarind", quantityType: "cup"))
+//    produceTypes.append((name: "Tangerine", quantityType: "unit"))
+//    produceTypes.append((name: "Tarragon", quantityType: "handful"))
+//    produceTypes.append((name: "Tatsoi", quantityType: "bunch"))
+//    
+//    produceTypes.append((name: "Thyme", quantityType: "handful"))
+//    produceTypes.append((name: "Tomatillo", quantityType: "unit"))
+//    produceTypes.append((name: "Tomato", quantityType: "unit"))
+//    produceTypes.append((name: "Turnip", quantityType: "unit"))
+//    produceTypes.append((name: "Valerian", quantityType: "unit"))
+//    produceTypes.append((name: "Vanilla", quantityType: "bean"))
+//    produceTypes.append((name: "Walnut", quantityType: "unit"))
+//    produceTypes.append((name: "Watercress", quantityType: "bunch"))
+//    produceTypes.append((name: "Watermelon", quantityType: "unit"))
+//    produceTypes.append((name: "Wheat", quantityType: "unit"))
+//    
+//    produceTypes.append((name: "Yam", quantityType: "unit"))
+//    produceTypes.append((name: "Zucchini", quantityType: "unit"))
+//    
+//    completion(produceTypes)
   }
   
 }

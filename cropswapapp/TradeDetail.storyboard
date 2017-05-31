@@ -704,7 +704,7 @@ this cropswap?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dc9-5n-p7X" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yKI-mb-8VU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yKI-mb-8VU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -722,7 +722,7 @@ this cropswap?</string>
             <objects>
                 <navigationController storyboardIdentifier="NCTradeChatVC" automaticallyAdjustsScrollViewInsets="NO" id="TJn-jZ-eRL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="VHy-dF-2F1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHy-dF-2F1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

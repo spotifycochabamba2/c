@@ -13,14 +13,23 @@ class ProfileChildVC: UITableViewController {
   
   var currentUserId: String?
   var currentUsername: String?
+  var showBackButton = false
   
+  
+  @IBOutlet weak var aboutCell: UITableViewCell!
   @IBOutlet weak var streetCell: UITableViewCell!
   @IBOutlet weak var cityCell: UITableViewCell!
   @IBOutlet weak var stateCell: UITableViewCell!
   @IBOutlet weak var zipCodeCell: UITableViewCell!
-  @IBOutlet weak var showAddressCell: UITableViewCell!
+  @IBOutlet weak var showAddressCell: UITableViewCell!    
+  @IBOutlet weak var emailAddressCell: UITableViewCell!
+  @IBOutlet weak var phoneNumberCell: UITableViewCell!
   
-  var showBackButton = false
+  @IBOutlet weak var aboutLabel: UILabel! {
+    didSet {
+      aboutLabel.text = ""
+    }
+  }
   
   @IBOutlet weak var nameLabel: UILabel! {
     didSet {
@@ -45,13 +54,6 @@ class ProfileChildVC: UITableViewController {
       websiteLabel.text = ""
     }
   }
-  
-  
-//  @IBOutlet weak var locationLabel: UILabel! {
-//    didSet {
-//      locationLabel.text = ""
-//    }
-//  }
   
   @IBOutlet weak var streetLabel: UILabel! {
     didSet {
@@ -101,10 +103,9 @@ class ProfileChildVC: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)
+    let cell = super.tableView(tableView, cellForRowAt: indexPath)
     
     if showBackButton {
-      let cell = super.tableView(tableView, cellForRowAt: indexPath)
-      
       if cell === streetCell {
         return 0
       } else if cell === cityCell {
@@ -115,27 +116,30 @@ class ProfileChildVC: UITableViewController {
         return 0
       } else if cell === showAddressCell {
         return 0
+      } else if cell == phoneNumberCell {
+        return 0
+      } else if cell == emailAddressCell {
+        return 0
       }
+    }
+  
+    if cell === aboutCell {
+
+//      print("wtf cell \(cell.contentView.frame.height)")
+//      print("wtf label \(aboutLabel.frame.height)")
+//      print("wtf label.text \(aboutLabel.text)")
+//      return cell.contentView.frame.height
+      return UITableViewAutomaticDimension
     }
     
     return height
   }
   
-  
-//  @IBAction func takePictureButtonTouched() {
-//    performSegue(withIdentifier: Storyboard.ProfileChildToCamera, sender: nil)
-//  }
-//  
-//  @IBAction func pickPictureButtonTouched() {
-//    
-//  }
-//  
-//  @IBAction func deletePictureButtonTouched() {
-//    
-  //  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    tableView.estimatedRowHeight = 80
+    tableView.rowHeight = UITableViewAutomaticDimension
     
     if showBackButton {
       setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
@@ -151,6 +155,10 @@ class ProfileChildVC: UITableViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+
+    self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    navigationController?.navigationBar.isTranslucent = false
+    navigationController?.navigationBar.barTintColor = UIColor.hexStringToUIColor(hex: "#f9f9f9")
     
     DispatchQueue.main.async {
       SVProgressHUD.show()
@@ -160,7 +168,9 @@ class ProfileChildVC: UITableViewController {
       SVProgressHUD.dismiss()
       switch result {
       case .success(let user):
-        self?.loadUserInfoToUI(user: user)
+        DispatchQueue.main.async {
+          self?.loadUserInfoToUI(user: user)
+        }
       case .fail(let error):
         print(error)
         break
@@ -173,7 +183,7 @@ class ProfileChildVC: UITableViewController {
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"
     phoneNumberLabel.text = "\(user.phoneNumber ?? "")"
     websiteLabel.text = "\(user.website ?? "")"
-//    locationLabel.text = "\(user.location ?? "")"
+
     emailLabel.text = user.email
     
     profileImageURL = user.profilePictureURL
@@ -184,6 +194,9 @@ class ProfileChildVC: UITableViewController {
     zipCodeLabel.text = user.zipCode
     
     showAddressSwitch.isOn = user.showAddress ?? false
+    aboutLabel.text = user.about
+    
+    tableView.reloadData()
   }
 }
 

@@ -213,6 +213,7 @@ class HomeTBC: UITabBarController {
       vc?.anotherUsername = data?["senderUsername"] as? String
       vc?.dealId = data?["dealId"] as? String
     }
+//    } else if segue.identifier == Storyboard.G
   }
   
   func showChat(_ data: [String: Any]) {

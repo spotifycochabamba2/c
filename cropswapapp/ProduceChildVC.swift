@@ -198,7 +198,7 @@ class ProduceChildVC: UITableViewController {
       vc?.pictureIndexLeft = pictureIndexLeft
     } else if segue.identifier == Storyboard.ProduceChildToProfileChild {
       let nv = segue.destination as? UINavigationController
-      let vc = nv?.viewControllers.first as? ProfileChildVC
+      let vc = nv?.viewControllers.first as? ProfileContainerVC
 //      let values = sender as? [String: Any]
 //      
       vc?.currentUserId = produce?.ownerId
@@ -215,6 +215,9 @@ class ProduceChildVC: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    tableView.estimatedRowHeight = 80
+    tableView.rowHeight = UITableViewAutomaticDimension
 
     descriptionProduceTextView.isScrollEnabled = false
     

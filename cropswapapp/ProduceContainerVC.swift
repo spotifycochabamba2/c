@@ -147,7 +147,9 @@ class ProduceContainerVC: UIViewController {
   }
   
   func backButtonTouched() {
+    print("gaytan from produce container navigation controller vc count: \(navigationController?.viewControllers.count)")
     dismiss(animated: true)
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
   }
   
   func didConfirmOffer(_ howFinalized: String) {
