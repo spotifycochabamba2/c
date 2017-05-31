@@ -93,6 +93,10 @@ struct Storyboard {
   
   static let ProfileContainerToGarden = "ProfileContainerToGarden"
   static let GardenToProduceContainer = "GardenToProduceContainer"
+  static let SearchResultFeedToProduceContainer = "SearchResultFeedToProduceContainer"
+  
+  static let ProfileContainerToFinalizeTrade = "ProfileContainerToFinalizeTrade"
+  static let ProfileContainerToMakeDeal = "ProfileContainerToMakeDeal"
 }
 
 

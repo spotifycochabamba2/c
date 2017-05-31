@@ -35,11 +35,11 @@ class TradeListVC: UIViewController {
       Deal.removeListentingDealsUpdated(byUserId: userId, handlerId: getUpdatedDealsHandlerId)
     }
     
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
   }
   
   override func viewDidLoad() {
@@ -105,14 +105,14 @@ class TradeListVC: UIViewController {
     }
   }
   
-  func dismissModals(notification: Notification) {
-    self.dismiss(animated: true)
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
-  }
+//  func dismissModals(notification: Notification) {
+//    self.dismiss(animated: true)
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
+//  }
   
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,12 +149,12 @@ class TradeListVC: UIViewController {
       vc?.currentUsername = values?["username"] as? String
       vc?.showBackButton = true
       
-      NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(dismissModals(notification:)),
-        name: NSNotification.Name(rawValue: "dismissModals"),
-        object: nil
-      )
+//      NotificationCenter.default.addObserver(
+//        self,
+//        selector: #selector(dismissModals(notification:)),
+//        name: NSNotification.Name(rawValue: "dismissModals"),
+//        object: nil
+//      )
     }
   }
 }

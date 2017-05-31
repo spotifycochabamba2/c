@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.3.0)
+  - AlgoliaSearch-Client-Swift (4.6.1)
   - Ax (0.1.3)
   - Firebase (3.11.1):
     - Firebase/Core (= 3.11.1)
@@ -74,6 +75,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
+  - AlgoliaSearch-Client-Swift (~> 4.0)
   - Ax
   - Firebase
   - Firebase/Auth
@@ -105,6 +107,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  AlgoliaSearch-Client-Swift: cd88a599e43b753874001a7d40eeb3999f137f5f
   Ax: bf20b35de51359fc48bf7cbf96c60d50bb10a87c
   Firebase: 53b2343db1ebfa3eb16bdb4318b8bb65360b2220
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
@@ -127,6 +130,6 @@ SPEC CHECKSUMS:
   UITextField-Navigation: 681dcdf4041ca35ab20e21e3028e6b24b178a1f2
   UPCarouselFlowLayout: c0ea167002b597853f56ab8f44f00a4c60287619
 
-PODFILE CHECKSUM: 95cf826182bf497dd61ccd7c1a430b57c9ebeed5
+PODFILE CHECKSUM: 904eab090fc1459af3d0ca7483a4e12f336b8bd8
 
 COCOAPODS: 1.1.0.rc.2

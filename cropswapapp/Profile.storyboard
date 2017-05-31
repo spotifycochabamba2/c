@@ -62,7 +62,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-KC-MZr">
                                 <subviews>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxM-Cf-7PP">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxM-Cf-7PP">
                                         <color key="backgroundColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="DXp-HT-iqh"/>
@@ -137,11 +137,29 @@
                         <outlet property="segmentedControlViewHeightConstraint" destination="abZ-86-cyJ" id="jWQ-ef-Mz6"/>
                         <segue destination="Uvr-iv-DOK" kind="presentation" identifier="ProfileContainerToEditProfileContainer" id="Ehr-qk-lFL"/>
                         <segue destination="PiF-nt-4dk" kind="show" identifier="ProfileChildToSettings" id="KbG-fF-dAh"/>
+                        <segue destination="3c0-qc-bqN" kind="presentation" identifier="ProfileContainerToFinalizeTrade" id="UzT-NK-csm"/>
+                        <segue destination="4uo-Cc-cna" kind="presentation" identifier="ProfileContainerToMakeDeal" id="G1W-FD-cXO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXA-4E-uBk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-268" y="124.58770614692655"/>
+        </scene>
+        <!--MakeDealVC-->
+        <scene sceneID="j21-Xu-jrz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MakeDeal" referencedIdentifier="MakeDealVC" id="4uo-Cc-cna" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ab2-ke-a4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-55" y="-601"/>
+        </scene>
+        <!--FinalizeTradeVC-->
+        <scene sceneID="4aP-NG-wg2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="FinalizeTradeVC" id="3c0-qc-bqN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ve-wV-GyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="438" y="-485"/>
         </scene>
         <!--EditProfileContainerVC-->
         <scene sceneID="2fL-MS-Jl0">
@@ -553,11 +571,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s3L-JD-Tmt" id="Zes-vO-nvX">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ZM-Tr-ze7">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -570,11 +588,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6SE-fh-uUp" id="RiM-cC-913">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="efh-Ha-56U">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -587,11 +605,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKB-cS-xlx" id="9Xa-CI-XBa">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Terms and conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F5x-VP-84P">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>

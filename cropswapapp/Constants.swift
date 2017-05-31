@@ -10,6 +10,11 @@ import Foundation
 
 struct Constants {
   
+  struct Algolia {
+    static let searchAPIKey = "df5fa3a6d24e2da4cb02e7a6c65d71a1"
+    static let apiID = "LX7ZA23GKW"
+  }
+  
   struct Ids {
     static let logoutId = "logoutId"
   }
@@ -22,8 +27,8 @@ struct Constants {
   struct Server {
     static var stringURL: String {
 //      let url = "http://127.0.0.1:5000/"
-      let url = "https://aqueous-river-57184.herokuapp.com/"
-//      let url = "http://192.168.1.4:5000/"
+//      let url = "https://aqueous-river-57184.herokuapp.com/"
+      let url = "http://192.168.1.4:5000/"
       
       return url
     }
@@ -32,8 +37,8 @@ struct Constants {
   struct Instagram {
     private static let clientID = "265265bbe53b4934b9a30ae93597277e"
 //    private static let redirectURI = "http://127.0.0.1:5000//instagram-callback"
-    private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
-//    private static let redirectURI = "http://192.168.1.4:5000:5000/instagram-callback"
+//    private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
+    private static let redirectURI = "http://192.168.1.4:5000:5000/instagram-callback"
     
     static var authURL: String {
       let url = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=code"

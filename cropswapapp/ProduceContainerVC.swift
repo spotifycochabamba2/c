@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProduceContainerVC: UIViewController {
   var produceChildVC: ProduceChildVC?
@@ -125,8 +126,13 @@ class ProduceContainerVC: UIViewController {
     }
     
     if ownerId != currenUserId {
+      SVProgressHUD.show()
+      
       Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
-        self?.enableMakeDealButton()
+        DispatchQueue.main.async {
+          SVProgressHUD.show()
+          self?.enableMakeDealButton()
+        }
         print(hoursLeft)
         
         if hoursLeft > 0 {
@@ -149,7 +155,7 @@ class ProduceContainerVC: UIViewController {
   func backButtonTouched() {
     print("gaytan from produce container navigation controller vc count: \(navigationController?.viewControllers.count)")
     dismiss(animated: true)
-    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
+//    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
   }
   
   func didConfirmOffer(_ howFinalized: String) {

@@ -20,7 +20,7 @@ target 'cropswapapp' do
   pod 'SVProgressHUD'
   pod 'SDWebImage', '~>3.8'
   pod 'Ax'
-  
+    
   pod 'UPCarouselFlowLayout', :git => 'https://github.com/ink-spot/UPCarouselFlowLayout.git'
   pod 'iCarousel'
   

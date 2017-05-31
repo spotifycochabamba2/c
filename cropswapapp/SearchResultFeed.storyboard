@@ -21,7 +21,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCellId" id="1pR-Ma-HQP" customClass="FeedCell" customModule="cropswapapp" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="1pR-Ma-HQP">
                                 <rect key="frame" x="0.0" y="0.0" width="174" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -35,10 +35,41 @@
                             <outlet property="delegate" destination="5Jh-v7-46y" id="N3s-8O-lvD"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="HTG-9C-ptO" kind="show" identifier="SearchResultFeedToProduceContainer" id="6E8-yT-tWg"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVu-WA-tMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="104.7976011994003"/>
+            <point key="canvasLocation" x="-166" y="41"/>
+        </scene>
+        <!--ProduceContainerVC-->
+        <scene sceneID="37w-9A-ce4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Produce" referencedIdentifier="ProduceContainerVC" id="MO5-4b-Exr" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7aJ-Lz-zCY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnI-2C-cth" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1864.8" y="40.479760119940032"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ohs-tc-rs7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HTG-9C-ptO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="32e-bN-ROZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MO5-4b-Exr" kind="relationship" relationship="rootViewController" id="07y-Za-DkN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kiI-S7-hHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925.60000000000002" y="40.929535232383813"/>
         </scene>
     </scenes>
 </document>

@@ -30,6 +30,7 @@ class ProfileContainerVC: UIViewController {
   var currentUserId: String?
   var currentUsername: String?
   var showBackButton = false
+  var transactionMethod: String?
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Storyboard.ProfileContainerToProfileChild {
@@ -43,11 +44,71 @@ class ProfileContainerVC: UIViewController {
       let vc = segue.destination as? GardenVC
       vc?.currentUserId = self.currentUserId
       vc?.isCurrentOwner = false
+    } else if segue.identifier == Storyboard.ProfileContainerToFinalizeTrade {
+      let vc = segue.destination as? FinalizeTradeVC
+      vc?.didConfirmOffer = didConfirmOffer
+    } else if segue.identifier == Storyboard.ProfileContainerToMakeDeal {
+      let vc = segue.destination as? MakeDealVC
+      
+      vc?.transactionMethod = transactionMethod
+      vc?.anotherOwnerId = currentUserId
+      vc?.anotherUsername = currentUsername
     }
   }
   
+  func didConfirmOffer(_ howFinalized: String) {
+    transactionMethod = howFinalized
+    performSegue(withIdentifier: Storyboard.ProfileContainerToMakeDeal, sender: nil)
+  }
+  
   @IBAction func makeDealButtonTouched() {
+    makeDealButton.isEnabled = false
+    makeDealButton.alpha = 0.5
+    print(currentUserId)
+    print(currentUsername)
     
+    guard let ownerId = currentUserId else {
+      return
+    }
+    
+    guard let ownerName = currentUsername else {
+      return
+    }
+    
+    guard let currenUserId = User.currentUser?.uid else {
+      return
+    }
+    
+    if ownerId != currenUserId {
+      SVProgressHUD.show()
+      
+      Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
+        DispatchQueue.main.async {
+          SVProgressHUD.show()
+          self?.enableMakeDealButton()
+        }
+        print(hoursLeft)
+        
+        if hoursLeft > 0 {
+          let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          
+          self?.present(alert, animated: true)
+        } else {
+          self?.performSegue(withIdentifier: Storyboard.ProfileContainerToFinalizeTrade, sender: nil)
+        }
+        })
+    } else {
+      let alert = UIAlertController(title: "Info", message: "Sorry you can't make a deal with yourself", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      enableMakeDealButton()
+    }
+  }
+  
+  func enableMakeDealButton() {
+    makeDealButton.isEnabled = true
+    makeDealButton.alpha = 1
   }
   
   override func viewWillLayoutSubviews() {
@@ -143,7 +204,7 @@ class ProfileContainerVC: UIViewController {
   func backButtonTouched() {
     print("gaytan from profile container navigation controller vc count: \(navigationController?.viewControllers.count)")
     dismiss(animated: true)
-    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
+//    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
     
   }
   

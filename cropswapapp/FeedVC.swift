@@ -40,11 +40,11 @@ class FeedVC: UIViewController {
     User.stopListeningToGetProducesByListeningAddedNewOnes(handlerId: getNewProducesHandlerId, fromTime: time)
     User.stopListeningToGetProducesByListeningRemovedOnes(handlerId: getRemovedProducesHandlerId)
     
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,23 +55,23 @@ class FeedVC: UIViewController {
       
       vc?.produce = sender as? Produce
       
-      NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(dismissModals(notification:)),
-        name: NSNotification.Name(rawValue: "dismissModals"),
-        object: nil
-      )
+//      NotificationCenter.default.addObserver(
+//        self,
+//        selector: #selector(dismissModals(notification:)),
+//        name: NSNotification.Name(rawValue: "dismissModals"),
+//        object: nil
+//      )
     }
   }
   
-  func dismissModals(notification: Notification) {
-    self.dismiss(animated: true)
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
-  }
+//  func dismissModals(notification: Notification) {
+//    self.dismiss(animated: true)
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
+//  }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -108,7 +108,12 @@ class FeedVC: UIViewController {
 //    searchResultFeedVC = SearchResultFeedVC(
     
     produceSearchController = UISearchController(searchResultsController: searchResultFeedVC)
-    //    produceSearchController.searchResultsUpdater = self
+//    produceSearchController.searchResultsUpdater = searchResultFeedVC as! UISearchResultsUpdating?
+    produceSearchController.searchBar.delegate = searchResultFeedVC
+    produceSearchController.delegate = searchResultFeedVC
+//    produceSearchController.searchResultsUpdater = self
+//    produceSearchController.searchBar.delegate = self
+//    produceSearchController.delegate = self
     produceSearchController.dimsBackgroundDuringPresentation = true
     produceSearchController.searchBar.sizeToFit()
     
@@ -329,9 +334,31 @@ extension FeedVC {
 }
 
 
-extension FeedVC {
-  
-}
+//extension FeedVC: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+//  
+//  func willPresentSearchController(_ searchController: UISearchController) {
+//    SVProgressHUD.dismiss()
+//  }
+//  
+//  func willDismissSearchController(_ searchController: UISearchController) {
+//    SVProgressHUD.dismiss()
+//  }
+//  
+//  func updateSearchResults(for searchController: UISearchController) {
+//    let text = searchController.searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
+//    if text.characters.count > 3 {
+//      SVProgressHUD.show()
+//      Produce.searchFor(filter: text, completion: { [weak self] (produces) in
+//        DispatchQueue.main.async {
+//          SVProgressHUD.dismiss()
+//        }
+//        
+//        self?.searchResultFeedVC.produces = produces
+//      })
+//    }
+//  }
+//  
+//}
 
 
 

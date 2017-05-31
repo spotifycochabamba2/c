@@ -278,48 +278,48 @@ class TradeDetailVC: UIViewController {
       
       produceContainerVC = vc
       print("backstreet \(produceContainerVC)")
-      NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(dismissModals(notification:)),
-        name: NSNotification.Name(rawValue: "dismissModals"),
-        object: nil
-      )
+//      NotificationCenter.default.addObserver(
+//        self,
+//        selector: #selector(dismissModals(notification:)),
+//        name: NSNotification.Name(rawValue: "dismissModals"),
+//        object: nil
+//      )
     }
   }
   
-  func dismissModals(notification: Notification) {
-    print("backstreet \(produceContainerVC)")
-
-    
-    let rare1 = (presentingViewController as? UINavigationController)?.viewControllers.first
-    let rare2 = (presentedViewController as? UINavigationController)?.viewControllers.first
-    
-    print("backstreet rare1 \(rare1)")
-    print("backstreet rara2 \(rare2)")
-    
-    DispatchQueue.main.async { [weak self] in
-      self?.produceContainerVC?.dismiss(animated: true) {
-        let rare2 = (self?.presentedViewController as? UINavigationController)?.viewControllers.first
-        print("backstreet presenting \(self?.presentingViewController)")
-        print("backstreet presented \(self?.presentedViewController)")
-        print("backstreet after rara2 \(rare2)")
-        rare2?.dismiss(animated: true)
-      }
-    }
-//    self.dismiss(animated: true)
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
-  }
+//  func dismissModals(notification: Notification) {
+//    print("backstreet \(produceContainerVC)")
+//
+//    
+//    let rare1 = (presentingViewController as? UINavigationController)?.viewControllers.first
+//    let rare2 = (presentedViewController as? UINavigationController)?.viewControllers.first
+//    
+//    print("backstreet rare1 \(rare1)")
+//    print("backstreet rara2 \(rare2)")
+//    
+//    DispatchQueue.main.async { [weak self] in
+//      self?.produceContainerVC?.dismiss(animated: true) {
+//        let rare2 = (self?.presentedViewController as? UINavigationController)?.viewControllers.first
+//        print("backstreet presenting \(self?.presentingViewController)")
+//        print("backstreet presented \(self?.presentedViewController)")
+//        print("backstreet after rara2 \(rare2)")
+//        rare2?.dismiss(animated: true)
+//      }
+//    }
+////    self.dismiss(animated: true)
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
+//  }
   
   deinit {
-    NotificationCenter.default.removeObserver(
-      self,
-      name: NSNotification.Name(rawValue: "dismissModals"),
-      object: nil
-    )
+//    NotificationCenter.default.removeObserver(
+//      self,
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
   }
 }
 

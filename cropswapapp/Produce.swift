@@ -192,6 +192,21 @@ extension Produce {
   static var refDetails = refDatabase.child("details-tags")
   static var refProduceTypes = refDatabase.child("produce-types")
   
+  static func searchFor(
+    filter: String,
+    completion: @escaping ([Produce]) -> Void
+  ) {
+    let producesFound = [Produce]()
+    
+    if (User.currentUser?.uid) != nil {
+      Algolia.searchFor(filter: filter, completion: { (produces) in
+        completion(produces)
+      })
+    } else {
+      completion(producesFound)
+    }
+  }
+  
   static func archiveProduce(
     produceId: String,
     ownerUserId: String,
