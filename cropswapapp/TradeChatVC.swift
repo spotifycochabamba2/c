@@ -13,12 +13,17 @@ import Ax
 
 class TradeChatVC: JSQMessagesViewController {
   
-  var dealId: String!
+  var dealId: String?
   var anotherUsername: String?
   var anotherUserId: String!
   var currentUserId: String!
   var anotherUser: User?
   var date: Date!
+  
+  // this screen could
+  // used for chatting
+  // on Trades or One on One (inbox)
+  var usedForInbox = false
   
   var userImageView: UIImageView!
   
@@ -79,30 +84,37 @@ class TradeChatVC: JSQMessagesViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    CSNotification.clearChatNotification(withDealId: dealId, andUserId: currentUserId) { (error) in
-      print(error)
+    if let dealId = dealId {
+      
+      if usedForInbox {
+        
+      } else {
+        CSNotification.clearChatNotification(withDealId: dealId, andUserId: currentUserId) { (error) in
+          print(error)
+        }
+      }
+      
+      Message.removeListenNewMessages(byDealId: dealId, date: date, handlerId: listenNewMessagesHandlerId)
     }
-    
-    Message.removeListenNewMessages(byDealId: dealId, date: date, handlerId: listenNewMessagesHandlerId)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     date = Date()
     
-    
-    
-    listenNewMessagesHandlerId = Message.listenNewMessages(
-      byDealId: dealId,
-      date: date) { [weak self] (newMessage) in
-        print("newmessage \(newMessage)")
-        
-        let jsqMessage = JSQMessage(senderId: newMessage.senderId, displayName: "", text: newMessage.text)
-        self?.jsqMessages.append(jsqMessage!)
-        
-        DispatchQueue.main.async {
-          self?.finishReceivingMessage(animated: true)
-        }
+    if let dealId = dealId {
+      listenNewMessagesHandlerId = Message.listenNewMessages(
+        byDealId: dealId,
+        date: date) { [weak self] (newMessage) in
+          print("newmessage \(newMessage)")
+          
+          let jsqMessage = JSQMessage(senderId: newMessage.senderId, displayName: "", text: newMessage.text)
+          self?.jsqMessages.append(jsqMessage!)
+          
+          DispatchQueue.main.async {
+            self?.finishReceivingMessage(animated: true)
+          }
+      }
     }
     
     DispatchQueue.main.async {
@@ -116,6 +128,10 @@ class TradeChatVC: JSQMessagesViewController {
           switch result {
           case .success(let user):
             self?.anotherUser = user
+            DispatchQueue.main.async {
+              self?.setNavHeaderTitle(title: "Chat with \(user.name)", color: UIColor.black)
+            }
+            
             if let url = URL(string: user.profilePictureURL ?? "") {
               self?.userImageView.sd_setImage(with: url)
             }
@@ -128,8 +144,10 @@ class TradeChatVC: JSQMessagesViewController {
       },
       
       { [weak self] done in
-        if let this = self {
-          Message.getMessages(byDealId: this.dealId, completion: { (messages) in
+        if let this = self,
+           let dealId = this.dealId
+        {
+          Message.getMessages(byDealId: dealId, completion: { (messages) in
             this.jsqMessages = messages.map { msg in
               let jsqMessage = JSQMessage(senderId: msg.senderId, displayName: "", text: msg.text)
               return jsqMessage!
@@ -141,6 +159,8 @@ class TradeChatVC: JSQMessagesViewController {
             
             done(nil)
           })
+        } else {
+          done(nil)
         }
       }
       
@@ -197,13 +217,56 @@ extension TradeChatVC {
   }
   
   override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-    
-    Message.sendMessage(
-      dealId: dealId,
-      senderId: currentUserId,
-      receiverId: anotherUserId,
-      text: text) { (error) in
-        print(error)
+    if let dealId = dealId {
+      Message.sendMessage(
+        dealId: dealId,
+        senderId: currentUserId,
+        receiverId: anotherUserId,
+        text: text) { [weak self] (error) in
+          print(error)
+          
+          if let this = self {
+            if this.usedForInbox {
+              Inbox.createOrUpdateInbox(
+                fromUserId: this.currentUserId,
+                toUserId: this.anotherUserId,
+                text: text,
+                date: Date(),
+                inboxId: dealId,
+                completion: { (error) in
+                  print(error)
+              })
+            } else {
+              // test
+              Message.sendMessagePushNotification(
+                dealId: dealId,
+                senderId: senderId,
+                receiverId: this.anotherUserId,
+                text: text,
+                completion: { (_) in
+                  
+              })
+              
+              CSNotification.createOrUpdateChatNotification(
+                withDealId: dealId,
+                andUserId: this.anotherUserId,
+                completion: { (error) in
+                  print(error)
+                }
+              )
+              
+              CSNotification.saveOrUpdateTradeNotification(
+                byUserId: this.anotherUserId,
+                dealId: dealId,
+                field: "chat",
+                withValue: 1,
+                completion: { (error) in
+                  print(error)
+              })
+              // /test
+            }
+          }
+      }
     }
     
     finishSendingMessage(animated: true)

@@ -130,7 +130,7 @@ class ProduceContainerVC: UIViewController {
       
       Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
         DispatchQueue.main.async {
-          SVProgressHUD.show()
+          SVProgressHUD.dismiss()
           self?.enableMakeDealButton()
         }
         print(hoursLeft)

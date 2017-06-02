@@ -331,6 +331,16 @@
             </objects>
             <point key="canvasLocation" x="-708" y="1714.5427286356824"/>
         </scene>
+        <!--CropswapsVC-->
+        <scene sceneID="rg6-Kv-NGn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cropswaps" referencedIdentifier="CropswapsVC" id="hsy-W2-AcU" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uy3-B7-sfZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gu4-JJ-RAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1458.4000000000001" y="1917.8410794602701"/>
+        </scene>
         <!--TradeChatVC-->
         <scene sceneID="npe-9w-avJ">
             <objects>
@@ -339,7 +349,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3p-6d-ELW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="1714.5427286356824"/>
+            <point key="canvasLocation" x="158" y="2393"/>
         </scene>
         <!--HomeTBC-->
         <scene sceneID="VtG-rO-bfz">
@@ -351,12 +361,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="hW7-Np-1pw" kind="presentation" identifier="HomeToTradeHome" modalPresentationStyle="overFullScreen" id="QRq-C3-chr"/>
+                        <segue destination="OPg-9X-Fxe" kind="presentation" identifier="HomeToTradeChat" modalPresentationStyle="overFullScreen" id="iJZ-DI-PmQ"/>
                         <segue destination="WUk-um-lDf" kind="relationship" relationship="viewControllers" id="mze-f1-nWP"/>
                         <segue destination="fEZ-2d-pmC" kind="relationship" relationship="viewControllers" id="x6K-YZ-8Rq"/>
                         <segue destination="AcQ-h1-s9h" kind="relationship" relationship="viewControllers" id="x0S-li-WII"/>
+                        <segue destination="mPo-6b-8PG" kind="relationship" relationship="viewControllers" id="AzA-NZ-BZi"/>
                         <segue destination="Gw8-XH-bzP" kind="relationship" relationship="viewControllers" id="c5M-1T-7sg"/>
-                        <segue destination="hW7-Np-1pw" kind="presentation" identifier="HomeToTradeHome" modalPresentationStyle="overFullScreen" id="QRq-C3-chr"/>
-                        <segue destination="OPg-9X-Fxe" kind="presentation" identifier="HomeToTradeChat" modalPresentationStyle="overFullScreen" id="iJZ-DI-PmQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcY-NL-lvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -382,11 +393,11 @@
             </objects>
             <point key="canvasLocation" x="1400.8" y="218.1409295352324"/>
         </scene>
-        <!--TRADE LIST-->
+        <!--TRADELIST-->
         <scene sceneID="OJs-d7-taH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fEZ-2d-pmC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="TRADE LIST" image="tabbar-tradelist-icon" id="N1W-op-OmG"/>
+                    <tabBarItem key="tabBarItem" title="TRADELIST" image="tabbar-tradelist-icon" id="N1W-op-OmG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="svb-oy-dne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -411,11 +422,11 @@
             </objects>
             <point key="canvasLocation" x="2268" y="854"/>
         </scene>
-        <!--MY GARDEN-->
+        <!--GARDEN-->
         <scene sceneID="6We-JV-Aqc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AcQ-h1-s9h" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="MY GARDEN" image="tabbar-mygarden-icon" id="sfo-rT-94Y"/>
+                    <tabBarItem key="tabBarItem" title="GARDEN" image="tabbar-mygarden-icon" id="sfo-rT-94Y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Wgq-bm-bXk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -428,7 +439,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFZ-Ep-dHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3279.1999999999998" y="1727.5862068965519"/>
+            <point key="canvasLocation" x="3743.1999999999998" y="1878.7106446776613"/>
         </scene>
         <!--GardenVC-->
         <scene sceneID="f2y-BX-M3Q">
@@ -440,11 +451,11 @@
             </objects>
             <point key="canvasLocation" x="4116" y="1715.4422788605698"/>
         </scene>
-        <!--MY PROFILE-->
+        <!--CHAT-->
         <scene sceneID="KT9-z6-6DK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gw8-XH-bzP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="MY PROFILE" image="tabbar-myprofile-icon" id="Ani-PX-fVM"/>
+                    <tabBarItem key="tabBarItem" title="CHAT" image="tabar-chat-icon" id="Ani-PX-fVM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pFf-9X-IC3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -457,12 +468,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x57-H9-O5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2172" y="1837.3313343328336"/>
+            <point key="canvasLocation" x="2551.1999999999998" y="2000.1499250374814"/>
         </scene>
-        <!--ProfileContainerVC-->
+        <!--InboxVC-->
         <scene sceneID="S7s-eF-6ai">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="DV6-io-BhL" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Inbox" referencedIdentifier="InboxVC" id="DV6-io-BhL" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="XIT-52-pqM"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgu-Zh-ROv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -503,7 +514,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="muw-Qb-0Ww" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-111.2" y="1714.9925037481262"/>
+            <point key="canvasLocation" x="-527" y="2394"/>
+        </scene>
+        <!--CROPSWAPS-->
+        <scene sceneID="Jsg-3G-7ee">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mPo-6b-8PG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="CROPSWAPS" image="tabar-cropswap-icon" id="jtJ-Ig-p20"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3w5-hq-Ech">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hsy-W2-AcU" kind="relationship" relationship="rootViewController" id="mWA-RC-iL0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="woG-79-ikM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="519.20000000000005" y="1917.3913043478262"/>
         </scene>
     </scenes>
     <resources>
@@ -515,9 +545,10 @@
         <image name="home-popup-icon-messages" width="67" height="67"/>
         <image name="home-popup-icon-mylist" width="67" height="67"/>
         <image name="home-popup-icon-trade" width="67" height="67"/>
+        <image name="tabar-chat-icon" width="24" height="22"/>
+        <image name="tabar-cropswap-icon" width="23" height="23"/>
         <image name="tabbar-feed-icon" width="24" height="26"/>
         <image name="tabbar-mygarden-icon" width="23" height="27"/>
-        <image name="tabbar-myprofile-icon" width="24" height="23"/>
         <image name="tabbar-tradelist-icon" width="22" height="28"/>
     </resources>
 </document>

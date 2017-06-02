@@ -13,6 +13,7 @@ class ProfileContainerVC: UIViewController {
   @IBOutlet weak var profileContainerView: UIView!
   @IBOutlet weak var gardenContainerView: UIView!
   
+  @IBOutlet weak var openChatButton: UIButton!
   @IBOutlet weak var editButton: UIButton!
   @IBOutlet weak var makeDealView: UIView!
 //  var logoutButton: UIButton!
@@ -53,12 +54,42 @@ class ProfileContainerVC: UIViewController {
       vc?.transactionMethod = transactionMethod
       vc?.anotherOwnerId = currentUserId
       vc?.anotherUsername = currentUsername
+    } else if segue.identifier == Storyboard.ProfileContainerToChat {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? TradeChatVC
+      
+      vc?.anotherUserId = currentUserId
+      vc?.anotherUsername = currentUsername
+      vc?.dealId = sender as? String
+      vc?.usedForInbox = true
     }
   }
   
   func didConfirmOffer(_ howFinalized: String) {
     transactionMethod = howFinalized
     performSegue(withIdentifier: Storyboard.ProfileContainerToMakeDeal, sender: nil)
+  }
+  
+  @IBAction func openChatButtonTouched() {
+    guard let fromUserId = User.currentUser?.uid else {
+      return
+    }
+    
+    guard let toUserId = currentUserId else {
+      return
+    }
+    
+    SVProgressHUD.show()
+    
+    Inbox.getOrCreateInboxId(
+      fromUserId: fromUserId,
+      toUserId: toUserId) { (inboxId) in
+        DispatchQueue.main.async { [weak self] in
+          SVProgressHUD.dismiss()
+          
+          self?.performSegue(withIdentifier: Storyboard.ProfileContainerToChat, sender: inboxId)
+        }
+    }
   }
   
   @IBAction func makeDealButtonTouched() {
@@ -84,7 +115,7 @@ class ProfileContainerVC: UIViewController {
       
       Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
         DispatchQueue.main.async {
-          SVProgressHUD.show()
+          SVProgressHUD.dismiss()
           self?.enableMakeDealButton()
         }
         print(hoursLeft)

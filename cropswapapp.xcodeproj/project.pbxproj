@@ -66,9 +66,15 @@
 		694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697441E816531006D8907 /* Montserrat-SemiBold.ttf */; };
 		696024ED1E9D80F2006766AF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696024EC1E9D80F2006766AF /* ItemCell.swift */; };
 		696024EF1E9D8115006766AF /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696024EE1E9D8115006766AF /* ItemCell.xib */; };
+		696C9A481EE051D4008CEF4C /* Inbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 696C9A471EE051D4008CEF4C /* Inbox.storyboard */; };
 		6974BC8E1EA02D7100126732 /* ButtonCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC8D1EA02D7100126732 /* ButtonCircular.swift */; };
 		6974BC921EA1191F00126732 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC911EA1191F00126732 /* Deal.swift */; };
 		6974BC941EA1B8A300126732 /* TradeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC931EA1B8A300126732 /* TradeListCell.swift */; };
+		697B82C41EE05AF50068673C /* InboxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C31EE05AF50068673C /* InboxVC.swift */; };
+		697B82C61EE05B1C0068673C /* InboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C51EE05B1C0068673C /* InboxCell.swift */; };
+		697B82C81EE062E20068673C /* Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C71EE062E20068673C /* Inbox.swift */; };
+		697B82CB1EE0C3460068673C /* Cropswaps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697B82CA1EE0C3460068673C /* Cropswaps.storyboard */; };
+		697B82CD1EE0C3560068673C /* CropswapsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82CC1EE0C3560068673C /* CropswapsVC.swift */; };
 		69823A8B1E9E7AD50066DEB1 /* AddItemToDeal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69823A8A1E9E7AD50066DEB1 /* AddItemToDeal.storyboard */; };
 		69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69823A8C1E9E7AE20066DEB1 /* AddItemToDealVC.swift */; };
 		698241991EC366E900F9B37D /* CSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698241981EC366E900F9B37D /* CSNotification.swift */; };
@@ -203,9 +209,15 @@
 		6954E2A81EB77552009EFA59 /* cropswapapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cropswapapp.entitlements; sourceTree = "<group>"; };
 		696024EC1E9D80F2006766AF /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		696024EE1E9D8115006766AF /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		696C9A471EE051D4008CEF4C /* Inbox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Inbox.storyboard; sourceTree = "<group>"; };
 		6974BC8D1EA02D7100126732 /* ButtonCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCircular.swift; sourceTree = "<group>"; };
 		6974BC911EA1191F00126732 /* Deal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 		6974BC931EA1B8A300126732 /* TradeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeListCell.swift; sourceTree = "<group>"; };
+		697B82C31EE05AF50068673C /* InboxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxVC.swift; sourceTree = "<group>"; };
+		697B82C51EE05B1C0068673C /* InboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxCell.swift; sourceTree = "<group>"; };
+		697B82C71EE062E20068673C /* Inbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inbox.swift; sourceTree = "<group>"; };
+		697B82CA1EE0C3460068673C /* Cropswaps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cropswaps.storyboard; sourceTree = "<group>"; };
+		697B82CC1EE0C3560068673C /* CropswapsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropswapsVC.swift; sourceTree = "<group>"; };
 		69823A8A1E9E7AD50066DEB1 /* AddItemToDeal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddItemToDeal.storyboard; sourceTree = "<group>"; };
 		69823A8C1E9E7AE20066DEB1 /* AddItemToDealVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemToDealVC.swift; sourceTree = "<group>"; };
 		698241981EC366E900F9B37D /* CSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSNotification.swift; sourceTree = "<group>"; };
@@ -311,6 +323,7 @@
 				698241981EC366E900F9B37D /* CSNotification.swift */,
 				6934322B1ED4D7D9005C2B48 /* CSFirebase.swift */,
 				69288E221EDF15BB008A5179 /* Algolia.swift */,
+				697B82C71EE062E20068673C /* Inbox.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -397,6 +410,8 @@
 		692E76C91E829C780071EF5C /* New Design */ = {
 			isa = PBXGroup;
 			children = (
+				697B82C91EE0C32B0068673C /* Cropswaps */,
+				696C9A461EE051B9008CEF4C /* Chat */,
 				69B685521EA8FBF7003C8188 /* Trade Detail */,
 				692E7AEC1E971535001ABF36 /* Trade */,
 				6982CC931E854C9A00A41E8D /* Reusable Views */,
@@ -471,6 +486,25 @@
 				69EE4AF91E3FD42C00C95624 /* Storyboard.swift */,
 			);
 			path = cropswapapp;
+			sourceTree = "<group>";
+		};
+		696C9A461EE051B9008CEF4C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				696C9A471EE051D4008CEF4C /* Inbox.storyboard */,
+				697B82C31EE05AF50068673C /* InboxVC.swift */,
+				697B82C51EE05B1C0068673C /* InboxCell.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		697B82C91EE0C32B0068673C /* Cropswaps */ = {
+			isa = PBXGroup;
+			children = (
+				697B82CA1EE0C3460068673C /* Cropswaps.storyboard */,
+				697B82CC1EE0C3560068673C /* CropswapsVC.swift */,
+			);
+			name = Cropswaps;
 			sourceTree = "<group>";
 		};
 		6982CC931E854C9A00A41E8D /* Reusable Views */ = {
@@ -758,6 +792,7 @@
 				69EE4AEE1E3FCDE700C95624 /* OpenSans-LightItalic.ttf in Resources */,
 				69941DBE1E82FC600073760F /* Produce.storyboard in Resources */,
 				69EE4AE71E3FCDE700C95624 /* VarelaRound-Regular.ttf in Resources */,
+				696C9A481EE051D4008CEF4C /* Inbox.storyboard in Resources */,
 				694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */,
 				69EE4AEC1E3FCDE700C95624 /* OpenSans-Italic.ttf in Resources */,
 				69B685561EA8FC46003C8188 /* TradeDetail.storyboard in Resources */,
@@ -788,6 +823,7 @@
 				6913AD141E5E2F9A002EB1BC /* MyGarden.storyboard in Resources */,
 				6982CC951E854CC500A41E8D /* FeedCell.xib in Resources */,
 				692E76C61E829C5A0071EF5C /* TradeList.storyboard in Resources */,
+				697B82CB1EE0C3460068673C /* Cropswaps.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +892,7 @@
 				6974BC941EA1B8A300126732 /* TradeListCell.swift in Sources */,
 				69941DC61E84222A0073760F /* TagsCollectionView.swift in Sources */,
 				69B685651EABAA20003C8188 /* TradeHistorialProduceView.swift in Sources */,
+				697B82C61EE05B1C0068673C /* InboxCell.swift in Sources */,
 				691282381EAFD8BC0053290B /* Offer.swift in Sources */,
 				69FB72511E9294C100D053FB /* ProfileChildVC.swift in Sources */,
 				69EF6E671E6AF24F0033454F /* UITableViewControllerExtension.swift in Sources */,
@@ -891,10 +928,12 @@
 				693DFA071E92D48F00C2FD6C /* EditProfileChildVC.swift in Sources */,
 				6917D38B1EBB6D0300F87224 /* TradeStatusVC.swift in Sources */,
 				69EE4AFC1E3FD70900C95624 /* SignupVC.swift in Sources */,
+				697B82C41EE05AF50068673C /* InboxVC.swift in Sources */,
 				69C4013A1E82021600F5F5D8 /* TradeListVC.swift in Sources */,
 				6974BC8E1EA02D7100126732 /* ButtonCircular.swift in Sources */,
 				69DB63F11EDA0E9F007D7170 /* ChooseUnitVC.swift in Sources */,
 				69B6855E1EAA4A93003C8188 /* UIImageViewCircular.swift in Sources */,
+				697B82CD1EE0C3560068673C /* CropswapsVC.swift in Sources */,
 				69C4013C1E82023200F5F5D8 /* ProfileContainerVC.swift in Sources */,
 				69EE4B021E3FE31300C95624 /* UIColorExtension.swift in Sources */,
 				69F85D7F1ECA24E6008E3835 /* CSTextView.swift in Sources */,
@@ -918,6 +957,7 @@
 				692E7AEE1E9716A5001ABF36 /* MakeDealVC.swift in Sources */,
 				6914F28D1EA5552F00142CB8 /* ChooseDetailListVC.swift in Sources */,
 				69B685601EAAC06D003C8188 /* Message.swift in Sources */,
+				697B82C81EE062E20068673C /* Inbox.swift in Sources */,
 				69047E971EC4AC2B00A8E554 /* SettingsVC.swift in Sources */,
 				6914F28B1EA54E8B00142CB8 /* ChooseDetailCell.swift in Sources */,
 				69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */,

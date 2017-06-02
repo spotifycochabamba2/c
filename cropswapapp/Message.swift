@@ -67,31 +67,31 @@ extension Message {
     refDealMessage.setValue(data, withCompletionBlock: {
       (error: Error?, ref: FIRDatabaseReference) in
       
-      sendMessagePushNotification(
-        dealId: dealId,
-        senderId: senderId,
-        receiverId: receiverId,
-        text: text,
-        completion: { (_) in
-          
-      })
-      
-      CSNotification.createOrUpdateChatNotification(
-        withDealId: dealId,
-        andUserId: receiverId,
-        completion: { (error) in
-          print(error)
-        }
-      )
-      
-      CSNotification.saveOrUpdateTradeNotification(
-        byUserId: receiverId,
-        dealId: dealId,
-        field: "chat",
-        withValue: 1,
-        completion: { (error) in
-          print(error)
-      })
+//      sendMessagePushNotification(
+//        dealId: dealId,
+//        senderId: senderId,
+//        receiverId: receiverId,
+//        text: text,
+//        completion: { (_) in
+//          
+//      })
+//      
+//      CSNotification.createOrUpdateChatNotification(
+//        withDealId: dealId,
+//        andUserId: receiverId,
+//        completion: { (error) in
+//          print(error)
+//        }
+//      )
+//      
+//      CSNotification.saveOrUpdateTradeNotification(
+//        byUserId: receiverId,
+//        dealId: dealId,
+//        field: "chat",
+//        withValue: 1,
+//        completion: { (error) in
+//          print(error)
+//      })
       
       completion(error as NSError?)
     })

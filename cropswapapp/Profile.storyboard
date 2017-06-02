@@ -104,15 +104,27 @@
                                     <action selector="editProfileButtonTouched" destination="igU-gF-0tQ" eventType="touchUpInside" id="xhM-7c-vCj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uto-m9-cw3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="Ebx-dC-KSR"/>
+                                    <constraint firstAttribute="width" constant="69" id="jjL-hq-t0K"/>
+                                </constraints>
+                                <state key="normal" image="icon-button-chat"/>
+                                <connections>
+                                    <action selector="openChatButtonTouched" destination="igU-gF-0tQ" eventType="touchUpInside" id="Jkb-qI-GR6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="eHs-c0-8PH" secondAttribute="bottom" constant="5" id="Bil-7w-cUy"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="d0o-to-JA2" secondAttribute="bottom" constant="5" id="C83-C1-7Vp"/>
+                            <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="Uto-m9-cw3" secondAttribute="bottom" constant="5" id="Cpe-BB-fup"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="RIQ-iS-1wF" secondAttribute="bottom" id="HZP-rS-bNc"/>
                             <constraint firstAttribute="trailing" secondItem="d0o-to-JA2" secondAttribute="trailing" id="Kjn-dl-4TZ"/>
                             <constraint firstItem="d0o-to-JA2" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="NRO-Li-LdL"/>
                             <constraint firstAttribute="trailing" secondItem="RIQ-iS-1wF" secondAttribute="trailing" id="Q8e-EP-Lwx"/>
+                            <constraint firstItem="Uto-m9-cw3" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="RMm-vJ-vyc"/>
                             <constraint firstAttribute="trailing" secondItem="QEC-iC-PJ2" secondAttribute="trailing" id="UVt-va-lhL"/>
                             <constraint firstAttribute="trailing" secondItem="eHs-c0-8PH" secondAttribute="trailing" id="Yt9-Y3-Vik"/>
                             <constraint firstItem="d0o-to-JA2" firstAttribute="top" secondItem="QEC-iC-PJ2" secondAttribute="bottom" id="a9M-oB-eWT"/>
@@ -131,6 +143,7 @@
                         <outlet property="makeDealButton" destination="wxM-Cf-7PP" id="zrC-4A-7lg"/>
                         <outlet property="makeDealView" destination="hXL-KC-MZr" id="0td-Xe-hVb"/>
                         <outlet property="makeDealViewHeightConstraint" destination="b03-EA-eU4" id="XbM-Rg-3P7"/>
+                        <outlet property="openChatButton" destination="Uto-m9-cw3" id="nwq-Ci-Hr7"/>
                         <outlet property="profileContainerView" destination="eHs-c0-8PH" id="tkH-Uh-AtF"/>
                         <outlet property="segmentedControl" destination="wkW-TV-eJX" id="lFQ-DP-G6r"/>
                         <outlet property="segmentedControlView" destination="QEC-iC-PJ2" id="r1D-Yi-lBT"/>
@@ -139,11 +152,22 @@
                         <segue destination="PiF-nt-4dk" kind="show" identifier="ProfileChildToSettings" id="KbG-fF-dAh"/>
                         <segue destination="3c0-qc-bqN" kind="presentation" identifier="ProfileContainerToFinalizeTrade" id="UzT-NK-csm"/>
                         <segue destination="4uo-Cc-cna" kind="presentation" identifier="ProfileContainerToMakeDeal" id="G1W-FD-cXO"/>
+                        <segue destination="TdM-AU-tmd" kind="presentation" identifier="ProfileContainerToChat" id="06h-Mn-wiG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXA-4E-uBk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-268" y="124.58770614692655"/>
+        </scene>
+        <!--TradeChatVC-->
+        <scene sceneID="j9q-VT-6eE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="TradeChatVC" id="WAK-DU-ajC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="X7h-tx-9O0"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z3l-sK-GGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="762" y="-759"/>
         </scene>
         <!--MakeDealVC-->
         <scene sceneID="j21-Xu-jrz">
@@ -151,7 +175,7 @@
                 <viewControllerPlaceholder storyboardName="MakeDeal" referencedIdentifier="MakeDealVC" id="4uo-Cc-cna" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ab2-ke-a4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55" y="-601"/>
+            <point key="canvasLocation" x="2008.8" y="-672.86356821589209"/>
         </scene>
         <!--FinalizeTradeVC-->
         <scene sceneID="4aP-NG-wg2">
@@ -159,7 +183,7 @@
                 <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="FinalizeTradeVC" id="3c0-qc-bqN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ve-wV-GyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="438" y="-485"/>
+            <point key="canvasLocation" x="1055" y="-470"/>
         </scene>
         <!--EditProfileContainerVC-->
         <scene sceneID="2fL-MS-Jl0">
@@ -571,11 +595,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s3L-JD-Tmt" id="Zes-vO-nvX">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ZM-Tr-ze7">
-                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -588,11 +612,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6SE-fh-uUp" id="RiM-cC-913">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="efh-Ha-56U">
-                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -605,11 +629,11 @@ trade requests</string>
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKB-cS-xlx" id="9Xa-CI-XBa">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Terms and conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F5x-VP-84P">
-                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -641,7 +665,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qcd-L1-8BO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -662,10 +686,29 @@ trade requests</string>
             </objects>
             <point key="canvasLocation" x="1286" y="1063"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KGp-uz-tVq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdM-AU-tmd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xvL-IM-h7X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WAK-DU-ajC" kind="relationship" relationship="rootViewController" id="Tp0-W3-q6J"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o4V-1A-NQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7" y="-758"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cropswap-gray-logo" width="106" height="105"/>
         <image name="edit-profile-button-icon" width="69" height="69"/>
+        <image name="icon-button-chat" width="67" height="67"/>
         <image name="start-inactive-icon" width="19" height="17"/>
     </resources>
 </document>

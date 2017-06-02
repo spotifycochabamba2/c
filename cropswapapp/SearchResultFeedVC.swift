@@ -109,7 +109,7 @@ extension SearchResultFeedVC: UISearchControllerDelegate, UISearchBarDelegate { 
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     let text = searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
-    if text.characters.count > 3 {
+    if text.characters.count >= 3 {
       print("searching")
       SVProgressHUD.show()
       

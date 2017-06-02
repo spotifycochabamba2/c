@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--InboxVC-->
+        <scene sceneID="Bnc-VC-wxS">
+            <objects>
+                <tableViewController storyboardIdentifier="InboxVC" id="jWk-UO-ZIp" customClass="InboxVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VxQ-3r-JBf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InboxCellId" rowHeight="100" id="5M8-15-u7G" customClass="InboxCell" customModule="cropswapapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5M8-15-u7G" id="pid-hK-ZlM">
+                                    <frame key="frameInset" width="375" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5A5-mn-lOG" customClass="UIImageViewCircular" customModule="cropswapapp" customModuleProvider="target">
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="PKy-MA-KpC"/>
+                                                <constraint firstAttribute="height" constant="70" id="pb7-2n-Hdf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wilson dkjfhd kjfghdfkj g" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgc-XK-Na4">
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 min ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8f-ls-iEw">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="D5D-HR-6uf"/>
+                                                <constraint firstAttribute="width" constant="80" id="lXa-kX-UIY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dflgj dlskgjdls;fkgj ldksfj gl;dkfjs gl;kdfjs gl;kjs fgl;kj dfsl;kgj dsl;kgj dfls;kgj kl;dsfgj lkdsf g" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKb-f1-emi">
+                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Qgc-XK-Na4" firstAttribute="top" secondItem="pid-hK-ZlM" secondAttribute="topMargin" id="9zB-F2-Upe"/>
+                                        <constraint firstItem="CKb-f1-emi" firstAttribute="top" secondItem="Qgc-XK-Na4" secondAttribute="bottom" constant="2" id="Bic-Lu-3df"/>
+                                        <constraint firstItem="5A5-mn-lOG" firstAttribute="top" secondItem="pid-hK-ZlM" secondAttribute="topMargin" id="FHn-mD-kg9"/>
+                                        <constraint firstItem="CKb-f1-emi" firstAttribute="leading" secondItem="5A5-mn-lOG" secondAttribute="trailing" constant="8" id="YYL-XJ-NEA"/>
+                                        <constraint firstItem="CKb-f1-emi" firstAttribute="trailing" secondItem="pid-hK-ZlM" secondAttribute="trailingMargin" id="Z2K-GR-lUw"/>
+                                        <constraint firstItem="Qgc-XK-Na4" firstAttribute="leading" secondItem="5A5-mn-lOG" secondAttribute="trailing" constant="8" id="fBa-9C-GjP"/>
+                                        <constraint firstItem="5A5-mn-lOG" firstAttribute="leading" secondItem="pid-hK-ZlM" secondAttribute="leadingMargin" id="oT8-Dd-2bM"/>
+                                        <constraint firstItem="F8f-ls-iEw" firstAttribute="top" secondItem="pid-hK-ZlM" secondAttribute="topMargin" id="p8h-jR-j4m"/>
+                                        <constraint firstItem="F8f-ls-iEw" firstAttribute="trailing" secondItem="pid-hK-ZlM" secondAttribute="trailingMargin" id="shp-jA-gW9"/>
+                                        <constraint firstItem="F8f-ls-iEw" firstAttribute="leading" secondItem="Qgc-XK-Na4" secondAttribute="trailing" constant="8" id="tMm-1h-KxR"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="messageLabel" destination="CKb-f1-emi" id="1oV-b3-Etv"/>
+                                    <outlet property="timeLabel" destination="F8f-ls-iEw" id="ezw-5X-4dG"/>
+                                    <outlet property="userImageView" destination="5A5-mn-lOG" id="GhZ-Yu-oo2"/>
+                                    <outlet property="usernameLabel" destination="Qgc-XK-Na4" id="zCW-VZ-Flo"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jWk-UO-ZIp" id="JLP-b6-iIM"/>
+                            <outlet property="delegate" destination="jWk-UO-ZIp" id="gtf-G1-lF3"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pt0-00-69u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23.199999999999999" y="108.39580209895054"/>
+        </scene>
+    </scenes>
+</document>
