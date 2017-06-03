@@ -15,6 +15,12 @@ class InboxCell: UITableViewCell {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var messageLabel: UILabel!
   
+  let usernameRegularFont = UIFont(name: "Montserrat-Regular", size: 20)
+  let usernameSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 20)
+  
+  let messageRegularFont = UIFont(name: "Montserrat-Regular", size: 13)
+  let messageSemiboldFont = UIFont(name: "Montserrat-Semibold", size: 13)
+  
   static let identifier = "InboxCellId"
   
   var inbox: [String: Any]? {
@@ -24,6 +30,20 @@ class InboxCell: UITableViewCell {
         name = inbox["name"] as? String
         time = inbox["dateUpdated"] as? Double
         messageText = inbox["text"] as? String
+        hasNewNotifications = inbox["notifications"] as? Bool ?? false
+      }
+    }
+  }
+  
+  var hasNewNotifications = false {
+    didSet {
+      print(" creative hasNewNotifications \(hasNewNotifications) name: \(name)")
+      if hasNewNotifications {
+        usernameLabel.font = usernameSemiboldFont
+        messageLabel.font = messageSemiboldFont
+      } else {
+        usernameLabel.font = usernameRegularFont
+        messageLabel.font = messageRegularFont
       }
     }
   }

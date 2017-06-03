@@ -21,6 +21,43 @@ extension Inbox {
   static let refInbox = refDatabase.child("inbox")
   static let refMessages = refDatabase.child("messages")
   
+  static func listenUpdatesInbox(
+    byUserId userId: String,
+    completion: @escaping(Int) -> Void
+  ) -> UInt {
+    let refInboxUser = refInbox.child(userId)
+    
+    return refInboxUser.observe(.value) { (snap: FIRDataSnapshot) in
+      var numberOfNotifications = 0
+      
+      if snap.exists() {
+        if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
+          print(dictionaries)
+          dictionaries.forEach {
+            var inbox = $0.value as? [String: Any]
+            
+            if let notifications = inbox?["notifications"] as? Int {
+              if notifications > 0 {
+                numberOfNotifications += 1
+              }
+            }
+          }
+          
+        }
+      }
+      
+      completion(numberOfNotifications)
+    }
+  }
+  
+  static func unListenUpdateInbox(
+    byUserId userId: String,
+    handlerId: UInt
+  ) {
+    let refInboxUser = refInbox.child(userId)
+    refInboxUser.removeObserver(withHandle: handlerId)
+  }
+  
   static func getInbox(
     byUserId userId: String,
     completion: @escaping ([[String: Any]]) -> Void
@@ -81,6 +118,24 @@ extension Inbox {
     }
   }
   
+  static func clearInbox(
+    ofUserId: String,
+    withUserId: String,
+    completion: @escaping () -> Void
+  ) {
+    var values = [String: Any]()
+    values["notifications"] = 0
+    
+    let refFromTo = refInbox
+      .child(ofUserId)
+      .child(withUserId)
+    
+    refFromTo.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+      completion()
+    }
+//    refFromTo.updateChildValues(values)
+  }
+  
   static func createOrUpdateInbox(
     fromUserId: String,
     toUserId: String,
@@ -111,9 +166,12 @@ extension Inbox {
     valuesToFrom["dateUpdated"] = utc
     valuesToFrom["anotherUserId"] = fromUserId
     valuesToFrom["inboxId"] = inboxId
+    valuesToFrom["notifications"] = 1
     
     refFromTo.updateChildValues(valuesFromTo)
     refToFrom.updateChildValues(valuesToFrom)
+    
+    completion(nil)
   }
   
 }

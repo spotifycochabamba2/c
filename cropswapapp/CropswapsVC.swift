@@ -9,5 +9,9 @@
 import UIKit
 
 class CropswapsVC: UIViewController {
-  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setNavHeaderTitle(title: "Cropswaps", color: UIColor.black)
+  }
 }

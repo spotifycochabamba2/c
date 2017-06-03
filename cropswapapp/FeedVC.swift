@@ -316,11 +316,11 @@ extension FeedVC {
             
             }, completion: { terminated in
               if terminated {
-                if self.produces.count > 0 {
-                  if lastProduceId != self.produces[self.produces.count - 1].id {
-                    self.collectionView.scrollToItem(at: IndexPath(item: self.produces.count - 1, section: 0), at: .bottom, animated: true)
-                  }
-                }
+//                if self.produces.count > 0 {
+//                  if lastProduceId != self.produces[self.produces.count - 1].id {
+//                    self.collectionView.scrollToItem(at: IndexPath(item: self.produces.count - 1, section: 0), at: .bottom, animated: true)
+//                  }
+//                }
               }
           })
           })

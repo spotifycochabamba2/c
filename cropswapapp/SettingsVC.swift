@@ -52,11 +52,13 @@ extension SettingsVC {
     switch cell {
     case logoutTableViewCell:
       print("logoutTableViewCell touched")
-      NotificationCenter.default.post(
-        name: Notification.Name(Constants.Ids.logoutId),
-        object: nil
-      )
-    case privacyPolicyTableViewCell :
+      dismiss(animated: true, completion: {
+        NotificationCenter.default.post(
+          name: Notification.Name(Constants.Ids.logoutId),
+          object: nil
+        )
+      })
+    case privacyPolicyTableViewCell:
       print("privacyPolicyTableViewCell")
     case termsConditionsTableViewCell:
       print("termsConditionsTableViewCell")
@@ -65,3 +67,25 @@ extension SettingsVC {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

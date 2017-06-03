@@ -14,6 +14,16 @@ class GardenVC: UIViewController {
   var currentUserId: String?
   var isCurrentOwner = true
   
+  var userImageView: UIImageView! {
+    didSet {
+      let userImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(userImageViewTapped))
+      userImageViewTapGesture.numberOfTapsRequired = 1
+      userImageViewTapGesture.numberOfTouchesRequired = 1
+      
+      userImageView.addGestureRecognizer(userImageViewTapGesture)
+    }
+  }
+  
   @IBOutlet weak var addProduceButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
   let cellIdentifier = "FeedCellId"
@@ -30,6 +40,10 @@ class GardenVC: UIViewController {
       User.stopListeningToGetProducesByUserByListeningAddedOnes(handlerId: addedOnesHandlerId, fromTime: time, fromUserId: userId)
       User.stopListeningToGetProducesByUserByListeningUpdatedOnes(handlerId: updatedOnesHandlerId, fromUserId: userId)
     }
+  }
+  
+  func userImageViewTapped() {
+    performSegue(withIdentifier: Storyboard.GardenToProfileContainer, sender: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +68,19 @@ class GardenVC: UIViewController {
     }
     
     if let userId = currentUserId {
+      
+      User.getUser(byUserId: currentUserId, completion: { (result) in
+        switch result {
+        case .success(let user):
+          if let url = URL(string: user.profilePictureURL ?? "") {
+            DispatchQueue.main.async { [weak self] in
+              self?.userImageView.sd_setImage(with: url)
+            }
+          }
+        case .fail(_):
+          break
+        }
+      })
       
       SVProgressHUD.show()
       User.getProducesByUser(byUserId: userId) { [weak self] produces in
@@ -118,9 +145,20 @@ class GardenVC: UIViewController {
       })
     }
     
-    _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
+    let userImageViewFrame = CGRect(x: 0, y: 0, width: 25, height: 25)
+    userImageView = UIImageView(frame: userImageViewFrame)
+    userImageView.backgroundColor = .lightGray
+    userImageView.layer.cornerRadius = 25 / 2
+    userImageView.layer.borderWidth = 1
+    userImageView.layer.borderColor = UIColor.clear.cgColor
+    userImageView.layer.masksToBounds = true
+    userImageView.contentMode = .scaleAspectFit
+    let userImageViewBar = UIBarButtonItem(customView: userImageView)
+    navigationItem.rightBarButtonItem = userImageViewBar
     
-    _ = setNavIcon(imageName: "search-icon", size: CGSize(width: 17, height: 17), position: .right)
+//    _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .right)
+    
+    _ = setNavIcon(imageName: "search-icon", size: CGSize(width: 0, height: 0), position: .left)
     
     setNavHeaderTitle(title: "My Garden", color: UIColor.black)
     
@@ -149,7 +187,13 @@ class GardenVC: UIViewController {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? ProduceContainerVC
       vc?.produce = sender as? Produce
+    } else if segue.identifier == Storyboard.GardenToProfileContainer {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProfileContainerVC
+      
+      vc?.currentUserId = currentUserId
     }
+
   }
 
 }

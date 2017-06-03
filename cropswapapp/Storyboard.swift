@@ -98,6 +98,8 @@ struct Storyboard {
   static let ProfileContainerToFinalizeTrade = "ProfileContainerToFinalizeTrade"
   static let ProfileContainerToMakeDeal = "ProfileContainerToMakeDeal"
   static let ProfileContainerToChat = "ProfileContainerToChat"
+  static let GardenToProfileContainer = "GardenToProfileContainer"
+  static let InboxToChat = "InboxToChat"
 }
 
 

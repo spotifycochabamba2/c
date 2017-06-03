@@ -20,6 +20,8 @@ class TradeChatVC: JSQMessagesViewController {
   var anotherUser: User?
   var date: Date!
   
+  var updateInboxVC: () -> Void = { }
+  
   // this screen could
   // used for chatting
   // on Trades or One on One (inbox)
@@ -41,6 +43,7 @@ class TradeChatVC: JSQMessagesViewController {
       self.senderId = currentUserId
       self.senderDisplayName = ""
     }
+    
     
     let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
     leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
@@ -85,9 +88,19 @@ class TradeChatVC: JSQMessagesViewController {
     super.viewWillDisappear(animated)
     
     if let dealId = dealId {
-      
       if usedForInbox {
-        
+        if let userId = User.currentUser?.uid,
+           let anotherUserId = anotherUserId {
+          Inbox.clearInbox(
+            ofUserId: userId,
+            withUserId: anotherUserId,
+            completion: { [weak self] in
+              CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+                UIApplication.shared.applicationIconBadgeNumber = counter
+              })
+              self?.updateInboxVC()
+          })
+        }
       } else {
         CSNotification.clearChatNotification(withDealId: dealId, andUserId: currentUserId) { (error) in
           print(error)
@@ -164,8 +177,23 @@ class TradeChatVC: JSQMessagesViewController {
         }
       }
       
-    ]) { (error) in
-      SVProgressHUD.dismiss()
+    ]) { [weak self] (error) in
+      
+      if let usedForInbox = self?.usedForInbox,
+        usedForInbox {
+        if let userId = User.currentUser?.uid,
+          let anotherUserId = self?.anotherUserId {
+          Inbox.clearInbox(
+            ofUserId: userId,
+            withUserId: anotherUserId,
+            completion: {
+              
+          })
+        }
+      }
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
+      }
     }
   }
 }
@@ -235,6 +263,16 @@ extension TradeChatVC {
                 inboxId: dealId,
                 completion: { (error) in
                   print(error)
+                  
+//                  // test - probably to delete
+//                  Message.sendMessagePushNotification(
+//                    dealId: dealId,
+//                    senderId: senderId,
+//                    receiverId: this.anotherUserId,
+//                    text: text,
+//                    completion: { (_) in
+//                      
+//                  })
               })
             } else {
               // test
@@ -247,6 +285,7 @@ extension TradeChatVC {
                   
               })
               
+              // update user deal
               CSNotification.createOrUpdateChatNotification(
                 withDealId: dealId,
                 andUserId: this.anotherUserId,
@@ -255,6 +294,7 @@ extension TradeChatVC {
                 }
               )
               
+              // update notification
               CSNotification.saveOrUpdateTradeNotification(
                 byUserId: this.anotherUserId,
                 dealId: dealId,

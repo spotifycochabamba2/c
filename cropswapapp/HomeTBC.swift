@@ -28,6 +28,7 @@ class HomeTBC: UITabBarController {
     label.text = "80"
     
     let tradeListTabBarItem = tabBar.items?[1]
+    let chatTabBarItem = tabBar.items?[4]
     
     print(tradeListTabBarItem)
     
@@ -129,14 +130,36 @@ class HomeTBC: UITabBarController {
     tabBar.isTranslucent = true
     
     if let userId = User.currentUser?.uid {
+      _ = Inbox.listenUpdatesInbox(byUserId: userId, completion: { (numberOfNotifications) in
+        
+        // call
+        
+        CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+          UIApplication.shared.applicationIconBadgeNumber = counter
+        })
+        
+        if numberOfNotifications <= 0 {
+          chatTabBarItem?.badgeValue = nil
+        } else {
+          chatTabBarItem?.badgeValue = "\(numberOfNotifications)"
+        }
+        })
+      
+      
       _ = CSNotification.listenTradeNotifications(byUserId: userId, completion: { (counter) in
         DispatchQueue.main.async {
+          
+          // call
+          CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+            UIApplication.shared.applicationIconBadgeNumber = counter
+          })
+          
           if counter <= 0 {
             tradeListTabBarItem?.badgeValue = nil
-            UIApplication.shared.applicationIconBadgeNumber = 0
+//            UIApplication.shared.applicationIconBadgeNumber = 0
           } else {
             tradeListTabBarItem?.badgeValue = "\(counter)"
-            UIApplication.shared.applicationIconBadgeNumber = counter
+//            UIApplication.shared.applicationIconBadgeNumber = counter
           }
         }
       })

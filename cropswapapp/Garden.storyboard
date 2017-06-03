@@ -68,6 +68,7 @@
                         <outlet property="collectionView" destination="Skk-hX-Qui" id="rlb-kn-Ul2"/>
                         <segue destination="sbB-lV-GXM" kind="presentation" identifier="GardenToAddProduce" id="cOO-1S-871"/>
                         <segue destination="DRa-aR-Fri" kind="presentation" identifier="GardenToProduceContainer" id="IGM-th-KAN"/>
+                        <segue destination="HHc-Jb-cXw" kind="presentation" identifier="GardenToProfileContainer" id="454-c5-GHI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5g4-NF-n4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,12 +85,22 @@
             </objects>
             <point key="canvasLocation" x="1732" y="101"/>
         </scene>
+        <!--ProfileContainerVC-->
+        <scene sceneID="aTL-vD-5sn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="wEg-UY-pYi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3Oq-kO-L5a"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hci-O5-3GP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1692" y="-804"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lUP-hR-dU7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbB-lV-GXM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fxT-Aw-TBC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fxT-Aw-TBC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -117,7 +128,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DRa-aR-Fri" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1iZ-l6-o0S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1iZ-l6-o0S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -129,6 +140,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWm-oH-SOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-346" y="1054"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FZs-r9-XQr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HHc-Jb-cXw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3me-NG-zNH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wEg-UY-pYi" kind="relationship" relationship="rootViewController" id="wM8-SE-aJb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8O8-e6-MFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="832.79999999999995" y="-803.74812593703155"/>
         </scene>
     </scenes>
     <resources>

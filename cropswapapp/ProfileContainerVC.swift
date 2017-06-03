@@ -79,16 +79,21 @@ class ProfileContainerVC: UIViewController {
       return
     }
     
-    SVProgressHUD.show()
-    
-    Inbox.getOrCreateInboxId(
-      fromUserId: fromUserId,
-      toUserId: toUserId) { (inboxId) in
-        DispatchQueue.main.async { [weak self] in
-          SVProgressHUD.dismiss()
-          
-          self?.performSegue(withIdentifier: Storyboard.ProfileContainerToChat, sender: inboxId)
-        }
+    if fromUserId != toUserId {
+      SVProgressHUD.show()
+      Inbox.getOrCreateInboxId(
+        fromUserId: fromUserId,
+        toUserId: toUserId) { (inboxId) in
+          DispatchQueue.main.async { [weak self] in
+            SVProgressHUD.dismiss()
+            
+            self?.performSegue(withIdentifier: Storyboard.ProfileContainerToChat, sender: inboxId)
+          }
+      }
+    } else {
+      let alert = UIAlertController(title: "Info", message: "Sorry you can't send a message to yourself", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
     }
   }
   
@@ -214,12 +219,10 @@ class ProfileContainerVC: UIViewController {
       editButton.isHidden = true
       
       setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
-      
-      let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
-      leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
     } else {
       makeDealViewHeightConstraint.constant = 0
       makeDealButton.isHidden = true
+      openChatButton.isHidden = true
       
       segmentedControl.isHidden = true
       segmentedControlViewHeightConstraint.constant = 0.5
@@ -227,6 +230,9 @@ class ProfileContainerVC: UIViewController {
       let settingsButton = setNavIcon(imageName: "settings-icon", size: CGSize(width: 26, height: 26), position: .right)
       settingsButton.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
     }
+    
+    let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
+    leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
     
     navigationController?.navigationBar.isHidden = false
     navigationController?.isNavigationBarHidden = false

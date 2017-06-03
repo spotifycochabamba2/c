@@ -9,6 +9,8 @@
 import Foundation
 import FirebaseDatabase
 import Ax
+import Alamofire
+import SwiftyJSON
 
 struct CSNotification {
   var dealId: String?
@@ -37,6 +39,39 @@ extension CSNotification {
   static let refDatabaseNotifications = refDatabase.child("notifications")
   
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
+  static var refDatabaseInbox = refDatabase.child("inbox")
+  
+  static func getNotificationsForAppIcon(
+    userId: String,
+    completion: @escaping (Int) -> Void
+  ) {
+    let url = "\(Constants.Server.stringURL)api/notifications"
+    
+    var data = [String: Any]()
+    data["userId"] = userId
+    
+    Alamofire
+      .request(
+        url,
+        method: .post,
+        parameters: data,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        var counter = 0
+        
+        switch response.result {
+        case .success(let result):
+          let result = result as? [String: Any]
+          counter = result?["counter"] as? Int ?? 0
+        case .failure(let error):
+          print(error)
+        }
+        
+        completion(counter)
+    }
+  }
   
   static func saveOrUpdateTradeNotification(
     byUserId userId: String,
@@ -222,6 +257,13 @@ extension CSNotification {
       completion(error as? NSError)
     })
   }
+  
+//  static func saveOrUpdateInboxNotification(
+//    fromUserId: String,
+//    toUserId: String
+//  ) {
+//    
+//  }
   
   static func createOrUpdateChatNotification(
     withDealId dealId: String,

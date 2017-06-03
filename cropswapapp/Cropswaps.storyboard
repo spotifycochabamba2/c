@@ -23,16 +23,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMc-zk-CGD">
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-av-8gT">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-qb-dPJ">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="78" id="8Xb-W8-gnv"/>
+                                            <constraint firstAttribute="width" constant="78" id="YYd-wP-bBA"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMc-zk-CGD">
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="EMc-zk-CGD" firstAttribute="centerY" secondItem="yc0-By-QtE" secondAttribute="centerY" id="b1l-Jk-dpB"/>
-                            <constraint firstItem="EMc-zk-CGD" firstAttribute="centerX" secondItem="yc0-By-QtE" secondAttribute="centerX" id="fJS-Pf-T8g"/>
+                            <constraint firstItem="7bi-av-8gT" firstAttribute="centerX" secondItem="yc0-By-QtE" secondAttribute="centerX" id="85S-mT-3Ph"/>
+                            <constraint firstItem="7bi-av-8gT" firstAttribute="centerY" secondItem="yc0-By-QtE" secondAttribute="centerY" id="C3t-VF-HHx"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -41,4 +51,7 @@
             <point key="canvasLocation" x="-55.200000000000003" y="98.50074962518741"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="signup-logo" width="78" height="77"/>
+    </resources>
 </document>

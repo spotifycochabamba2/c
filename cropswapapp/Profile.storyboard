@@ -124,8 +124,8 @@
                             <constraint firstAttribute="trailing" secondItem="d0o-to-JA2" secondAttribute="trailing" id="Kjn-dl-4TZ"/>
                             <constraint firstItem="d0o-to-JA2" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="NRO-Li-LdL"/>
                             <constraint firstAttribute="trailing" secondItem="RIQ-iS-1wF" secondAttribute="trailing" id="Q8e-EP-Lwx"/>
-                            <constraint firstItem="Uto-m9-cw3" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="RMm-vJ-vyc"/>
                             <constraint firstAttribute="trailing" secondItem="QEC-iC-PJ2" secondAttribute="trailing" id="UVt-va-lhL"/>
+                            <constraint firstAttribute="trailing" secondItem="Uto-m9-cw3" secondAttribute="trailing" id="Va9-En-C2n"/>
                             <constraint firstAttribute="trailing" secondItem="eHs-c0-8PH" secondAttribute="trailing" id="Yt9-Y3-Vik"/>
                             <constraint firstItem="d0o-to-JA2" firstAttribute="top" secondItem="QEC-iC-PJ2" secondAttribute="bottom" id="a9M-oB-eWT"/>
                             <constraint firstItem="eHs-c0-8PH" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="dxT-Wv-dSq"/>
@@ -665,7 +665,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qcd-L1-8BO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -691,7 +691,7 @@ trade requests</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdM-AU-tmd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xvL-IM-h7X">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xvL-IM-h7X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
