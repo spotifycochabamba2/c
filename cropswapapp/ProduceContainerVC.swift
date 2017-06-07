@@ -183,6 +183,7 @@ class ProduceContainerVC: UIViewController {
       produceChildVC = vc
       vc?.produce = produce
       vc?.enableMakeDealButton = enableMakeDealButton
+      vc?.isReadOnly = isReadOnly
       showProfileFromChild = vc?.showProfileFromChild
       print(showProfileFromChild)
     }

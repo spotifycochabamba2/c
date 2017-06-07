@@ -74,6 +74,11 @@ class ProduceTypesDelegate: NSObject, UITableViewDelegate, UITableViewDataSource
     return cell
   }
   
+  public func clear() {
+    filteredProduceTypes.removeAll()
+    tableView.reloadData()
+  }
+  
   public func filterProduces(byText text: String) {
     
     filteredProduceTypes.removeAll()

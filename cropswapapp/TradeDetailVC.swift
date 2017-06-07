@@ -108,7 +108,11 @@ class TradeDetailVC: UIViewController {
         { done in
           if let currentUserId = User.currentUser?.uid {
             User.getProducesByUser(byUserId: currentUserId, completion: { (myProduces) in
-              myProducesFound = myProduces
+              myProducesFound = myProduces.filter {
+                let liveState = $0["liveState"] as? String ?? ""
+                
+                return liveState != ProduceState.archived.rawValue
+              }
               
               done(nil)
             })
@@ -120,7 +124,11 @@ class TradeDetailVC: UIViewController {
         { [weak self] done in
           if let anotherUserId = self?.anotherUserId {
             User.getProducesByUser(byUserId: anotherUserId, completion: { (anotherProduces) in
-              anotherProducesFound = anotherProduces
+              anotherProducesFound = anotherProduces.filter {
+                let liveState = $0["liveState"] as? String ?? ""
+                
+                return liveState != ProduceState.archived.rawValue
+              }
               
               done(nil)
             })

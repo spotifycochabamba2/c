@@ -495,6 +495,7 @@ df dsfsdf</string>
                         <outlet property="userNameStackView" destination="9mc-48-78s" id="aLr-O7-M44"/>
                         <segue destination="kx4-2s-hgC" kind="presentation" identifier="ProduceChildToPhotoViewer" modalPresentationStyle="overCurrentContext" id="zTR-5H-bcB"/>
                         <segue destination="AAs-Fc-kkv" kind="show" identifier="ProduceChildToProfileChild" id="eYa-H8-mkN"/>
+                        <segue destination="2jr-jJ-FGt" kind="show" identifier="ProduceChildToProduce" id="ysO-Nq-Dmn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R04-iM-Vqi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -564,6 +565,16 @@ df dsfsdf</string>
             </objects>
             <point key="canvasLocation" x="878" y="-490"/>
         </scene>
+        <!--ProduceContainerVC-->
+        <scene sceneID="t72-QL-UFW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Produce" referencedIdentifier="ProduceContainerVC" id="9TP-zY-Ilp" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="sbJ-Sf-edD"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1AH-3o-9K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="768"/>
+        </scene>
         <!--ProfileContainerVC-->
         <scene sceneID="EEC-vB-qpH">
             <objects>
@@ -572,7 +583,7 @@ df dsfsdf</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE8-KL-gdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="404"/>
+            <point key="canvasLocation" x="433" y="769"/>
         </scene>
         <!--MakeDealVC-->
         <scene sceneID="ll2-OS-xgD">
@@ -606,7 +617,25 @@ df dsfsdf</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGv-lt-kLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-186" y="405"/>
+            <point key="canvasLocation" x="-217" y="770"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wxC-IA-RA3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jr-jJ-FGt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xQs-3G-dgZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9TP-zY-Ilp" kind="relationship" relationship="rootViewController" id="ZsL-Oz-ncC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XrM-8V-PgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090" y="769"/>
         </scene>
     </scenes>
     <resources>

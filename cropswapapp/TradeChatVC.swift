@@ -13,6 +13,15 @@ import Ax
 
 class TradeChatVC: JSQMessagesViewController {
   
+  
+  var messageFont = UIFont(name: "Montserrat-Regular", size: 15)
+  var statusMessageFont = UIFont(name: "Montserrat-Regular", size: 12)
+  var timestampFont = UIFont(name: "Montserrat-Regular", size: 12)
+  
+  var attributesStringTopBubble = [String: Any]()
+  var attributesStringStatusMessage = [String: Any]()
+  var attributesStringTopCell = [String: Any]()
+  
   var dealId: String?
   var anotherUsername: String?
   var anotherUserId: String!
@@ -31,12 +40,33 @@ class TradeChatVC: JSQMessagesViewController {
   
   var listenNewMessagesHandlerId: UInt = 0
   
-  var jsqMessages = [JSQMessage]()
+  var jsqMessages = [(JSQMessage, String)]()
+  var messagesDelivered = [String: Bool]()
 
   let bubbleFactory = JSQMessagesBubbleImageFactory()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    attributesStringTopBubble[NSForegroundColorAttributeName] = UIColor.black
+    attributesStringTopBubble[NSFontAttributeName] = timestampFont
+    
+    attributesStringStatusMessage[NSForegroundColorAttributeName] = UIColor.darkGray
+    attributesStringStatusMessage[NSFontAttributeName] = statusMessageFont
+    
+    attributesStringTopCell[NSForegroundColorAttributeName] = UIColor.black
+    attributesStringTopCell[NSFontAttributeName] = messageFont
+//    self.outgoingCellIdentifier = CustomMessagesCollectionViewCellOutgoing.cellReuseIdentifier()
+//    self.outgoingMediaCellIdentifier = CustomMessagesCollectionViewCellOutgoing.mediaCellReuseIdentifier()
+//
+//    self.collectionView.register(CustomMessagesCollectionViewCellOutgoing.nib(), forCellWithReuseIdentifier: self.outgoingCellIdentifier)
+//    self.collectionView.register(CustomMessagesCollectionViewCellOutgoing.nib(), forCellWithReuseIdentifier: self.outgoingMediaCellIdentifier)
+//    
+//    self.incomingCellIdentifier = CustomMessagesCollectionViewCellIncoming.cellReuseIdentifier()
+//    self.incomingMediaCellIdentifier = CustomMessagesCollectionViewCellIncoming.mediaCellReuseIdentifier()
+//    
+//    self.collectionView.register(CustomMessagesCollectionViewCellIncoming.nib(), forCellWithReuseIdentifier: self.incomingCellIdentifier)
+//    self.collectionView.register(CustomMessagesCollectionViewCellIncoming.nib(), forCellWithReuseIdentifier: self.incomingMediaCellIdentifier)
     
     if let currentUserId = User.currentUser?.uid {
       self.currentUserId = currentUserId
@@ -119,10 +149,20 @@ class TradeChatVC: JSQMessagesViewController {
       listenNewMessagesHandlerId = Message.listenNewMessages(
         byDealId: dealId,
         date: date) { [weak self] (newMessage) in
-          print("newmessage \(newMessage)")
+          self?.messagesDelivered[newMessage.id] = true
           
-          let jsqMessage = JSQMessage(senderId: newMessage.senderId, displayName: "", text: newMessage.text)
-          self?.jsqMessages.append(jsqMessage!)
+          let senderId = self?.senderId ?? newMessage.senderId
+          
+          if senderId != newMessage.senderId {
+            let jsqMessage = JSQMessage(
+              senderId: newMessage.senderId,
+              senderDisplayName: "",
+              date: newMessage.dateCreated,
+              text: newMessage.text
+            )
+            
+            self?.jsqMessages.append((jsqMessage!, newMessage.id))
+          }
           
           DispatchQueue.main.async {
             self?.finishReceivingMessage(animated: true)
@@ -162,8 +202,9 @@ class TradeChatVC: JSQMessagesViewController {
         {
           Message.getMessages(byDealId: dealId, completion: { (messages) in
             this.jsqMessages = messages.map { msg in
-              let jsqMessage = JSQMessage(senderId: msg.senderId, displayName: "", text: msg.text)
-              return jsqMessage!
+              this.messagesDelivered[msg.id] = true
+              let jsqMessage = JSQMessage(senderId: msg.senderId, senderDisplayName: "", date: msg.dateCreated, text: msg.text)
+              return (jsqMessage!, msg.id)
             }
             
             DispatchQueue.main.async {
@@ -205,7 +246,7 @@ extension TradeChatVC {
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
-    return jsqMessages[indexPath.row]
+    return jsqMessages[indexPath.row].0
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
@@ -213,13 +254,13 @@ extension TradeChatVC {
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-    let message = jsqMessages[indexPath.row]
+    let message = jsqMessages[indexPath.row].0
     
     let outgoingBubble = bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.hexStringToUIColor(hex: "#f83f39"))
     let incomingBubble = bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.hexStringToUIColor(hex: "#f0f2f5"))
     
-    print(senderId)
-    print(message.senderId)
+//    print(senderId)
+//    print(message.senderId)
     
     if senderId == message.senderId {
       return outgoingBubble
@@ -228,29 +269,106 @@ extension TradeChatVC {
     }
   }
   
+ 
+  
+
+  
+  
+  
+//  override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+//    var attributes = [String: Any]()
+//    attributes[NSForegroundColorAttributeName] = UIColor.red
+//    
+//    let attributedString = NSAttributedString(string: "21:00", attributes: attributes)
+//    return attributedString
+//  }
+ 
+  
+  // CELL TOP LABEL
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+    let message = jsqMessages[indexPath.row].0
+    
+    let attributedString = NSAttributedString(string: message.date.mediumDateString, attributes: attributesStringTopCell)
+    return attributedString
+  }
+  
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat {
+    return 20
+  }
+  
+  //  BUBBLE TOP LABEL
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+    let message = jsqMessages[indexPath.row].0
+    
+    let attributedString = NSAttributedString(string: message.date.shortTimeString, attributes: attributesStringTopBubble)
+    return attributedString
+  }
+  
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+    return 25
+  }
+  
+  // CELL BOTTOM LABEL
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+    let message = jsqMessages[indexPath.row].0
+    let messageId = jsqMessages[indexPath.row].1
+    let statusMessageBool = messagesDelivered[messageId] ?? true
+    var statusMessageText = ""
+    
+    if message.senderId == senderId {
+      if statusMessageBool {
+        statusMessageText = "Sent"
+      } else {
+        statusMessageText = "Sending"
+      }
+    }
+    
+    print("new message: \(statusMessageText)")
+    
+    let attributedString = NSAttributedString(string: statusMessageText, attributes: attributesStringStatusMessage)
+    return attributedString
+  }
+  
+  
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+    return 25
+  }
+  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
-    let message = jsqMessages[indexPath.row]
+    let message = jsqMessages[indexPath.row].0
     
-    cell.textView.font = UIFont(name: "Montserrat-Regular", size: 15)
-    cell.textView.textAlignment = .center
+    cell.textView.font = messageFont
+//    cell.cellTopLabel.font = timestampFont
+//    cell.cellTopLabel.textColor = .black
+    cell.cellTopLabel.textAlignment = .center
     
     if message.senderId == senderId {
       cell.textView.textColor = UIColor.white
+      cell.textView.textAlignment = .right
+      cell.messageBubbleTopLabel.textAlignment = .right
     } else {
       cell.textView.textColor = UIColor.black
+      cell.textView.textAlignment = .left
+      cell.messageBubbleTopLabel.textAlignment = .left
     }
     
     return cell
   }
   
   override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+    
+    let jsqMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: date, text: text)
+    
+ 
+    
     if let dealId = dealId {
-      Message.sendMessage(
+      let messageId = Message.sendMessage(
         dealId: dealId,
         senderId: currentUserId,
         receiverId: anotherUserId,
-        text: text) { [weak self] (error) in
+        text: text,
+        date: date) { [weak self] (error) in
           print(error)
           
           if let this = self {
@@ -264,15 +382,15 @@ extension TradeChatVC {
                 completion: { (error) in
                   print(error)
                   
-//                  // test - probably to delete
-//                  Message.sendMessagePushNotification(
-//                    dealId: dealId,
-//                    senderId: senderId,
-//                    receiverId: this.anotherUserId,
-//                    text: text,
-//                    completion: { (_) in
-//                      
-//                  })
+                  //                  // test - probably to delete
+                  //                  Message.sendMessagePushNotification(
+                  //                    dealId: dealId,
+                  //                    senderId: senderId,
+                  //                    receiverId: this.anotherUserId,
+                  //                    text: text,
+                  //                    completion: { (_) in
+                  //
+                  //                  })
               })
             } else {
               // test
@@ -307,12 +425,14 @@ extension TradeChatVC {
             }
           }
       }
+      
+      jsqMessages.append((jsqMessage!, messageId))
+      messagesDelivered[messageId] = false
     }
     
     finishSendingMessage(animated: true)
   }
 }
-
 
 
 

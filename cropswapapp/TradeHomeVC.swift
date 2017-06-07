@@ -72,7 +72,26 @@ class TradeHomeVC: UIViewController {
   }
   
   @IBAction func openChatButtonTouched() {
-    performSegue(withIdentifier: Storyboard.TradeHomeToTradeChat, sender: nil)
+    guard let fromUserId = User.currentUser?.uid else {
+      return
+    }
+    
+    guard let toUserId = anotherUserId else {
+      return
+    }
+    
+    SVProgressHUD.show()
+    Inbox.getOrCreateInboxId(
+      fromUserId: fromUserId,
+      toUserId: toUserId) { (inboxId) in
+        DispatchQueue.main.async { [weak self] in
+          SVProgressHUD.dismiss()
+          
+          self?.performSegue(withIdentifier: Storyboard.TradeHomeToTradeChat, sender: inboxId)
+        }
+    }
+    
+    //performSegue(withIdentifier: Storyboard.TradeHomeToTradeChat, sender: nil)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,18 +135,19 @@ class TradeHomeVC: UIViewController {
       
       vc?.anotherUserId = anotherUserId
       vc?.anotherUsername = anotherUsername
-      vc?.dealId = dealId
+      vc?.dealId = sender as? String
+      vc?.usedForInbox = true
       
-      if let dealId = vc?.dealId,
-        let userId = User.currentUser?.uid {
-        
-        CSNotification.clearChatNotification(
-          withDealId: dealId,
-          andUserId: userId,
-          completion: { (error) in
-            print(error)
-        })
-      }
+//      if let dealId = vc?.dealId,
+//        let userId = User.currentUser?.uid {
+//        
+//        CSNotification.clearChatNotification(
+//          withDealId: dealId,
+//          andUserId: userId,
+//          completion: { (error) in
+//            print(error)
+//        })
+//      }
     }
   }
   

@@ -15,6 +15,7 @@ struct Message {
   var senderId: String
   var text: String
   var dateCreated: Date
+  var id: String = ""
   
   init(
     senderId: String,
@@ -31,7 +32,8 @@ struct Message {
       let json = json,
       let senderId = json["senderId"] as? String,
       let text = json["text"] as? String,
-      let utcDate = json["dateCreated"] as? Double
+      let utcDate = json["dateCreated"] as? Double,
+      let id = json["id"] as? String
       else {
         return nil
     }
@@ -39,6 +41,7 @@ struct Message {
     self.senderId = senderId
     self.text = text
     self.dateCreated = Date(timeIntervalSince1970: (utcDate * -1))
+    self.id = id
   }
 }
 
@@ -55,14 +58,17 @@ extension Message {
     senderId: String,
     receiverId: String,
     text: String,
+    date: Date,
     completion: @escaping (NSError?) -> Void
-  ) {
+  ) -> String {
     let refDealMessage = refMessages.child(dealId).childByAutoId()
+    let messageId = refDealMessage.key
     
     var data = [String: Any]()
+    data["id"] = messageId
     data["senderId"] = senderId
     data["text"] = text
-    data["dateCreated"] = Date().timeIntervalSince1970 * -1
+    data["dateCreated"] = date.timeIntervalSince1970 * -1
     
     refDealMessage.setValue(data, withCompletionBlock: {
       (error: Error?, ref: FIRDatabaseReference) in
@@ -95,6 +101,8 @@ extension Message {
       
       completion(error as NSError?)
     })
+    
+    return messageId
   }
   
   static func sendMessagePushNotification(

@@ -191,11 +191,22 @@
                         <outlet property="upperView" destination="gWI-E6-lLs" id="K3X-qt-Tek"/>
                         <segue destination="SpA-3K-a8N" kind="presentation" identifier="MakeDealToAddItemToDeal" modalPresentationStyle="overCurrentContext" id="bU3-bW-9p8"/>
                         <segue destination="uas-HC-FUL" kind="presentation" identifier="MakeDealToDealSubmitted" modalPresentationStyle="overCurrentContext" id="b7a-Iy-DWl"/>
+                        <segue destination="Mq1-gN-MFa" kind="presentation" identifier="MakeDealToProduce" modalPresentationStyle="overCurrentContext" id="GhD-mg-4Qi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPk-3j-gTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-290.39999999999998" y="92.203898050974516"/>
+        </scene>
+        <!--ProduceContainerVC-->
+        <scene sceneID="ooW-Qh-G3U">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Produce" referencedIdentifier="ProduceContainerVC" id="rx6-vb-Cbi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="v7D-oV-i7f"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9a2-lN-Puy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1729" y="-351"/>
         </scene>
         <!--AddItemToDealVC-->
         <scene sceneID="dxJ-i9-81y">
@@ -212,6 +223,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfj-Tt-DIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="705" y="222"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hXK-h2-EdM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mq1-gN-MFa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0TN-l7-nly">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rx6-vb-Cbi" kind="relationship" relationship="rootViewController" id="GzN-Fm-Fgc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="szC-mp-Byh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-350"/>
         </scene>
     </scenes>
     <resources>

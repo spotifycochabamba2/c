@@ -355,7 +355,13 @@ extension User {
             item?["id"] = $0.key
             item?["ownerId"] = userId
             
-            return item
+            let liveState = item?["liveState"] as? String ?? ""
+            
+            if liveState != ProduceState.archived.rawValue {
+              return item
+            }
+            
+            return nil
           }
         }
 

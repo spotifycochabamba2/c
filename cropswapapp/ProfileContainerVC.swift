@@ -10,6 +10,9 @@ import UIKit
 import SVProgressHUD
 
 class ProfileContainerVC: UIViewController {
+  
+  var isReadOnly = false
+  
   @IBOutlet weak var profileContainerView: UIView!
   @IBOutlet weak var gardenContainerView: UIView!
   

@@ -12,6 +12,8 @@ import Ax
 
 class ProduceChildVC: UITableViewController {
   
+  var isReadOnly = false
+  
   @IBOutlet weak var imagesPageControl: UIPageControl!
   
   @IBOutlet weak var relatedProducesCell: UITableViewCell!
@@ -204,8 +206,28 @@ class ProduceChildVC: UITableViewController {
       vc?.currentUserId = produce?.ownerId
       vc?.currentUsername = produce?.ownerUsername
       vc?.showBackButton = true
+      vc?.isReadOnly = true
 //      produce?.ownerId
 //      produce.ownerUsername
+    } else if segue.identifier == Storyboard.ProduceChildToProduce {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProduceContainerVC
+      
+      let dictionary = sender as? [String: Any]
+      let id = dictionary?["id"] as? String ?? ""
+      let name = dictionary?["name"] as? String ?? ""
+      let ownerId = dictionary?["ownerId"] as? String ?? ""
+      let ownerUsername = dictionary?["ownerUsername"] as? String ?? ""
+      
+      let produce = Produce(
+        id: id,
+        name: name,
+        ownerId: ownerId,
+        ownerUsername: ownerUsername
+      )
+      
+      vc?.produce = produce
+      vc?.isReadOnly = isReadOnly
     }
   }
   
@@ -262,8 +284,10 @@ class ProduceChildVC: UITableViewController {
             
             self?.relatedProduces = dictionaries.filter {
               let iteratedProduceId = $0["id"] as? String ?? ""
+//              let liveState = $0["liveState"] as? String ?? ""
               
-              return iteratedProduceId != produceId
+              return
+                iteratedProduceId != produceId
             }
             
             done(nil)
@@ -639,6 +663,25 @@ extension ProduceChildVC {
 
 extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    let relatedProduce = relatedProduces[indexPath.row]
+    
+    if
+      let id = relatedProduce["id"] as? String,
+      let name = relatedProduce["name"] as? String,
+      let ownerId = relatedProduce["ownerId"] as? String
+    {
+      var values = [String: Any]()
+      values["id"] = id
+      values["name"] = name
+      values["ownerId"] = ownerId
+      values["ownerUsername"] = ""
+      
+      performSegue(withIdentifier: Storyboard.ProduceChildToProduce, sender: values)
+    }
+  }
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView === tagsCollectionView {
       return tags.count

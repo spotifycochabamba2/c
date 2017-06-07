@@ -196,6 +196,7 @@ class MakeDealVC: UIViewController {
           switch result {
           case .success(let user):
             anotherUserFound = user
+            self?.anotherUsername = user.name
             done(nil)
           case .fail(let error):
             done(error)
@@ -405,6 +406,25 @@ class MakeDealVC: UIViewController {
       vc?.anotherPictureURL = anotherUser?.profilePictureURL
       // anotherPictureURL
       // anotherUsername
+    } else if segue.identifier == Storyboard.MakeDealToProduce {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProduceContainerVC
+      
+      let dictionary = sender as? [String: Any]
+      let id = dictionary?["id"] as? String ?? ""
+      let name = dictionary?["name"] as? String ?? ""
+      let ownerId = dictionary?["ownerId"] as? String ?? ""
+      let ownerUsername = dictionary?["ownerUsername"] as? String ?? ""
+      
+      let produce = Produce(
+        id: id,
+        name: name,
+        ownerId: ownerId,
+        ownerUsername: ownerUsername
+      )
+      
+      vc?.produce = produce
+      vc?.isReadOnly = true
     }
   }
 }
@@ -412,22 +432,28 @@ class MakeDealVC: UIViewController {
 extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    var data = [String: Any]()
-//    
-//    if collectionView ===  myGardenCollectionView {
-//      data["ownerId"] = User.currentUser?.uid
-//      data["anotherOwnerUsername"] = ""
-//      data["whoseGarden"] = AddItemType.toMyGarden
-//      
-//      performSegue(withIdentifier: Storyboard.MakeDealToAddItemToDeal, sender: data)
-//    } else {
-//      
-//      data["ownerId"] = anotherOwnerId
-//      data["anotherOwnerUsername"] = anotherUsername
-//      data["whoseGarden"] = AddItemType.toGardensAnother
-//      
-//      performSegue(withIdentifier: Storyboard.MakeDealToAddItemToDeal, sender: data)
-//    }
+    
+    let produceSelected: [String: Any]?
+    
+    if anotherGardenCollectionView === collectionView {
+      produceSelected = anotherProduces[indexPath.row]
+    } else {
+      produceSelected = myProduces[indexPath.row]
+    }
+    
+    if let produceSelected = produceSelected,
+       let id = produceSelected["id"],
+       let name = produceSelected["name"],
+       let ownerId = produceSelected["ownerId"]
+    {
+      var values = [String: Any]()
+      values["id"] = id
+      values["name"] = name
+      values["ownerId"] = ownerId
+      values["ownerUsername"] = ""
+      
+      performSegue(withIdentifier: Storyboard.MakeDealToProduce, sender: values)
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

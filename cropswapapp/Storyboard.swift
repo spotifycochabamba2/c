@@ -100,6 +100,10 @@ struct Storyboard {
   static let ProfileContainerToChat = "ProfileContainerToChat"
   static let GardenToProfileContainer = "GardenToProfileContainer"
   static let InboxToChat = "InboxToChat"
+  
+  static let MakeDealToProduce = "MakeDealToProduce"
+  
+  static let ProduceChildToProduce = "ProduceChildToProduce"
 }
 
 

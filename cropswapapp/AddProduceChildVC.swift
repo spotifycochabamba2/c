@@ -1444,6 +1444,7 @@ extension AddProduceChildVC {
       if thirdCellSelected {
         return 200
       } else {
+        categoriesTableViewDelegate.clear()
         return thirdCellHeight
       }
     } else if indexPath.row == 6 {

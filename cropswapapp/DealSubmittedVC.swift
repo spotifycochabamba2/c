@@ -59,7 +59,7 @@ class DealSubmittedVC: UIViewController {
       anotherImageView.sd_setImage(with: url)
     }
 
-    descriptionLabel.text = "Once \(anotherUsername?.capitalized ?? "") approves the deal, we will send you and alert to set a meet up spot."
+    descriptionLabel.text = "Once \(anotherUsername?.capitalized ?? "") approves the deal, we will send you an alert to set a meet up spot."
     
     view.backgroundColor = .clear
     
