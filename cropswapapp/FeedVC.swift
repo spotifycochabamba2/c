@@ -96,8 +96,6 @@ class FeedVC: UIViewController {
     
     let storyboard = UIStoryboard(name: "SearchResultFeed", bundle: nil)
     searchResultFeedVC = storyboard.instantiateViewController(withIdentifier: "SearchResultFeedVC") as! SearchResultFeedVC
-    print(self.view.frame)
-    print(searchResultFeedVC.view.frame)
     
     searchResultFeedVC.view.frame = view.frame
     

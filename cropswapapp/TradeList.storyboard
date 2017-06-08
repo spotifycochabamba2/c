@@ -129,7 +129,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pzv-Fs-aoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088.8000000000002" y="123.23838080959521"/>
+            <point key="canvasLocation" x="1950" y="124"/>
         </scene>
         <!--ProfileContainerVC-->
         <scene sceneID="nFG-co-JYQ">
@@ -146,7 +146,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vHx-Ql-TnU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdi-lk-6y5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cdi-lk-6y5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -164,7 +164,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hhI-lW-dNJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6jn-qX-nI9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6jn-qX-nI9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

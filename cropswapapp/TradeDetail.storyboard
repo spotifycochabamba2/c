@@ -452,7 +452,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PCr-TQ-ghb" id="KtT-dU-bRj">
-                                    <frame key="frameInset" width="375" height="149.5"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-HY-QPI">
@@ -554,13 +554,59 @@
                     <view key="view" contentMode="scaleToFill" id="8Yz-q3-y0o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJD-YJ-6v2">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="QOd-5W-eDI"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEZ-i4-5UO">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="4hV-As-scJ"/>
+                                    <constraint firstAttribute="height" constant="67" id="sfp-aW-pT7"/>
+                                </constraints>
+                                <state key="normal" image="tradelist-button-icon"/>
+                                <connections>
+                                    <action selector="tradeListButtonTouched" destination="puf-kw-82q" eventType="touchUpInside" id="lAJ-18-65c"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Me-AJ-spf" firstAttribute="top" secondItem="BJD-YJ-6v2" secondAttribute="bottom" id="LST-OT-8Zs"/>
+                            <constraint firstItem="BJD-YJ-6v2" firstAttribute="leading" secondItem="8Yz-q3-y0o" secondAttribute="leading" id="RbR-0o-nCk"/>
+                            <constraint firstAttribute="trailing" secondItem="BJD-YJ-6v2" secondAttribute="trailing" id="RdX-DL-AfW"/>
+                            <constraint firstAttribute="trailing" secondItem="jEZ-i4-5UO" secondAttribute="trailing" constant="8" id="aX6-45-9vT"/>
+                            <constraint firstItem="BJD-YJ-6v2" firstAttribute="top" secondItem="jEZ-i4-5UO" secondAttribute="bottom" constant="8" id="m5D-nK-bMg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lC1-Hv-f4d"/>
+                    <connections>
+                        <outlet property="tradeListButton" destination="jEZ-i4-5UO" id="Vcg-ly-PM1"/>
+                        <segue destination="4KW-X4-Ggk" kind="presentation" identifier="TradeChatToFinalizeTrade" modalPresentationStyle="overCurrentContext" id="BMg-46-17Q"/>
+                        <segue destination="Mof-5l-AwQ" kind="presentation" identifier="TradeChatToMakeDeal" modalPresentationStyle="overCurrentContext" id="4fW-7P-OeL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAR-qO-kCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="1194"/>
+            <point key="canvasLocation" x="940" y="1193.2533733133434"/>
+        </scene>
+        <!--FinalizeTradeVC-->
+        <scene sceneID="adt-yg-6Jd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="FinalizeTradeVC" id="4KW-X4-Ggk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HTK-vf-tSM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1850" y="1121"/>
+        </scene>
+        <!--MakeDealVC-->
+        <scene sceneID="vPQ-eK-rB6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MakeDeal" referencedIdentifier="MakeDealVC" id="Mof-5l-AwQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngs-oP-kX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1833" y="1264"/>
         </scene>
         <!--Finalize TradeVC-->
         <scene sceneID="gJy-pW-3G5">
@@ -702,7 +748,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dc9-5n-p7X" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yKI-mb-8VU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yKI-mb-8VU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -720,7 +766,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NCTradeChatVC" automaticallyAdjustsScrollViewInsets="NO" id="TJn-jZ-eRL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHy-dF-2F1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="VHy-dF-2F1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -740,6 +786,7 @@
         <image name="icon-button-chat" width="67" height="67"/>
         <image name="illdrive-gray-image" width="315" height="148"/>
         <image name="letsmeet-gray-image" width="315" height="148"/>
+        <image name="tradelist-button-icon" width="67" height="67"/>
         <image name="waiting-answer-icon" width="34" height="34"/>
         <image name="youdrive-gray-image" width="315" height="148"/>
     </resources>

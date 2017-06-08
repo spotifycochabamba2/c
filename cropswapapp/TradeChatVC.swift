@@ -13,6 +13,8 @@ import Ax
 
 class TradeChatVC: JSQMessagesViewController {
   
+  var tradeListButtonWasTouchedOnChat: () -> Void = {}
+  @IBOutlet weak var tradeListButton: UIButton!
   
   var messageFont = UIFont(name: "Montserrat-Regular", size: 15)
   var statusMessageFont = UIFont(name: "Montserrat-Regular", size: 12)
@@ -28,6 +30,8 @@ class TradeChatVC: JSQMessagesViewController {
   var currentUserId: String!
   var anotherUser: User?
   var date: Date!
+  
+  var transactionMethod: String?
   
   var updateInboxVC: () -> Void = { }
   
@@ -108,6 +112,57 @@ class TradeChatVC: JSQMessagesViewController {
     
     inputToolbar.contentView.textView.font = UIFont(name: "Montserrat-Light", size: 15)
     inputToolbar.contentView.textView.textColor = UIColor.hexStringToUIColor(hex: "#484646")
+    
+//    let customView = UIView()
+//    customView.backgroundColor = .red
+//    customView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+//    customView.translatesAutoresizingMaskIntoConstraints = false
+    
+    tradeListButton.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.addSubview(tradeListButton)
+    collectionView.bringSubview(toFront: tradeListButton)
+    
+    let height = NSLayoutConstraint(
+      item: tradeListButton,
+      attribute: .height,
+      relatedBy: .equal,
+      toItem: nil,
+      attribute: .notAnAttribute,
+      multiplier: 1.0,
+      constant: 67
+    )
+    
+    let width = NSLayoutConstraint(
+      item: tradeListButton,
+      attribute: .width,
+      relatedBy: .equal,
+      toItem: nil,
+      attribute: .notAnAttribute,
+      multiplier: 1.0,
+      constant: 67
+    )
+    
+    let bottom = NSLayoutConstraint(
+      item: tradeListButton,
+      attribute: .bottom,
+      relatedBy: .equal,
+      toItem: view,
+      attribute: .bottom,
+      multiplier: 1,
+      constant: -52
+    )
+    
+    let right = NSLayoutConstraint(
+      item: tradeListButton,
+      attribute: .right,
+      relatedBy: .equal,
+      toItem: view,
+      attribute: .right,
+      multiplier: 1,
+      constant: -8
+    )
+    
+    view.addConstraints([height, width, bottom, right])
   }
   
   func backButtonTouched() {
@@ -141,8 +196,108 @@ class TradeChatVC: JSQMessagesViewController {
     }
   }
   
+  deinit {
+    print("deinit of trade chat vc")
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Storyboard.TradeChatToFinalizeTrade {
+      let vc = segue.destination as? FinalizeTradeVC
+      vc?.didConfirmOffer = didConfirmOffer
+    } else if segue.identifier == Storyboard.TradeChatToMakeDeal {
+      let vc = segue.destination as? MakeDealVC
+      vc?.transactionMethod = transactionMethod
+      vc?.anotherOwnerId = anotherUserId
+    }
+  }
+  
+  func didConfirmOffer(_ howFinalized: String) {
+    transactionMethod = howFinalized
+    performSegue(withIdentifier: Storyboard.TradeChatToMakeDeal, sender: nil)
+  }
+  
+  
+  @IBAction func tradeListButtonTouched() {
+    guard let ownerId = anotherUserId else {
+      let alert = UIAlertController(title: "Info", message: "Another User Id not provided.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    guard let ownerName = anotherUsername else {
+      let alert = UIAlertController(title: "Info", message: "Another User Name not provided.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    guard let currenUserId = User.currentUser?.uid else {
+      let alert = UIAlertController(title: "Info", message: "Current User Id not provided.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    SVProgressHUD.show()
+    Deal.anyActiveDeal(
+      userOneId: currenUserId,
+      userTwoId: ownerId) { [weak self] (result) in
+        DispatchQueue.main.async {
+          SVProgressHUD.dismiss()
+        }
+        
+        switch result {
+        case .success(let anyActive):
+          if anyActive {
+//            let tradeListButtonWasTouchedOnChat = self?.tradeListButtonWasTouchedOnChat
+//            self?.dismiss(animated: true) {
+//              DispatchQueue.main.async {
+//                tradeListButtonWasTouchedOnChat?()
+//              }
+//            }
+            let alert = UIAlertController(title: "Info", message: "You already have a trade in progress with \(ownerName), Please go to your Trade List to see the trade.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            self?.present(alert, animated: true)
+          } else {
+            if ownerId != currenUserId {
+              SVProgressHUD.show()
+              
+              Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
+                DispatchQueue.main.async {
+                  SVProgressHUD.dismiss()
+                }
+                print(hoursLeft)
+                
+                if hoursLeft > 0 {
+                  let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
+                  alert.addAction(UIAlertAction(title: "OK", style: .default))
+                  
+                  self?.present(alert, animated: true)
+                } else {
+                  self?.performSegue(withIdentifier: Storyboard.TradeChatToFinalizeTrade, sender: nil)
+                }
+                })
+            } else {
+              let alert = UIAlertController(title: "Info", message: "Sorry you can't make a deal with yourself", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .default))
+              self?.present(alert, animated: true)
+            }
+          }
+        case .fail(let error):
+          let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          self?.present(alert, animated: true)
+        }
+        
+    }
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    print(inputToolbar.contentView.frame.height)
     date = Date()
     
     if let dealId = dealId {

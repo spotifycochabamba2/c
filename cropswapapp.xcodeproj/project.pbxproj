@@ -67,6 +67,9 @@
 		694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697441E816531006D8907 /* Montserrat-SemiBold.ttf */; };
 		696024ED1E9D80F2006766AF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696024EC1E9D80F2006766AF /* ItemCell.swift */; };
 		696024EF1E9D8115006766AF /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696024EE1E9D8115006766AF /* ItemCell.xib */; };
+		69694CDF1EE8D52C00E5BACA /* SearchingResultsChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69694CDE1EE8D52C00E5BACA /* SearchingResultsChatVC.swift */; };
+		69694CE11EE8D75700E5BACA /* SearchingResultsChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69694CE01EE8D75700E5BACA /* SearchingResultsChat.storyboard */; };
+		69694CE31EE8D92100E5BACA /* SearchingResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69694CE21EE8D92100E5BACA /* SearchingResultCell.swift */; };
 		696C9A481EE051D4008CEF4C /* Inbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 696C9A471EE051D4008CEF4C /* Inbox.storyboard */; };
 		6974BC8E1EA02D7100126732 /* ButtonCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC8D1EA02D7100126732 /* ButtonCircular.swift */; };
 		6974BC921EA1191F00126732 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC911EA1191F00126732 /* Deal.swift */; };
@@ -76,11 +79,6 @@
 		697B82C81EE062E20068673C /* Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C71EE062E20068673C /* Inbox.swift */; };
 		697B82CB1EE0C3460068673C /* Cropswaps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697B82CA1EE0C3460068673C /* Cropswaps.storyboard */; };
 		697B82CD1EE0C3560068673C /* CropswapsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82CC1EE0C3560068673C /* CropswapsVC.swift */; };
-		697B82CF1EE6F3D00068673C /* CustomMessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82CE1EE6F3D00068673C /* CustomMessagesCollectionViewCell.swift */; };
-		697B82D11EE6F5BA0068673C /* CustomMessagesCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697B82D01EE6F5BA0068673C /* CustomMessagesCollectionViewCellIncoming.xib */; };
-		697B82D31EE6F6B30068673C /* CustomMessagesCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697B82D21EE6F6B30068673C /* CustomMessagesCollectionViewCellOutgoing.xib */; };
-		697B82D51EE6FDA50068673C /* CustomMessagesCollectionViewCellOutgoing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82D41EE6FDA50068673C /* CustomMessagesCollectionViewCellOutgoing.swift */; };
-		697B82D71EE6FDDB0068673C /* CustomMessagesCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82D61EE6FDDB0068673C /* CustomMessagesCollectionViewCellIncoming.swift */; };
 		69823A8B1E9E7AD50066DEB1 /* AddItemToDeal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69823A8A1E9E7AD50066DEB1 /* AddItemToDeal.storyboard */; };
 		69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69823A8C1E9E7AE20066DEB1 /* AddItemToDealVC.swift */; };
 		698241991EC366E900F9B37D /* CSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698241981EC366E900F9B37D /* CSNotification.swift */; };
@@ -216,6 +214,9 @@
 		6954E2A81EB77552009EFA59 /* cropswapapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cropswapapp.entitlements; sourceTree = "<group>"; };
 		696024EC1E9D80F2006766AF /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		696024EE1E9D8115006766AF /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		69694CDE1EE8D52C00E5BACA /* SearchingResultsChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingResultsChatVC.swift; sourceTree = "<group>"; };
+		69694CE01EE8D75700E5BACA /* SearchingResultsChat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchingResultsChat.storyboard; sourceTree = "<group>"; };
+		69694CE21EE8D92100E5BACA /* SearchingResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingResultCell.swift; sourceTree = "<group>"; };
 		696C9A471EE051D4008CEF4C /* Inbox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Inbox.storyboard; sourceTree = "<group>"; };
 		6974BC8D1EA02D7100126732 /* ButtonCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCircular.swift; sourceTree = "<group>"; };
 		6974BC911EA1191F00126732 /* Deal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
@@ -225,11 +226,6 @@
 		697B82C71EE062E20068673C /* Inbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inbox.swift; sourceTree = "<group>"; };
 		697B82CA1EE0C3460068673C /* Cropswaps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cropswaps.storyboard; sourceTree = "<group>"; };
 		697B82CC1EE0C3560068673C /* CropswapsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropswapsVC.swift; sourceTree = "<group>"; };
-		697B82CE1EE6F3D00068673C /* CustomMessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessagesCollectionViewCell.swift; sourceTree = "<group>"; };
-		697B82D01EE6F5BA0068673C /* CustomMessagesCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMessagesCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
-		697B82D21EE6F6B30068673C /* CustomMessagesCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMessagesCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
-		697B82D41EE6FDA50068673C /* CustomMessagesCollectionViewCellOutgoing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessagesCollectionViewCellOutgoing.swift; sourceTree = "<group>"; };
-		697B82D61EE6FDDB0068673C /* CustomMessagesCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessagesCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
 		69823A8A1E9E7AD50066DEB1 /* AddItemToDeal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddItemToDeal.storyboard; sourceTree = "<group>"; };
 		69823A8C1E9E7AE20066DEB1 /* AddItemToDealVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemToDealVC.swift; sourceTree = "<group>"; };
 		698241981EC366E900F9B37D /* CSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSNotification.swift; sourceTree = "<group>"; };
@@ -507,11 +503,9 @@
 				696C9A471EE051D4008CEF4C /* Inbox.storyboard */,
 				697B82C31EE05AF50068673C /* InboxVC.swift */,
 				697B82C51EE05B1C0068673C /* InboxCell.swift */,
-				697B82CE1EE6F3D00068673C /* CustomMessagesCollectionViewCell.swift */,
-				697B82D01EE6F5BA0068673C /* CustomMessagesCollectionViewCellIncoming.xib */,
-				697B82D21EE6F6B30068673C /* CustomMessagesCollectionViewCellOutgoing.xib */,
-				697B82D41EE6FDA50068673C /* CustomMessagesCollectionViewCellOutgoing.swift */,
-				697B82D61EE6FDDB0068673C /* CustomMessagesCollectionViewCellIncoming.swift */,
+				69694CDE1EE8D52C00E5BACA /* SearchingResultsChatVC.swift */,
+				69694CE01EE8D75700E5BACA /* SearchingResultsChat.storyboard */,
+				69694CE21EE8D92100E5BACA /* SearchingResultCell.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -810,8 +804,8 @@
 				69EE4AEE1E3FCDE700C95624 /* OpenSans-LightItalic.ttf in Resources */,
 				69941DBE1E82FC600073760F /* Produce.storyboard in Resources */,
 				69EE4AE71E3FCDE700C95624 /* VarelaRound-Regular.ttf in Resources */,
-				697B82D11EE6F5BA0068673C /* CustomMessagesCollectionViewCellIncoming.xib in Resources */,
 				696C9A481EE051D4008CEF4C /* Inbox.storyboard in Resources */,
+				69694CE11EE8D75700E5BACA /* SearchingResultsChat.storyboard in Resources */,
 				694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */,
 				69EE4AEC1E3FCDE700C95624 /* OpenSans-Italic.ttf in Resources */,
 				69B685561EA8FC46003C8188 /* TradeDetail.storyboard in Resources */,
@@ -837,7 +831,6 @@
 				690A52211E9EB85A0074DE52 /* DealSubmitted.storyboard in Resources */,
 				696024EF1E9D8115006766AF /* ItemCell.xib in Resources */,
 				69EE4AD91E3FCBDC00C95624 /* GoogleService-Info.plist in Resources */,
-				697B82D31EE6F6B30068673C /* CustomMessagesCollectionViewCellOutgoing.xib in Resources */,
 				6900F8B41E5BC770002CF473 /* Home.storyboard in Resources */,
 				69FB72551E92D0A900D053FB /* EditProfile.storyboard in Resources */,
 				6913AD141E5E2F9A002EB1BC /* MyGarden.storyboard in Resources */,
@@ -939,9 +932,9 @@
 				69EE4AFE1E3FE18400C95624 /* UITextFieldExtension.swift in Sources */,
 				691ED5CA1E43C6A0005F6E2A /* InstagramLoginVC.swift in Sources */,
 				69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */,
-				697B82D71EE6FDDB0068673C /* CustomMessagesCollectionViewCellIncoming.swift in Sources */,
 				6934322A1ED32AC2005C2B48 /* ProduceImageZoomableVC.swift in Sources */,
 				69FE346C1E42865600F01176 /* UIViewControllerExtension.swift in Sources */,
+				69694CE31EE8D92100E5BACA /* SearchingResultCell.swift in Sources */,
 				699838721EA80C520018502D /* ChooseStateListVC.swift in Sources */,
 				69B6855C1EA8FCA2003C8188 /* TradeChatVC.swift in Sources */,
 				69B685621EABA60E003C8188 /* TradeHistorialCell.swift in Sources */,
@@ -979,20 +972,19 @@
 				692E7AEE1E9716A5001ABF36 /* MakeDealVC.swift in Sources */,
 				6914F28D1EA5552F00142CB8 /* ChooseDetailListVC.swift in Sources */,
 				69B685601EAAC06D003C8188 /* Message.swift in Sources */,
-				697B82D51EE6FDA50068673C /* CustomMessagesCollectionViewCellOutgoing.swift in Sources */,
 				697B82C81EE062E20068673C /* Inbox.swift in Sources */,
 				69047E971EC4AC2B00A8E554 /* SettingsVC.swift in Sources */,
 				6914F28B1EA54E8B00142CB8 /* ChooseDetailCell.swift in Sources */,
 				69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */,
 				69B685541EA8FC37003C8188 /* TradeDetailVC.swift in Sources */,
 				69941DC21E8310430073760F /* ProduceImageVC.swift in Sources */,
-				697B82CF1EE6F3D00068673C /* CustomMessagesCollectionViewCell.swift in Sources */,
 				692169831E6EDE260053C0C8 /* ProduceDetailVC.swift in Sources */,
 				69288E1F1EDC8227008A5179 /* SearchResultFeedVC.swift in Sources */,
 				69D7F36C1EC551A300C6A288 /* YourLocationVC.swift in Sources */,
 				6932B9D01E7AC51D001626F2 /* ProduceWanted.swift in Sources */,
 				6945B5D41E39306300AA0799 /* AppDelegate.swift in Sources */,
 				69A748EB1E849CE9006F321A /* RelatedProducesCell.swift in Sources */,
+				69694CDF1EE8D52C00E5BACA /* SearchingResultsChatVC.swift in Sources */,
 				69CEE10B1E85AF72004E0725 /* AddProduceChildVC.swift in Sources */,
 				691B6B0D1ECF38FE00FAC876 /* PhotoViewerVC.swift in Sources */,
 				69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */,

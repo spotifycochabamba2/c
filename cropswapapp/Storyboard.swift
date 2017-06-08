@@ -104,6 +104,9 @@ struct Storyboard {
   static let MakeDealToProduce = "MakeDealToProduce"
   
   static let ProduceChildToProduce = "ProduceChildToProduce"
+  
+  static let TradeChatToFinalizeTrade = "TradeChatToFinalizeTrade"
+  static let TradeChatToMakeDeal = "TradeChatToMakeDeal"
 }
 
 

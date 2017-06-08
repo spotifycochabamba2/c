@@ -11,6 +11,10 @@ import SVProgressHUD
 
 // Properties
 class InboxVC: UITableViewController {
+  
+//  var searchingResultsChatVC: SearchingResultsChatVC!
+  var usersSearchController: UISearchController!
+  
   var items = [[String: Any]]() {
     didSet {
       DispatchQueue.main.async { [weak self] in
@@ -33,7 +37,12 @@ extension InboxVC {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setNavHeaderTitle(title: "Chat", color: UIColor.black)
+    let rightButtonIcon = setNavIcon(imageName: "add-user-chat", size: CGSize(width: 40, height: 40), position: .right)
+    rightButtonIcon.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
+    
+    setupUsersSearchController()
+    
+    setNavHeaderTitle(title: "Messages", color: UIColor.black)
     
     if let userId = User.currentUser?.uid {
       SVProgressHUD.show()
@@ -93,6 +102,7 @@ extension InboxVC {
       vc?.dealId = inboxId
       vc?.usedForInbox = true
       vc?.updateInboxVC = updateInboxVC
+      vc?.tradeListButtonWasTouchedOnChat = tradeListButtonWasTouchedOnChat
       
       if let currentUserId = User.currentUser?.uid,
         let anotherUserId = userId {
@@ -133,8 +143,30 @@ extension InboxVC {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100
   }
+  
 }
 
+extension InboxVC {
+  
+  func rightButtonTouched() {
+    tabBarController?.present(usersSearchController, animated: true, completion: {
+      
+    })
+  }
+  
+  func setupUsersSearchController() {
+    usersSearchController = UISearchController(searchResultsController: nil)
+    
+    usersSearchController.dimsBackgroundDuringPresentation = true
+    usersSearchController.searchBar.sizeToFit()
+    definesPresentationContext = false
+  }
+  
+  func tradeListButtonWasTouchedOnChat() {
+    tabBarController?.selectedIndex = 1
+  }
+  
+}
 
 
 

@@ -9,6 +9,8 @@
 import Foundation
 import FirebaseDatabase
 import Ax
+import Alamofire
+import SwiftyJSON
 
 struct Deal {
   var id: String?
@@ -140,6 +142,45 @@ extension Deal {
   static var refDatabaseDeals = refDatabase.child("deals")
   static var refDatabaseUserDeals = refDatabase.child("deals-by-user")
   static var refDatabaseUserToUserDeals = refDatabase.child("user-to-user-deals")
+  
+  static func anyActiveDeal(
+    userOneId: String,
+    userTwoId: String,
+    completion: @escaping (Result<Bool>) -> Void
+  ) {
+    let url = "\(Constants.Server.stringURL)api/users/trade"
+    
+    var data = [String: Any]()
+    data["userOneId"] = userOneId
+    data["userTwoId"] = userTwoId
+    
+    Alamofire
+      .request(
+        url,
+        method: .post,
+        parameters: data,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let result):
+          let result = result as? [String: Any]
+          if result?["anyTradeActive"] as? Bool ?? false {
+            completion(Result.success(data: true))
+          } else {
+            completion(Result.success(data: false))
+          }
+          
+        case .failure(let error):
+          print(error)
+          let customError = NSError(domain: "Deal", code: 0, userInfo: [
+            NSLocalizedDescriptionKey: error.localizedDescription
+            ])
+          completion(Result.fail(error: customError))
+        }
+    }
+  }
   
   static func deleteDeal(
     byOwnerUserId ownerUserId: String,
