@@ -102,6 +102,63 @@ class ItemCell: UICollectionViewCell {
   
   }
   
+  var isMoneyCircle = false {
+    didSet {
+      if isMoneyCircle {
+        itemImageView.image = UIImage(named: "money-circle-icon")
+      }
+    }
+  }
+  
+  var isWorkerCircle = false {
+    didSet {
+      if isWorkerCircle {
+        itemImageView.image = UIImage(named: "worker-circle-icon")
+        if isAnotherProduce {
+          increaseQuantityUpButton.isHidden = true
+          decreaseQuantityUpButton.isHidden = true
+          
+          upPlusIcon.isHidden = true
+          upMinusIcon.isHidden = true
+        } else {
+          increaseQuantityDownButton.isHidden = true
+          decreaseQuantityDownButton.isHidden = true
+          
+          downPlusIcon.isHidden = true
+          downMinusIcon.isHidden = true
+        }
+      } else {
+        if isAnotherProduce {
+          increaseQuantityUpButton.isHidden = false
+          decreaseQuantityUpButton.isHidden = false
+          
+          upPlusIcon.isHidden = false
+          upMinusIcon.isHidden = false
+        } else {
+          increaseQuantityDownButton.isHidden = false
+          decreaseQuantityDownButton.isHidden = false
+          
+          downPlusIcon.isHidden = false
+          downMinusIcon.isHidden = false
+        }
+      }
+    }
+  }
+  
+  var payWithWork = false {
+    didSet {
+      if isWorkerCircle {
+        if payWithWork {
+          itemImageView.alpha = 1
+        } else {
+          itemImageView.alpha = 0.5
+        }
+      } else {
+        itemImageView.alpha = 1
+      }
+    }
+  }
+  
   var isAnotherProduce = false {
     didSet {
       if isAnotherProduce {
@@ -200,7 +257,7 @@ class ItemCell: UICollectionViewCell {
   }
   
   @IBAction func decreaseQuantityUpButtonTouched() {
-    if let produceId = produceId {
+    if let produceId = produceId {      
       processQuantity(produceId, tag, .toGardensAnother, -1)
     }
   }

@@ -256,7 +256,7 @@ class TradeChatVC: JSQMessagesViewController {
 //                tradeListButtonWasTouchedOnChat?()
 //              }
 //            }
-            let alert = UIAlertController(title: "Info", message: "You already have a trade in progress with \(ownerName), Please go to your Trade List to see the trade.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please go to your Trade List to see the trade.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             
             self?.present(alert, animated: true)
@@ -497,14 +497,13 @@ extension TradeChatVC {
 //    cell.cellTopLabel.font = timestampFont
 //    cell.cellTopLabel.textColor = .black
     cell.cellTopLabel.textAlignment = .center
+    cell.textView.textAlignment = .left
     
     if message.senderId == senderId {
-      cell.textView.textColor = UIColor.white
-      cell.textView.textAlignment = .right
+      cell.textView.textColor = UIColor.white      
       cell.messageBubbleTopLabel.textAlignment = .right
     } else {
       cell.textView.textColor = UIColor.black
-      cell.textView.textAlignment = .left
       cell.messageBubbleTopLabel.textAlignment = .left
     }
     

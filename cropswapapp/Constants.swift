@@ -16,6 +16,8 @@ struct Constants {
   }
   
   struct Ids {
+    static let workerId = "worker"
+    static let moneyId = "money"
     static let logoutId = "logoutId"
   }
   

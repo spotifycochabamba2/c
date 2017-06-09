@@ -142,7 +142,16 @@ extension User {
   static var refStorageUsers = refStorage.child("users")
   
   
-//  static var 
+  static func searchFor(
+    filter: String,
+    completion: @escaping ([[String: Any]]) -> Void
+  ) {
+    Algolia.searchForUsers(
+      filter: filter
+    ) { (users) in
+      completion(users)
+    }
+  }
   
   static func logout() {
     

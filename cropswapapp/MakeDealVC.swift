@@ -21,6 +21,7 @@ class MakeDealVC: UIViewController {
   var anotherOwnerId: String?
   var anotherUsername: String?
   
+  
   var transactionMethod: String?
   
 //  var pageSize: CGSize {
@@ -68,14 +69,35 @@ class MakeDealVC: UIViewController {
   @IBOutlet weak var backgroundView: UIView!
   @IBOutlet weak var upperView: UIView!
   
+  var numberFormatter = { () -> NumberFormatter in
+    let formatter = NumberFormatter()
+    
+    formatter.numberStyle = .currencyAccounting
+    formatter.currencyCode = "USD"
+    
+    return formatter
+  }()
+  
   func showProduceOnMyGardenUI(_ produce: [String: Any]) {
     let name = produce["produceType"] as? String ?? ""
     let quantity = produce["quantityAdded"] as? Int ?? 0
     let quantityType = produce["quantityType"] as? String ?? ""
+    let id = produce["id"] as? String ?? ""
+    myProduceUnitTitleLabel.alpha = 1
     
-    myProduceTitleLabel.text = name
-    myProduceUnitTitleLabel.isHidden = false
-    myProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    if id == Constants.Ids.moneyId {
+      myProduceTitleLabel.text = "Money"
+//      myProduceUnitTitleLabel.isHidden = false
+      myProduceUnitTitleLabel.text = "$\(quantity)"
+    } else if id == Constants.Ids.workerId {
+      myProduceTitleLabel.text = "Pay with work"
+      myProduceUnitTitleLabel.alpha = 0
+    } else {
+      myProduceTitleLabel.text = name
+//      myProduceUnitTitleLabel.isHidden = false
+      myProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+//      myProduceUnitTitleLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+    }
   }
   
   func showProduceOnAnothersGardenUI(_ produce: [String: Any]) {
@@ -83,10 +105,22 @@ class MakeDealVC: UIViewController {
     let quantity = produce["quantityAdded"] as? Int ?? 0
     let quantityType = produce["quantityType"] as? String ?? ""
 //    let pictureURL = produce["firstPictureURL"] as? String
+    let id = produce["id"] as? String ?? ""
+    anotherProduceUnitTitleLabel.alpha = 1
     
-    anotherProduceTitleLabel.text = name
-    anotherProduceUnitTitleLabel.isHidden = false
-    anotherProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    if id == Constants.Ids.moneyId {
+      anotherProduceTitleLabel.text = "Money"
+      anotherProduceUnitTitleLabel.isHidden = false
+      anotherProduceUnitTitleLabel.text = "$\(quantity)"
+    } else if id == Constants.Ids.workerId {
+      anotherProduceTitleLabel.text = "Pay with work"
+      anotherProduceUnitTitleLabel.alpha = 0
+    } else {
+      anotherProduceTitleLabel.text = name
+      anotherProduceUnitTitleLabel.isHidden = false
+      anotherProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+      
+    }
   }
   
   var currentPageOnMyGarden: Int = 0 {
@@ -259,6 +293,21 @@ class MakeDealVC: UIViewController {
     }
   }
   
+  func createMoneyProduce() -> [String: Any] {
+    var values = [String: Any]()
+    values["id"] = Constants.Ids.moneyId
+    
+    return values
+  }
+  
+  func createWorkerProduce() -> [String: Any] {
+    var values = [String: Any]()
+    values["id"] = Constants.Ids.workerId
+    values["isActive"] = false
+    
+    return values
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 //    let produce = Produce(json: [:])
@@ -275,6 +324,12 @@ class MakeDealVC: UIViewController {
               
               return liveState != ProduceState.archived.rawValue
             }
+            
+            let moneyProduce = self?.createMoneyProduce()
+            self?.myProduces.append(moneyProduce!)
+            
+            let workerProduce = self?.createWorkerProduce()
+            self?.myProduces.append(workerProduce!)
 
             DispatchQueue.main.async {
               self?.myGardenCollectionView.reloadData()
@@ -299,6 +354,12 @@ class MakeDealVC: UIViewController {
               return liveState != ProduceState.archived.rawValue
             }
             
+            let moneyProduce = self?.createMoneyProduce()
+            self?.anotherProduces.append(moneyProduce!)
+            
+            let workerProduce = self?.createWorkerProduce()
+            self?.anotherProduces.append(workerProduce!)
+            
             let produceIndex = self?.anotherProduces.index(where: { (produce) -> Bool in
               let produceId = produce["id"] as! String
               print(produceId)
@@ -306,6 +367,8 @@ class MakeDealVC: UIViewController {
               
               return produceId == self?.currentProduceId ?? ""
             })
+            
+            
             
             print(produceIndex)
             
@@ -434,11 +497,22 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
     let produceSelected: [String: Any]?
+    let cell = collectionView.cellForItem(at: indexPath) as! ItemCell
     
     if anotherGardenCollectionView === collectionView {
       produceSelected = anotherProduces[indexPath.row]
+      
+      if cell.isWorkerCircle {
+        cell.payWithWork = !cell.payWithWork
+        anotherProduces[indexPath.row]["isActive"] = cell.payWithWork
+      }
     } else {
       produceSelected = myProduces[indexPath.row]
+      
+      if cell.isWorkerCircle {
+        cell.payWithWork = !cell.payWithWork
+        myProduces[indexPath.row]["isActive"] = cell.payWithWork
+      }
     }
     
     if let produceSelected = produceSelected,
@@ -477,9 +551,11 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
       cell.produceId = produce["id"] as? String
       cell.processQuantity = processQuantity
       cell.tag = indexPath.row
+      cell.isMoneyCircle = (produce["id"] as? String ?? "") == Constants.Ids.moneyId
+      cell.isWorkerCircle = (produce["id"] as? String ?? "") == Constants.Ids.workerId
+      cell.payWithWork = produce["isActive"] as? Bool ?? false
       
     } else {
-      
       let produce = myProduces[indexPath.row]
       cell.imageURLString = produce["firstPictureURL"] as? String
       
@@ -487,6 +563,9 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
       cell.produceId = produce["id"] as? String
       cell.processQuantity = processQuantity
       cell.tag = indexPath.row
+      cell.isMoneyCircle = (produce["id"] as? String ?? "") == Constants.Ids.moneyId
+      cell.isWorkerCircle = (produce["id"] as? String ?? "") == Constants.Ids.workerId
+      cell.payWithWork = produce["isActive"] as? Bool ?? false
     }
     
     return cell
@@ -509,6 +588,7 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let liveState = anotherProduces[index]["liveState"] as? String ?? ""
         let produceQuantity = anotherProduces[index]["quantity"] as? Int ?? 0
         let value = anotherProduces[index]["quantityAdded"] as? Int ?? 0
+        let produceId = anotherProduces[index]["id"] as? String ?? ""
         let result = value + quantity
         
         if liveState == ProduceState.archived.rawValue {
@@ -525,7 +605,7 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
           return
         }
         
-        if result <= produceQuantity {
+        if result <= produceQuantity || produceId == Constants.Ids.moneyId {
           anotherProduces[index]["quantityAdded"] = result >= 0 ? result : 0
           currentPageOnAnotherGarden = index
         } else {
@@ -544,6 +624,7 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let value = myProduces[index]["quantityAdded"] as? Int ?? 0
         let result = value + quantity
         let liveState = myProduces[index]["liveState"] as? String ?? ""
+        let produceId = myProduces[index]["id"] as? String ?? ""
         
         if liveState == ProduceState.archived.rawValue {
           let alert = UIAlertController(title: "Info", message: "You can't trade this item anymore since it was removed.", preferredStyle: .alert)
@@ -559,7 +640,8 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
           return
         }
         
-        if result <= produceQuantity {
+        
+        if result <= produceQuantity || produceId == Constants.Ids.moneyId {
           myProduces[index]["quantityAdded"] = result >= 0 ? result : 0
           currentPageOnMyGarden = index
         } else {

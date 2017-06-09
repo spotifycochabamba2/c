@@ -17,7 +17,7 @@
         <!--Searching Results ChatVC-->
         <scene sceneID="EWe-4P-Z9A">
             <objects>
-                <tableViewController id="ltw-WS-Owo" customClass="SearchingResultsChatVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchingResultsChatVC" id="ltw-WS-Owo" customClass="SearchingResultsChatVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Axz-LD-PFV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,14 +39,17 @@
                                                         <constraint firstAttribute="height" constant="70" id="xGO-dP-cPV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="4zU-ym-aKR">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4zU-ym-aKR">
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rob's Farm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4O-qz-DtZ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rob's Farmg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4O-qz-DtZ">
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P9-yo-5tz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P9-yo-5tz">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="48" id="SX5-FZ-uSf"/>
+                                                            </constraints>
                                                             <string key="text">sdflkjsdfk
 slkdfjsdklf
 sdfsf
@@ -85,10 +88,41 @@ sdf</string>
                             <outlet property="delegate" destination="ltw-WS-Owo" id="hBJ-7l-fgH"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="N1p-3M-Xlq" kind="presentation" identifier="SearchingChatResultsToChat" id="Joq-Ts-quN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7T-kA-iUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-172" y="-2.2488755622188905"/>
+        </scene>
+        <!--TradeChatVC-->
+        <scene sceneID="bBN-je-2Jy">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="TradeChatVC" id="DcW-WJ-DKt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BV1-na-rXa"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z0E-5L-ltJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="-2.6986506746626691"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D0m-qw-CkS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N1p-3M-Xlq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="H4L-rx-H4H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DcW-WJ-DKt" kind="relationship" relationship="rootViewController" id="cfm-Tr-Q0j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-1V-va9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="658" y="-2"/>
         </scene>
     </scenes>
 </document>

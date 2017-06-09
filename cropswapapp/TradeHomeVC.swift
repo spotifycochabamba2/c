@@ -163,9 +163,9 @@ class TradeHomeVC: UIViewController {
   
   func didCancelOffer() {
     let alert = UIAlertController(title: "Confirmation", message: "Are you sure you want to cancel the offer?", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    alert.addAction(UIAlertAction(title: "NO", style: .cancel))
       
-    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] (alert) in
+    alert.addAction(UIAlertAction(title: "YES", style: .destructive, handler: { [weak self] (alert) in
       
       guard let ownerId = self?.anotherUserId
         else {
@@ -377,8 +377,8 @@ class TradeHomeVC: UIViewController {
       originalOwnerUserId: originalOwnerUserId,
       newOwnerId: newOwnerId,
       newAnotherId: newAnotherId,
-      newOwnerProduces: newOwnerProduces.map { return ($0.0.id, $0.1) },
-      newAnotherProduces: newAnotherProduces.map { return ($0.0.id, $0.1) },
+      newOwnerProduces: newOwnerProduces.map { return ($0.0.id, Int($0.1)) },
+      newAnotherProduces: newAnotherProduces.map { return ($0.0.id, Int($0.1)) },
       dealId: dealId,
       dateCreated: Date(),
       transactionMethod: transactionMethod,

@@ -43,70 +43,44 @@ struct Storyboard {
   static let AddProduceChildToRetakeCamera = "AddProduceChildToRetakeCamera"
   static let ProfileContainerToEditProfileContainer = "ProfileContainerToEditProfileContainer"
   static let EditProfileChildToCamera = "EditProfileChildToCamera"
-  
   static let ProduceContainerToMakeDeal = "ProduceContainerToMakeDeal"
-  
   static let MakeDealToAddItemToDeal = "MakeDealToAddItemToDeal"
   static let MakeDealToDealSubmitted = "MakeDealToDealSubmitted"
-  
   static let AddProduceChildToChooseDetails = "AddProduceChildToChooseDetails"
-  
   static let AddProduceChildToChooseState = "AddProduceChildToChooseState"
-  
   static let TradeListToTradeDetail = "TradeListToTradeDetail"
-  
   static let TradeHomeToTradeDetail = "TradeHomeToTradeDetail"
   static let TradeHomeToTradeHistorial = "TradeHomeToTradeHistorial"
-  
   static let TradeHistorialToFinalizeTrade = "TradeHistorialToFinalizeTrade"
-  
   static let TradeDetailToProduce = "TradeDetailToProduce"
-  
   static let HomeToTradeHome = "HomeToTradeHome"
-  
   static let TradeHomeToTradeChat = "TradeHomeToTradeChat"
-  
   static let HomeToTradeChat = "HomeToTradeChat"
-  
   static let TradeHomeToTradeStatus = "TradeHomeToTradeStatus"
-  
   static let TradeStatusToFinalizeTrade = "TradeStatusToFinalizeTrade"
-  
   static let ProduceContainerToFinalizeTrade = "ProduceContainerToFinalizeTrade"
-  
   static let ProfileChildToSettings = "ProfileChildToSettings"
-  
   static let LoginToForgotPassword = "LoginToForgotPassword"
-  
   static let SignupToYourLocation = "SignupToYourLocation"
-  
   static let ProduceChildToPhotoViewer = "ProduceChildToPhotoViewer"
-  
   static let TradeListToProfile = "TradeListToProfile"
-  
   static let ProfileContainerToProfileChild = "ProfileContainerToProfileChild"
   static let ProduceChildToProfileChild = "ProduceChildToProfileChild"
-  
   static let AddProduceChildToImageDetail = "AddProduceChildToImageDetail"
-  
   static let AddProduceChildToChooseUnit = "AddProduceChildToChooseUnit"
-  
   static let ProfileContainerToGarden = "ProfileContainerToGarden"
   static let GardenToProduceContainer = "GardenToProduceContainer"
   static let SearchResultFeedToProduceContainer = "SearchResultFeedToProduceContainer"
-  
   static let ProfileContainerToFinalizeTrade = "ProfileContainerToFinalizeTrade"
   static let ProfileContainerToMakeDeal = "ProfileContainerToMakeDeal"
   static let ProfileContainerToChat = "ProfileContainerToChat"
   static let GardenToProfileContainer = "GardenToProfileContainer"
   static let InboxToChat = "InboxToChat"
-  
   static let MakeDealToProduce = "MakeDealToProduce"
-  
   static let ProduceChildToProduce = "ProduceChildToProduce"
-  
   static let TradeChatToFinalizeTrade = "TradeChatToFinalizeTrade"
   static let TradeChatToMakeDeal = "TradeChatToMakeDeal"
+  static let SearchingChatResultsToChat = "SearchingChatResultsToChat"
 }
 
 

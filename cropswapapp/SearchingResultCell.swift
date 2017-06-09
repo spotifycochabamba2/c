@@ -15,12 +15,29 @@ class SearchingResultCell: UITableViewCell {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var statusLabel: UILabel!
   
+  var user: [String: Any]? {
+    didSet {
+      let pictureURL = user?["profilePictureURL"] as? String ?? ""
+      let name = user?["name"] as? String ?? ""
+      let lastName = user?["lastName"] as? String ?? ""
+      let about = user?["about"] as? String ?? ""
+      
+      if let url = URL(string: pictureURL) {
+        userImageView.sd_setImage(with: url)
+      }
+      
+      nameLabel.text = "\(name) \(lastName)"
+      print(about)
+      statusLabel.text = about
+    }
+  }
+  
  
   override func prepareForReuse() {
     super.prepareForReuse()
     
     userImageView.image = nil
     nameLabel.text = ""
-    statusLabel.text = ""
+//    statusLabel.text = ""
   }
 }

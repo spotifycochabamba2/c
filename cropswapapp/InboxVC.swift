@@ -12,7 +12,7 @@ import SVProgressHUD
 // Properties
 class InboxVC: UITableViewController {
   
-//  var searchingResultsChatVC: SearchingResultsChatVC!
+  var searchingResultsChatVC: SearchingResultsChatVC!
   var usersSearchController: UISearchController!
   
   var items = [[String: Any]]() {
@@ -155,10 +155,17 @@ extension InboxVC {
   }
   
   func setupUsersSearchController() {
-    usersSearchController = UISearchController(searchResultsController: nil)
+    searchingResultsChatVC = UIStoryboard(name: "SearchingResultsChat", bundle: nil).instantiateViewController(withIdentifier: "SearchingResultsChatVC") as! SearchingResultsChatVC
+    searchingResultsChatVC.view.frame = view.frame
+    
+    usersSearchController = UISearchController(searchResultsController: searchingResultsChatVC)
     
     usersSearchController.dimsBackgroundDuringPresentation = true
     usersSearchController.searchBar.sizeToFit()
+    
+    usersSearchController.searchBar.delegate = searchingResultsChatVC
+    usersSearchController.delegate = searchingResultsChatVC    
+    
     definesPresentationContext = false
   }
   
@@ -168,8 +175,9 @@ extension InboxVC {
   
 }
 
-
-
+extension InboxVC {
+  
+}
 
 
 

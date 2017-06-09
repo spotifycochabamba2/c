@@ -75,25 +75,69 @@ class TradeDetailVC: UIViewController {
     let name = produce.0.name
     let quantity = produce.1
     let quantityType = produce.0.quantityType
+    let id = produce.0.id
+    anotherProduceUnitTitleLabel.alpha = 1
     
-    anotherProduceTitleLabel.text = name
-    anotherProduceUnitTitleLabel.isHidden = false
-    anotherProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    if id == Constants.Ids.moneyId {
+      anotherProduceTitleLabel.text = "Money"
+      anotherProduceUnitTitleLabel.isHidden = false
+      anotherProduceUnitTitleLabel.text = "$\(quantity)"
+    } else if id == Constants.Ids.workerId {
+      anotherProduceTitleLabel.text = "Pay with work"
+      anotherProduceUnitTitleLabel.alpha = 0
+    } else {
+      anotherProduceTitleLabel.text = name
+      anotherProduceUnitTitleLabel.isHidden = false
+      anotherProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    }
   }
   
   func showProduceOnMyGardenUI(_ produce: (Produce, Int)) {
     let name = produce.0.name
     let quantity = produce.1
     let quantityType = produce.0.quantityType
+    let id = produce.0.id
+    myProduceUnitTitleLabel.alpha = 1
     
-    myProduceTitleLabel.text = name
-    myProduceUnitTitleLabel.isHidden = false
-    myProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    if id == Constants.Ids.moneyId {
+      myProduceTitleLabel.text = "Money"
+      myProduceUnitTitleLabel.isHidden = false
+      myProduceUnitTitleLabel.text = "$\(quantity)"
+    } else if id == Constants.Ids.workerId {
+      myProduceTitleLabel.text = "Pay with work"
+      myProduceUnitTitleLabel.alpha = 0
+    } else {
+      myProduceTitleLabel.text = name
+      myProduceUnitTitleLabel.isHidden = false
+      myProduceUnitTitleLabel.text = "\(quantity) \(quantityType)"
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
+  }
+  
+  func createMoneyProduce() -> Produce {
+    let produce = Produce(
+      id: Constants.Ids.moneyId,
+      name: "",
+      ownerId: "",
+      ownerUsername: ""
+    )
+    
+    return produce
+  }
+  
+  func createWorkerProduce() -> Produce {
+    let produce = Produce(
+      id: Constants.Ids.workerId,
+      name: "",
+      ownerId: "",
+      ownerUsername: ""
+    )
+    
+    return produce
   }
   
   func loadData() {
@@ -182,6 +226,12 @@ class TradeDetailVC: UIViewController {
                   }
                 }
                 
+                let anotherMoneyProduce = self?.createMoneyProduce()
+                self?.anotherProduces.append((anotherMoneyProduce!, 0))
+                
+                let anotherWorkerProduce = self?.createWorkerProduce()
+                self?.anotherProduces.append((anotherWorkerProduce!, 0))
+                
                 myProducesFound.forEach { myProduce in
                   var exists = false
                   
@@ -214,6 +264,13 @@ class TradeDetailVC: UIViewController {
                     }
                   }
                 }
+                
+                let myMoneyProduce = self?.createMoneyProduce()
+                self?.myProduces.append((myMoneyProduce!, 0))
+                
+                let myWorkerProduce = self?.createWorkerProduce()
+                self?.myProduces.append((myWorkerProduce!, 0))
+
               case .waitingAnswer:
                 fallthrough
               case .tradeCompleted:
@@ -335,11 +392,25 @@ class TradeDetailVC: UIViewController {
 extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let produceSelected: Produce?
+    let cell = collectionView.cellForItem(at: indexPath) as! ItemCell
+    
+    if cell.isWorkerCircle {
+      cell.payWithWork = !cell.payWithWork
+    }
     
     if anotherGardenCollectionView == collectionView {
       produceSelected = anotherProduces[indexPath.row].0
+      anotherProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
     } else {
       produceSelected = myProduces[indexPath.row].0
+      myProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
+    }
+    
+    if let produce = produceSelected,
+        produce.id == Constants.Ids.moneyId ||
+        produce.id == Constants.Ids.workerId
+    {
+      return
     }
     
     if produceSelected != nil {
@@ -375,6 +446,9 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     cell.produceId = produceTuple?.0.id
     cell.tag = indexPath.row
     cell.processQuantity = processQuantity
+    cell.isMoneyCircle = (produceTuple?.0.id ?? "") == Constants.Ids.moneyId
+    cell.isWorkerCircle = (produceTuple?.0.id ?? "") == Constants.Ids.workerId
+    cell.payWithWork = produceTuple?.1 == 1
     
     return cell
   }
@@ -408,7 +482,7 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
           return
         }
         
-        if result <= produce.quantity {
+        if result <= produce.quantity || produce.id == Constants.Ids.moneyId {
           
           anotherProduces[index].1 = result >= 0 ? result : 0
           DispatchQueue.main.async { [weak self] in
@@ -443,7 +517,7 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
           return
         }
         
-        if result <= produce.quantity {
+        if result <= produce.quantity || produce.id == Constants.Ids.moneyId {
           myProduces[index].1 = result >= 0 ? result : 0
           DispatchQueue.main.async { [weak self] in
             self?.userUpdatedStateDeal()
