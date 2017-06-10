@@ -21,6 +21,12 @@ struct Deal {
   var ownerUsername: String
   var anotherUsername: String
   
+  var anotherPayWithMoney: Int = 0
+  var anotherPayWithWork: Bool = false
+  
+  var ownerPayWithMoney: Int = 0
+  var ownerPayWithWork: Bool = false
+  
   // trade request (to user) / waiting answer (from user) (this goes to deal core)
   // trade completed
   // trade in process
@@ -31,8 +37,8 @@ struct Deal {
   
   var transactionMethod: String?
   
-  var ownerProduces: [(produceId: String, quantity: Int)]
-  var anotherProduces: [(produceId: String, quantity: Int)]
+  var ownerProduces = [(produceId: String, quantity: Int)]()
+  var anotherProduces = [(produceId: String, quantity: Int)]()
   
   var changes: [String: Any]?
   
@@ -43,9 +49,7 @@ struct Deal {
       let id = json["id"] as? String,
       let ownerUserId = json["ownerUserId"] as? String,
       let anotherUserId = json["anotherUserId"] as? String,
-      let dateCreated = json["dateCreated"] as? Double,
-      let anotherProduces = json["anotherProduces"] as? [String: Int],
-      let ownerProduces = json["ownerProduces"] as? [String: Int]
+      let dateCreated = json["dateCreated"] as? Double
     else {
       return nil
     }
@@ -55,14 +59,17 @@ struct Deal {
     self.anotherUserId = anotherUserId
     self.dateCreated = dateCreated
     
+    let ownerProducesTemp = json["ownerProduces"] as? [String: Int] ?? [String: Int]()
+    let anotherProducesTemp = json["anotherProduces"] as? [String: Int] ?? [String: Int]()
+    
     self.ownerProduces = [(produceId: String, quantity: Int)]()
-    for (key, value) in ownerProduces {
+    for (key, value) in ownerProducesTemp {
       self.ownerProduces.append((produceId: key, quantity: value))
       print(self.ownerProduces.count)
     }
     
     self.anotherProduces = [(produceId: String, quantity: Int)]()
-    for (key, value) in anotherProduces {
+    for (key, value) in anotherProducesTemp {
       self.anotherProduces.append((produceId: key, quantity: value))
       print(self.anotherProduces.count)
     }
@@ -74,6 +81,12 @@ struct Deal {
     self.transactionMethod = json["transactionMethod"] as? String ?? ""
     
     self.changes = json["changes"] as? [String: Any]
+    
+    self.ownerPayWithWork = json["ownerPayWithWork"] as? Bool ?? false
+    self.ownerPayWithMoney = json["ownerPayWithMoney"] as? Int ?? 0
+    
+    self.anotherPayWithWork = json["anotherPayWithWork"] as? Bool ?? false
+    self.anotherPayWithMoney = json["anotherPayWithMoney"] as? Int ?? 0
   }
   
   init(
@@ -97,6 +110,12 @@ struct Deal {
     self.ownerUserId = ownerUserId
     self.anotherUserId = anotherUserId
     
+//    var anotherPayWithMoney: Int = 0
+//    var anotherPayWithWork: Bool = false
+//    
+//    var ownerPayWithMoney: Int = 0
+//    var ownerPayWithWork: Bool = false
+    
     self.ownerProduces = ownerProduces.flatMap {
       guard
           let produceId = $0["id"] as? String,
@@ -105,18 +124,35 @@ struct Deal {
         return nil
       }
       
-      return (produceId: produceId, quantity: quantity)
+      if produceId == Constants.Ids.moneyId {
+        ownerPayWithMoney = quantity
+      } else if produceId == Constants.Ids.workerId {
+        let isActive = $0["isActive"] as? Bool ?? false
+        ownerPayWithWork = isActive
+      } 
+//      else {
+        return (produceId: produceId, quantity: quantity)
+//      }
     }
     
     self.anotherProduces = anotherProduces.flatMap {
       guard
         let produceId = $0["id"] as? String,
         let quantity = $0["quantityAdded"] as? Int
-        else {
+      else {
           return nil
       }
       
-      return (produceId: produceId, quantity: quantity)
+      if produceId == Constants.Ids.moneyId {
+        anotherPayWithMoney = quantity
+      } else if produceId == Constants.Ids.workerId {
+        let isActive = $0["isActive"] as? Bool ?? false
+        anotherPayWithWork = isActive
+      } 
+//      else
+//      {
+        return (produceId: produceId, quantity: quantity)
+//      }
     }
   }
 }
@@ -594,6 +630,52 @@ extension Deal {
       change["transactionMethod"] = transactionMethod
     }
     
+    // filter money and pay with work
+    // get money and pay with work values
+    // and update properties
+    
+    var ownerPayWithMoney = 0
+    var ownerPayWithWork = false
+    
+    var anotherPayWithMoney = 0
+    var anotherPayWithWork = false
+    
+    let newOwnerProduces = newOwnerProduces.filter { (produce) -> Bool in
+      let produceId = produce.produceId
+      let value = produce.quantity
+      
+      if produceId == Constants.Ids.moneyId {
+        ownerPayWithMoney = value
+      } else if produceId == Constants.Ids.workerId {
+        ownerPayWithWork = value > 0
+      }
+      
+      return produceId != Constants.Ids.moneyId &&
+              produceId != Constants.Ids.workerId
+    }
+    
+    let newAnotherProduces = newAnotherProduces.filter {
+      let produceId = $0.produceId
+      let value = $0.quantity
+      
+      if produceId == Constants.Ids.moneyId {
+        anotherPayWithMoney = value
+      } else if produceId == Constants.Ids.workerId {
+        anotherPayWithWork = value > 0
+      }
+      
+      return produceId != Constants.Ids.moneyId &&
+        produceId != Constants.Ids.workerId
+    }
+    
+    valuesForDeal["ownerPayWithMoney"] = ownerPayWithMoney
+    valuesForDeal["ownerPayWithWork"] = ownerPayWithWork
+    
+    valuesForDeal["anotherPayWithMoney"] = anotherPayWithMoney
+    valuesForDeal["anotherPayWithWork"] = anotherPayWithWork
+    
+    // show in historical, using offer values => money and pay with
+    // work have quantity as their storage variable name.
     var counterOwnerProduces = 0
     newOwnerProduces.forEach {
       counterOwnerProduces += $0.quantity
@@ -713,7 +795,7 @@ extension Deal {
     })
   }
   
-  static func getDealProduces(byId dealId: String, completion: @escaping (_ ownerProduces:[(Produce, Int)], _ anotherProduces: [(Produce, Int)]) -> Void) {
+  static func getDealProduces(byId dealId: String, completion: @escaping (_ ownerProduces:[(Produce, Int)], _ anotherProduces: [(Produce, Int)], Deal) -> Void) {
 
     let refDatabaseDeal = refDatabaseDeals
                               .child(dealId)
@@ -769,7 +851,7 @@ extension Deal {
             }
             
             ], result: { (error) in
-              completion(ownerProduces, anotherProduces)
+              completion(ownerProduces, anotherProduces, deal)
             }
           )
         }
@@ -953,16 +1035,35 @@ extension Deal {
       ownerProduces: deal.ownerProduces
     )
     
+    //      if produceId == Constants.Ids.moneyId {
+    //        ownerPayWithMoney = quantity
+    //        return nil
+    //      } else if produceId == Constants.Ids.workerId {
+    //        let isActive = $0["isActive"] as? Bool ?? false
+    //        ownerPayWithWork = isActive
+    //        return nil
+    
+//    anotherProduces
+    let anotherProduces = deal.anotherProduces.filter {
+      return $0.produceId != Constants.Ids.moneyId &&
+              $0.produceId != Constants.Ids.workerId
+    }
+    
+    let ownerProduces = deal.ownerProduces.filter {
+      return $0.produceId != Constants.Ids.moneyId &&
+        $0.produceId != Constants.Ids.workerId
+    }
+    
     offer.ownerUserId = deal.ownerUserId
     offer.anotherUserId = deal.anotherUserId
     
     var counterOwnerProduces = 0
-    deal.ownerProduces.forEach {
+    ownerProduces.forEach {
       counterOwnerProduces += $0.quantity
     }
     
     var counterAnotherProduces = 0
-    deal.anotherProduces.forEach {
+    anotherProduces.forEach {
       counterAnotherProduces += $0.quantity
     }
     
@@ -988,6 +1089,11 @@ extension Deal {
     valuesForDeal["originalAnotherProducesCount"] = counterAnotherProduces
     valuesForDeal["transactionMethod"] = deal.transactionMethod ?? ""
     
+    valuesForDeal["ownerPayWithMoney"] = deal.ownerPayWithMoney
+    valuesForDeal["ownerPayWithWork"] = deal.ownerPayWithWork
+    valuesForDeal["anotherPayWithMoney"] = deal.anotherPayWithMoney
+    valuesForDeal["anotherPayWithWork"] = deal.anotherPayWithWork
+    
     var valuesForUserDealOwner = [String: Any]()
     valuesForUserDealOwner["id"] = dealKey
     valuesForUserDealOwner["state"] = DealState.tradeRequest.rawValue
@@ -998,8 +1104,6 @@ extension Deal {
     valuesForUserDealOwner["numberProducesTrade"] = numberProducesTrade
     valuesForUserDealOwner["originalOwnerProducesCount"] = counterOwnerProduces
     valuesForUserDealOwner["originalAnotherProducesCount"] = counterAnotherProduces
-    
-    
     
     var valuesForUserDealAnother = [String: Any]()
     valuesForUserDealAnother["id"] = dealKey
@@ -1012,19 +1116,19 @@ extension Deal {
     valuesForUserDealAnother["originalOwnerProducesCount"] = counterOwnerProduces
     valuesForUserDealAnother["originalAnotherProducesCount"] = counterAnotherProduces
     
-    var ownerProduces = [String: Int]()
-    var anotherProduces = [String: Int]()
+    var ownerProducesTemp = [String: Int]()
+    var anotherProducesTemp = [String: Int]()
     
-    deal.ownerProduces.forEach {
-      ownerProduces[$0.produceId] = $0.quantity
+    ownerProduces.forEach {
+      ownerProducesTemp[$0.produceId] = $0.quantity
     }
     
-    deal.anotherProduces.forEach {
-      anotherProduces[$0.produceId] = $0.quantity
+    anotherProduces.forEach {
+      anotherProducesTemp[$0.produceId] = $0.quantity
     }
   
-    valuesForDeal["ownerProduces"] = ownerProduces
-    valuesForDeal["anotherProduces"] = anotherProduces
+    valuesForDeal["ownerProduces"] = ownerProducesTemp
+    valuesForDeal["anotherProduces"] = anotherProducesTemp
     
     refDatabaseUserDealOwner.setValue(valuesForUserDealAnother)
     refDatabaseUserDealAnother.setValue(valuesForUserDealOwner)

@@ -41,8 +41,6 @@ struct Offer {
       let dateCreated = json["dateCreated"] as? Double,
       let ownerUserId = json["ownerUserId"] as? String,
       let anotherUserId = json["anotherUserId"] as? String,
-      let anotherProduces = json["anotherProduces"] as? [String: Int],
-      let ownerProduces = json["ownerProduces"] as? [String: Int],
       let dealId = json["dealId"] as? String
       else {
         return nil
@@ -51,14 +49,17 @@ struct Offer {
     self.anotherUserId = anotherUserId
     self.ownerUserId = ownerUserId
     
+    let anotherProducesTemp = json["anotherProduces"] as? [String: Int] ?? [String: Int]()
+    let ownerProducesTemp = json["ownerProduces"] as? [String: Int] ?? [String: Int]()
+    
     self.ownerProduces = [(produceId: String, quantity: Int)]()
-    for (key, value) in ownerProduces {
+    for (key, value) in ownerProducesTemp {
       self.ownerProduces.append((produceId: key, quantity: value))
       print(self.ownerProduces.count)
     }
     
     self.anotherProduces = [(produceId: String, quantity: Int)]()
-    for (key, value) in anotherProduces {
+    for (key, value) in anotherProducesTemp {
       self.anotherProduces.append((produceId: key, quantity: value))
       print(self.anotherProduces.count)
     }
@@ -101,6 +102,8 @@ extension Offer {
     
     Ax.parallel(tasks: [
       { done in
+        print(ownerProduces.count)
+        print(anotherProduces.count)
         create(offer) { (error) in
           done(error)
         }
@@ -163,12 +166,34 @@ extension Offer {
                     group.enter()
                     let quantity = $0.quantity
                     
-                    Produce.getProduce(byProduceId: $0.produceId, completion: { (produce) in
-                      if let produce = produce {
-                        anotherProduces.append((produce, quantity))
-                      }
+                    if $0.produceId == Constants.Ids.moneyId {
+                      let produce = Produce(
+                        id: Constants.Ids.moneyId,
+                        name: "Money",
+                        ownerId: "",
+                        ownerUsername: ""
+                      )
+                      
+                      anotherProduces.append((produce, quantity))
                       group.leave()
-                    })
+                    } else if $0.produceId == Constants.Ids.workerId {
+                      let produce = Produce(
+                        id: Constants.Ids.workerId,
+                        name: "Work",
+                        ownerId: "",
+                        ownerUsername: ""
+                      )
+                      
+                      anotherProduces.append((produce, quantity))
+                      group.leave()
+                    } else {
+                      Produce.getProduce(byProduceId: $0.produceId, completion: { (produce) in
+                        if let produce = produce {
+                          anotherProduces.append((produce, quantity))
+                        }
+                        group.leave()
+                      })
+                    }
                   }
                   
                   group.notify(queue: DispatchQueue.global(qos: .background), execute: {
@@ -192,13 +217,35 @@ extension Offer {
                     group.enter()
                     let quantity = $0.quantity
                     
-                    Produce.getProduce(byProduceId: $0.produceId, completion: { (produce) in
-                      if let produce = produce {
-                        ownerProduces.append((produce, quantity))
-                      }
+                    if $0.produceId == Constants.Ids.moneyId {
+                      let produce = Produce(
+                        id: Constants.Ids.moneyId,
+                        name: "Money",
+                        ownerId: "",
+                        ownerUsername: ""
+                      )
                       
+                      ownerProduces.append((produce, quantity))
                       group.leave()
-                    })
+                    } else if $0.produceId == Constants.Ids.workerId {
+                      let produce = Produce(
+                        id: Constants.Ids.workerId,
+                        name: "Work",
+                        ownerId: "",
+                        ownerUsername: ""
+                      )
+                      
+                      ownerProduces.append((produce, quantity))
+                      group.leave()
+                    } else {
+                      Produce.getProduce(byProduceId: $0.produceId, completion: { (produce) in
+                        if let produce = produce {
+                          ownerProduces.append((produce, quantity))
+                        }
+                        
+                        group.leave()
+                      })
+                    }
                   }
                   
                   group.notify(queue: DispatchQueue.global(qos: .background), execute: {

@@ -183,11 +183,18 @@ class TradeDetailVC: UIViewController {
         
         { [weak self] done in
           if let dealState = self?.dealState {
-            Deal.getDealProduces(byId: dealId, completion: { [weak self] (ownerProduces, anotherProduces) in
+            Deal.getDealProduces(byId: dealId, completion: { [weak self] (ownerProduces, anotherProduces, deal) in
+
               switch dealState {
               case .tradeRequest:
                 self?.anotherProduces = ownerProduces
                 self?.myProduces = anotherProduces
+                
+                let anotherPayWithWork = deal.ownerPayWithWork
+                let anotherPayWithMoney = deal.ownerPayWithMoney
+                
+                let ownerPayWithWork = deal.anotherPayWithWork
+                let ownerPayWithMoney = deal.anotherPayWithMoney
                 
                 print(myProducesFound.count)
                 print(ownerProduces.count)
@@ -227,10 +234,10 @@ class TradeDetailVC: UIViewController {
                 }
                 
                 let anotherMoneyProduce = self?.createMoneyProduce()
-                self?.anotherProduces.append((anotherMoneyProduce!, 0))
+                self?.anotherProduces.append((anotherMoneyProduce!, anotherPayWithMoney))
                 
                 let anotherWorkerProduce = self?.createWorkerProduce()
-                self?.anotherProduces.append((anotherWorkerProduce!, 0))
+                self?.anotherProduces.append((anotherWorkerProduce!, anotherPayWithWork ? 1 : 0))
                 
                 myProducesFound.forEach { myProduce in
                   var exists = false
@@ -266,10 +273,10 @@ class TradeDetailVC: UIViewController {
                 }
                 
                 let myMoneyProduce = self?.createMoneyProduce()
-                self?.myProduces.append((myMoneyProduce!, 0))
+                self?.myProduces.append((myMoneyProduce!, ownerPayWithMoney))
                 
                 let myWorkerProduce = self?.createWorkerProduce()
-                self?.myProduces.append((myWorkerProduce!, 0))
+                self?.myProduces.append((myWorkerProduce!, ownerPayWithWork ? 1 : 0))
 
               case .waitingAnswer:
                 fallthrough
@@ -278,8 +285,30 @@ class TradeDetailVC: UIViewController {
               case .tradeDeleted:
                 fallthrough
               case .tradeCancelled:
+//                self?.myProduces = myProducesFound
+//                self?.anotherProduces = anotherProducesFound
+                
                 self?.anotherProduces = anotherProduces
+                if deal.anotherPayWithWork {
+                  let anotherWorkerProduce = self?.createWorkerProduce()
+                  self?.anotherProduces.append((anotherWorkerProduce!, 1))
+                }
+                
+                if deal.anotherPayWithMoney > 0 {
+                  let anotherMoneyProduce = self?.createMoneyProduce()
+                  self?.anotherProduces.append((anotherMoneyProduce!, deal.anotherPayWithMoney))
+                }
+                
                 self?.myProduces = ownerProduces
+                if deal.ownerPayWithWork {
+                  let myWorkerProduce = self?.createWorkerProduce()
+                  self?.myProduces.append((myWorkerProduce!, 1))
+                }
+                
+                if deal.ownerPayWithMoney > 0 {
+                  let myMoneyProduce = self?.createMoneyProduce()
+                  self?.myProduces.append((myMoneyProduce!, deal.ownerPayWithMoney))
+                }
                 
               case .tradeInProcess:
                 break
@@ -394,16 +423,26 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     let produceSelected: Produce?
     let cell = collectionView.cellForItem(at: indexPath) as! ItemCell
     
-    if cell.isWorkerCircle {
-      cell.payWithWork = !cell.payWithWork
-    }
-    
     if anotherGardenCollectionView == collectionView {
       produceSelected = anotherProduces[indexPath.row].0
-      anotherProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
     } else {
       produceSelected = myProduces[indexPath.row].0
-      myProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
+    }
+    
+    print(dealState)
+    if cell.isWorkerCircle,
+       dealState?.rawValue ?? "" == DealState.tradeRequest.rawValue
+    {
+      cell.payWithWork = !cell.payWithWork
+      
+      if anotherGardenCollectionView == collectionView {
+        anotherProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
+      } else {
+        myProduces[indexPath.row].1 = cell.payWithWork ? 1 : 0
+      }
+      
+      userUpdatedStateDeal()
+      
     }
     
     if let produce = produceSelected,
@@ -441,7 +480,7 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     print(produceTuple?.0)
     print(produceTuple?.0.firstPictureURL)
     
-    cell.dealState = dealState
+    
     cell.imageURLString = produceTuple?.0.firstPictureURL
     cell.produceId = produceTuple?.0.id
     cell.tag = indexPath.row
@@ -449,6 +488,8 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     cell.isMoneyCircle = (produceTuple?.0.id ?? "") == Constants.Ids.moneyId
     cell.isWorkerCircle = (produceTuple?.0.id ?? "") == Constants.Ids.workerId
     cell.payWithWork = produceTuple?.1 == 1
+    
+    cell.dealState = dealState
     
     return cell
   }

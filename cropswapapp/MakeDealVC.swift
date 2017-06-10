@@ -77,6 +77,7 @@ class MakeDealVC: UIViewController {
     
     return formatter
   }()
+
   
   func showProduceOnMyGardenUI(_ produce: [String: Any]) {
     let name = produce["produceType"] as? String ?? ""
@@ -157,16 +158,18 @@ class MakeDealVC: UIViewController {
     
     let anotherProducesSelected = anotherProduces.filter { (produce) -> Bool in  // true include and false exclude
       let quantityAdded = produce["quantityAdded"] as? Int ?? 0
+      let isActive = produce["isActive"] as? Bool ?? false
       
-      return quantityAdded > 0
+      return quantityAdded > 0 || isActive
     }
     
     let myProducesSelected = myProduces.filter {
       let quantityAdded = $0["quantityAdded"] as? Int ?? 0
+      let isActive = $0["isActive"] as? Bool ?? false
       
-      return quantityAdded > 0
+      return quantityAdded > 0 || isActive
     }
-
+    
     
     if anotherProducesSelected.count <= 0  {
       acceptButton.isEnabled = true
@@ -187,7 +190,7 @@ class MakeDealVC: UIViewController {
       present(alert, animated: true)
       return
     }
-    
+        
     var ownerUserFound: User?
     var anotherUserFound: User?
     
@@ -296,6 +299,7 @@ class MakeDealVC: UIViewController {
   func createMoneyProduce() -> [String: Any] {
     var values = [String: Any]()
     values["id"] = Constants.Ids.moneyId
+    values["quantityAdded"] = 0
     
     return values
   }
@@ -304,6 +308,7 @@ class MakeDealVC: UIViewController {
     var values = [String: Any]()
     values["id"] = Constants.Ids.workerId
     values["isActive"] = false
+    values["quantityAdded"] = 0
     
     return values
   }

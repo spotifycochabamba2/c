@@ -329,7 +329,10 @@ class TradeHomeVC: UIViewController {
       return
     }
     
-    let newOwnerProduces = tradeDetailVC.myProduces.filter { return $0.1 > 0 }
+    let newOwnerProduces = tradeDetailVC.myProduces.filter {
+      return $0.1 > 0
+    }
+    
     let newAnotherProduces = tradeDetailVC.anotherProduces.filter { return $0.1 > 0 }    
     
     print(newOwnerProduces)

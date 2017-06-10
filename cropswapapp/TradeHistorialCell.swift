@@ -37,12 +37,31 @@ class TradeHistorialCell: UITableViewCell {
   var myProduces = [(Produce, Int)]() {
     didSet {
       myProduces.forEach { produce in
-        addProduceToMyList(
-          pictureURL: produce.0.firstPictureURL,
-          produceName: produce.0.name,
-          quantityType: produce.0.quantityType,
-          quantity: produce.1
-        )
+        print(produce.0.id)
+        if produce.0.id == Constants.Ids.moneyId {
+          addProduceToMyList(
+            pictureURL: "",
+            produceName: "Money",
+            quantityType: "",
+            quantity: produce.1,
+            produceId: produce.0.id
+          )
+        } else if produce.0.id == Constants.Ids.workerId {
+          addProduceToMyList(
+            pictureURL: "",
+            produceName: "Work",
+            quantityType: "",
+            quantity: produce.1,
+            produceId: produce.0.id
+          )
+        } else {
+          addProduceToMyList(
+            pictureURL: produce.0.firstPictureURL,
+            produceName: produce.0.name,
+            quantityType: produce.0.quantityType,
+            quantity: produce.1
+          )
+        }
       }
     }
   }
@@ -50,12 +69,31 @@ class TradeHistorialCell: UITableViewCell {
   var anotherProduces = [(Produce, Int)]() {
     didSet {
       anotherProduces.forEach { produce in
-        addProduceToAnothersList(
-          pictureURL: produce.0.firstPictureURL,
-          produceName: produce.0.name,
-          quantityType: produce.0.quantityType,
-          quantity: produce.1
-        )
+        print(produce.0.id)
+        if produce.0.id == Constants.Ids.moneyId {
+          addProduceToAnothersList(
+            pictureURL: "",
+            produceName: "Money",
+            quantityType: "",
+            quantity: produce.1,
+            produceId: produce.0.id
+          )
+        } else if produce.0.id == Constants.Ids.workerId {
+          addProduceToAnothersList(
+            pictureURL: "",
+            produceName: "Work",
+            quantityType: "",
+            quantity: produce.1,
+            produceId: produce.0.id
+          )
+        } else {
+          addProduceToAnothersList(
+            pictureURL: produce.0.firstPictureURL,
+            produceName: produce.0.name,
+            quantityType: produce.0.quantityType,
+            quantity: produce.1
+          )
+        }
       }
     }
   }
@@ -99,11 +137,22 @@ class TradeHistorialCell: UITableViewCell {
     anotherViews.removeAll()
   }
   
-  func addProduceToMyList(pictureURL: String?, produceName: String, quantityType: String, quantity: Int) {
+  func addProduceToMyList(pictureURL: String?, produceName: String, quantityType: String, quantity: Int, produceId: String = "") {
     let customView = TradeHistorialProduceView()
     customView.translatesAutoresizingMaskIntoConstraints = false
-    customView.producePictureURL = pictureURL
-    customView.produceNameLabel.text = "\(quantity) \(quantityType) \(produceName)"
+    
+    if produceId == Constants.Ids.moneyId {
+      customView.produceImageView.image = UIImage(named: "money-circle-icon")
+      customView.produceNameLabel.text = "$\(quantity) \(produceName)"
+    } else if produceId == Constants.Ids.workerId {
+      customView.produceImageView.image = UIImage(named: "worker-circle-icon")
+      customView.produceNameLabel.text = "Pay With Work"
+    } else {
+      customView.producePictureURL = pictureURL
+      customView.produceNameLabel.text = "\(quantity) \(quantityType) \(produceName)"
+    }
+
+    
     
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -119,11 +168,22 @@ class TradeHistorialCell: UITableViewCell {
     self.myViews.append(view)
   }
   
-  func addProduceToAnothersList(pictureURL: String?, produceName: String, quantityType: String, quantity: Int) {
+  func addProduceToAnothersList(pictureURL: String?, produceName: String, quantityType: String, quantity: Int, produceId: String = "") {
     let customView = TradeHistorialProduceView()
     customView.translatesAutoresizingMaskIntoConstraints = false
-    customView.producePictureURL = pictureURL
-    customView.produceNameLabel.text = "\(quantity) \(quantityType) \(produceName)"
+//    customView.producePictureURL = pictureURL
+//    customView.produceNameLabel.text = "\(quantity) \(quantityType) \(produceName)"
+    
+    if produceId == Constants.Ids.moneyId {
+      customView.produceImageView.image = UIImage(named: "money-circle-icon")
+      customView.produceNameLabel.text = "$\(quantity) \(produceName)"
+    } else if produceId == Constants.Ids.workerId {
+      customView.produceImageView.image = UIImage(named: "worker-circle-icon")
+      customView.produceNameLabel.text = "Pay With Work"
+    } else {
+      customView.producePictureURL = pictureURL
+      customView.produceNameLabel.text = "\(quantity) \(quantityType) \(produceName)"
+    }
     
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
