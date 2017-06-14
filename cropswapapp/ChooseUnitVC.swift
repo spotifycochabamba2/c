@@ -11,12 +11,14 @@ import UIKit
 class ChooseUnitVC: UIViewController {
   @IBOutlet weak var backgroundView: UIView!
   @IBOutlet weak var upperView: UIView!
+  var typeSelected: String?
   
   var chooseUnitListVC: ChooseUnitListVC?
   var didSelectUnit: (String) -> Void = { _ in }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     chooseUnitListVC = segue.destination as? ChooseUnitListVC
+    chooseUnitListVC?.typeSelected = typeSelected
   }
   
   override func viewDidLoad() {

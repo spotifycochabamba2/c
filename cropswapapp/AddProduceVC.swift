@@ -780,7 +780,7 @@ class AddProduceVC: UIViewController {
             fourthPicURL: fourthPicURL ?? "",
             fifthPicURL: fifthPicURL ?? "",
             
-            tags: [(String, Bool, Int, String)](),
+            tags: [String: Any](),
             
             state: "",
             
@@ -1240,7 +1240,7 @@ class AddProduceVC: UIViewController {
             fourthPicURL: fourthPicURL,
             fifthPicURL: fifthPicURL,
             
-            tags: [],
+            tags: [String: Any](),
             state: "",
             completion: { (result) in
               switch result {

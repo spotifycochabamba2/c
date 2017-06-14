@@ -223,11 +223,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="130" id="9dr-XU-gXb">
-                                        <rect key="frame" x="0.0" y="300" width="375" height="130"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="9dr-XU-gXb">
+                                        <rect key="frame" x="0.0" y="300" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9dr-XU-gXb" id="yLb-us-UWJ">
-                                            <frame key="frameInset" width="375" height="130"/>
+                                            <frame key="frameInset" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QDU-xT-9UZ">
@@ -242,25 +242,6 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rFt-Aq-9bD">
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf4-Nj-hrF">
-                                                                    <state key="normal" image="start-inactive-icon"/>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRZ-eD-R3u">
-                                                                    <state key="normal" image="start-inactive-icon"/>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-g1-yMt">
-                                                                    <state key="normal" image="start-inactive-icon"/>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNK-TC-oN3">
-                                                                    <state key="normal" image="start-inactive-icon"/>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ek-yk-XKf">
-                                                                    <state key="normal" image="start-inactive-icon"/>
-                                                                </button>
-                                                            </subviews>
-                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atq-bC-Mk7">
@@ -279,7 +260,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="15V-FU-Sy2">
-                                        <rect key="frame" x="0.0" y="430" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="410" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="15V-FU-Sy2" id="w6N-id-WEI">
                                             <frame key="frameInset" width="375" height="80"/>
@@ -306,7 +287,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="LN6-rj-N9Y">
-                                        <rect key="frame" x="0.0" y="510" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="490" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LN6-rj-N9Y" id="vWd-n7-sh7">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -335,7 +316,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="fh9-eq-Rhm">
-                                        <rect key="frame" x="0.0" y="580" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="560" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fh9-eq-Rhm" id="TDK-io-c47">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -364,7 +345,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="MjZ-7t-d7s">
-                                        <rect key="frame" x="0.0" y="650" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="630" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MjZ-7t-d7s" id="U8G-GW-un0">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -393,7 +374,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="6ZA-Zh-Nah">
-                                        <rect key="frame" x="0.0" y="720" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="700" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6ZA-Zh-Nah" id="dB7-En-Xab">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -424,7 +405,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="fPn-y6-gDU">
-                                        <rect key="frame" x="0.0" y="810" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="790" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPn-y6-gDU" id="sbO-Zf-wPD">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -455,7 +436,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="q4L-78-J3T">
-                                        <rect key="frame" x="0.0" y="900" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="880" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q4L-78-J3T" id="OnJ-Cm-A3v">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -486,7 +467,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="VxI-Xf-zaL">
-                                        <rect key="frame" x="0.0" y="990" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="970" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VxI-Xf-zaL" id="mhS-gs-9Vm">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -517,7 +498,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="08V-Fg-7dy">
-                                        <rect key="frame" x="0.0" y="1080" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="1060" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="08V-Fg-7dy" id="ZSd-Dg-9EJ">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -709,6 +690,5 @@ trade requests</string>
         <image name="cropswap-gray-logo" width="106" height="105"/>
         <image name="edit-profile-button-icon" width="69" height="69"/>
         <image name="icon-button-chat" width="67" height="67"/>
-        <image name="start-inactive-icon" width="19" height="17"/>
     </resources>
 </document>

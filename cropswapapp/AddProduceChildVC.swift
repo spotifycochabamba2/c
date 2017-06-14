@@ -134,6 +134,10 @@ class AddProduceChildVC: UITableViewController {
   var unitSelected: String?
   
   var tagsSelected = [(String, Bool, Int, String)]()
+  
+  var tagsToDisplay = [String]()
+  var tagsToSave = [String: Any]()
+  
   var stateSelected: String? {
     didSet {
       isSeedTypeSelected = false
@@ -833,6 +837,7 @@ class AddProduceChildVC: UITableViewController {
       }
       
       didSelectState(state: produce.state)
+      didSelectUnit(unit: produce.quantityType)
 //      stateSelected = produce.stat
       
 //      unitTextField
@@ -851,10 +856,13 @@ class AddProduceChildVC: UITableViewController {
 //      descriptionTextView.text = "\(produce.description)"
       csDescriptionTextView.text = "\(produce.description)"
       
-      tagsSelected = produce.tags.map {
-        print($0)
-        return ($0.name, false, $0.priority, $0.key)
-      }
+      tagsToDisplay = Produce.getTagNamesFrom(tags: produce.tags3)
+      tagsToSave = produce.tags3
+      
+//      tagsSelected = produce.tags.map {
+//        print($0)
+//        return ($0.name, false, $0.priority, $0.key)
+//      }
       
       DispatchQueue.main.async { [weak self] in
         self?.enableProcessButton()
@@ -1061,7 +1069,10 @@ class AddProduceChildVC: UITableViewController {
       vc?.cancelled = cameraCancelled
       vc?.photoNumber = number
     } else if segue.identifier == Storyboard.AddProduceChildToChooseDetails {
-      let vc = segue.destination as? ChooseDetailVC
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? TagsListContainerVC
+      vc?.tagsAlreadySelected = currentProduce?.tags3 ?? [String: Any]()
+      vc?.tagsAlreadySelected = tagsToSave
       vc?.didSelectTags = didSelectTags
     } else if segue.identifier == Storyboard.AddProduceChildToChooseState {
       let vc = segue.destination as? ChooseStateVC
@@ -1073,6 +1084,7 @@ class AddProduceChildVC: UITableViewController {
     } else if segue.identifier == Storyboard.AddProduceChildToChooseUnit {
       let vc = segue.destination as? ChooseUnitVC
       vc?.didSelectUnit = didSelectUnit
+      vc?.typeSelected = stateSelected
     }
   }
   
@@ -1090,7 +1102,8 @@ class AddProduceChildVC: UITableViewController {
   
   func didSelectState(state: String) {
     self.stateSelected = state
-    
+    self.unitSelected = nil
+    self.unitTextField.text = ""
 //    stateLabelView.isHidden = false
 //    stateLabel.isHidden = false
 //    
@@ -1110,9 +1123,13 @@ class AddProduceChildVC: UITableViewController {
     self.tableView.reloadData()
   }
   
-  func didSelectTags(tags: [(String, Bool, Int, String)]) {
-    tagsSelected = tags
-    
+  func didSelectTags(_ tags: [String: Any]) {
+    print(tags)
+    tagsToSave = tags
+    tagsToDisplay = Produce.getTagNamesFrom(tags: tags)
+    print(tagsToDisplay)
+//    tagsSelected = tags
+//
     DispatchQueue.main.async { [weak self] in
       self?.tagsCollectionView.reloadData()
       
@@ -1121,6 +1138,24 @@ class AddProduceChildVC: UITableViewController {
       }
     }
   }
+  
+//  func getTagNamesFrom(tags: [String: Any]) -> [String] {
+//    var tagNames = [String]()
+//    
+//    for (_, groupValue) in tags {
+//      if let dictionaries = groupValue as? [String: Any] {
+//        for (_, tagValue) in dictionaries {
+//          if let tagValue = tagValue as? [String: Any],
+//             let name = tagValue["name"] as? String
+//          {
+//            tagNames.append(name)
+//          }
+//        }
+//      }
+//    }
+//    
+//    return tagNames
+//  }
   
   @IBAction func previousButtonTouched() {
     print("currentIndex: \(currentIndex)")
@@ -1517,7 +1552,15 @@ extension AddProduceChildVC: UITextFieldDelegate {
   
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     if textField === unitTextField {
-      performSegue(withIdentifier: Storyboard.AddProduceChildToChooseUnit, sender: nil)
+      
+      if let stateSelected = stateSelected {
+        performSegue(withIdentifier: Storyboard.AddProduceChildToChooseUnit, sender: stateSelected)
+      } else {
+        let alert = UIAlertController(title: "Alert", message: "Please first, select a category", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+      }
+      
       return false
     }
     
@@ -1672,22 +1715,22 @@ extension AddProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegat
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let size: CGSize!
     
-    let tag = tagsSelected[indexPath.row]
-    let tagSize = (tag.0 as NSString).size(attributes: self.tagFontAttributes!)
+    let tag = tagsToDisplay[indexPath.row]
+    let tagSize = (tag as NSString).size(attributes: self.tagFontAttributes!)
     size = CGSize(width: tagSize.width + 10, height: tagSize.height + 10)
     
     return size
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return tagsSelected.count
+    return tagsToDisplay.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tagCellId, for: indexPath) as! TagCell
-    let tagSelected = tagsSelected[indexPath.row]
+    let tagSelected = tagsToDisplay[indexPath.row]
     
-    cell.tagNameLabel.text = tagSelected.0
+    cell.tagNameLabel.text = tagSelected
     
     return cell
   }

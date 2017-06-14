@@ -81,6 +81,7 @@ struct Storyboard {
   static let TradeChatToFinalizeTrade = "TradeChatToFinalizeTrade"
   static let TradeChatToMakeDeal = "TradeChatToMakeDeal"
   static let SearchingChatResultsToChat = "SearchingChatResultsToChat"
+  static let TagListToChooseTags = "TagListToChooseTags"
 }
 
 

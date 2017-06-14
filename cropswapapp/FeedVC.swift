@@ -298,6 +298,12 @@ extension FeedVC {
           }
           self.isGettingPaginatedDataFromServer = false
           
+          var broughtProduces = broughtProduces
+          
+          broughtProduces = broughtProduces.filter({ (produce) -> Bool in
+            return produce.liveState ?? "" != ProduceState.archived.rawValue
+          })
+          
           self.collectionView.performBatchUpdates({
             
             var indexToInsert = self.produces.count - 1

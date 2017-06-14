@@ -799,7 +799,7 @@
                         <outlet property="unitTextField" destination="dxf-YS-XaK" id="Qfz-cI-gPp"/>
                         <segue destination="8Uk-UP-lpU" kind="presentation" identifier="AddProduceChildToCamera" id="9Ml-En-jg9"/>
                         <segue destination="KyQ-HF-oYT" kind="presentation" identifier="AddProduceChildToRetakeCamera" id="Glj-la-deW"/>
-                        <segue destination="Aks-LN-Op2" kind="presentation" identifier="AddProduceChildToChooseDetails" modalPresentationStyle="overCurrentContext" id="Lg2-Hn-JKN"/>
+                        <segue destination="Sw8-BX-nPU" kind="presentation" identifier="AddProduceChildToChooseDetails" modalPresentationStyle="overCurrentContext" id="Lg2-Hn-JKN"/>
                         <segue destination="qdU-RN-6Rw" kind="presentation" identifier="AddProduceChildToChooseState" id="wVe-7d-Kb7"/>
                         <segue destination="abZ-oC-3DF" kind="presentation" identifier="AddProduceChildToImageDetail" id="Etr-dl-kCT"/>
                         <segue destination="cJS-5j-5YN" kind="presentation" identifier="AddProduceChildToChooseUnit" modalPresentationStyle="overCurrentContext" id="Fpu-O5-zqe"/>
@@ -833,13 +833,15 @@
             </objects>
             <point key="canvasLocation" x="2001" y="-150"/>
         </scene>
-        <!--ChooseDetailVC-->
+        <!--TagsListContainerVC-->
         <scene sceneID="prg-pN-yFC">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseDetail" referencedIdentifier="ChooseDetailVC" id="Aks-LN-Op2" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Tags" referencedIdentifier="TagsListContainerVC" id="Aks-LN-Op2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="UUP-gg-Tlp"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGU-J8-Cqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2000" y="-16"/>
+            <point key="canvasLocation" x="3323" y="-17"/>
         </scene>
         <!--ChooseStateVC-->
         <scene sceneID="Clc-hV-tah">
@@ -856,6 +858,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zea-UF-beG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1992" y="159"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HDH-XJ-8Sv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sw8-BX-nPU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Ai-Yh-GPz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Aks-LN-Op2" kind="relationship" relationship="rootViewController" id="df8-Bb-yqz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1k4-G6-ywx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2634" y="-16"/>
         </scene>
     </scenes>
     <resources>

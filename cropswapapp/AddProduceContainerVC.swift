@@ -89,7 +89,7 @@ class AddProduceContainerVC: UIViewController {
       let price = try addProduceChildVC.getPrice()
       let description = try addProduceChildVC.getDescription()
       
-      let tags = addProduceChildVC.tagsSelected
+      let tags = addProduceChildVC.tagsToSave
       
       
       
@@ -289,7 +289,7 @@ class AddProduceContainerVC: UIViewController {
               fourthPicURL: fourthPicURL ?? "",
               fifthPicURL: fifthPicURL ?? "",
               
-              tags: tags.map { return $0 },
+              tags: tags,
               state: stateSelected,
               completion: { (result) in
                 switch result {
@@ -316,7 +316,7 @@ class AddProduceContainerVC: UIViewController {
               fourthPicURL: fourthPicURL ?? "",
               fifthPicURL: fifthPicURL ?? "",
               
-              tags: tags.map { return $0 },
+              tags: tags,
               state: stateSelected,
               
               completion: { (result) in

@@ -11,6 +11,12 @@ import SVProgressHUD
 import Ax
 
 class ProduceChildVC: UITableViewController {
+  @IBOutlet weak var produceStateImageView: UIImageView!
+  @IBOutlet weak var produceStateLabel: UILabel! {
+    didSet {
+      produceStateLabel.text = ""
+    }
+  }
   
   var isReadOnly = false
   
@@ -107,6 +113,25 @@ class ProduceChildVC: UITableViewController {
     return formatter
   }()
   
+  var tagsToDisplay = [String]() {
+    didSet {
+      DispatchQueue.main.async { [weak self] in
+        self?.tagsCollectionView.reloadData()
+        self?.tagsCollectionView.performBatchUpdates({
+          }, completion: { (finished) in
+            if finished {
+              DispatchQueue.main.async {
+                self?.tableView.reloadData()
+              }
+              //              DispatchQueue.main.async { [weak self] in
+              //                let indexPath = IndexPath(row: 2, section: 0)
+              //                self?.tableView.reloadRows(at: [indexPath], with: .none)
+              //              }
+            }
+        })
+      }
+    }
+  }
   
   var tags = [(name: String, priority: Int)]() {
     didSet {
@@ -324,8 +349,11 @@ class ProduceChildVC: UITableViewController {
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
 //        DispatchQueue.main.async {
-          self?.tags = produce.tags.map { return (name: $0.name, priority: $0.priority) }
-//        }
+        
+        self?.tagsToDisplay = Produce.getTagNamesFrom(tags:produce.tags3)
+        
+//        self?.tags = produce.tags.map { return (name: $0.name, priority: $0.priority) }
+        //        }
         
         DispatchQueue.main.async {
           if let firstPictureURL = produce.firstPictureURL, firstPictureURL.characters.count > 0 {
@@ -384,9 +412,39 @@ class ProduceChildVC: UITableViewController {
           
           let quantityType = self?.getQuantityType(quantityType: produce.quantityType)
           
-          self?.perQuantityTypeLabel.text = "Per \(quantityType?.singular.capitalized ?? "Unit")"
+          self?.produceStateLabel.text = produce.state.capitalized
           
-          self?.quantityTypeAvailableLabel.text = "\(quantityType?.plural.capitalized ?? "Units") Available"
+          if produce.state == ProduceStartType.seed.rawValue {
+            self?.produceStateImageView.image = UIImage(named: "seed-state-produce")
+          } else if produce.state == ProduceStartType.plant.rawValue {
+            self?.produceStateImageView.image = UIImage(named: "plant-state-produce")
+          } else if produce.state == ProduceStartType.harvest.rawValue {
+            self?.produceStateImageView.image = UIImage(named: "harvest-state-produce")
+          } else {
+            self?.produceStateImageView.image = UIImage(named: "other-state-produce")
+            self?.produceStateLabel.text = "Other"
+          }
+          
+          
+          
+          if produce.state == ProduceStartType.seed.rawValue ||
+             produce.state == ProduceStartType.plant.rawValue
+          {
+            self?.perQuantityTypeLabel.text = "\(quantityType?.singular.capitalized ?? "Unit")"
+            
+            self?.quantityTypeAvailableLabel.text = "Available"
+          } else {
+            if (quantityType?.singular.lowercased() ?? "") == "each" {
+              self?.perQuantityTypeLabel.text = "\(quantityType?.singular.capitalized ?? "Unit")"
+              
+              self?.quantityTypeAvailableLabel.text = "Available"
+            } else {
+              self?.perQuantityTypeLabel.text = "Per \(quantityType?.singular.capitalized ?? "Unit")"
+              
+              self?.quantityTypeAvailableLabel.text = "\(quantityType?.plural.capitalized ?? "Units") Available"
+            }
+          }
+          
           
           self?.descriptionProduceTextView.text = produce.description
           self?.produceNameLabel.text = produce.name
@@ -530,10 +588,14 @@ class ProduceChildVC: UITableViewController {
     {
       singular = "bean"
       plural = "beans"
-    }
-    else {
+    } else if
+            quantityType == "unit" ||
+              quantityType == "units" {
       singular = "unit"
       plural = "units"
+    } else {
+      singular = quantityType
+      plural = quantityType
     }
     
     return (singular: singular, plural: plural)
@@ -632,7 +694,7 @@ extension ProduceChildVC {
 //      return UITableView
 //      return 100
     } else if indexPath.row == 3 {
-      if tags.count > 0  {
+      if tagsToDisplay.count > 0  {
         tagsCollectionView.collectionViewLayout.invalidateLayout()
         tagsCollectionView.collectionViewLayout.prepare()
         tagsCollectionView.layoutIfNeeded()
@@ -684,7 +746,7 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView === tagsCollectionView {
-      return tags.count
+      return tagsToDisplay.count
     } else {
       return relatedProduces.count
     }
@@ -695,8 +757,8 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     if collectionView === tagsCollectionView {
       let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: tagCellId, for: indexPath) as! TagCell
-      let tag = tags[indexPath.row]
-      tagCell.tagNameLabel.text = tag.name
+      let tag = tagsToDisplay[indexPath.row]
+      tagCell.tagNameLabel.text = tag
       
       cell = tagCell
     } else {
@@ -716,8 +778,8 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
     let size: CGSize!
     
     if collectionView === tagsCollectionView {
-      let tag = tags[indexPath.row]
-      let tagSize = (tag.name as NSString).size(attributes: self.tagFontAttributes!)
+      let tag = tagsToDisplay[indexPath.row]
+      let tagSize = (tag as NSString).size(attributes: self.tagFontAttributes!)
       size = CGSize(width: tagSize.width + 10, height: tagSize.height + 10) //10
     } else {
       size = CGSize(width: 60, height: 60)

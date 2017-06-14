@@ -67,6 +67,9 @@
 		694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697441E816531006D8907 /* Montserrat-SemiBold.ttf */; };
 		696024ED1E9D80F2006766AF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696024EC1E9D80F2006766AF /* ItemCell.swift */; };
 		696024EF1E9D8115006766AF /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696024EE1E9D8115006766AF /* ItemCell.xib */; };
+		6965D0681EF079C100535049 /* ChooseTagsChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6965D0671EF079C100535049 /* ChooseTagsChildVC.swift */; };
+		6965D06A1EF0A93300535049 /* ChooseTagsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6965D0691EF0A93300535049 /* ChooseTagsCell.swift */; };
+		6965D06C1EF1BE8900535049 /* TagListContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6965D06B1EF1BE8900535049 /* TagListContainerVC.swift */; };
 		69694CDF1EE8D52C00E5BACA /* SearchingResultsChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69694CDE1EE8D52C00E5BACA /* SearchingResultsChatVC.swift */; };
 		69694CE11EE8D75700E5BACA /* SearchingResultsChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69694CE01EE8D75700E5BACA /* SearchingResultsChat.storyboard */; };
 		69694CE31EE8D92100E5BACA /* SearchingResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69694CE21EE8D92100E5BACA /* SearchingResultCell.swift */; };
@@ -96,6 +99,10 @@
 		69A4FA111E797C9A002CCC66 /* ProducesWanted.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A4FA101E797C9A002CCC66 /* ProducesWanted.storyboard */; };
 		69A4FA131E797CAB002CCC66 /* ProducesWantedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A4FA121E797CAB002CCC66 /* ProducesWantedVC.swift */; };
 		69A4FA151E79865A002CCC66 /* ProduceWantedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A4FA141E79865A002CCC66 /* ProduceWantedCell.swift */; };
+		69A5F17F1EF027CD00533FFA /* Tags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A5F17E1EF027CC00533FFA /* Tags.storyboard */; };
+		69A5F1811EF0283000533FFA /* TagListChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5F1801EF0283000533FFA /* TagListChildVC.swift */; };
+		69A5F1831EF0285C00533FFA /* ChooseTagsContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5F1821EF0285C00533FFA /* ChooseTagsContainerVC.swift */; };
+		69A5F1851EF0514500533FFA /* TagListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5F1841EF0514500533FFA /* TagListCell.swift */; };
 		69A748EB1E849CE9006F321A /* RelatedProducesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A748EA1E849CE9006F321A /* RelatedProducesCell.swift */; };
 		69B685541EA8FC37003C8188 /* TradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B685531EA8FC37003C8188 /* TradeDetailVC.swift */; };
 		69B685561EA8FC46003C8188 /* TradeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B685551EA8FC46003C8188 /* TradeDetail.storyboard */; };
@@ -214,6 +221,9 @@
 		6954E2A81EB77552009EFA59 /* cropswapapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cropswapapp.entitlements; sourceTree = "<group>"; };
 		696024EC1E9D80F2006766AF /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		696024EE1E9D8115006766AF /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		6965D0671EF079C100535049 /* ChooseTagsChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsChildVC.swift; sourceTree = "<group>"; };
+		6965D0691EF0A93300535049 /* ChooseTagsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsCell.swift; sourceTree = "<group>"; };
+		6965D06B1EF1BE8900535049 /* TagListContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListContainerVC.swift; sourceTree = "<group>"; };
 		69694CDE1EE8D52C00E5BACA /* SearchingResultsChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingResultsChatVC.swift; sourceTree = "<group>"; };
 		69694CE01EE8D75700E5BACA /* SearchingResultsChat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchingResultsChat.storyboard; sourceTree = "<group>"; };
 		69694CE21EE8D92100E5BACA /* SearchingResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingResultCell.swift; sourceTree = "<group>"; };
@@ -243,6 +253,10 @@
 		69A4FA101E797C9A002CCC66 /* ProducesWanted.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProducesWanted.storyboard; sourceTree = "<group>"; };
 		69A4FA121E797CAB002CCC66 /* ProducesWantedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducesWantedVC.swift; sourceTree = "<group>"; };
 		69A4FA141E79865A002CCC66 /* ProduceWantedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceWantedCell.swift; sourceTree = "<group>"; };
+		69A5F17E1EF027CC00533FFA /* Tags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tags.storyboard; sourceTree = "<group>"; };
+		69A5F1801EF0283000533FFA /* TagListChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListChildVC.swift; sourceTree = "<group>"; };
+		69A5F1821EF0285C00533FFA /* ChooseTagsContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsContainerVC.swift; sourceTree = "<group>"; };
+		69A5F1841EF0514500533FFA /* TagListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListCell.swift; sourceTree = "<group>"; };
 		69A748EA1E849CE9006F321A /* RelatedProducesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedProducesCell.swift; sourceTree = "<group>"; };
 		69B685531EA8FC37003C8188 /* TradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeDetailVC.swift; sourceTree = "<group>"; };
 		69B685551EA8FC46003C8188 /* TradeDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TradeDetail.storyboard; sourceTree = "<group>"; };
@@ -419,6 +433,7 @@
 		692E76C91E829C780071EF5C /* New Design */ = {
 			isa = PBXGroup;
 			children = (
+				69A5F17D1EF0248400533FFA /* Tags */,
 				697B82C91EE0C32B0068673C /* Cropswaps */,
 				696C9A461EE051B9008CEF4C /* Chat */,
 				69B685521EA8FBF7003C8188 /* Trade Detail */,
@@ -566,6 +581,20 @@
 				69A4FA141E79865A002CCC66 /* ProduceWantedCell.swift */,
 			);
 			name = ProducesWanted;
+			sourceTree = "<group>";
+		};
+		69A5F17D1EF0248400533FFA /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				69A5F17E1EF027CC00533FFA /* Tags.storyboard */,
+				69A5F1801EF0283000533FFA /* TagListChildVC.swift */,
+				69A5F1821EF0285C00533FFA /* ChooseTagsContainerVC.swift */,
+				69A5F1841EF0514500533FFA /* TagListCell.swift */,
+				6965D0671EF079C100535049 /* ChooseTagsChildVC.swift */,
+				6965D0691EF0A93300535049 /* ChooseTagsCell.swift */,
+				6965D06B1EF1BE8900535049 /* TagListContainerVC.swift */,
+			);
+			name = Tags;
 			sourceTree = "<group>";
 		};
 		69B685521EA8FBF7003C8188 /* Trade Detail */ = {
@@ -824,6 +853,7 @@
 				69EE4AED1E3FCDE700C95624 /* OpenSans-Light.ttf in Resources */,
 				69288E211EDC82A0008A5179 /* SearchResultFeed.storyboard in Resources */,
 				692E7AF01E9716C7001ABF36 /* MakeDeal.storyboard in Resources */,
+				69A5F17F1EF027CD00533FFA /* Tags.storyboard in Resources */,
 				69EE4AEF1E3FCDE700C95624 /* OpenSans-Regular.ttf in Resources */,
 				69DB63EF1EDA0E5B007D7170 /* ChooseUnit.storyboard in Resources */,
 				69EE4AF01E3FCDE700C95624 /* OpenSans-Semibold.ttf in Resources */,
@@ -926,6 +956,7 @@
 				6900F8B21E5B3983002CF473 /* User.swift in Sources */,
 				69288E231EDF15BB008A5179 /* Algolia.swift in Sources */,
 				69FB72531E92D09700D053FB /* EditProfileContainerVC.swift in Sources */,
+				6965D06C1EF1BE8900535049 /* TagListContainerVC.swift in Sources */,
 				69C401341E81F42E00F5F5D8 /* HomeTBC.swift in Sources */,
 				69B685581EA8FC67003C8188 /* TradeHomeVC.swift in Sources */,
 				691ED5CD1E43C759005F6E2A /* Constants.swift in Sources */,
@@ -939,6 +970,8 @@
 				69B6855C1EA8FCA2003C8188 /* TradeChatVC.swift in Sources */,
 				69B685621EABA60E003C8188 /* TradeHistorialCell.swift in Sources */,
 				692E76CE1E82A7BF0071EF5C /* FeedCell.swift in Sources */,
+				69A5F1831EF0285C00533FFA /* ChooseTagsContainerVC.swift in Sources */,
+				6965D06A1EF0A93300535049 /* ChooseTagsCell.swift in Sources */,
 				693DFA071E92D48F00C2FD6C /* EditProfileChildVC.swift in Sources */,
 				6917D38B1EBB6D0300F87224 /* TradeStatusVC.swift in Sources */,
 				69EE4AFC1E3FD70900C95624 /* SignupVC.swift in Sources */,
@@ -973,6 +1006,7 @@
 				6914F28D1EA5552F00142CB8 /* ChooseDetailListVC.swift in Sources */,
 				69B685601EAAC06D003C8188 /* Message.swift in Sources */,
 				697B82C81EE062E20068673C /* Inbox.swift in Sources */,
+				69A5F1811EF0283000533FFA /* TagListChildVC.swift in Sources */,
 				69047E971EC4AC2B00A8E554 /* SettingsVC.swift in Sources */,
 				6914F28B1EA54E8B00142CB8 /* ChooseDetailCell.swift in Sources */,
 				69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */,
@@ -984,10 +1018,12 @@
 				6932B9D01E7AC51D001626F2 /* ProduceWanted.swift in Sources */,
 				6945B5D41E39306300AA0799 /* AppDelegate.swift in Sources */,
 				69A748EB1E849CE9006F321A /* RelatedProducesCell.swift in Sources */,
+				6965D0681EF079C100535049 /* ChooseTagsChildVC.swift in Sources */,
 				69694CDF1EE8D52C00E5BACA /* SearchingResultsChatVC.swift in Sources */,
 				69CEE10B1E85AF72004E0725 /* AddProduceChildVC.swift in Sources */,
 				691B6B0D1ECF38FE00FAC876 /* PhotoViewerVC.swift in Sources */,
 				69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */,
+				69A5F1851EF0514500533FFA /* TagListCell.swift in Sources */,
 				691FE0FF1E60EAFC0031DAA0 /* CameraView.swift in Sources */,
 				6934322C1ED4D7D9005C2B48 /* CSFirebase.swift in Sources */,
 				691ED5ED1E451DCE005F6E2A /* Utils.swift in Sources */,

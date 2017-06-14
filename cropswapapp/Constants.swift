@@ -10,6 +10,18 @@ import Foundation
 
 struct Constants {
   
+  struct Tag {
+    static let tagGroupNames: [String: String] = {
+      var values = [String: String]()
+      values["habitat"] = "Habitat"
+      values["method"] = "Method"
+      values["origin"] = "Origin"
+      values["others"] = "Others"
+      values["soil-amendments"] = "Soil Amendments"
+      return values
+    }()
+  }
+  
   struct Algolia {
     static let searchAPIKey = "df5fa3a6d24e2da4cb02e7a6c65d71a1"
     static let apiID = "LX7ZA23GKW"
