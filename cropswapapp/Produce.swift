@@ -37,7 +37,7 @@ enum ProduceMethods: String {
   case organic
 }
 
-struct Produce {
+public struct Produce {
   var id: String
   
   var name: String

@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AlgoliaSearch-Client-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Ax.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,11 +77,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>09E84E09DDDAE9E6C9EB266D5165C73F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1ED4DFAAD25E1999D0244868457A351E</key>
 		<dict>
 			<key>primary</key>
@@ -97,12 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35C64C9D4D6825DE6E8795ACF63C0793</key>
+		<key>3634ABA74A6F41DB3C7516A583373EE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3634ABA74A6F41DB3C7516A583373EE8</key>
+		<key>4569841EBD531E9A54C160864B418E79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,12 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>69855A7E658D98004F0DA9499D939110</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9BF1FD7A65820838B245BE812FBDE49E</key>
+		<key>8758E07878F4E2F4A78989954BF07231</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,22 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA73956D541E3350476C5A2829CC5C84</key>
+		<key>AAB916B118F485E640958FC55BF73A00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C38BB1FC4F7A906D25D941E14F097650</key>
+		<key>E9CD622F66A169A3D5CF1D999325FF6C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1F44E631B820717A55B34D51C9C4294</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F441BA9AD5008CF742DD4B725F5EA47D</key>
+		<key>EB63A11F1A795F648A25ACB063391386</key>
 		<dict>
 			<key>primary</key>
 			<true/>

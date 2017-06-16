@@ -380,7 +380,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WUk-um-lDf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="FEED" image="tabbar-feed-icon" id="shO-ID-cOq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="b2w-Tq-pkH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="b2w-Tq-pkH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -399,7 +399,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fEZ-2d-pmC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="TRADELIST" image="tabbar-tradelist-icon" id="N1W-op-OmG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="svb-oy-dne">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="svb-oy-dne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -428,7 +428,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AcQ-h1-s9h" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="GARDEN" image="tabbar-mygarden-icon" id="sfo-rT-94Y"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Wgq-bm-bXk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Wgq-bm-bXk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -439,7 +439,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFZ-Ep-dHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3743.1999999999998" y="1878.7106446776613"/>
+            <point key="canvasLocation" x="3535" y="1879"/>
         </scene>
         <!--GardenVC-->
         <scene sceneID="f2y-BX-M3Q">
@@ -457,7 +457,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gw8-XH-bzP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="CHAT" image="tabar-chat-icon" id="Ani-PX-fVM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pFf-9X-IC3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="pFf-9X-IC3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -522,7 +522,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mPo-6b-8PG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="CROPSWAPS" image="tabar-cropswap-icon" id="jtJ-Ig-p20"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3w5-hq-Ech">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3w5-hq-Ech">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

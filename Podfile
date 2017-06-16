@@ -26,6 +26,8 @@ target 'cropswapapp' do
   
   pod 'JSQMessagesViewController'
   
+  pod 'Mapbox-iOS-SDK', '~> 3.5'
+  
 #  pod 'CHTCollectionViewWaterfallLayout/Swift'
 #pod 'CHTCollectionViewWaterfallLayout/Swift', :git => "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout.git", :branch => 'develop'
 

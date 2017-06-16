@@ -11,6 +11,54 @@ import Ax
 import SVProgressHUD
 
 class TradeStatusVC: UIViewController {
+  @IBOutlet weak var statusView: UIView!
+  
+  
+  @IBOutlet weak var yourImageView: UIImageViewCircular!
+  @IBOutlet weak var anotherImageView: UIImageViewCircular!
+  
+  @IBOutlet weak var yourNameLabel: UILabel! {
+    didSet {
+      yourNameLabel.text = "Your garden"
+    }
+  }
+  @IBOutlet weak var anotherNameLabel: UILabel! {
+    didSet {
+      anotherNameLabel.text = "Name"
+    }
+  }
+  
+  @IBOutlet weak var yourDetailLabel: UILabel! {
+    didSet {
+      yourDetailLabel.text = ""
+    }
+  }
+  @IBOutlet weak var anotherDetailLabel: UILabel! {
+    didSet {
+      anotherDetailLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var transactionMethodImageView: UIImageView!
+  @IBOutlet weak var transactionMethodLabel: UILabel! {
+    didSet {
+      transactionMethodLabel.text = ""
+    }
+  }
+  
+  @IBOutlet weak var requestLocationButton: UIButton!
+  
+  @IBOutlet weak var locationTitleLabel: UILabel! {
+    didSet {
+      locationTitleLabel.text = ""
+    }
+  }
+  @IBOutlet weak var locationDetailLabel: UILabel! {
+    didSet {
+      locationDetailLabel.text = ""
+    }
+  }
+  @IBOutlet weak var locationStackView: UIStackView!
   
   @IBOutlet weak var editButtonShadowView: UIView!
   var originalOwnerProducesCount = 0
@@ -47,23 +95,23 @@ class TradeStatusVC: UIViewController {
     }
   }
   
-  @IBOutlet weak var transactionMethodLabel: UILabel! {
-    didSet {
-      transactionMethodLabel.text = ""
-    }
-  }
-  
-  @IBOutlet weak var locationTitleLabel: UILabel! {
-    didSet {
-      locationTitleLabel.text = ""
-    }
-  }
-  
-  @IBOutlet weak var locationDetailLabel: UILabel! {
-    didSet {
-      locationDetailLabel.text = ""
-    }
-  }
+//  @IBOutlet weak var transactionMethodLabel: UILabel! {
+//    didSet {
+//      transactionMethodLabel.text = ""
+//    }
+//  }
+//  
+//  @IBOutlet weak var locationTitleLabel: UILabel! {
+//    didSet {
+//      locationTitleLabel.text = ""
+//    }
+//  }
+//  
+//  @IBOutlet weak var locationDetailLabel: UILabel! {
+//    didSet {
+//      locationDetailLabel.text = ""
+//    }
+//  }
   
   @IBOutlet weak var editTransactionButton: UIButton!
   
@@ -89,13 +137,13 @@ class TradeStatusVC: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    editButtonShadowView.layoutIfNeeded()
-    editButtonShadowView.makeMeBordered()
-    
-    editButtonShadowView.layer.shadowColor = UIColor.lightGray.cgColor
-    editButtonShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-    editButtonShadowView.layer.shadowRadius = 3
-    editButtonShadowView.layer.shadowOpacity = 0.5
+//    editButtonShadowView.layoutIfNeeded()
+//    editButtonShadowView.makeMeBordered()
+//    
+//    editButtonShadowView.layer.shadowColor = UIColor.lightGray.cgColor
+//    editButtonShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//    editButtonShadowView.layer.shadowRadius = 3
+//    editButtonShadowView.layer.shadowOpacity = 0.5
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -116,10 +164,10 @@ class TradeStatusVC: UIViewController {
               self?.transactionMethod = deal.transactionMethod
               
               DispatchQueue.main.async {
-                self?.hasAnyChangeTransactionMethod(
-                  deal: deal,
-                  transactionMethodLabel: self?.transactionMethodLabel
-                )
+//                self?.hasAnyChangeTransactionMethod(
+//                  deal: deal,
+//                  transactionMethodLabel: self?.transactionMethodLabel
+//                )
               }
             case .fail(let error):
               print(error)
@@ -165,41 +213,106 @@ class TradeStatusVC: UIViewController {
                 let anotherUserId = self?.anotherUserId
               {
                 if currentUserId == originalOwnerUserId {
+                  // owner
                   currentItemsCount = self?.originalOwnerProducesCount ?? 0
+                  
                   anotherItemsCount = self?.originalAnotherProducesCount  ?? 0
                   
+                  // second
                   username = self?.anotherUsername ?? ""
+                  
+                  if let url = URL(string: user.profilePictureURL ?? "") {
+                    self?.yourImageView.sd_setImage(with: url)
+                  }
+                  
+//                  if let userId = self?.anotherUserId {
+                  User.getUser(byUserId: anotherUserId, completion: { [weak self] (result) in
+                    switch result {
+                    case .success(let user):
+                      if let url = URL(string: user.profilePictureURL ?? "") {
+                        self?.anotherImageView.sd_setImage(with: url)
+                      }
+                    case .fail(let error):
+                      print(error)
+                    }
+                    
+                    done(nil)
+                    })
+                  //                  }
+                  
+                  
                 } else {
+                  // another
                   currentItemsCount = self?.originalAnotherProducesCount ?? 0
                   anotherItemsCount = self?.originalOwnerProducesCount  ?? 0
                   
                   username = user.name
+                  
+                  if let url = URL(string: user.profilePictureURL ?? "") {
+                    self?.anotherImageView.sd_setImage(with: url)
+                  }
+                  
+
+                  User.getUser(byUserId: currentUserId, completion: { [weak self] (result) in
+                    switch result {
+                    case .success(let user):
+                      //                        self?.currentUser = user
+                      
+                      if let url = URL(string: user.profilePictureURL ?? "") {
+                        self?.yourImageView.sd_setImage(with: url)
+                      }
+                    case .fail(let error):
+                      print(error)
+                    }
+                    
+                    done(nil)
+                    })
+
                 }
+                
+                
+
+                
+                
                 
                 DispatchQueue.main.async { [weak self] in
                   
-                  self?.hasAnyChangeProduceCount(
-                    deal: self?.currentDeal,
-                    detailsLabel : self?.detailsLabel,
-                    currentItemsCount: currentItemsCount,
-                    anotherItemsCount: anotherItemsCount,
-                    username: username,
-                    currentUserId: currentUserId,
-                    originalOwnerUserId: originalOwnerUserId,
-                    anotherUserId: anotherUserId
-                  )
+                  self?.anotherNameLabel.text = "\(username)'s Garden"
+                  
+                  if currentItemsCount > 1 {
+                    self?.yourDetailLabel.text = "\(currentItemsCount) items"
+                  } else {
+                    self?.yourDetailLabel.text = "\(currentItemsCount) item"
+                  }
+                  
+                  if anotherItemsCount > 1 {
+                    self?.anotherDetailLabel.text = "\(anotherItemsCount) items"
+                  } else {
+                    self?.anotherDetailLabel.text = "\(anotherItemsCount) item"
+                  }
+//                  self?.hasAnyChangeProduceCount(
+//                    deal: self?.currentDeal,
+//                    detailsLabel : self?.detailsLabel,
+//                    currentItemsCount: currentItemsCount,
+//                    anotherItemsCount: anotherItemsCount,
+//                    username: username,
+//                    currentUserId: currentUserId,
+//                    originalOwnerUserId: originalOwnerUserId,
+//                    anotherUserId: anotherUserId
+//                  )
                   
                   if let showAddress = user.showAddress,
                     showAddress {
                     let location = "\(user.street ?? "") \(user.city ?? "") \(user.state ?? "") \(user.zipCode ?? "")"
-                    
+                    self?.locationTitleLabel.text = "\(user.name)'s Location"
                     self?.locationDetailLabel.text = location
+                    self?.locationStackView.isHidden = false
+                    self?.requestLocationButton.isHidden = true
                   } else {
-                    self?.locationDetailLabel.text = "Message \(user.name) for location details."
+                    self?.locationStackView.isHidden = true
+                    self?.requestLocationButton.isHidden = false
+                    self?.requestLocationButton.setTitle("REQUEST \(user.name.uppercased())'S LOCATION", for: .normal)
                   }
-
-                  
-                  self?.locationTitleLabel.text = "\(user.name)'s Garden Location"
                 }
               }
             case .fail(let error):
@@ -220,6 +333,16 @@ class TradeStatusVC: UIViewController {
       
       if let currentDeal = self?.currentDeal {
         DispatchQueue.main.async {
+          if let transactionMethod = currentDeal.transactionMethod {
+            if transactionMethod == HowFinalized.illDrive.rawValue {
+              self?.transactionMethodImageView.image = UIImage(named: "illdrive-gray-image-no-title")
+            } else if transactionMethod == HowFinalized.letsMeetHalfway.rawValue {
+              self?.transactionMethodImageView.image = UIImage(named: "letsmeet-gray-image-no-title")
+            } else {
+              self?.transactionMethodImageView.image = UIImage(named: "youdrive-gray-image-no-title")
+            }
+          }
+          
           self?.transactionMethodLabel.text = "\(self?.ownerUserName ?? "") says: \(currentDeal.transactionMethod ?? "")"
         }
       }
@@ -272,13 +395,6 @@ class TradeStatusVC: UIViewController {
       if keys.count > 0 {
         let change = changes[keys.last!] as? [String: Any]
         
-        print(currentUserId)
-        print(anotherUserId)
-        
-        print(change)
-        print(change?[currentUserId] as? Int)
-        print(change?[anotherUserId] as? Int)
-        
         if let _ = change?[currentUserId] as? Int {
           currentFontAttributeToUse = blueFontAttribute
         }
@@ -290,8 +406,11 @@ class TradeStatusVC: UIViewController {
     }
     
     let text1 = NSAttributedString(string: "You are trading ", attributes: regularFontAttribuge)
+    
     let text2 = NSAttributedString(string: "\(currentItemsCount) item(s) ", attributes: currentFontAttributeToUse)
+    
     let text3 = NSAttributedString(string: "for ", attributes: regularFontAttribuge)
+    
     let text4 = NSAttributedString(string: "\(anotherItemsCount) item(s) ", attributes: anotherFontAttributeToUse)
     let text5 = NSAttributedString(string: "of \(username)'s garden.", attributes: regularFontAttribuge)
     
@@ -304,32 +423,41 @@ class TradeStatusVC: UIViewController {
     
     detailsLabel?.attributedText = fullString
   }
-  
+//  @IBOutlet weak var requestLocationButton: UIButton!
+//  
+//  @IBOutlet weak var locationTitleLabel: UILabel!
+//  @IBOutlet weak var locationDetailLabel: UILabel!
+//  @IBOutlet weak var locationStackView: UIStackView!
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    detailsLabel.text = ""
+    locationStackView.isHidden = true
+    requestLocationButton.isHidden = true
+//    detailsLabel.text = ""
     
     if let dealState = dealState {
       switch dealState {
       case .tradeDeleted:
         fallthrough
       case .tradeCancelled:
-        statusLabel.textColor = UIColor.hexStringToUIColor(hex: "#f83f39")
+        statusView.backgroundColor = UIColor.hexStringToUIColor(hex: "#f83f39")
         statusLabel.text = dealState.rawValue
-        editTransactionButton.isHidden = true
+//        transactionMethodImageView.image = UIImage(named: "")
+//        editTransactionButton.isHidden = true
       case .tradeCompleted:
-        statusLabel.textColor = UIColor.hexStringToUIColor(hex: "#37d67c")
+        statusView.backgroundColor = UIColor.hexStringToUIColor(hex: "#37d67c")
         statusLabel.text = dealState.rawValue
-        editTransactionButton.isHidden = true
+//        editTransactionButton.isHidden = true
       case .tradeInProcess:
         fallthrough
       case .waitingAnswer:
+        statusView.backgroundColor = UIColor.hexStringToUIColor(hex: "#1572fb")
         statusLabel.text = dealState.rawValue
-        editTransactionButton.isHidden = true
+//        editTransactionButton.isHidden = true
       case .tradeRequest:
+        statusView.backgroundColor = UIColor.hexStringToUIColor(hex: "#1572fb")
         statusLabel.text = dealState.rawValue
-        editTransactionButton.isHidden = false
+//        editTransactionButton.isHidden = false
       }
     }
   }

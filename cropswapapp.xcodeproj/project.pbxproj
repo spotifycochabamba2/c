@@ -12,6 +12,9 @@
 		6900F8B71E5BC7FB002CF473 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6900F8B61E5BC7FB002CF473 /* HomeVC.swift */; };
 		69047E971EC4AC2B00A8E554 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69047E961EC4AC2B00A8E554 /* SettingsVC.swift */; };
 		69047E991EC4B55F00A8E554 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69047E981EC4B55F00A8E554 /* ForgotPasswordVC.swift */; };
+		6906748C1EF2F73D00416C21 /* FeedContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6906748B1EF2F73D00416C21 /* FeedContainerVC.swift */; };
+		6906748E1EF2F74800416C21 /* FeedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6906748D1EF2F74800416C21 /* FeedMapVC.swift */; };
+		690674901EF360D000416C21 /* DistanceControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6906748F1EF360D000416C21 /* DistanceControlVC.swift */; };
 		69092ECE1E6467B4000C6952 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69092ECD1E6467B4000C6952 /* UIImageExtension.swift */; };
 		6909FF971E605EBA00037ACB /* Produce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909FF961E605EBA00037ACB /* Produce.swift */; };
 		6909FF991E6062D200037ACB /* ProduceTypesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909FF981E6062D200037ACB /* ProduceTypesDelegate.swift */; };
@@ -118,7 +121,7 @@
 		69C401381E8201FA00F5F5D8 /* GardenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C401371E8201FA00F5F5D8 /* GardenVC.swift */; };
 		69C4013A1E82021600F5F5D8 /* TradeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C401391E82021600F5F5D8 /* TradeListVC.swift */; };
 		69C4013C1E82023200F5F5D8 /* ProfileContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C4013B1E82023200F5F5D8 /* ProfileContainerVC.swift */; };
-		69C4013F1E82028600F5F5D8 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C4013E1E82028600F5F5D8 /* FeedVC.swift */; };
+		69C4013F1E82028600F5F5D8 /* FeedProducesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C4013E1E82028600F5F5D8 /* FeedProducesVC.swift */; };
 		69CEE1071E85ABC6004E0725 /* AddProduce.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEE1061E85ABC6004E0725 /* AddProduce.storyboard */; };
 		69CEE1091E85AF36004E0725 /* AddProduceContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEE1081E85AF36004E0725 /* AddProduceContainerVC.swift */; };
 		69CEE10B1E85AF72004E0725 /* AddProduceChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEE10A1E85AF72004E0725 /* AddProduceChildVC.swift */; };
@@ -163,6 +166,9 @@
 		6900F8B61E5BC7FB002CF473 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		69047E961EC4AC2B00A8E554 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		69047E981EC4B55F00A8E554 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		6906748B1EF2F73D00416C21 /* FeedContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedContainerVC.swift; sourceTree = "<group>"; };
+		6906748D1EF2F74800416C21 /* FeedMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedMapVC.swift; sourceTree = "<group>"; };
+		6906748F1EF360D000416C21 /* DistanceControlVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceControlVC.swift; sourceTree = "<group>"; };
 		69092ECD1E6467B4000C6952 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		6909FF961E605EBA00037ACB /* Produce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Produce.swift; sourceTree = "<group>"; };
 		6909FF981E6062D200037ACB /* ProduceTypesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceTypesDelegate.swift; sourceTree = "<group>"; };
@@ -272,7 +278,7 @@
 		69C401371E8201FA00F5F5D8 /* GardenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GardenVC.swift; sourceTree = "<group>"; };
 		69C401391E82021600F5F5D8 /* TradeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeListVC.swift; sourceTree = "<group>"; };
 		69C4013B1E82023200F5F5D8 /* ProfileContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileContainerVC.swift; sourceTree = "<group>"; };
-		69C4013E1E82028600F5F5D8 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		69C4013E1E82028600F5F5D8 /* FeedProducesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedProducesVC.swift; sourceTree = "<group>"; };
 		69CEE1061E85ABC6004E0725 /* AddProduce.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddProduce.storyboard; sourceTree = "<group>"; };
 		69CEE1081E85AF36004E0725 /* AddProduceContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProduceContainerVC.swift; sourceTree = "<group>"; };
 		69CEE10A1E85AF72004E0725 /* AddProduceChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProduceChildVC.swift; sourceTree = "<group>"; };
@@ -649,10 +655,13 @@
 		69C4013D1E82025F00F5F5D8 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				69C4013E1E82028600F5F5D8 /* FeedVC.swift */,
 				692E76C11E829C420071EF5C /* Feed.storyboard */,
-				69288E1E1EDC8227008A5179 /* SearchResultFeedVC.swift */,
 				69288E201EDC82A0008A5179 /* SearchResultFeed.storyboard */,
+				69288E1E1EDC8227008A5179 /* SearchResultFeedVC.swift */,
+				69C4013E1E82028600F5F5D8 /* FeedProducesVC.swift */,
+				6906748B1EF2F73D00416C21 /* FeedContainerVC.swift */,
+				6906748D1EF2F74800416C21 /* FeedMapVC.swift */,
+				6906748F1EF360D000416C21 /* DistanceControlVC.swift */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -943,7 +952,7 @@
 				69C401381E8201FA00F5F5D8 /* GardenVC.swift in Sources */,
 				6913AD1A1E5E6ED6002EB1BC /* MyGardenCell.swift in Sources */,
 				69D7F36A1EC542D400C6A288 /* ModalViewController.swift in Sources */,
-				69C4013F1E82028600F5F5D8 /* FeedVC.swift in Sources */,
+				69C4013F1E82028600F5F5D8 /* FeedProducesVC.swift in Sources */,
 				6914F2871EA54B7100142CB8 /* ChooseDetailVC.swift in Sources */,
 				6913AD181E5E41DB002EB1BC /* MyGardenHeaderCell.swift in Sources */,
 				69DB63F31EDA0ED0007D7170 /* ChooseUnitListVC.swift in Sources */,
@@ -954,6 +963,7 @@
 				691FE0FD1E60DC530031DAA0 /* Camera.swift in Sources */,
 				69092ECE1E6467B4000C6952 /* UIImageExtension.swift in Sources */,
 				6900F8B21E5B3983002CF473 /* User.swift in Sources */,
+				6906748E1EF2F74800416C21 /* FeedMapVC.swift in Sources */,
 				69288E231EDF15BB008A5179 /* Algolia.swift in Sources */,
 				69FB72531E92D09700D053FB /* EditProfileContainerVC.swift in Sources */,
 				6965D06C1EF1BE8900535049 /* TagListContainerVC.swift in Sources */,
@@ -962,9 +972,11 @@
 				691ED5CD1E43C759005F6E2A /* Constants.swift in Sources */,
 				69EE4AFE1E3FE18400C95624 /* UITextFieldExtension.swift in Sources */,
 				691ED5CA1E43C6A0005F6E2A /* InstagramLoginVC.swift in Sources */,
+				6906748C1EF2F73D00416C21 /* FeedContainerVC.swift in Sources */,
 				69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */,
 				6934322A1ED32AC2005C2B48 /* ProduceImageZoomableVC.swift in Sources */,
 				69FE346C1E42865600F01176 /* UIViewControllerExtension.swift in Sources */,
+				690674901EF360D000416C21 /* DistanceControlVC.swift in Sources */,
 				69694CE31EE8D92100E5BACA /* SearchingResultCell.swift in Sources */,
 				699838721EA80C520018502D /* ChooseStateListVC.swift in Sources */,
 				69B6855C1EA8FCA2003C8188 /* TradeChatVC.swift in Sources */,
