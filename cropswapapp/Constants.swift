@@ -10,6 +10,14 @@ import Foundation
 
 struct Constants {
   
+  struct Map {
+    static let radius: Int = 10
+    static let unitedStatesLat: Double = 39.755769
+    static let unitedStatesLng: Double = -100.678711
+    
+    static let unitedStatesName = "United States"
+  }
+  
   struct Tag {
     static let tagGroupNames: [String: String] = {
       var values = [String: String]()
@@ -42,7 +50,7 @@ struct Constants {
     static var stringURL: String {
 //      let url = "http://127.0.0.1:5000/"
       let url = "https://aqueous-river-57184.herokuapp.com/"
-//      let url = "http://192.168.1.4:5000/"
+//      let url = "http://192.168.1.6:5000/"
       
       return url
     }
@@ -52,7 +60,7 @@ struct Constants {
     private static let clientID = "265265bbe53b4934b9a30ae93597277e"
 //    private static let redirectURI = "http://127.0.0.1:5000//instagram-callback"
     private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
-//    private static let redirectURI = "http://192.168.1.4:5000:5000/instagram-callback"
+//    private static let redirectURI = "http://192.168.1.6:5000:5000/instagram-callback"
     
     static var authURL: String {
       let url = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=code"

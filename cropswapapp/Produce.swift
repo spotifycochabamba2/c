@@ -12,7 +12,6 @@ import FirebaseStorage
 import FirebaseDatabase
 import Ax
 
-
 enum ProduceState: String {
   case archived = "archived"
 }

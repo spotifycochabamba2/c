@@ -21,6 +21,6 @@ struct Utils {
     }
     
     return nil
-  }
+  }  
   
 }

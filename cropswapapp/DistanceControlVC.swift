@@ -7,22 +7,84 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 public class DistanceControlVC: UIViewController {
   @IBOutlet weak var backgroundView: UIView!
   @IBOutlet weak var upperView: UIView!
   @IBOutlet weak var slider: UISlider!
-  
-  
   @IBOutlet weak var valueLabel: UILabel!
+  @IBOutlet weak var valueMilesLabel: UILabel!
+  @IBOutlet weak var enableFilterSwitch: UISwitch!
+  var enableFilterRadiusFromFeedContainer = false
+  
+  var currentDistance = 0 {
+    didSet {
+      DispatchQueue.main.async { [weak self] in
+        if let this = self {
+          this.valueLabel.text = "\(this.currentDistance)"
+          
+        }
+      }
+    }
+  }
+  
+  var enabledFilterRadius = false {
+    didSet {
+      if enabledFilterRadius {
+        valueMilesLabel.alpha = 1
+        valueLabel.alpha = 1
+        slider.isEnabled = true
+        slider.alpha = 1
+      } else {
+        valueMilesLabel.alpha = 0.5
+        valueLabel.alpha = 0.5
+        slider.isEnabled = false
+        slider.alpha = 0.5
+      }
+    }
+  }
+  
+  @IBAction func enabledFilterSwitchChanged() {
+    enabledFilterRadius = !enabledFilterRadius
+  }
+  
+  var didSelectDistance: (Int) -> Void = { _ in }
   
   override public func viewDidLoad() {
     super.viewDidLoad()
-    
+    currentDistance = 10
+    enabledFilterRadius = false
+    enableFilterSwitch.isOn = false
     view.backgroundColor = .clear
     
     backgroundView.backgroundColor = .white
     backgroundView.alpha = 0.8
+    
+    if enableFilterRadiusFromFeedContainer {
+      enabledFilterRadius = true
+      enableFilterSwitch.isOn = true
+    }
+    
+    SVProgressHUD.show()
+    User.getUser(byUserId: User.currentUser?.uid) { [weak self] (result) in
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
+      }
+      
+      switch result {
+      case .success(let user):
+        self?.currentDistance = user.radiusFilterInMiles ?? 10
+        DispatchQueue.main.async {
+//          self?.enabledFilterRadius = user.enabledRadiusFilter ?? true
+          self?.slider.value = Float(user.radiusFilterInMiles ?? 10)
+//          self?.enableFilterSwitch.isOn = user.enabledRadiusFilter ?? true
+        }
+        break
+      case .fail(let error):
+        print(error)
+      }
+    }
   }
   
   public override func viewWillAppear(_ animated: Bool) {
@@ -30,9 +92,7 @@ public class DistanceControlVC: UIViewController {
   }
   
   @IBAction func slidedValueChanged(_ sender: AnyObject) {
-    let value = lroundf(slider.value)
-    valueLabel.text = "\(value)"
-    
+    currentDistance = lroundf(slider.value)
   }
   
   override public func viewWillLayoutSubviews() {
@@ -49,6 +109,55 @@ public class DistanceControlVC: UIViewController {
   }
   
   @IBAction public func acceptButtonTouched() {
-    dismiss(animated: true)
+    if let userId = User.currentUser?.uid {
+//      User.saveEnabledFilterRadius(
+//        byUserId: userId,
+//        enabledFilterRadius: enabledFilterRadius,
+//        completion: { (error) in
+//          if error != nil {
+//
+//          }
+//        })
+      
+      if enabledFilterRadius {
+        SVProgressHUD.show()
+        
+        didSelectDistance(currentDistance)
+        User.saveRadius(
+          byUserId: userId,
+          radiusInMiles: currentDistance,
+          completion: { [weak self] (error) in
+            DispatchQueue.main.async {
+              SVProgressHUD.dismiss()
+            }
+            
+            self?.dismiss(animated: true)
+            
+            print(error)
+          })
+      } else {
+        didSelectDistance(0)
+        dismiss(animated: true)
+      }
+    } else {
+      dismiss(animated: true)
+    }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

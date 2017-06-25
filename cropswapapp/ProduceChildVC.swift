@@ -75,9 +75,9 @@ class ProduceChildVC: UITableViewController {
 //    }
 //  }
   
-  @IBOutlet weak var descriptionProduceTextView: UITextView! {
+  @IBOutlet weak var descriptionProduceLabel: UILabel! {
     didSet {
-      descriptionProduceTextView.text = "Description"
+      descriptionProduceLabel.text = "Description"
     }
   }
   
@@ -266,14 +266,14 @@ class ProduceChildVC: UITableViewController {
     tableView.estimatedRowHeight = 80
     tableView.rowHeight = UITableViewAutomaticDimension
 
-    descriptionProduceTextView.isScrollEnabled = false
+//    descriptionProduceTextView.isScrollEnabled = false
     
     imagesPageControl.isUserInteractionEnabled = false
     imagesPageControl.transform = CGAffineTransform(scaleX: 2, y: 2)
     
     
-    tableView.estimatedRowHeight = 80
-    tableView.rowHeight = UITableViewAutomaticDimension
+//    tableView.estimatedRowHeight = 80
+//    tableView.rowHeight = UITableViewAutomaticDimension
     
     tagFontAttributes = [NSFontAttributeName: montserratFont!]
     
@@ -445,8 +445,8 @@ class ProduceChildVC: UITableViewController {
             }
           }
           
-          
-          self?.descriptionProduceTextView.text = produce.description
+          self?.descriptionProduceLabel.text = produce.description
+//          self?.descriptionProduceTextView.text = produce.description
           self?.produceNameLabel.text = produce.name
           self?.categoryLabel.text = produce.produceType
           self?.quantityAndTypeLabel.text = "\(produce.quantity)"
@@ -635,7 +635,7 @@ extension ProduceChildVC {
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if indexPath.row == 0 {
       if isFirstimeLoaded {
-        pageContainer.view.frame = cell.contentView.bounds
+        pageContainer.view.frame = cell.contentView .bounds
         cell.contentView.insertSubview(pageContainer.view, at: 0)
         cell.contentView.layoutIfNeeded()
         
@@ -688,12 +688,9 @@ extension ProduceChildVC {
       
 
 //      return height
-      return descriptionProduceTextView.frame.size.height + 13 + 20 + 10
-      
-//      return UITableViewAutomaticDimension
-//      return UITableView
-//      return 100
-    } else if indexPath.row == 3 {
+//      return descriptionProduceTextView.frame.size.height + 13 + 20 + 10
+      return UITableViewAutomaticDimension
+    } else if indexPath.row == 4 {
       if tagsToDisplay.count > 0  {
         tagsCollectionView.collectionViewLayout.invalidateLayout()
         tagsCollectionView.collectionViewLayout.prepare()
@@ -705,7 +702,7 @@ extension ProduceChildVC {
       } else {
         return 0
       }
-    } else if indexPath.row == 5 {
+    } else if indexPath.row == 6 {
       if relatedProduces.count > 0 {
         relatedProducesCollectionView.collectionViewLayout.invalidateLayout()
         relatedProducesCollectionView.collectionViewLayout.prepare()
@@ -726,21 +723,22 @@ extension ProduceChildVC {
 extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-    let relatedProduce = relatedProduces[indexPath.row]
-    
-    if
-      let id = relatedProduce["id"] as? String,
-      let name = relatedProduce["name"] as? String,
-      let ownerId = relatedProduce["ownerId"] as? String
-    {
-      var values = [String: Any]()
-      values["id"] = id
-      values["name"] = name
-      values["ownerId"] = ownerId
-      values["ownerUsername"] = ""
+    if collectionView === relatedProducesCollectionView {
+      let relatedProduce = relatedProduces[indexPath.row]
       
-      performSegue(withIdentifier: Storyboard.ProduceChildToProduce, sender: values)
+      if
+        let id = relatedProduce["id"] as? String,
+        let name = relatedProduce["name"] as? String,
+        let ownerId = relatedProduce["ownerId"] as? String
+      {
+        var values = [String: Any]()
+        values["id"] = id
+        values["name"] = name
+        values["ownerId"] = ownerId
+        values["ownerUsername"] = ""
+        
+        performSegue(withIdentifier: Storyboard.ProduceChildToProduce, sender: values)
+      }
     }
   }
   

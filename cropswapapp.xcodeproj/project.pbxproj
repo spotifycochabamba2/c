@@ -26,6 +26,7 @@
 		6913AD181E5E41DB002EB1BC /* MyGardenHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913AD171E5E41DB002EB1BC /* MyGardenHeaderCell.swift */; };
 		6913AD1A1E5E6ED6002EB1BC /* MyGardenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913AD191E5E6ED6002EB1BC /* MyGardenCell.swift */; };
 		6913AD1C1E5F2EED002EB1BC /* AddProduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913AD1B1E5F2EED002EB1BC /* AddProduceVC.swift */; };
+		69140F721EFAB73500559470 /* CountryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69140F711EFAB73500559470 /* CountryDelegate.swift */; };
 		6914F2871EA54B7100142CB8 /* ChooseDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914F2861EA54B7100142CB8 /* ChooseDetailVC.swift */; };
 		6914F2891EA54B8500142CB8 /* ChooseDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6914F2881EA54B8500142CB8 /* ChooseDetail.storyboard */; };
 		6914F28B1EA54E8B00142CB8 /* ChooseDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914F28A1EA54E8B00142CB8 /* ChooseDetailCell.swift */; };
@@ -68,6 +69,8 @@
 		694697451E816531006D8907 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697421E816531006D8907 /* Montserrat-Light.ttf */; };
 		694697461E816531006D8907 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697431E816531006D8907 /* Montserrat-Regular.ttf */; };
 		694697471E816531006D8907 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 694697441E816531006D8907 /* Montserrat-SemiBold.ttf */; };
+		6949DAD31EF8657700A9A49F /* UserPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6949DAD21EF8657700A9A49F /* UserPointAnnotation.swift */; };
+		695866EB1EF890E6000291DB /* UserAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695866EA1EF890E6000291DB /* UserAnnotationView.swift */; };
 		696024ED1E9D80F2006766AF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696024EC1E9D80F2006766AF /* ItemCell.swift */; };
 		696024EF1E9D8115006766AF /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696024EE1E9D8115006766AF /* ItemCell.xib */; };
 		6965D0681EF079C100535049 /* ChooseTagsChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6965D0671EF079C100535049 /* ChooseTagsChildVC.swift */; };
@@ -80,6 +83,7 @@
 		6974BC8E1EA02D7100126732 /* ButtonCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC8D1EA02D7100126732 /* ButtonCircular.swift */; };
 		6974BC921EA1191F00126732 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC911EA1191F00126732 /* Deal.swift */; };
 		6974BC941EA1B8A300126732 /* TradeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974BC931EA1B8A300126732 /* TradeListCell.swift */; };
+		697679DC1EFC0D1A001F4248 /* UserCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697679DB1EFC0D1A001F4248 /* UserCalloutView.swift */; };
 		697B82C41EE05AF50068673C /* InboxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C31EE05AF50068673C /* InboxVC.swift */; };
 		697B82C61EE05B1C0068673C /* InboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C51EE05B1C0068673C /* InboxCell.swift */; };
 		697B82C81EE062E20068673C /* Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B82C71EE062E20068673C /* Inbox.swift */; };
@@ -180,6 +184,7 @@
 		6913AD171E5E41DB002EB1BC /* MyGardenHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGardenHeaderCell.swift; sourceTree = "<group>"; };
 		6913AD191E5E6ED6002EB1BC /* MyGardenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGardenCell.swift; sourceTree = "<group>"; };
 		6913AD1B1E5F2EED002EB1BC /* AddProduceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProduceVC.swift; sourceTree = "<group>"; };
+		69140F711EFAB73500559470 /* CountryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDelegate.swift; sourceTree = "<group>"; };
 		6914F2861EA54B7100142CB8 /* ChooseDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDetailVC.swift; sourceTree = "<group>"; };
 		6914F2881EA54B8500142CB8 /* ChooseDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseDetail.storyboard; sourceTree = "<group>"; };
 		6914F28A1EA54E8B00142CB8 /* ChooseDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDetailCell.swift; sourceTree = "<group>"; };
@@ -224,7 +229,9 @@
 		694697421E816531006D8907 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		694697431E816531006D8907 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		694697441E816531006D8907 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		6949DAD21EF8657700A9A49F /* UserPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPointAnnotation.swift; sourceTree = "<group>"; };
 		6954E2A81EB77552009EFA59 /* cropswapapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cropswapapp.entitlements; sourceTree = "<group>"; };
+		695866EA1EF890E6000291DB /* UserAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAnnotationView.swift; sourceTree = "<group>"; };
 		696024EC1E9D80F2006766AF /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		696024EE1E9D8115006766AF /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		6965D0671EF079C100535049 /* ChooseTagsChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsChildVC.swift; sourceTree = "<group>"; };
@@ -237,6 +244,7 @@
 		6974BC8D1EA02D7100126732 /* ButtonCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCircular.swift; sourceTree = "<group>"; };
 		6974BC911EA1191F00126732 /* Deal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 		6974BC931EA1B8A300126732 /* TradeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeListCell.swift; sourceTree = "<group>"; };
+		697679DB1EFC0D1A001F4248 /* UserCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCalloutView.swift; sourceTree = "<group>"; };
 		697B82C31EE05AF50068673C /* InboxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxVC.swift; sourceTree = "<group>"; };
 		697B82C51EE05B1C0068673C /* InboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxCell.swift; sourceTree = "<group>"; };
 		697B82C71EE062E20068673C /* Inbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inbox.swift; sourceTree = "<group>"; };
@@ -352,6 +360,8 @@
 				6934322B1ED4D7D9005C2B48 /* CSFirebase.swift */,
 				69288E221EDF15BB008A5179 /* Algolia.swift */,
 				697B82C71EE062E20068673C /* Inbox.swift */,
+				6949DAD21EF8657700A9A49F /* UserPointAnnotation.swift */,
+				695866EA1EF890E6000291DB /* UserAnnotationView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -648,6 +658,7 @@
 				69FB72541E92D0A900D053FB /* EditProfile.storyboard */,
 				693DFA061E92D48F00C2FD6C /* EditProfileChildVC.swift */,
 				69047E961EC4AC2B00A8E554 /* SettingsVC.swift */,
+				69140F711EFAB73500559470 /* CountryDelegate.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -662,6 +673,7 @@
 				6906748B1EF2F73D00416C21 /* FeedContainerVC.swift */,
 				6906748D1EF2F74800416C21 /* FeedMapVC.swift */,
 				6906748F1EF360D000416C21 /* DistanceControlVC.swift */,
+				697679DB1EFC0D1A001F4248 /* UserCalloutView.swift */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -940,6 +952,8 @@
 				69EF6E631E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift in Sources */,
 				6909FF991E6062D200037ACB /* ProduceTypesDelegate.swift in Sources */,
 				6900F8B71E5BC7FB002CF473 /* HomeVC.swift in Sources */,
+				6949DAD31EF8657700A9A49F /* UserPointAnnotation.swift in Sources */,
+				697679DC1EFC0D1A001F4248 /* UserCalloutView.swift in Sources */,
 				6982CC9D1E85605B00A41E8D /* UIFontExtension.swift in Sources */,
 				6974BC941EA1B8A300126732 /* TradeListCell.swift in Sources */,
 				69941DC61E84222A0073760F /* TagsCollectionView.swift in Sources */,
@@ -976,6 +990,7 @@
 				69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */,
 				6934322A1ED32AC2005C2B48 /* ProduceImageZoomableVC.swift in Sources */,
 				69FE346C1E42865600F01176 /* UIViewControllerExtension.swift in Sources */,
+				69140F721EFAB73500559470 /* CountryDelegate.swift in Sources */,
 				690674901EF360D000416C21 /* DistanceControlVC.swift in Sources */,
 				69694CE31EE8D92100E5BACA /* SearchingResultCell.swift in Sources */,
 				699838721EA80C520018502D /* ChooseStateListVC.swift in Sources */,
@@ -1032,6 +1047,7 @@
 				69A748EB1E849CE9006F321A /* RelatedProducesCell.swift in Sources */,
 				6965D0681EF079C100535049 /* ChooseTagsChildVC.swift in Sources */,
 				69694CDF1EE8D52C00E5BACA /* SearchingResultsChatVC.swift in Sources */,
+				695866EB1EF890E6000291DB /* UserAnnotationView.swift in Sources */,
 				69CEE10B1E85AF72004E0725 /* AddProduceChildVC.swift in Sources */,
 				691B6B0D1ECF38FE00FAC876 /* PhotoViewerVC.swift in Sources */,
 				69EE4AF51E3FCFF100C95624 /* IntroVC.swift in Sources */,
@@ -1164,12 +1180,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = cropswapapp/cropswapapp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = N729L9HYWA;
 				INFOPLIST_FILE = cropswapapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cropswap.cropswapapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "529aad96-8ee3-49ce-8441-bae415a7ba25";
+				PROVISIONING_PROFILE = "c5e64a1b-0909-49f6-97a7-496c8df68f31";
 				PROVISIONING_PROFILE_SPECIFIER = CropswapAppDevPush;
 				SWIFT_VERSION = 3.0;
 			};

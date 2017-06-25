@@ -44,7 +44,7 @@ class SignupVC: UITableViewController {
     navigationController?.navigationBar.isHidden = false
     navigationController?.isNavigationBarHidden = false
     
-    setupTableView()
+//    setupTableView()
 
   }
   
@@ -90,7 +90,7 @@ class SignupVC: UITableViewController {
     let email = emailTextField.text ?? ""
     let password = passwordTextField.text ?? ""
     let repeatPassword = repeatPasswordTextField.text ?? ""
-    
+        
     SVProgressHUD.show()
     User.signup(
       email: email,
@@ -155,6 +155,10 @@ extension SignupVC {
     
     if indexPath.row == 0 {
       height = view.frame.size.height - CGFloat(420 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
+      
+      if height < 0 {
+        height = 0
+      }
     }
     
     return height

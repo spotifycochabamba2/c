@@ -73,10 +73,12 @@ class EditProfileContainerVC: UIViewController {
       return
     }
     
+    
     SVProgressHUD.show()
     
     Ax.serial(tasks: [
       { done in
+        let country = editProfileChildVC.country
         let street = editProfileChildVC.street
         let city = editProfileChildVC.city
         let state = editProfileChildVC.state
@@ -85,6 +87,7 @@ class EditProfileContainerVC: UIViewController {
         
         User.saveLocation(
           byUserId: userId,
+          country: country,
           street: street,
           city: city,
           state: state,

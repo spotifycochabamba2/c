@@ -85,6 +85,7 @@ struct Storyboard {
   static let FeedContainerToFeedProduces = "FeedContainerToFeedProduces"
   static let FeedContainerToFeedMap = "FeedContainerToFeedMap"
   static let FeedContainerToDistanceControl = "FeedContainerToDistanceControl"
+  static let MapToProfileChild = "MapToProfileChild"
 }
 
 

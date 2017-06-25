@@ -25,6 +25,13 @@ class ProfileChildVC: UITableViewController {
   @IBOutlet weak var emailAddressCell: UITableViewCell!
   @IBOutlet weak var phoneNumberCell: UITableViewCell!
   
+  
+  @IBOutlet weak var countryLabel: UILabel! {
+    didSet {
+      countryLabel.text = ""
+    }
+  }
+  
   @IBOutlet weak var aboutLabel: UILabel! {
     didSet {
       aboutLabel.text = ""
@@ -142,7 +149,7 @@ class ProfileChildVC: UITableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     
     if showBackButton {
-      setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
+      setNavHeaderTitle(title: "\(currentUsername ?? "User")'s Profile", color: UIColor.black)
       
       let leftButtonIcon = setNavIcon(imageName: "back-icon-1", size: CGSize(width: 10, height: 17), position: .left)
       leftButtonIcon.addTarget(self, action: #selector(backButtonTouched), for: .touchUpInside)
@@ -180,6 +187,9 @@ class ProfileChildVC: UITableViewController {
   
   
   func loadUserInfoToUI(user: User) {
+    
+    setNavHeaderTitle(title: "\(user.name)'s Profile", color: UIColor.black)
+    
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"
     phoneNumberLabel.text = "\(user.phoneNumber ?? "")"
     websiteLabel.text = "\(user.website ?? "")"
@@ -192,6 +202,7 @@ class ProfileChildVC: UITableViewController {
     cityLabel.text = user.city
     stateLabel.text = user.state
     zipCodeLabel.text = user.zipCode
+    countryLabel.text = user.country
     
     showAddressSwitch.isOn = user.showAddress ?? false
     aboutLabel.text = user.about

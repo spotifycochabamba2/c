@@ -65,6 +65,7 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - Mapbox-iOS-SDK (3.5.4)
+  - MapboxGeocoder.swift (0.6.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - iCarousel
   - JSQMessagesViewController
   - Mapbox-iOS-SDK (~> 3.5)
+  - MapboxGeocoder.swift (~> 0.6)
   - SDWebImage (~> 3.8)
   - SVProgressHUD
   - SwiftyJSON
@@ -124,12 +126,13 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Mapbox-iOS-SDK: 81197829dcf4c4ed9a593b7a95462881b5f1309a
+  MapboxGeocoder.swift: ec63783e8752b9d2435aeee33fe4640da8f9c2c6
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UITextField-Navigation: 681dcdf4041ca35ab20e21e3028e6b24b178a1f2
   UPCarouselFlowLayout: c0ea167002b597853f56ab8f44f00a4c60287619
 
-PODFILE CHECKSUM: bed90ae58e4e9be66421c1380754ead5d7c156b3
+PODFILE CHECKSUM: e01c56df4bc83c62bee0a5c8c5ff2f6cca969200
 
 COCOAPODS: 1.1.0.rc.2

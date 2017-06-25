@@ -324,38 +324,45 @@ df dsfsdf</string>
                                             <frame key="frameInset" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I1k-SK-qId">
-                                                    <subviews>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Some description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0J-Cm-RnL">
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5lk-uN-hze">
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moo-nR-7eS">
-                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="10"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mv7-37-Sv4">
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="I1k-SK-qId" firstAttribute="leading" secondItem="zP0-Sc-tha" secondAttribute="leadingMargin" constant="4" id="1dl-hC-isE"/>
-                                                <constraint firstItem="5lk-uN-hze" firstAttribute="top" secondItem="I1k-SK-qId" secondAttribute="bottom" constant="20" id="FrX-dW-7qZ"/>
-                                                <constraint firstItem="5lk-uN-hze" firstAttribute="leading" secondItem="zP0-Sc-tha" secondAttribute="leadingMargin" constant="4" id="nx1-O5-hhG"/>
-                                                <constraint firstItem="I1k-SK-qId" firstAttribute="top" secondItem="zP0-Sc-tha" secondAttribute="topMargin" constant="4" id="oJn-8R-ZIG"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="I1k-SK-qId" secondAttribute="trailing" constant="4" id="thH-Pq-B2N"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="5lk-uN-hze" secondAttribute="trailing" constant="4" id="y6C-xy-k5q"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Mv7-37-Sv4" secondAttribute="trailing" id="DHX-5j-WyR"/>
+                                                <constraint firstItem="Mv7-37-Sv4" firstAttribute="leading" secondItem="zP0-Sc-tha" secondAttribute="leadingMargin" id="Q0c-iz-Q19"/>
+                                                <constraint firstItem="Mv7-37-Sv4" firstAttribute="top" secondItem="zP0-Sc-tha" secondAttribute="topMargin" id="fzb-dL-BXm"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Mv7-37-Sv4" secondAttribute="bottom" id="vHM-vG-AG8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="35" id="ZEr-4Q-K24">
+                                        <rect key="frame" x="0.0" y="540" width="375" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZEr-4Q-K24" id="qjd-m0-G9W">
+                                            <frame key="frameInset" width="375" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmj-Ij-FMZ">
+                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bmj-Ij-FMZ" secondAttribute="trailing" constant="4" id="Y7q-cl-Fmp"/>
+                                                <constraint firstItem="bmj-Ij-FMZ" firstAttribute="leading" secondItem="qjd-m0-G9W" secondAttribute="leadingMargin" constant="4" id="YeG-fB-G9R"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bmj-Ij-FMZ" secondAttribute="bottom" id="rQv-6I-hGC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="67o-jm-gZJ">
-                                        <rect key="frame" x="0.0" y="540" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="575" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="67o-jm-gZJ" id="rga-hp-8eS">
                                             <frame key="frameInset" width="375" height="100"/>
@@ -410,7 +417,7 @@ df dsfsdf</string>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="x1Z-4O-ahN">
-                                        <rect key="frame" x="0.0" y="640" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="675" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1Z-4O-ahN" id="Thg-X1-ZSz">
                                             <frame key="frameInset" width="375" height="40"/>
@@ -431,7 +438,7 @@ df dsfsdf</string>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="f1M-N2-qHD">
-                                        <rect key="frame" x="0.0" y="680" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="715" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f1M-N2-qHD" id="56g-f1-I8N">
                                             <frame key="frameInset" width="375" height="100"/>
@@ -493,7 +500,7 @@ df dsfsdf</string>
                     </tableView>
                     <connections>
                         <outlet property="categoryLabel" destination="Pzi-v4-uiW" id="j9G-6T-T2B"/>
-                        <outlet property="descriptionProduceTextView" destination="v0J-Cm-RnL" id="MyM-SE-Z7z"/>
+                        <outlet property="descriptionProduceLabel" destination="Mv7-37-Sv4" id="LCM-uA-oNJ"/>
                         <outlet property="imagesPageControl" destination="ks7-5j-RGD" id="NEh-2Q-KRg"/>
                         <outlet property="perQuantityTypeLabel" destination="18E-cE-X5P" id="nKc-Zw-KWY"/>
                         <outlet property="priceLabel" destination="ZRv-Mg-jn2" id="BYx-4i-JWx"/>

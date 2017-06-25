@@ -33,12 +33,19 @@ struct User {
   var profilePictureURL: String? = nil
   var instagramToken: String? = nil
   
+  var country: String?
   var street: String?
   var city: String?
   var state: String?
   var zipCode: String?
   var showAddress: Bool?
   var about: String?
+  
+  var latitude: Double?
+  var longitude: Double?
+  
+  var radiusFilterInMiles: Int?
+  var enabledRadiusFilter: Bool?
   
   init?(json: [String: Any]?) {
     guard
@@ -60,12 +67,23 @@ struct User {
     
     self.location = json["location"] as? String
     
+    self.country = json["country"] as? String
     self.street = json["street"] as? String
     self.city = json["city"] as? String
     self.state = json["state"] as? String
     self.zipCode = json["zipCode"] as? String
     self.showAddress = json["showAddress"] as? Bool
     self.about = json["about"] as? String
+    
+    self.radiusFilterInMiles = json["radiusFilterInMiles"] as? Int
+    self.enabledRadiusFilter = json["enabledRadiusFilter"] as? Bool
+    
+    let publicLocation = json["publicGeoLoc"] as? [String: Any]
+    let lat = publicLocation?["lat"] as? Double
+    let lng = publicLocation?["lng"] as? Double
+    
+    self.latitude = lat
+    self.longitude = lng
   }
   
   init(email: String, name: String) {
@@ -81,6 +99,89 @@ struct User {
 }
 
 extension User {
+  static func getCoordinates(
+    from: String,
+    completion: @escaping (_ latitude: Double, _ longitude: Double) -> Void
+  ) {
+    let url = "\(Constants.Server.stringURL)api/users/geocode"
+    var latitude = Constants.Map.unitedStatesLat
+    var longitude = Constants.Map.unitedStatesLng
+    
+    var data = [String: Any]()
+    data["query"] = from
+    
+    Alamofire
+      .request(
+        url,
+        method: .post,
+        parameters: data,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let data):
+          let dictionaries = data as? [String: Any]
+          
+          print(dictionaries)
+          print(dictionaries?["latitude"])
+          print(dictionaries?["longitude"])
+          if let lat = dictionaries?["latitude"] as? Double,
+             let lng = dictionaries?["longitude"] as? Double
+          {
+            latitude = lat
+            longitude = lng
+          }
+        case .failure(let error):
+          print(error)
+        }
+        
+        completion(latitude, longitude)
+    }
+    
+  }
+  
+  static func getUsersBy(
+    latitude: Double,
+    longitude: Double,
+    radius: Int,
+    completion: @escaping ([[String: Any]]) -> Void
+    ) {
+    
+    let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
+    let url = "\(Constants.Server.stringURL)api/users/location?\(query)"
+    var users = [[String: Any]]()
+    
+    print(query)
+    
+    Alamofire
+      .request(
+        url,
+        method: .get,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let data):
+          let dictionaries = data as? [String: Any]
+          
+          if let usersFound = dictionaries?["users"] as? [[String: Any]] {
+            usersFound.forEach {
+              print($0)
+            }
+            
+            users = usersFound
+          }
+        case .failure(let error):
+          print(error)
+        }
+        
+        completion(users)
+    }
+    
+  }
+  
   static func isValid(email: String?) -> Result<Bool> {
     
     guard let email = email,
@@ -436,8 +537,57 @@ extension User {
     })
   }
   
+  static func saveEnabledFilterRadius(
+    byUserId userId: String,
+    enabledFilterRadius: Bool,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    let refUser = refDatabaseUsers.child(userId)
+    
+    var data = [String: Any]()
+    data["enabledRadiusFilter"] = enabledFilterRadius
+    
+    refUser.updateChildValues(data, withCompletionBlock: {(error, ref) in
+      completion(error as? NSError)
+    })
+  }
+  
+  static func saveRadius(
+    byUserId userId: String,
+    radiusInMiles radius: Int,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    let refUser = refDatabaseUsers.child(userId)
+    
+    var data = [String: Any]()
+    data["radiusFilterInMiles"] = radius
+    
+    refUser.updateChildValues(data, withCompletionBlock: {(error, ref) in
+      completion(error as? NSError)
+    })
+  }
+  
+  static func saveLatLong(
+    byUserId userId: String,
+    latitude: Double,
+    longitude: Double
+  ) {
+    
+    let refUser = refDatabaseUsers.child(userId)
+    
+    var values = [String: Any]()
+    values["lat"] = latitude
+    values["lng"] = longitude
+    
+    var loc = [String: Any]()
+    loc["publicGeoLoc"] = values
+    
+    refUser.updateChildValues(loc)
+  }
+  
   static func saveLocation(
     byUserId userId: String,
+    country: String,
     street: String? = nil,
     city: String? = nil,
     state: String? = nil,
@@ -446,23 +596,65 @@ extension User {
     completion: @escaping (NSError?) -> Void
   ) {
     let refUser = refDatabaseUsers.child(userId)
+    var query = ""
     
-    if zipCode.trimmingCharacters(in: CharacterSet.whitespaces).characters.count <= 0 {
-      let error = NSError(domain: "Authentication", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please provide at least your zipcode."])
+    if country
+            .trimmingCharacters(in: CharacterSet.whitespaces)
+            .characters.count <= 0
+    {
+      let error = NSError(domain: "Authentication", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please provide your country."])
       
       completion(error)
       return
     }
     
-    var data = [String: Any]()
-    data["street"] = street ?? ""
-    data["city"] = city ?? ""
-    data["state"] = state ?? ""
-    data["zipCode"] = zipCode
-    data["showAddress"] = showAddress
+    if country == Constants.Map.unitedStatesName {
+      if zipCode.trimmingCharacters(in: CharacterSet.whitespaces).characters.count <= 0 {
+        let error = NSError(domain: "Authentication", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please provide your zipcode."])
+        
+        completion(error)
+        return
+      }
+    }
     
-    refUser.updateChildValues(data, withCompletionBlock: {(error, ref) in
-      completion(error as? NSError)
+    query += "\(country) "
+    
+    if !(city ?? "").isEmpty {
+      query += "\(city!) "
+    }
+    
+    if !(state ?? "").isEmpty {
+      query += "\(state!) "
+    }
+    
+    if !zipCode.isEmpty {
+      query += "\(zipCode) "
+    }
+    
+    User.getCoordinates(from: query, completion: { (latitude, longitude) in
+//      User.saveLatLong(
+//        byUserId: userId,
+//        latitude: latitude,
+//        longitude: longitude
+//      )
+      
+      var values = [String: Any]()
+      values["lat"] = latitude
+      values["lng"] = longitude
+      
+      var data = [String: Any]()
+      
+      data["country"] = country
+      data["street"] = street ?? ""
+      data["city"] = city ?? ""
+      data["state"] = state ?? ""
+      data["zipCode"] = zipCode
+      data["showAddress"] = showAddress
+      data["publicGeoLoc"] = values
+      
+      refUser.updateChildValues(data, withCompletionBlock: {(error, ref) in
+        completion(error as? NSError)
+      })
     })
   }
   

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 public class FeedContainerVC: UIViewController {
   var searchResultFeedVC: SearchResultFeedVC!
   var produceSearchController: UISearchController!
@@ -38,7 +39,20 @@ extension FeedContainerVC {
       let vc = nv?.viewControllers.first as? ProduceContainerVC
       
       vc?.produce = sender as? Produce
+    } else if segue.identifier == Storyboard.FeedContainerToDistanceControl {
+      let vc = segue.destination as? DistanceControlVC
+      vc?.didSelectDistance = didSelectDistance
+      vc?.enableFilterRadiusFromFeedContainer = mapChild?.enabledRadiusFilter ?? false
     }
+  }
+  
+  public func didSelectDistance(_ distance: Int) {
+    mapChild?.didSelectDistance(distance)
+//    mapChild?.loadUsers(
+//      radius: distance,
+//      completion: {
+//      
+//    })
   }
   
   public func didSelectProduce(_ produce: Produce) {
@@ -91,6 +105,12 @@ extension FeedContainerVC {
     leftBarButton.isEnabled = false
     
     if isMapViewActive {
+//      mapChild?.loadUsers(
+//        radius: distance,
+//        completion: {
+//          
+//      })
+      
       UIView.animate(withDuration: 0.5, animations: { [weak self] in
         self?.producesContainer.alpha = 0
         }, completion: { [weak self] (finished) in
