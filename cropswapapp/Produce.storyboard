@@ -170,6 +170,7 @@
                         <outlet property="produceChildBottomConstraint" destination="e20-MQ-OUw" id="WoA-ph-zMf"/>
                         <segue destination="xSj-jd-Wwk" kind="presentation" identifier="ProduceContainerToMakeDeal" modalPresentationStyle="overCurrentContext" id="Dw6-4I-EGw"/>
                         <segue destination="LQv-Mq-UJY" kind="presentation" identifier="ProduceContainerToFinalizeTrade" id="oF6-83-Zkz"/>
+                        <segue destination="Tyf-4e-5bs" kind="show" identifier="ProduceContainerToTradeDetail" id="jtR-5Q-A8Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yw2-ds-wFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -409,7 +410,7 @@ df dsfsdf</string>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="9ym-3a-UVg" secondAttribute="trailing" constant="10" id="0OM-uc-DXc"/>
-                                                <constraint firstItem="9ym-3a-UVg" firstAttribute="top" secondItem="rga-hp-8eS" secondAttribute="top" constant="10" id="L3z-x5-bAR"/>
+                                                <constraint firstItem="9ym-3a-UVg" firstAttribute="top" secondItem="rga-hp-8eS" secondAttribute="top" id="L3z-x5-bAR"/>
                                                 <constraint firstAttribute="bottom" secondItem="9ym-3a-UVg" secondAttribute="bottom" id="LeP-Ev-Hvx"/>
                                                 <constraint firstItem="9ym-3a-UVg" firstAttribute="leading" secondItem="rga-hp-8eS" secondAttribute="leading" constant="10" id="c5b-zX-E7l"/>
                                             </constraints>
@@ -444,7 +445,7 @@ df dsfsdf</string>
                                             <frame key="frameInset" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JHt-vF-WcZ">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JHt-vF-WcZ">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lfE-e5-z3Q">
                                                         <size key="itemSize" width="50" height="50"/>
@@ -526,7 +527,7 @@ df dsfsdf</string>
         <!--Photo ViewerVC-->
         <scene sceneID="pI8-HT-vIm">
             <objects>
-                <viewController id="kx4-2s-hgC" customClass="PhotoViewerVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoViewerVC" id="kx4-2s-hgC" customClass="PhotoViewerVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AjI-BJ-Ntd"/>
                         <viewControllerLayoutGuide type="bottom" id="QKu-mx-MM2"/>
@@ -545,41 +546,22 @@ df dsfsdf</string>
                                     <action selector="closeButtonTouched" destination="kx4-2s-hgC" eventType="touchUpInside" id="AZI-Vi-fNk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ci-r2-V8F">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="J2E-Sl-byE"/>
-                                    <constraint firstAttribute="height" constant="80" id="XQg-6o-QSd"/>
-                                </constraints>
-                                <state key="normal" image="icon-left-arrow"/>
-                                <connections>
-                                    <action selector="previousPictureButtonTouched" destination="kx4-2s-hgC" eventType="touchUpInside" id="eLA-Dc-1IZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAm-8C-g1M">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="5ub-rn-dx0"/>
-                                    <constraint firstAttribute="height" constant="80" id="97i-2N-sQo"/>
-                                </constraints>
-                                <state key="normal" image="icon-right-arrow"/>
-                                <connections>
-                                    <action selector="nextPictureButtonTouched" destination="kx4-2s-hgC" eventType="touchUpInside" id="vh8-QN-cJx"/>
-                                </connections>
-                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Zbg-Vg-0gs">
+                                <color key="pageIndicatorTintColor" red="1" green="0.39651786680000001" blue="0.3844039064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="juG-fg-ElF" firstAttribute="top" secondItem="AjI-BJ-Ntd" secondAttribute="bottom" id="7gl-kZ-sPV"/>
-                            <constraint firstItem="jAm-8C-g1M" firstAttribute="centerY" secondItem="4TM-Mc-FqM" secondAttribute="centerY" id="Iij-8d-MlN"/>
                             <constraint firstAttribute="trailing" secondItem="juG-fg-ElF" secondAttribute="trailing" id="JLR-qW-TOP"/>
-                            <constraint firstItem="4ci-r2-V8F" firstAttribute="centerY" secondItem="4TM-Mc-FqM" secondAttribute="centerY" id="Mab-pF-lCy"/>
-                            <constraint firstAttribute="trailing" secondItem="jAm-8C-g1M" secondAttribute="trailing" id="mcD-vw-xBh"/>
-                            <constraint firstItem="4ci-r2-V8F" firstAttribute="leading" secondItem="4TM-Mc-FqM" secondAttribute="leading" id="oJT-iO-Fz5"/>
+                            <constraint firstItem="Zbg-Vg-0gs" firstAttribute="centerX" secondItem="4TM-Mc-FqM" secondAttribute="centerX" id="K9o-XB-Byc"/>
+                            <constraint firstAttribute="bottom" secondItem="Zbg-Vg-0gs" secondAttribute="bottom" constant="20" id="xin-uK-wh0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="juG-fg-ElF" id="Wst-Ow-two"/>
-                        <outlet property="nextPictureButton" destination="jAm-8C-g1M" id="goG-93-Z1p"/>
-                        <outlet property="previousPictureButton" destination="4ci-r2-V8F" id="dwy-fG-gro"/>
+                        <outlet property="imagePageControl" destination="Zbg-Vg-0gs" id="h18-aO-RO9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ux3-vW-x1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -606,13 +588,23 @@ df dsfsdf</string>
             </objects>
             <point key="canvasLocation" x="433" y="769"/>
         </scene>
+        <!--TradeHomeVC-->
+        <scene sceneID="At3-B1-cTg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="TradeHomeVC" id="a0e-al-Byo" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zkz-97-Vah"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="azW-ta-rqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1465" y="414"/>
+        </scene>
         <!--MakeDealVC-->
         <scene sceneID="ll2-OS-xgD">
             <objects>
                 <viewControllerPlaceholder storyboardName="MakeDeal" referencedIdentifier="MakeDealVC" id="xSj-jd-Wwk" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWI-3O-uWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1338" y="53"/>
+            <point key="canvasLocation" x="-399.19999999999999" y="52.173913043478265"/>
         </scene>
         <!--FinalizeTradeVC-->
         <scene sceneID="1Gk-CQ-2tQ">
@@ -620,7 +612,7 @@ df dsfsdf</string>
                 <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="FinalizeTradeVC" id="LQv-Mq-UJY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ZL-fi-rxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1051" y="52"/>
+            <point key="canvasLocation" x="-112.8" y="51.27436281859071"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rzV-t8-PhZ">
@@ -658,12 +650,28 @@ df dsfsdf</string>
             </objects>
             <point key="canvasLocation" x="1090" y="769"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AbT-Bv-yiY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tyf-4e-5bs" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yhE-3l-1KL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="a0e-al-Byo" kind="relationship" relationship="rootViewController" id="pEv-h2-gWL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="byt-fh-U4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2241" y="403"/>
+        </scene>
     </scenes>
     <resources>
         <image name="admiration-icon" width="14" height="14"/>
         <image name="category-icon" width="11" height="11"/>
         <image name="close-icon" width="26" height="27"/>
-        <image name="icon-left-arrow" width="23" height="33"/>
-        <image name="icon-right-arrow" width="23" height="33"/>
     </resources>
 </document>

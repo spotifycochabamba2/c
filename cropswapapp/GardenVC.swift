@@ -193,7 +193,6 @@ class GardenVC: UIViewController {
       
       vc?.currentUserId = currentUserId
     }
-
   }
 
 }
@@ -208,8 +207,7 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
     cell.producePictureURL = produce["firstPictureURL"] as? String ?? ""
     cell.produceName = produce["produceType"] as? String ?? ""
     cell.price = produce["price"] as? Double ?? 0
-    cell.distance = 0
-    
+
     if let state = produce["liveState"] as? String,
       state == ProduceState.archived.rawValue
     {
@@ -217,17 +215,8 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
     } else {
       cell.contentView.alpha = 1
     }
-//    if
-//      let imageURL = produce["firstPictureURL"] as? String,
-//      let produceType = produce["produceType"] as? String
-//    {
-//      cell.producePictureURL = imageURL
-//      cell.produceName = produceType
-//      cell.price = produce["price"]
-////      cell.price = (produce["price"] as? Double) ?? 0
-//    }
-
-//    cell.distanceLabel.isHidden = true
+    
+    cell.distance = 0
     
     return cell
   }

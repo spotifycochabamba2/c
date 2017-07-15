@@ -78,6 +78,37 @@ class EditProfileContainerVC: UIViewController {
     
     Ax.serial(tasks: [
       { done in
+        do {
+          let firstName = try editProfileChildVC.getFirstName()
+          let lastName = editProfileChildVC.lastName
+          let username = editProfileChildVC.username
+          let phoneNumber = editProfileChildVC.phoneNumber
+          let website = editProfileChildVC.website
+          let location = ""
+          let about = editProfileChildVC.about
+          
+          User.updateUser(
+            userId: userId,
+            firstName: firstName,
+            lastName: lastName,
+            username: username,
+            phoneNumber: phoneNumber,
+            website: website,
+            location: location,
+            about: about,
+            completion: { (error) in
+              done(error)
+          })
+
+        } catch ValidationFormError.error(let errorMessage) {
+          let error = NSError(domain: "EditProfile", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+          done(error)
+        } catch {
+          done(error as NSError?)
+        }
+      },
+      
+      { done in
         let country = editProfileChildVC.country
         let street = editProfileChildVC.street
         let city = editProfileChildVC.city
@@ -96,35 +127,6 @@ class EditProfileContainerVC: UIViewController {
           completion: { (error) in
             done(error)
         })
-      },
-      
-      { done in
-        do {
-          let firstName = try editProfileChildVC.getFirstName()
-          let lastName = editProfileChildVC.lastName
-          let phoneNumber = editProfileChildVC.phoneNumber
-          let website = editProfileChildVC.website
-          let location = ""
-          let about = editProfileChildVC.about
-          
-          User.updateUser(
-            userId: userId,
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
-            website: website,
-            location: location,
-            about: about,
-            completion: { (error) in
-              done(error)
-          })
-
-        } catch ValidationFormError.error(let errorMessage) {
-          let error = NSError(domain: "EditProfile", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-          done(error)
-        } catch {
-          done(error as NSError?)
-        }
       },
       
       { done in

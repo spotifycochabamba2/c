@@ -172,23 +172,15 @@
             </objects>
             <point key="canvasLocation" x="0.80000000000000004" y="96.7016491754123"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="9B3-pv-Kal">
+        <!--ProfileContainerVC-->
+        <scene sceneID="OZR-My-FHx">
             <objects>
-                <viewController id="8R6-Go-ds4" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ypl-te-SE8"/>
-                        <viewControllerLayoutGuide type="bottom" id="0yd-q5-Bb4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kf4-L5-WF7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nx8-FH-PEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="Nb2-d8-ors" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="G5h-uc-7cC"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="toJ-Uk-L1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="-1531"/>
+            <point key="canvasLocation" x="2822" y="-1893"/>
         </scene>
         <!--Trade StatusVC-->
         <scene sceneID="alZ-CG-gv1">
@@ -202,6 +194,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="511"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AmD-Mn-s1x">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnw-7Q-D63">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamation-sign-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pW0-Q7-Ozs">
@@ -242,7 +237,7 @@
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9Lh-mb-cYX">
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your garden" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUZ-lV-pcd">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your garden" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="aUZ-lV-pcd">
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                                 <color key="textColor" red="0.97254901960784312" green="0.24705882352941178" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -282,7 +277,7 @@
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="J5U-iT-7NJ">
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your farm sdkhfs fhksdjf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agW-bm-dp9">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your farm sdkhfs fhksdjf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="agW-bm-dp9">
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                                 <color key="textColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -317,13 +312,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youdrive-gray-image-no-title" translatesAutoresizingMaskIntoConstraints="NO" id="IbX-pX-Dmd">
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="148" id="3oq-5l-vLf"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="333" id="SbZ-Xg-gYZ"/>
-                                            <constraint firstAttribute="width" secondItem="IbX-pX-Dmd" secondAttribute="height" multiplier="9:4" id="vM1-jw-kRX"/>
-                                        </constraints>
-                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="youdrive-gray-image-no-title" translatesAutoresizingMaskIntoConstraints="NO" id="IbX-pX-Dmd"/>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="180" id="2BD-H2-WR7"/>
@@ -359,6 +348,9 @@ sddsf</string>
                                 <state key="normal" title="REQUEST ROB'S LOCATION">
                                     <color key="titleColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="requestLocationButtonTouched" destination="OC5-3o-WkM" eventType="touchUpInside" id="f2J-Aq-IwZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -372,13 +364,17 @@ sddsf</string>
                             <constraint firstItem="BCg-Tw-ez8" firstAttribute="top" secondItem="8Tu-Aj-swJ" secondAttribute="bottom" constant="8" id="V9f-PJ-qO3"/>
                             <constraint firstItem="m9x-WO-jsw" firstAttribute="top" secondItem="lnw-7Q-D63" secondAttribute="bottom" constant="8" id="VLr-HX-ETl"/>
                             <constraint firstItem="lnw-7Q-D63" firstAttribute="leading" secondItem="a73-zX-VXQ" secondAttribute="leading" id="b7I-ly-KOk"/>
+                            <constraint firstItem="AmD-Mn-s1x" firstAttribute="bottom" secondItem="BCg-Tw-ez8" secondAttribute="bottom" id="bIW-Ro-PyC"/>
+                            <constraint firstItem="AmD-Mn-s1x" firstAttribute="top" secondItem="BCg-Tw-ez8" secondAttribute="top" id="bJk-DO-vsi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Tu-Aj-swJ" secondAttribute="trailing" constant="5" id="fFS-0n-H0L"/>
                             <constraint firstItem="BCg-Tw-ez8" firstAttribute="leading" secondItem="a73-zX-VXQ" secondAttribute="leadingMargin" constant="5" id="fzF-94-r1s"/>
+                            <constraint firstItem="AmD-Mn-s1x" firstAttribute="trailing" secondItem="BCg-Tw-ez8" secondAttribute="trailing" constant="5" id="jyV-Bf-3a1"/>
                             <constraint firstItem="m9x-WO-jsw" firstAttribute="leading" secondItem="a73-zX-VXQ" secondAttribute="leadingMargin" constant="5" id="mlW-2Y-8Hs"/>
                             <constraint firstAttribute="trailing" secondItem="lnw-7Q-D63" secondAttribute="trailing" id="owy-t2-DWd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4zZ-Ec-Le8" secondAttribute="trailing" constant="8" id="qOD-WA-vNY"/>
                             <constraint firstItem="W60-N6-58v" firstAttribute="trailing" secondItem="IbX-pX-Dmd" secondAttribute="trailing" constant="-20" id="wEh-PJ-wmc"/>
                             <constraint firstItem="8Tu-Aj-swJ" firstAttribute="top" secondItem="m9x-WO-jsw" secondAttribute="bottom" constant="8" id="xLi-MR-339"/>
+                            <constraint firstItem="AmD-Mn-s1x" firstAttribute="leading" secondItem="BCg-Tw-ez8" secondAttribute="leading" constant="-5" id="z6K-n8-Moh"/>
                         </constraints>
                     </view>
                     <connections>
@@ -389,6 +385,7 @@ sddsf</string>
                         <outlet property="locationStackView" destination="4zZ-Ec-Le8" id="iR4-5e-wrC"/>
                         <outlet property="locationTitleLabel" destination="oOB-kg-w5e" id="hH9-ga-6Zs"/>
                         <outlet property="requestLocationButton" destination="BCg-Tw-ez8" id="cpl-MB-5Zh"/>
+                        <outlet property="requestLocationButtonView" destination="AmD-Mn-s1x" id="T69-CS-LV0"/>
                         <outlet property="statusImageView" destination="pW0-Q7-Ozs" id="Lb3-vS-lxx"/>
                         <outlet property="statusLabel" destination="z1T-Iq-nhB" id="Bdu-Qu-WpD"/>
                         <outlet property="statusView" destination="lnw-7Q-D63" id="rQQ-FT-GVP"/>
@@ -398,6 +395,7 @@ sddsf</string>
                         <outlet property="yourImageView" destination="rFE-fs-xtg" id="Ry6-RT-h0E"/>
                         <outlet property="yourNameLabel" destination="aUZ-lV-pcd" id="lH7-3t-b0w"/>
                         <segue destination="cY4-M6-F3J" kind="presentation" identifier="TradeStatusToFinalizeTrade" modalPresentationStyle="overCurrentContext" id="0Ew-qW-puA"/>
+                        <segue destination="Cle-UR-69u" kind="show" identifier="TradeStatusToProfileContainer" id="Lu9-st-qKf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLu-vs-y0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -692,11 +690,22 @@ sddsf</string>
                         <outlet property="tradeListButton" destination="jEZ-i4-5UO" id="Vcg-ly-PM1"/>
                         <segue destination="4KW-X4-Ggk" kind="presentation" identifier="TradeChatToFinalizeTrade" modalPresentationStyle="overCurrentContext" id="BMg-46-17Q"/>
                         <segue destination="Mof-5l-AwQ" kind="presentation" identifier="TradeChatToMakeDeal" modalPresentationStyle="overCurrentContext" id="4fW-7P-OeL"/>
+                        <segue destination="E50-nB-8jo" kind="show" identifier="TradeChatToProfileContainer" id="iHO-81-ZTC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAR-qO-kCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940" y="1193.2533733133434"/>
+        </scene>
+        <!--ProfileContainerVC-->
+        <scene sceneID="Dbk-l9-JyG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileContainerVC" id="WoJ-M8-mLO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zv4-Gb-5lh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1v-UD-aSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2804" y="1011.0944527736133"/>
         </scene>
         <!--FinalizeTradeVC-->
         <scene sceneID="adt-yg-6Jd">
@@ -828,7 +837,6 @@ sddsf</string>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="top" secondItem="hjt-Vd-qqJ" secondAttribute="bottom" id="AXc-iz-80l"/>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="trailing" secondItem="oLH-8a-53j" secondAttribute="trailingMargin" id="Z9p-zo-6cO"/>
                             <constraint firstItem="oiF-D8-iGa" firstAttribute="top" secondItem="oLH-8a-53j" secondAttribute="top" id="cJR-Cd-lwt"/>
-                            <constraint firstItem="WPN-Z0-W3i" firstAttribute="centerY" secondItem="oLH-8a-53j" secondAttribute="centerY" id="eQF-hB-zdg"/>
                             <constraint firstItem="CEA-gZ-s1f" firstAttribute="top" secondItem="WPN-Z0-W3i" secondAttribute="bottom" id="fNX-Ox-g6P"/>
                             <constraint firstAttribute="trailing" secondItem="oiF-D8-iGa" secondAttribute="trailing" id="jfV-ji-pBq"/>
                             <constraint firstItem="WPN-Z0-W3i" firstAttribute="leading" secondItem="oLH-8a-53j" secondAttribute="leadingMargin" id="qim-gZ-vTr"/>
@@ -854,7 +862,7 @@ sddsf</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dc9-5n-p7X" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yKI-mb-8VU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yKI-mb-8VU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -872,7 +880,7 @@ sddsf</string>
             <objects>
                 <navigationController storyboardIdentifier="NCTradeChatVC" automaticallyAdjustsScrollViewInsets="NO" id="TJn-jZ-eRL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHy-dF-2F1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="VHy-dF-2F1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -884,6 +892,42 @@ sddsf</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dE-sh-RFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1" y="1194"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BX6-Rq-5xB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E50-nB-8jo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CyK-v5-D2m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WoJ-M8-mLO" kind="relationship" relationship="rootViewController" id="43C-k5-zbR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Z4-1g-4Df" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1950" y="754"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PN6-RF-mEY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cle-UR-69u" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Yk-6u-Z2j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Nb2-d8-ors" kind="relationship" relationship="rootViewController" id="4KR-wd-oFJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a0X-Ic-NSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2164" y="-1892"/>
         </scene>
     </scenes>
     <resources>

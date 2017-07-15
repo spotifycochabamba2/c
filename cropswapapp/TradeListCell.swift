@@ -100,7 +100,7 @@ class TradeListCell: UITableViewCell {
   
   var username: String? {
     didSet {
-      usernameLabel.text = "\(username ?? "")'s Garden"
+      usernameLabel.text = "\(username ?? "")"
     }
   }
   

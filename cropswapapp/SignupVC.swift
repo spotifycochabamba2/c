@@ -18,7 +18,9 @@ class SignupVC: UITableViewController {
 
   @IBOutlet weak var logoCell: UITableViewCell!
   
+  @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
@@ -63,7 +65,7 @@ class SignupVC: UITableViewController {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
       
-      vc?.performSegueToHome = performSegueToHome
+      vc?.loggedSuccessfully = performSegueToHome
     } else if segue.identifier == Storyboard.SignupToHome {
       let vc = segue.destination as? HomeVC
       
@@ -85,8 +87,11 @@ class SignupVC: UITableViewController {
   
   @IBAction func signupButtonTouched() {
     signupButton.isEnabled = false
+    signupButton.alpha = 0.5
     
-    let name = nameTextField.text ?? ""
+    let firstName = nameTextField.text ?? ""
+    let lastName = lastNameTextField.text ?? ""
+    let username = usernameTextField.text ?? ""
     let email = emailTextField.text ?? ""
     let password = passwordTextField.text ?? ""
     let repeatPassword = repeatPasswordTextField.text ?? ""
@@ -94,11 +99,16 @@ class SignupVC: UITableViewController {
     SVProgressHUD.show()
     User.signup(
       email: email,
-      andName: name,
+      andFirstName: firstName,
+      andLastName: lastName,
+      andUsername: username,
       andPassword: password,
       andRepeatedPassword: repeatPassword) { [weak self] (result) in
-        self?.signupButton.isEnabled = true
-        SVProgressHUD.dismiss()
+        DispatchQueue.main.async {
+          self?.signupButton.alpha = 1
+          self?.signupButton.isEnabled = true
+          SVProgressHUD.dismiss()
+        }
         
         switch result {
         case .fail(let error):
@@ -124,6 +134,11 @@ class SignupVC: UITableViewController {
   
   func setupTextFields() {
     nameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    
+    lastNameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    
+    usernameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
+    
     emailTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     passwordTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     repeatPasswordTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
@@ -150,19 +165,19 @@ extension SignupVC {
 
 extension SignupVC {
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    var height = super.tableView(tableView, heightForRowAt: indexPath)
-    
-    if indexPath.row == 0 {
-      height = view.frame.size.height - CGFloat(420 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
-      
-      if height < 0 {
-        height = 0
-      }
-    }
-    
-    return height
-  }
+//  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    var height = super.tableView(tableView, heightForRowAt: indexPath)
+//    
+//    if indexPath.row == 0 {
+//      height = view.frame.size.height - CGFloat(420 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
+//      
+//      if height < 0 {
+//        height = 0
+//      }
+//    }
+//    
+//    return height
+//  }
 
 }
 

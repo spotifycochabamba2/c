@@ -441,10 +441,10 @@
             </objects>
             <point key="canvasLocation" x="3535" y="1879"/>
         </scene>
-        <!--GardenVC-->
+        <!--NewGardenVC-->
         <scene sceneID="f2y-BX-M3Q">
             <objects>
-                <viewControllerPlaceholder storyboardName="Garden" referencedIdentifier="GardenVC" id="afR-8O-llf" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Garden" referencedIdentifier="NewGardenVC" id="afR-8O-llf" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="PlW-MN-PWO"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DcV-v0-BNz" userLabel="First Responder" sceneMemberID="firstResponder"/>

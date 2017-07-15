@@ -79,7 +79,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="z7M-0o-sTl">
+                            <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="z7M-0o-sTl">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-instagram-logo" translatesAutoresizingMaskIntoConstraints="NO" id="zxR-07-8dp">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -298,7 +298,7 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fsj-xZ-M6y">
+                                                <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fsj-xZ-M6y">
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-logo-red" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Tx-A0n">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -348,7 +348,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyL-GI-0bn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3431" y="-790"/>
+            <point key="canvasLocation" x="3150" y="-1093"/>
         </scene>
         <!--Forgot PasswordVC-->
         <scene sceneID="Af1-LV-ODm">
@@ -621,11 +621,11 @@ trade requests</string>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B0b-Yn-xvZ">
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCellId" id="Eu0-cH-5ie">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCellId" id="Eu0-cH-5ie">
                                                         <rect key="frame" x="0.0" y="28" width="313" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eu0-cH-5ie" id="SEF-ql-Ccc">
-                                                            <frame key="frameInset" width="313" height="43.5"/>
+                                                            <frame key="frameInset" width="313" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -689,7 +689,7 @@ trade requests</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmj-g7-99n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4808.8000000000002" y="41.829085457271368"/>
+            <point key="canvasLocation" x="5748" y="41.829085457271368"/>
         </scene>
         <!--HomeTBC-->
         <scene sceneID="Eiw-l1-57v">
@@ -736,7 +736,7 @@ trade requests</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKr-5e-xi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060" y="-815"/>
+            <point key="canvasLocation" x="1876" y="-1332"/>
         </scene>
         <!--SignupVC-->
         <scene sceneID="tm5-d0-Ejy">
@@ -749,30 +749,46 @@ trade requests</string>
                         <sections>
                             <tableViewSection id="NIq-Ef-noK">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="499-sU-ojf">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="210"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="X6v-Jl-7Ue">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="499-sU-ojf" id="Cbv-H1-M7y">
-                                            <frame key="frameInset" width="375" height="210"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X6v-Jl-7Ue" id="BCj-3v-S6x">
+                                            <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup-logo" translatesAutoresizingMaskIntoConstraints="NO" id="9sk-CO-q8V">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="78" id="Iyx-ly-Lsb"/>
-                                                        <constraint firstAttribute="height" constant="77" id="XOo-bY-Rg1"/>
-                                                    </constraints>
-                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6lF-mz-0La">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your first name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBl-PS-cb8">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R2M-1t-3i7">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="yrp-Ii-ruG"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="yXp-dM-TQo"/>
+                                                                <outlet property="nextNavigationField" destination="Orx-MG-laE" id="n3V-hh-cKN"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="9sk-CO-q8V" firstAttribute="centerX" secondItem="Cbv-H1-M7y" secondAttribute="centerX" id="itF-kY-FDG"/>
-                                                <constraint firstItem="9sk-CO-q8V" firstAttribute="centerY" secondItem="Cbv-H1-M7y" secondAttribute="centerY" id="oxd-kT-DaM"/>
+                                                <constraint firstItem="6lF-mz-0La" firstAttribute="centerY" secondItem="BCj-3v-S6x" secondAttribute="centerY" id="J3S-xO-NJw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6lF-mz-0La" secondAttribute="trailing" id="as8-mU-p65"/>
+                                                <constraint firstItem="6lF-mz-0La" firstAttribute="leading" secondItem="BCj-3v-S6x" secondAttribute="leadingMargin" id="zyn-eW-pdS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="2Ng-IG-zde">
-                                        <rect key="frame" x="0.0" y="274" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="124" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ng-IG-zde" id="EtC-dC-zZD">
                                             <frame key="frameInset" width="375" height="60"/>
@@ -780,7 +796,7 @@ trade requests</string>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zRH-1p-OmP">
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-xk-hnQ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your last name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-xk-hnQ">
                                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -794,7 +810,7 @@ trade requests</string>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="GCI-cC-qEM" id="XRs-U3-F08"/>
-                                                                <outlet property="nextNavigationField" destination="aao-EP-qtu" id="Fdc-iX-3rz"/>
+                                                                <outlet property="nextNavigationField" destination="EAG-GL-jA4" id="XqI-DK-tfa"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -809,8 +825,46 @@ trade requests</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Yvb-Ci-fUq">
+                                        <rect key="frame" x="0.0" y="184" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yvb-Ci-fUq" id="LCe-ww-wHB">
+                                            <frame key="frameInset" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VOo-eb-6y9">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2PG-J2-ocv">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EAG-GL-jA4">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="Ej1-mZ-VCL"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="GCI-cC-qEM" id="LgR-4v-KKa"/>
+                                                                <outlet property="nextNavigationField" destination="aao-EP-qtu" id="fSu-Iw-odc"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="VOo-eb-6y9" firstAttribute="leading" secondItem="LCe-ww-wHB" secondAttribute="leadingMargin" id="KJs-H2-12A"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VOo-eb-6y9" secondAttribute="trailing" id="ax8-Qx-Jzo"/>
+                                                <constraint firstItem="VOo-eb-6y9" firstAttribute="centerY" secondItem="LCe-ww-wHB" secondAttribute="centerY" id="ycD-KM-l3I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="nfq-5j-I2O">
-                                        <rect key="frame" x="0.0" y="334" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="244" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nfq-5j-I2O" id="VjA-Ca-sWG">
                                             <frame key="frameInset" width="375" height="60"/>
@@ -832,7 +886,7 @@ trade requests</string>
                                                             <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="GCI-cC-qEM" id="PsV-WX-zeD"/>
-                                                                <outlet property="nextNavigationField" destination="xI8-K0-1lS" id="O60-ZF-Sf7"/>
+                                                                <outlet property="nextNavigationField" destination="xI8-K0-1lS" id="8WM-Jt-o5o"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -848,7 +902,7 @@ trade requests</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Ybo-ke-aiu">
-                                        <rect key="frame" x="0.0" y="394" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="304" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ybo-ke-aiu" id="TAZ-VG-cDL">
                                             <frame key="frameInset" width="375" height="60"/>
@@ -870,7 +924,7 @@ trade requests</string>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="GCI-cC-qEM" id="h4P-Kz-Q4X"/>
-                                                                <outlet property="nextNavigationField" destination="SEx-E0-GFy" id="6hu-N1-zWo"/>
+                                                                <outlet property="nextNavigationField" destination="SEx-E0-GFy" id="wl4-Pv-NmD"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -886,7 +940,7 @@ trade requests</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="ups-1X-zDe">
-                                        <rect key="frame" x="0.0" y="454" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="364" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ups-1X-zDe" id="EeC-PJ-gE2">
                                             <frame key="frameInset" width="375" height="60"/>
@@ -923,7 +977,7 @@ trade requests</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="EUk-jJ-Mhx">
-                                        <rect key="frame" x="0.0" y="514" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="424" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUk-jJ-Mhx" id="z9M-Tx-cRD">
                                             <frame key="frameInset" width="375" height="180"/>
@@ -956,7 +1010,7 @@ trade requests</string>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="VarelaRound-Regular" family="Varela Round" pointSize="15"/>
                                                             <state key="normal">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="instagramButtonTouched" destination="GCI-cC-qEM" eventType="touchUpInside" id="bhe-3x-ea9"/>
@@ -964,7 +1018,7 @@ trade requests</string>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vJH-FV-N1e">
+                                                <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vJH-FV-N1e">
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-logo-red" translatesAutoresizingMaskIntoConstraints="NO" id="JAs-GA-zVs">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1001,13 +1055,14 @@ trade requests</string>
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="emailTextField" destination="aao-EP-qtu" id="A8o-uN-9TW"/>
-                        <outlet property="logoCell" destination="499-sU-ojf" id="CCb-Om-kNo"/>
-                        <outlet property="nameTextField" destination="Orx-MG-laE" id="vb8-8L-42s"/>
-                        <outlet property="passwordTextField" destination="xI8-K0-1lS" id="a9F-W9-VHl"/>
-                        <outlet property="repeatPasswordTextField" destination="SEx-E0-GFy" id="71c-Nz-Bxd"/>
+                        <outlet property="emailTextField" destination="aao-EP-qtu" id="MDy-2j-Lvj"/>
+                        <outlet property="lastNameTextField" destination="Orx-MG-laE" id="ndP-Xp-scc"/>
+                        <outlet property="nameTextField" destination="R2M-1t-3i7" id="1te-ox-wPy"/>
+                        <outlet property="passwordTextField" destination="xI8-K0-1lS" id="rs5-kz-YKD"/>
+                        <outlet property="repeatPasswordTextField" destination="SEx-E0-GFy" id="69V-Dl-Qp7"/>
                         <outlet property="signupButton" destination="S4R-qQ-f3c" id="Dqp-uN-vud"/>
                         <outlet property="signupInstagramButton" destination="KnT-ru-NNS" id="RCK-Pd-Pjf"/>
+                        <outlet property="usernameTextField" destination="EAG-GL-jA4" id="w0W-fT-ShB"/>
                         <outlet property="yourNameLabel" destination="rpL-xk-hnQ" id="FOD-Kn-UqR"/>
                         <segue destination="oHI-X0-CJJ" kind="show" identifier="SignupToHome" id="nhb-hS-Ctu"/>
                         <segue destination="uIL-Qf-Wd5" kind="presentation" identifier="SignupToInstagram" id="Fgr-gZ-URl"/>
@@ -1016,7 +1071,17 @@ trade requests</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHC-oQ-FDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2914" y="176"/>
+            <point key="canvasLocation" x="2922" y="1022"/>
+        </scene>
+        <!--WallContainerVC-->
+        <scene sceneID="v9w-4z-uGe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wall" referencedIdentifier="WallContainerVC" id="3Gm-09-hCd" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hyS-m9-S0Z"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mi0-Ln-MAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="796" y="-434"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqM-jv-EtC">
@@ -1039,7 +1104,7 @@ trade requests</string>
         <!--Navigation Controller-->
         <scene sceneID="0vE-Ao-gdp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uIL-Qf-Wd5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="InstagramVC" automaticallyAdjustsScrollViewInsets="NO" id="uIL-Qf-Wd5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Mmy-qk-x3f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1052,7 +1117,25 @@ trade requests</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37M-0B-Ulc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1190" y="-790"/>
+            <point key="canvasLocation" x="1079" y="-1331"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wGg-ST-pSa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VPq-5N-aBL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ICQ-uD-ZdY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3Gm-09-hCd" kind="relationship" relationship="rootViewController" id="5do-eU-zdg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T6c-u3-BP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-78" y="-434"/>
         </scene>
     </scenes>
     <resources>
@@ -1064,7 +1147,7 @@ trade requests</string>
         <image name="signup-logo" width="78" height="77"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fgr-gZ-URl"/>
-        <segue reference="nhb-hS-Ctu"/>
+        <segue reference="DqF-kZ-bHq"/>
+        <segue reference="xB3-Wy-GsM"/>
     </inferredMetricsTieBreakers>
 </document>

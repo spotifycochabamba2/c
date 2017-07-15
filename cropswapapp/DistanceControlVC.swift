@@ -53,7 +53,7 @@ public class DistanceControlVC: UIViewController {
   
   override public func viewDidLoad() {
     super.viewDidLoad()
-    currentDistance = 10
+    currentDistance = Constants.Map.radius
     enabledFilterRadius = false
     enableFilterSwitch.isOn = false
     view.backgroundColor = .clear
@@ -74,10 +74,10 @@ public class DistanceControlVC: UIViewController {
       
       switch result {
       case .success(let user):
-        self?.currentDistance = user.radiusFilterInMiles ?? 10
+        self?.currentDistance = user.radiusFilterInMiles ?? Constants.Map.radius
         DispatchQueue.main.async {
 //          self?.enabledFilterRadius = user.enabledRadiusFilter ?? true
-          self?.slider.value = Float(user.radiusFilterInMiles ?? 10)
+          self?.slider.value = Float(user.radiusFilterInMiles ?? Constants.Map.radius)
 //          self?.enableFilterSwitch.isOn = user.enabledRadiusFilter ?? true
         }
         break

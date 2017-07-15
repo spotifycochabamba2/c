@@ -74,7 +74,7 @@ class LoginVC: UITableViewController {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
       
-      vc?.performSegueToHome = performSegueToHome
+      vc?.loggedSuccessfully = performSegueToHome
     }
   }
   
@@ -83,12 +83,19 @@ class LoginVC: UITableViewController {
   }
   
   @IBAction func loginButtonTouched() {
+    loginButton.isEnabled = false
+    loginButton.alpha = 0.5
     let email = emailTextField.text ?? ""
     let password = passwordTextField.text ?? ""
     
     SVProgressHUD.show()
     User.login(email: email, password: password) { [weak self] (result) in
-      SVProgressHUD.dismiss()
+      
+      DispatchQueue.main.async {
+        self?.loginButton.isEnabled = true
+        self?.loginButton.alpha = 1
+        SVProgressHUD.dismiss()
+      }
       
       switch result {
       case .success(let user):

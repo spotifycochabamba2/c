@@ -35,6 +35,7 @@ class EditProfileChildVC: UITableViewController {
   
   @IBOutlet weak var countryTableView: UITableView!
   
+  @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var countryCell: UITableViewCell!
   @IBOutlet weak var countryTextField: UITextField!
   @IBOutlet weak var streetTextField: UITextField!
@@ -110,6 +111,12 @@ class EditProfileChildVC: UITableViewController {
     }
   }
   
+  var username: String {
+    get {
+      return usernameTextField.text ?? ""
+    }
+  }
+  
 //  var location: String {
 //    get {
 //      return locationTextView.text
@@ -126,6 +133,15 @@ class EditProfileChildVC: UITableViewController {
     }
   }
   
+  func getUsername() throws -> String {
+    let username = usernameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
+    
+    if username.characters.count > 0 {
+      return username
+    } else {
+      throw ValidationFormError.error(Constants.ErrorMessages.usernameNotProvided)
+    }
+  }
   
   
   var profileImageURL: String? {
@@ -160,6 +176,12 @@ class EditProfileChildVC: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
     countriesTableViewDelegate = CountryDelegate(tableView: countryTableView)
     countriesTableViewDelegate.setup()
     countriesTableViewDelegate.didCountrySelect = didCountrySelect
@@ -177,9 +199,6 @@ class EditProfileChildVC: UITableViewController {
         break
       }
     }
-    
-//    locationTextView.textContainer.maximumNumberOfLines = 2
-//    locationTextView.delegate = self
   }
   
   func tryEnableZipCodeComponent() {
@@ -219,6 +238,7 @@ class EditProfileChildVC: UITableViewController {
     lastNameTextField.text = user.lastName
     phoneNumberTextField.text = "\(user.phoneNumber ?? "")"
     websiteTextField.text = "\(user.website ?? "")"
+    usernameTextField.text = user.username
 //    locationTextView.text = "\(user.location ?? "")"
     emailAddressTextField.text = user.email
     streetTextField.text = user.street
@@ -235,6 +255,7 @@ class EditProfileChildVC: UITableViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
+    usernameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     firstNameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     lastNameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     phoneNumberTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))

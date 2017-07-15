@@ -30,12 +30,33 @@ class InboxVC: UITableViewController {
       Inbox.unListenUpdateInbox(byUserId: userId, handlerId: listenUpdateInboxHandlerId)
     }
   }
+  
+//  func dismissModals(notification: Notification) {
+//    
+//    DispatchQueue.main.async { [weak self] in
+//      self?.dismiss(animated: true)
+//      self?.tabBarController?.selectedIndex = 1
+//    }
+////    NotificationCenter.default.removeObserver(
+////      self,
+////      name: NSNotification.Name(rawValue: "dismissModals"),
+////      object: nil
+////    )
+//  }
+  
 }
 
 // View Life Cycle
 extension InboxVC {
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+//    NotificationCenter.default.addObserver(
+//      self,
+//      selector: #selector(dismissModals(notification:)),
+//      name: NSNotification.Name(rawValue: "dismissModals"),
+//      object: nil
+//    )
     
     let rightButtonIcon = setNavIcon(imageName: "add-user-chat", size: CGSize(width: 40, height: 40), position: .right)
     rightButtonIcon.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)

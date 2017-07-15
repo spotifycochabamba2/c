@@ -49,6 +49,10 @@ class TradeChatVC: JSQMessagesViewController {
 
   let bubbleFactory = JSQMessagesBubbleImageFactory()
   
+  func userImageTopRightTapped() {
+    performSegue(withIdentifier: Storyboard.TradeChatToProfileContainer, sender: nil)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -92,6 +96,12 @@ class TradeChatVC: JSQMessagesViewController {
     userImageView.layer.borderColor = UIColor.clear.cgColor
     userImageView.layer.masksToBounds = true
     userImageView.contentMode = .scaleAspectFit
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userImageTopRightTapped))
+    tapGesture.numberOfTapsRequired = 1
+    tapGesture.numberOfTouchesRequired = 1
+    userImageView.addGestureRecognizer(tapGesture)
+    
     let userImageViewBar = UIBarButtonItem(customView: userImageView)
     navigationItem.rightBarButtonItem = userImageViewBar
 
@@ -112,11 +122,6 @@ class TradeChatVC: JSQMessagesViewController {
     
     inputToolbar.contentView.textView.font = UIFont(name: "Montserrat-Light", size: 15)
     inputToolbar.contentView.textView.textColor = UIColor.hexStringToUIColor(hex: "#484646")
-    
-//    let customView = UIView()
-//    customView.backgroundColor = .red
-//    customView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-//    customView.translatesAutoresizingMaskIntoConstraints = false
     
     tradeListButton.translatesAutoresizingMaskIntoConstraints = false
     collectionView.addSubview(tradeListButton)
@@ -208,6 +213,14 @@ class TradeChatVC: JSQMessagesViewController {
       let vc = segue.destination as? MakeDealVC
       vc?.transactionMethod = transactionMethod
       vc?.anotherOwnerId = anotherUserId
+    } else if segue.identifier == Storyboard.TradeChatToProfileContainer {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProfileContainerVC
+
+      vc?.currentUserId = anotherUserId
+      vc?.currentUsername = anotherUsername
+      vc?.showBackButton = true
+      vc?.isReadOnly = true
     }
   }
   
@@ -250,16 +263,13 @@ class TradeChatVC: JSQMessagesViewController {
         switch result {
         case .success(let anyActive):
           if anyActive {
-//            let tradeListButtonWasTouchedOnChat = self?.tradeListButtonWasTouchedOnChat
-//            self?.dismiss(animated: true) {
-//              DispatchQueue.main.async {
-//                tradeListButtonWasTouchedOnChat?()
-//              }
-//            }
-            let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please go to your Trade List to see the trade.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//
+//            let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please go to your Trade List to see the trade.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//            
+//            self?.present(alert, animated: true)
             
-            self?.present(alert, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
           } else {
             if ownerId != currenUserId {
               SVProgressHUD.show()
@@ -276,7 +286,10 @@ class TradeChatVC: JSQMessagesViewController {
                   
                   self?.present(alert, animated: true)
                 } else {
-                  self?.performSegue(withIdentifier: Storyboard.TradeChatToFinalizeTrade, sender: nil)
+                  
+                  DispatchQueue.main.async {
+                    self?.performSegue(withIdentifier: Storyboard.TradeChatToFinalizeTrade, sender: nil)
+                  }
                 }
                 })
             } else {
@@ -288,7 +301,9 @@ class TradeChatVC: JSQMessagesViewController {
         case .fail(let error):
           let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: "OK", style: .default))
-          self?.present(alert, animated: true)
+          DispatchQueue.main.async {
+            self?.present(alert, animated: true)
+          }
         }
         
     }

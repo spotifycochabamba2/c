@@ -11,15 +11,36 @@ import Ax
 import SVProgressHUD
 
 class TradeStatusVC: UIViewController {
+  
+  var goToItemsSegmentedSection: () -> Void = { }
+  
   @IBOutlet weak var statusView: UIView!
+  @IBOutlet weak var requestLocationButtonView: UIView!
+  @IBOutlet weak var yourImageView: UIImageViewCircular! {
+    didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(yourImageViewTapped))
+      tapGesture.numberOfTouchesRequired = 1
+      tapGesture.numberOfTapsRequired = 1
+      
+      yourImageView.isUserInteractionEnabled = true
+      yourImageView.addGestureRecognizer(tapGesture)
+    }
+  }
   
-  
-  @IBOutlet weak var yourImageView: UIImageViewCircular!
-  @IBOutlet weak var anotherImageView: UIImageViewCircular!
+  @IBOutlet weak var anotherImageView: UIImageViewCircular! {
+    didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(anotherImageViewTapped))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      
+      anotherImageView.isUserInteractionEnabled = true
+      anotherImageView.addGestureRecognizer(tapGesture)
+    }
+  }
   
   @IBOutlet weak var yourNameLabel: UILabel! {
     didSet {
-      yourNameLabel.text = "Your garden"
+      yourNameLabel.text = "You"
     }
   }
   @IBOutlet weak var anotherNameLabel: UILabel! {
@@ -31,19 +52,47 @@ class TradeStatusVC: UIViewController {
   @IBOutlet weak var yourDetailLabel: UILabel! {
     didSet {
       yourDetailLabel.text = ""
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(itemsLabelTapped))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      
+      yourDetailLabel.isUserInteractionEnabled = true
+      yourDetailLabel.addGestureRecognizer(tapGesture)
     }
   }
   @IBOutlet weak var anotherDetailLabel: UILabel! {
     didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(itemsLabelTapped))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      
+      anotherDetailLabel.isUserInteractionEnabled = true
+      anotherDetailLabel.addGestureRecognizer(tapGesture)
+      
       anotherDetailLabel.text = ""
     }
   }
   
-  @IBOutlet weak var transactionMethodImageView: UIImageView!
+  @IBOutlet weak var transactionMethodImageView: UIImageView! {
+    didSet {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(transactionMethodImageViewTapped))
+      tapGesture.numberOfTouchesRequired = 1
+      tapGesture.numberOfTapsRequired = 1
+      
+      transactionMethodImageView.isUserInteractionEnabled = true
+      transactionMethodImageView.addGestureRecognizer(tapGesture)
+    }
+  }
+  
   @IBOutlet weak var transactionMethodLabel: UILabel! {
     didSet {
       transactionMethodLabel.text = ""
     }
+  }
+  
+  func itemsLabelTapped() {
+    goToItemsSegmentedSection()
   }
   
   @IBOutlet weak var requestLocationButton: UIButton!
@@ -115,11 +164,89 @@ class TradeStatusVC: UIViewController {
   
   @IBOutlet weak var editTransactionButton: UIButton!
   
+  func transactionMethodImageViewTapped() {
+    performSegue(withIdentifier: Storyboard.TradeStatusToFinalizeTrade, sender: nil)
+  }
+  
+  @IBAction func requestLocationButtonTouched() {
+    requestLocationButton.isEnabled = false
+    requestLocationButton.alpha = 0.5
+    
+    // to do verify if Ids are correct and
+    // implement alert
+    // and finally test.
+    guard let senderId = User.currentUser?.uid else {
+      let alert = UIAlertController(title: "Info", message: "Sender Id was not found.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      return
+    }
+    
+    guard let receiverId = anotherUserId else {
+      let alert = UIAlertController(title: "Info", message: "Receiver Id was not found.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      return
+    }
+    
+    guard let dealId = dealId else {
+      let alert = UIAlertController(title: "Info", message: "Deal Id was not found.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      return
+    }
+    
+    User.sendRequestLocationPushNotification(
+      senderId: senderId,
+      receiverId: receiverId,
+      dealId: dealId) { (error) in
+        if error == nil {
+          let alert = UIAlertController(title: "Info", message: "Request location was already sent.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+        }
+    }
+  }
+  
+  func yourImageViewTapped() {
+    if let ownerUserId = User.currentUser?.uid {
+      var values = [String: Any]()
+      values["userId"] = ownerUserId
+      values["username"] = ownerUserName
+      
+      performSegue(withIdentifier: Storyboard.TradeStatusToProfileContainer, sender: values)
+    }
+  }
+  
+  func anotherImageViewTapped() {
+    if let anotherUserId = anotherUserId,
+       let anotherUsername = anotherUsername
+    {
+      var values = [String: Any]()
+      values["userId"] = anotherUserId
+      values["username"] = anotherUsername
+      
+      performSegue(withIdentifier: Storyboard.TradeStatusToProfileContainer, sender: values)
+    }
+  }
+  
   func didConfirmOffer(_ howFinalized: String) {
     userUpdatedStateDeal()
     transactionMethod = howFinalized
-    DispatchQueue.main.async {
-      self.transactionMethodLabel.text = "\(self.ownerUserName) says: \(howFinalized)"
+    DispatchQueue.main.async { [weak self] in
+      
+      if let transactionMethod = HowFinalized(rawValue: howFinalized) {
+        var imageName = ""
+        
+        switch transactionMethod {
+        case .illDrive:
+          imageName = "illdrive-gray-image-no-title"
+        case .letsMeetHalfway:
+          imageName = "letsmeet-gray-image-no-title"
+        case .youDriveIllTip:
+          imageName = "youdrive-gray-image-no-title"
+        }
+        
+        self?.transactionMethodImageView.image = UIImage(named: imageName)
+      }
+      
+      self?.transactionMethodLabel.text = "\(self?.ownerUserName ?? "") says: \(howFinalized)"
     }
   }
   
@@ -127,6 +254,15 @@ class TradeStatusVC: UIViewController {
     if segue.identifier == Storyboard.TradeStatusToFinalizeTrade {
       let vc = segue.destination as? FinalizeTradeVC
       vc?.didConfirmOffer = didConfirmOffer
+    } else if segue.identifier == Storyboard.TradeStatusToProfileContainer {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? ProfileContainerVC
+      let values = sender as? [String: Any]
+      
+      vc?.currentUserId = values?["userId"] as? String
+      vc?.currentUsername = values?["username"] as? String
+      vc?.showBackButton = true
+      vc?.isReadOnly = true
     }
   }
   
@@ -137,13 +273,13 @@ class TradeStatusVC: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-//    editButtonShadowView.layoutIfNeeded()
-//    editButtonShadowView.makeMeBordered()
-//    
-//    editButtonShadowView.layer.shadowColor = UIColor.lightGray.cgColor
-//    editButtonShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-//    editButtonShadowView.layer.shadowRadius = 3
-//    editButtonShadowView.layer.shadowOpacity = 0.5
+    requestLocationButtonView.layoutIfNeeded()
+    requestLocationButtonView.makeMeBordered()
+    
+    requestLocationButtonView.layer.shadowColor = UIColor.lightGray.cgColor
+    requestLocationButtonView.layer.shadowOffset = CGSize(width: 0, height: 0)
+    requestLocationButtonView.layer.shadowRadius = 3
+    requestLocationButtonView.layer.shadowOpacity = 0.5
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -213,6 +349,8 @@ class TradeStatusVC: UIViewController {
                 let anotherUserId = self?.anotherUserId
               {
                 if currentUserId == originalOwnerUserId {
+                  self?.requestLocationButton.isEnabled = false
+                  self?.requestLocationButton.alpha = 0.5
                   // owner
                   currentItemsCount = self?.originalOwnerProducesCount ?? 0
                   
@@ -243,6 +381,9 @@ class TradeStatusVC: UIViewController {
                   
                 } else {
                   // another
+                  self?.requestLocationButton.isEnabled = true
+                  self?.requestLocationButton.alpha = 1
+                  
                   currentItemsCount = self?.originalAnotherProducesCount ?? 0
                   anotherItemsCount = self?.originalOwnerProducesCount  ?? 0
                   
@@ -277,7 +418,7 @@ class TradeStatusVC: UIViewController {
                 
                 DispatchQueue.main.async { [weak self] in
                   
-                  self?.anotherNameLabel.text = "\(username)'s Garden"
+                  self?.anotherNameLabel.text = "\(username)"
                   
                   if currentItemsCount > 1 {
                     self?.yourDetailLabel.text = "\(currentItemsCount) items"
@@ -308,8 +449,10 @@ class TradeStatusVC: UIViewController {
                     self?.locationDetailLabel.text = location
                     self?.locationStackView.isHidden = false
                     self?.requestLocationButton.isHidden = true
+                    self?.requestLocationButtonView.isHidden = true
                   } else {
                     self?.locationStackView.isHidden = true
+                    self?.requestLocationButtonView.isHidden = false
                     self?.requestLocationButton.isHidden = false
                     self?.requestLocationButton.setTitle("REQUEST \(user.name.uppercased())'S LOCATION", for: .normal)
                   }
@@ -412,7 +555,7 @@ class TradeStatusVC: UIViewController {
     let text3 = NSAttributedString(string: "for ", attributes: regularFontAttribuge)
     
     let text4 = NSAttributedString(string: "\(anotherItemsCount) item(s) ", attributes: anotherFontAttributeToUse)
-    let text5 = NSAttributedString(string: "of \(username)'s garden.", attributes: regularFontAttribuge)
+    let text5 = NSAttributedString(string: "of \(username).", attributes: regularFontAttribuge)
     
     let fullString = NSMutableAttributedString()
     fullString.append(text1)
@@ -432,6 +575,7 @@ class TradeStatusVC: UIViewController {
     super.viewDidLoad()
     
     locationStackView.isHidden = true
+    requestLocationButtonView.isHidden = true
     requestLocationButton.isHidden = true
 //    detailsLabel.text = ""
     
@@ -448,6 +592,9 @@ class TradeStatusVC: UIViewController {
         statusView.backgroundColor = UIColor.hexStringToUIColor(hex: "#37d67c")
         statusLabel.text = dealState.rawValue
 //        editTransactionButton.isHidden = true
+        requestLocationButton.isEnabled = false
+        requestLocationButton.alpha = 0.5
+        transactionMethodImageView.isUserInteractionEnabled = false        
       case .tradeInProcess:
         fallthrough
       case .waitingAnswer:

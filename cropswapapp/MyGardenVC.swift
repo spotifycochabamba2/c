@@ -151,6 +151,8 @@ class MyGardenVC: UICollectionViewController {
     
     User.getProducesByUser(byUserId: userId) { [weak self] produces in
       self?.produces = produces
+      
+      
       completion?()
     }
     

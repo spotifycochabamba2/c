@@ -40,7 +40,7 @@ extension SettingsVC {
   }
   
   func backButtonTouched() {
-    _ = self.navigationController?.popViewController(animated: true)
+    dismiss(animated: true)
   }
   
 }

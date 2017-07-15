@@ -14,8 +14,9 @@ class InstagramVC: UIViewController {
   @IBOutlet weak var webView: UIWebView!
   var isCodePresent = false
   var wasLoggedIn = false
+  var onlyForGettingPictures = false
   
-  var performSegueToHome: (User) -> Void = { _ in print("what?") }
+  var loggedSuccessfully: (User) -> Void = { _ in print("what?") }
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -81,7 +82,7 @@ extension InstagramVC: UIWebViewDelegate {
             }
           }
         },
-        { done in
+        { [weak self] done in
           guard
             let user = userFound,
             let firebaseToken = firebaseToken
@@ -91,21 +92,35 @@ extension InstagramVC: UIWebViewDelegate {
             return
           }
           
-          User.login(with: user, firebaseToken: firebaseToken) { result in
-            switch result {
-            case .success(let result):
-              let userReturned = result["user"] as? User
-              let isNew = result["isNew"] as? Bool
-              
-              userFound = userReturned
-              isNewUser = isNew ?? false
-              print(isNewUser)
-
-              done(nil)
-              break
-            case .fail(let error):
-              done(error)
-              break
+          if self?.onlyForGettingPictures ?? false,
+             let userId = User.currentUser?.uid,
+             let instagramId = user.instagramId,
+             let instagramToken = user.instagramToken
+          {
+            User.update(
+              byUserId: userId,
+              withInstagramId: instagramId,
+              andInstagramToken: instagramToken,
+              completion: { (error) in
+                done(error)
+            })
+          } else {
+            User.login(with: user, firebaseToken: firebaseToken) { result in
+              switch result {
+              case .success(let result):
+                let userReturned = result["user"] as? User
+                let isNew = result["isNew"] as? Bool
+                
+                userFound = userReturned
+                isNewUser = isNew ?? false
+                print(isNewUser)
+                
+                done(nil)
+                break
+              case .fail(let error):
+                done(error)
+                break
+              }
             }
           }
         }
@@ -119,7 +134,7 @@ extension InstagramVC: UIWebViewDelegate {
             self?.wasLoggedIn = true
             DispatchQueue.main.async {
               self?.dismiss(animated: true) {
-                self?.performSegueToHome(user)
+                self?.loggedSuccessfully(user)
               }
             }
           } else {
@@ -144,8 +159,8 @@ extension InstagramVC: UIWebViewDelegate {
     if let data = jsonString?.data(using: .utf8) {
       let dict = try? JSONSerialization.jsonObject(with: data, options: [])
       if let dict = dict as? [String: Any],
-        let errorType = dict["error_type"] as? String,
-        errorType == "OAuthForbiddenException"
+        let _ = dict["error_type"] as? String
+//        errorType == "OAuthForbiddenException"
       {
         User.logout()
       }

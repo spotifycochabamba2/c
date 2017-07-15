@@ -16,8 +16,12 @@ class ProfileContainerVC: UIViewController {
   @IBOutlet weak var profileContainerView: UIView!
   @IBOutlet weak var gardenContainerView: UIView!
   
+  @IBOutlet weak var updatesContainerView: UIView!
+  
   @IBOutlet weak var openChatButton: UIButton!
   @IBOutlet weak var editButton: UIButton!
+  
+  var dealPending: [String: Any]?
   @IBOutlet weak var makeDealView: UIView!
 //  var logoutButton: UIButton!
   @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -65,7 +69,23 @@ class ProfileContainerVC: UIViewController {
       vc?.anotherUsername = currentUsername
       vc?.dealId = sender as? String
       vc?.usedForInbox = true
+    } else if segue.identifier == Storyboard.ProfileContainerToTradeDetail {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? TradeHomeVC
+
+      vc?.originalOwnerUserId = dealPending?["originalOwnerUserId"] as? String
+      vc?.originalOwnerProducesCount = dealPending?["originalOwnerProducesCount"] as? Int ?? 0
+      vc?.originalAnotherProducesCount = dealPending?["originalAnotherProducesCount"] as? Int ?? 0
+      vc?.dealId = dealPending?["id"] as? String
+      vc?.anotherUserId = dealPending?["anotherUserId"] as? String
+      vc?.anotherUsername = dealPending?["anotherUsername"] as? String
+      vc?.dealState = DealState(rawValue: dealPending?["state"] as? String ?? DealState.tradeRequest.rawValue)
+    } else if segue.identifier == Storyboard.ProfileToWall {
+      let vc = segue.destination as? WallContainerVC
+      vc?.wallOwnerId = currentUserId
     }
+    
+
   }
   
   func didConfirmOffer(_ howFinalized: String) {
@@ -105,6 +125,13 @@ class ProfileContainerVC: UIViewController {
     makeDealButton.alpha = 0.5
     print(currentUserId)
     print(currentUsername)
+    
+    guard dealPending == nil else {
+      makeDealButton.isEnabled = true
+      makeDealButton.alpha = 1
+      performSegue(withIdentifier: Storyboard.ProfileContainerToTradeDetail, sender: nil)
+      return
+    }
     
     guard let ownerId = currentUserId else {
       return
@@ -174,11 +201,20 @@ class ProfileContainerVC: UIViewController {
   
   @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
     if sender.selectedSegmentIndex == 0 {
-      profileContainerView.isHidden = false
-      gardenContainerView.isHidden = true
-    } else {
       profileContainerView.isHidden = true
       gardenContainerView.isHidden = false
+      updatesContainerView.isHidden = true
+      openChatButton.isHidden = false
+    } else if sender.selectedSegmentIndex == 1 {
+      profileContainerView.isHidden = true
+      gardenContainerView.isHidden = true
+      updatesContainerView.isHidden = false
+      openChatButton.isHidden = true
+    } else {
+      profileContainerView.isHidden = false
+      gardenContainerView.isHidden = true
+      updatesContainerView.isHidden = true
+      openChatButton.isHidden = false
     }
   }
 
@@ -207,12 +243,45 @@ class ProfileContainerVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    makeDealButton.setTitle("LOADING..", for: .normal)
+    makeDealButton.isEnabled = false
+    makeDealButton.alpha = 0.5
+    
+    User.hasPendingDeal(
+      userIdOne: User.currentUser?.uid,
+      userIdTwo: currentUserId) { (result) in
+        switch result {
+        case .success(let deal):
+          DispatchQueue.main.async { [weak self] in
+            guard let this = self else { return }
+            
+            self?.dealPending = deal
+            
+            this.makeDealButton.alpha = 1
+            this.makeDealButton.isEnabled = true
+            
+            if deal != nil {
+              this.makeDealButton.setTitle("VIEW DEAL", for: .normal)
+            } else {
+              this.makeDealButton.setTitle("MAKE A DEAL", for: .normal)
+            }
+          }
+        case .fail(let error):
+          DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            self?.present(alert, animated: true)
+          }
+        }
+    }
+    
     configureSegmentedControl(segmentedControl)
     
     segmentedControl.selectedSegmentIndex = 0
     segmentedControl.sendActions(for: .valueChanged)
     
-    _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
+//    _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
     
     setNavHeaderTitle(title: "My Profile", color: UIColor.black)
     
@@ -221,7 +290,8 @@ class ProfileContainerVC: UIViewController {
     if showBackButton {
       editButton.isHidden = true
       
-      setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
+//      setNavHeaderTitle(title: "\(currentUsername ?? "Someone")'s Profile", color: UIColor.black)
+      setNavHeaderTitle(title: "Profile", color: UIColor.black)
     } else {
       makeDealViewHeightConstraint.constant = 0
       makeDealButton.isHidden = true

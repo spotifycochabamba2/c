@@ -46,7 +46,7 @@ public class FeedMapVC: UIViewController {
   
   public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    mapView.logoView.alpha = 0
+//    mapView.logoView.alpha = 0
   }
   
   public override func viewDidLoad() {

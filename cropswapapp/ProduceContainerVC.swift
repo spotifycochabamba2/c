@@ -14,6 +14,7 @@ class ProduceContainerVC: UIViewController {
   var produce: Produce?
   var isReadOnly = false
   var transactionMethod: String?
+  var dealPending: [String: Any]?
   
   var userImageView: UIImageView!
   
@@ -52,8 +53,38 @@ class ProduceContainerVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+//    makeDealButton.setTitle("LOADING..", for: .normal)
     makeDealButton.isEnabled = false
     makeDealButton.alpha = 0.5
+    
+//    User.hasPendingDeal(
+//      userIdOne: User.currentUser?.uid,
+//      userIdTwo: produce?.ownerId) { (result) in
+//        switch result {
+//        case .success(let deal):
+//          DispatchQueue.main.async { [weak self] in
+//            guard let this = self else { return }
+//            
+//            self?.dealPending = deal
+//            
+//            this.makeDealButton.alpha = 1
+//            this.makeDealButton.isEnabled = true
+//            
+//            if deal != nil {
+//              this.makeDealButton.setTitle("VIEW DEAL", for: .normal)
+//            } else {
+//              this.makeDealButton.setTitle("MAKE A DEAL", for: .normal)
+//            }
+//          }
+//        case .fail(let error):
+//          DispatchQueue.main.async { [weak self] in
+//            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//            
+//            self?.present(alert, animated: true)
+//          }
+//        }
+//    }
     
     if isReadOnly {
       makeDealView.isHidden = true
@@ -131,7 +162,8 @@ class ProduceContainerVC: UIViewController {
       Deal.canUserMakeADeal(fromUserId: currenUserId, toUserId: ownerId, completion: { [weak self] (hoursLeft) in
         DispatchQueue.main.async {
           SVProgressHUD.dismiss()
-          self?.enableMakeDealButton()
+          self?.makeDealButton.isEnabled = true
+          self?.makeDealButton.alpha = 1
         }
         print(hoursLeft)
         
@@ -148,7 +180,8 @@ class ProduceContainerVC: UIViewController {
       let alert = UIAlertController(title: "Info", message: "Sorry you can't make a deal with yourself", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))
       present(alert, animated: true)
-      enableMakeDealButton()
+      makeDealButton.isEnabled = true
+      makeDealButton.alpha = 1
     }
   }
   
@@ -178,6 +211,18 @@ class ProduceContainerVC: UIViewController {
     } else if segue.identifier == Storyboard.ProduceContainerToFinalizeTrade {
       let vc = segue.destination as? FinalizeTradeVC
       vc?.didConfirmOffer = didConfirmOffer
+    } else if segue.identifier == Storyboard.ProduceContainerToTradeDetail {
+      let nv = segue.destination as? UINavigationController
+      let vc = nv?.viewControllers.first as? TradeHomeVC
+//      let vc = segue.destination as? TradeHomeVC
+      
+      vc?.originalOwnerUserId = dealPending?["originalOwnerUserId"] as? String
+      vc?.originalOwnerProducesCount = dealPending?["originalOwnerProducesCount"] as? Int ?? 0
+      vc?.originalAnotherProducesCount = dealPending?["originalAnotherProducesCount"] as? Int ?? 0
+      vc?.dealId = dealPending?["id"] as? String
+      vc?.anotherUserId = dealPending?["anotherUserId"] as? String
+      vc?.anotherUsername = dealPending?["anotherUsername"] as? String
+      vc?.dealState = DealState(rawValue: dealPending?["state"] as? String ?? DealState.tradeRequest.rawValue)
     } else {
       let vc = segue.destination as? ProduceChildVC
       produceChildVC = vc

@@ -10,8 +10,13 @@ import Foundation
 
 struct Constants {
   
+  struct Texts {
+    static let writePost = "Write a post..."
+    static let writeComment = "Write a comment..."
+  }
+  
   struct Map {
-    static let radius: Int = 10
+    static let radius: Int = 1
     static let unitedStatesLat: Double = 39.755769
     static let unitedStatesLng: Double = -100.678711
     
@@ -21,7 +26,7 @@ struct Constants {
   struct Tag {
     static let tagGroupNames: [String: String] = {
       var values = [String: String]()
-      values["habitat"] = "Habitat"
+      values["habitat"] = "Plant Space"
       values["method"] = "Method"
       values["origin"] = "Origin"
       values["others"] = "Others"
@@ -44,6 +49,7 @@ struct Constants {
   struct PushNotification {
     static let tradePushNotificationId = "TradePushNotificationId"
     static let chatPushNotificationId = "chatPushNotificationId"
+    static let requestLocationPushNotificationId = "requestLocationPushNotificationId"
   }
   
   struct Server {
@@ -73,6 +79,13 @@ struct Constants {
       return url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
     
+    static func getURLToGetUserMedia(
+      instagramClientId: String, // 3616078780
+      instagramAccessToken: String // 3616078780.265265b.1357b89a8b2a4e3db7a975441db31fac
+    ) -> String {
+      return "https://api.instagram.com/v1/users/\(instagramClientId)/media/recent/?access_token=\(instagramAccessToken)"
+    }
+    
   }
   
   struct ErrorMessages {
@@ -85,6 +98,7 @@ struct Constants {
     static let descriptionNotProvided = "Please provide description of your produce."
     
     static let firstNameNotProvided = "Please provide your first name."
+    static let usernameNotProvided = "Please provide your username."
     
     static let stateNotSelected = "Please select a state for the produce."
     

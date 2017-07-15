@@ -48,6 +48,7 @@ extension FeedContainerVC {
   
   public func didSelectDistance(_ distance: Int) {
     mapChild?.didSelectDistance(distance)
+    producesChild?.didSelectDistance(distance)
 //    mapChild?.loadUsers(
 //      radius: distance,
 //      completion: {

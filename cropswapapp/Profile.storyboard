@@ -34,8 +34,9 @@
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wkW-TV-eJX">
                                         <segments>
-                                            <segment title="PROFILE"/>
                                             <segment title="GARDEN"/>
+                                            <segment title="UPDATES"/>
+                                            <segment title="PROFILE"/>
                                         </segments>
                                         <color key="tintColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -89,6 +90,11 @@
                                     <segue destination="aEc-3E-CaH" kind="embed" identifier="ProfileContainerToProfileChild" id="MwA-e7-afv"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VI2-rk-SYZ">
+                                <connections>
+                                    <segue destination="dfz-fv-zdh" kind="embed" identifier="ProfileToWall" id="U6c-e7-PU7"/>
+                                </connections>
+                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0o-to-JA2">
                                 <connections>
                                     <segue destination="qBm-ry-c6T" kind="embed" identifier="ProfileContainerToGarden" id="6dP-G2-Pix"/>
@@ -117,13 +123,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="VI2-rk-SYZ" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="1Q7-h6-whe"/>
+                            <constraint firstAttribute="trailing" secondItem="VI2-rk-SYZ" secondAttribute="trailing" id="Ao2-GW-4tL"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="eHs-c0-8PH" secondAttribute="bottom" constant="5" id="Bil-7w-cUy"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="d0o-to-JA2" secondAttribute="bottom" constant="5" id="C83-C1-7Vp"/>
-                            <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="Uto-m9-cw3" secondAttribute="bottom" constant="5" id="Cpe-BB-fup"/>
+                            <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="Uto-m9-cw3" secondAttribute="bottom" id="Cpe-BB-fup"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="RIQ-iS-1wF" secondAttribute="bottom" id="HZP-rS-bNc"/>
                             <constraint firstAttribute="trailing" secondItem="d0o-to-JA2" secondAttribute="trailing" id="Kjn-dl-4TZ"/>
                             <constraint firstItem="d0o-to-JA2" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="NRO-Li-LdL"/>
                             <constraint firstAttribute="trailing" secondItem="RIQ-iS-1wF" secondAttribute="trailing" id="Q8e-EP-Lwx"/>
+                            <constraint firstItem="VI2-rk-SYZ" firstAttribute="top" secondItem="QEC-iC-PJ2" secondAttribute="bottom" id="Qse-xt-Nm1"/>
                             <constraint firstAttribute="trailing" secondItem="QEC-iC-PJ2" secondAttribute="trailing" id="UVt-va-lhL"/>
                             <constraint firstAttribute="trailing" secondItem="Uto-m9-cw3" secondAttribute="trailing" id="Va9-En-C2n"/>
                             <constraint firstAttribute="trailing" secondItem="eHs-c0-8PH" secondAttribute="trailing" id="Yt9-Y3-Vik"/>
@@ -134,6 +143,7 @@
                             <constraint firstItem="QEC-iC-PJ2" firstAttribute="top" secondItem="hVw-a6-aPx" secondAttribute="top" id="on6-67-wBC"/>
                             <constraint firstItem="hXL-KC-MZr" firstAttribute="leading" secondItem="hVw-a6-aPx" secondAttribute="leading" id="qKL-N7-RoG"/>
                             <constraint firstItem="M1L-X7-ntX" firstAttribute="top" secondItem="hXL-KC-MZr" secondAttribute="bottom" id="qjC-88-HWF"/>
+                            <constraint firstItem="hXL-KC-MZr" firstAttribute="top" secondItem="VI2-rk-SYZ" secondAttribute="bottom" constant="5" id="rGB-QB-RHB"/>
                             <constraint firstItem="eHs-c0-8PH" firstAttribute="top" secondItem="QEC-iC-PJ2" secondAttribute="bottom" id="ubg-YR-zC6"/>
                         </constraints>
                     </view>
@@ -148,16 +158,18 @@
                         <outlet property="segmentedControl" destination="wkW-TV-eJX" id="lFQ-DP-G6r"/>
                         <outlet property="segmentedControlView" destination="QEC-iC-PJ2" id="r1D-Yi-lBT"/>
                         <outlet property="segmentedControlViewHeightConstraint" destination="abZ-86-cyJ" id="jWQ-ef-Mz6"/>
+                        <outlet property="updatesContainerView" destination="VI2-rk-SYZ" id="7WA-61-uOm"/>
                         <segue destination="Uvr-iv-DOK" kind="presentation" identifier="ProfileContainerToEditProfileContainer" id="Ehr-qk-lFL"/>
                         <segue destination="PiF-nt-4dk" kind="show" identifier="ProfileChildToSettings" id="KbG-fF-dAh"/>
                         <segue destination="3c0-qc-bqN" kind="presentation" identifier="ProfileContainerToFinalizeTrade" id="UzT-NK-csm"/>
                         <segue destination="4uo-Cc-cna" kind="presentation" identifier="ProfileContainerToMakeDeal" id="G1W-FD-cXO"/>
                         <segue destination="TdM-AU-tmd" kind="presentation" identifier="ProfileContainerToChat" id="06h-Mn-wiG"/>
+                        <segue destination="Z0G-81-CTN" kind="show" identifier="ProfileContainerToTradeDetail" id="9h5-0s-qyG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXA-4E-uBk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-268" y="124.58770614692655"/>
+            <point key="canvasLocation" x="-4855" y="-488"/>
         </scene>
         <!--TradeChatVC-->
         <scene sceneID="j9q-VT-6eE">
@@ -167,7 +179,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3l-sK-GGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="762" y="-759"/>
+            <point key="canvasLocation" x="68" y="-736"/>
         </scene>
         <!--MakeDealVC-->
         <scene sceneID="j21-Xu-jrz">
@@ -175,7 +187,23 @@
                 <viewControllerPlaceholder storyboardName="MakeDeal" referencedIdentifier="MakeDealVC" id="4uo-Cc-cna" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ab2-ke-a4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008.8" y="-672.86356821589209"/>
+            <point key="canvasLocation" x="2383" y="-998"/>
+        </scene>
+        <!--InstagramVC-->
+        <scene sceneID="bye-2k-Hxg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="InstagramVC" id="xLn-nN-MXu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FqZ-Ar-uTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1976" y="-391"/>
+        </scene>
+        <!--PhotoViewerVC-->
+        <scene sceneID="qeD-Yo-KyZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Produce" referencedIdentifier="PhotoViewerVC" id="8Hj-Tu-ssP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FrD-HR-dnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1771" y="-4"/>
         </scene>
         <!--FinalizeTradeVC-->
         <scene sceneID="4aP-NG-wg2">
@@ -183,7 +211,7 @@
                 <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="FinalizeTradeVC" id="3c0-qc-bqN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ve-wV-GyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="-470"/>
+            <point key="canvasLocation" x="225" y="-507"/>
         </scene>
         <!--EditProfileContainerVC-->
         <scene sceneID="2fL-MS-Jl0">
@@ -193,7 +221,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK0-e8-hyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="558" y="1063"/>
+            <point key="canvasLocation" x="-2677" y="1557"/>
         </scene>
         <!--Profile ChildVC-->
         <scene sceneID="mlP-AZ-8yC">
@@ -286,8 +314,111 @@ sdf</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="30" id="M3c-3D-z9i">
+                                        <rect key="frame" x="0.0" y="490" width="375" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M3c-3D-z9i" id="RWi-tF-x3S">
+                                            <frame key="frameInset" width="375" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YKj-ac-2jw">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk0-fY-Wit">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="YKj-ac-2jw" firstAttribute="centerY" secondItem="RWi-tF-x3S" secondAttribute="centerY" id="8lx-9i-8GS"/>
+                                                <constraint firstItem="YKj-ac-2jw" firstAttribute="leading" secondItem="RWi-tF-x3S" secondAttribute="leadingMargin" id="SYM-vm-XzL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="YKj-ac-2jw" secondAttribute="trailing" id="acO-Um-ZYg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="yH7-zg-Eev">
+                                        <rect key="frame" x="0.0" y="520" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yH7-zg-Eev" id="bcT-gg-O8v">
+                                            <frame key="frameInset" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsK-3y-tD0">
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWQ-sC-Z1a">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="170" id="aZC-Io-yi2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
+                                                    <state key="normal" title="SIGN IN WITH INSTAGRAM">
+                                                        <color key="titleColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="signinInstagramButtonTouched" destination="aEc-3E-CaH" eventType="touchUpInside" id="Ae1-Fq-qdX"/>
+                                                    </connections>
+                                                </button>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FiJ-V5-rm6">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LaP-A1-la6">
+                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileInstagramCellId" id="2AG-Dr-Bub" customClass="ProfileInstagramCell" customModule="cropswapapp" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MKO-RE-KMd" customClass="UIImageViewCircular" customModule="cropswapapp" customModuleProvider="target">
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                            </view>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="MKO-RE-KMd" secondAttribute="bottom" id="8pg-M9-ZAn"/>
+                                                                <constraint firstAttribute="trailing" secondItem="MKO-RE-KMd" secondAttribute="trailing" id="EVh-va-jha"/>
+                                                                <constraint firstItem="MKO-RE-KMd" firstAttribute="leading" secondItem="2AG-Dr-Bub" secondAttribute="leading" id="Goy-1I-i79"/>
+                                                                <constraint firstItem="MKO-RE-KMd" firstAttribute="top" secondItem="2AG-Dr-Bub" secondAttribute="top" id="tkg-bj-Q5h"/>
+                                                            </constraints>
+                                                            <size key="customSize" width="40" height="40"/>
+                                                            <connections>
+                                                                <outlet property="instagramImageView" destination="MKO-RE-KMd" id="ZqZ-ew-rqO"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="aEc-3E-CaH" id="Ptg-k9-Ajh"/>
+                                                        <outlet property="delegate" destination="aEc-3E-CaH" id="dch-X1-Vhq"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="FiJ-V5-rm6" firstAttribute="leading" secondItem="bcT-gg-O8v" secondAttribute="leading" constant="8" id="B1n-7h-Y0o"/>
+                                                <constraint firstAttribute="trailing" secondItem="FiJ-V5-rm6" secondAttribute="trailing" constant="8" id="FQT-oh-SQb"/>
+                                                <constraint firstItem="jWQ-sC-Z1a" firstAttribute="leading" secondItem="bcT-gg-O8v" secondAttribute="leadingMargin" id="Fih-7A-Xfq"/>
+                                                <constraint firstItem="jWQ-sC-Z1a" firstAttribute="top" secondItem="bcT-gg-O8v" secondAttribute="topMargin" id="IEB-8Z-hYp"/>
+                                                <constraint firstItem="OsK-3y-tD0" firstAttribute="leading" secondItem="jWQ-sC-Z1a" secondAttribute="leading" id="QZg-SC-zAd"/>
+                                                <constraint firstItem="OsK-3y-tD0" firstAttribute="trailing" secondItem="jWQ-sC-Z1a" secondAttribute="trailing" id="RSd-Lf-v1R"/>
+                                                <constraint firstAttribute="bottom" secondItem="FiJ-V5-rm6" secondAttribute="bottom" id="TTl-bu-Zp1"/>
+                                                <constraint firstItem="FiJ-V5-rm6" firstAttribute="top" secondItem="bcT-gg-O8v" secondAttribute="top" id="ThZ-Fz-4bw"/>
+                                                <constraint firstItem="OsK-3y-tD0" firstAttribute="top" secondItem="jWQ-sC-Z1a" secondAttribute="top" id="xEI-MM-yGP"/>
+                                                <constraint firstItem="OsK-3y-tD0" firstAttribute="bottom" secondItem="jWQ-sC-Z1a" secondAttribute="bottom" id="xV7-8h-rdm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="LN6-rj-N9Y">
-                                        <rect key="frame" x="0.0" y="490" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="600" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LN6-rj-N9Y" id="vWd-n7-sh7">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -316,7 +447,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="fh9-eq-Rhm">
-                                        <rect key="frame" x="0.0" y="560" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="670" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fh9-eq-Rhm" id="TDK-io-c47">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -344,8 +475,37 @@ sdf</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="U66-GL-Wze">
+                                        <rect key="frame" x="0.0" y="740" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U66-GL-Wze" id="pFL-bj-pAZ">
+                                            <frame key="frameInset" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6ed-fQ-CRj">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4x3-qc-IJk">
+                                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="johndoe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="87z-xM-fM7">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6ed-fQ-CRj" firstAttribute="centerY" secondItem="pFL-bj-pAZ" secondAttribute="centerY" id="9kc-4X-lPy"/>
+                                                <constraint firstItem="6ed-fQ-CRj" firstAttribute="leading" secondItem="pFL-bj-pAZ" secondAttribute="leadingMargin" id="Txh-3U-xNg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6ed-fQ-CRj" secondAttribute="trailing" id="tDL-vq-0S4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="MjZ-7t-d7s">
-                                        <rect key="frame" x="0.0" y="630" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="810" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MjZ-7t-d7s" id="U8G-GW-un0">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -374,7 +534,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="8s6-cz-Sxc">
-                                        <rect key="frame" x="0.0" y="700" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="880" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8s6-cz-Sxc" id="lYN-8K-UjG">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -403,7 +563,7 @@ sdf</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="fPn-y6-gDU">
-                                        <rect key="frame" x="0.0" y="770" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="950" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPn-y6-gDU" id="sbO-Zf-wPD">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -434,7 +594,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="q4L-78-J3T">
-                                        <rect key="frame" x="0.0" y="840" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="1020" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q4L-78-J3T" id="OnJ-Cm-A3v">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -465,7 +625,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="VxI-Xf-zaL">
-                                        <rect key="frame" x="0.0" y="910" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="1090" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VxI-Xf-zaL" id="mhS-gs-9Vm">
                                             <frame key="frameInset" width="375" height="70"/>
@@ -496,7 +656,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="6ZA-Zh-Nah">
-                                        <rect key="frame" x="0.0" y="980" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="1160" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6ZA-Zh-Nah" id="dB7-En-Xab">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -527,7 +687,7 @@ Las Vegas, NV 89119</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="08V-Fg-7dy">
-                                        <rect key="frame" x="0.0" y="1070" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="1250" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="08V-Fg-7dy" id="ZSd-Dg-9EJ">
                                             <frame key="frameInset" width="375" height="90"/>
@@ -572,29 +732,36 @@ trade requests</string>
                         <outlet property="countryLabel" destination="c9B-CL-fq4" id="Ao8-X0-map"/>
                         <outlet property="emailAddressCell" destination="fh9-eq-Rhm" id="Qs1-Vo-7R2"/>
                         <outlet property="emailLabel" destination="UL7-tO-cM2" id="RTD-ie-b3W"/>
+                        <outlet property="instagramCell" destination="yH7-zg-Eev" id="3u1-uO-2GD"/>
+                        <outlet property="instagramCollectionView" destination="FiJ-V5-rm6" id="Pgp-eY-0jW"/>
                         <outlet property="nameLabel" destination="sOm-i8-PDE" id="WlF-Jz-I8O"/>
                         <outlet property="phoneNumberCell" destination="LN6-rj-N9Y" id="dqv-VH-3mg"/>
                         <outlet property="phoneNumberLabel" destination="3Sz-QK-Tlu" id="W1V-dp-98a"/>
                         <outlet property="profileImageView" destination="ZbD-tB-o1u" id="lYt-yp-d6C"/>
                         <outlet property="showAddressCell" destination="08V-Fg-7dy" id="XgP-Mg-eXe"/>
                         <outlet property="showAddressSwitch" destination="MRP-oO-0bZ" id="wUR-61-yDQ"/>
+                        <outlet property="siginInstagramShadowView" destination="OsK-3y-tD0" id="6Rn-DW-mJb"/>
+                        <outlet property="signinInstagramButton" destination="jWQ-sC-Z1a" id="xAP-IY-KBm"/>
                         <outlet property="stateCell" destination="q4L-78-J3T" id="9qd-Wm-VG0"/>
                         <outlet property="stateLabel" destination="SFU-ZY-dlS" id="0jy-ef-5z7"/>
                         <outlet property="streetCell" destination="6ZA-Zh-Nah" id="Shj-w3-pQR"/>
                         <outlet property="streetLabel" destination="tds-hk-lhZ" id="Z0U-sI-1sf"/>
+                        <outlet property="usernameLabel" destination="87z-xM-fM7" id="2wx-1f-k92"/>
                         <outlet property="websiteLabel" destination="px3-k2-kFK" id="2HR-4b-bJf"/>
                         <outlet property="zipCodeCell" destination="VxI-Xf-zaL" id="bSd-I8-xox"/>
                         <outlet property="zipCodeLabel" destination="bgG-e3-9ev" id="qBN-8L-fFl"/>
+                        <segue destination="xLn-nN-MXu" kind="presentation" identifier="ProfileChildToInstagramLogin" id="S2g-VW-1pj"/>
+                        <segue destination="8Hj-Tu-ssP" kind="presentation" identifier="ProfileChildToPhotoViewer" id="Bxc-hW-kCo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RL8-ZN-p5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="-326"/>
+            <point key="canvasLocation" x="-2870" y="-139"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="7Zu-eG-PHp">
             <objects>
-                <tableViewController id="PiF-nt-4dk" customClass="SettingsVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsVC" id="PiF-nt-4dk" customClass="SettingsVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3yR-Ke-jwb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -612,7 +779,7 @@ trade requests</string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ZM-Tr-ze7">
                                                     <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -629,7 +796,7 @@ trade requests</string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="efh-Ha-56U">
                                                     <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -646,7 +813,7 @@ trade requests</string>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Terms and conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F5x-VP-84P">
                                                     <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -674,6 +841,7 @@ trade requests</string>
         <!--Navigation Controller-->
         <scene sceneID="5Vo-bl-vgR">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uuj-M4-SjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
@@ -685,9 +853,8 @@ trade requests</string>
                         <segue destination="AgT-Ye-CgJ" kind="relationship" relationship="rootViewController" id="Gt7-Hf-6em"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uuj-M4-SjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-268" y="1064"/>
+            <point key="canvasLocation" x="-2676" y="1117"/>
         </scene>
         <!--GardenVC-->
         <scene sceneID="kNK-HR-NO6">
@@ -695,7 +862,17 @@ trade requests</string>
                 <viewControllerPlaceholder storyboardName="Garden" referencedIdentifier="GardenVC" id="qBm-ry-c6T" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPD-1s-AwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286" y="1063"/>
+            <point key="canvasLocation" x="-1412" y="983"/>
+        </scene>
+        <!--TradeHomeVC-->
+        <scene sceneID="cNY-Gd-wfA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TradeDetail" referencedIdentifier="TradeHomeVC" id="AsF-yh-onu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rYL-uE-9Qr"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q9c-DO-O6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1055" y="-930"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KGp-uz-tVq">
@@ -713,7 +890,33 @@ trade requests</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4V-1A-NQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="-758"/>
+            <point key="canvasLocation" x="745" y="-777"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0nv-Bs-NEo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z0G-81-CTN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eTU-yT-IsQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AsF-yh-onu" kind="relationship" relationship="rootViewController" id="h2Q-lh-uwa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M45-Cg-vUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1834" y="-930"/>
+        </scene>
+        <!--WallContainerVC-->
+        <scene sceneID="JJu-MX-UbW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wall" referencedIdentifier="WallContainerVC" id="dfz-fv-zdh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SBK-gN-6pD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3723" y="628"/>
         </scene>
     </scenes>
     <resources>

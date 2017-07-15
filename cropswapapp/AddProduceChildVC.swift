@@ -968,6 +968,20 @@ class AddProduceChildVC: UITableViewController {
         
         self.loadProduceToUI(produce)
       })
+    } else {
+      let defaults = UserDefaults.standard
+      if let tags = defaults.object(forKey: "tagsSelected") as? [String: Any] {
+        tagsToDisplay = Produce.getTagNamesFrom(tags: tags)
+        tagsToSave = tags
+        
+        DispatchQueue.main.async { [weak self] in
+          self?.tagsCollectionView.reloadData()
+          
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self?.tableView.reloadData()
+          }
+        }
+      }
     }
     
 //    pageContainer = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -1474,7 +1488,7 @@ extension AddProduceChildVC {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)
     
-    if indexPath.row == 2 {
+    if indexPath.row == 3 {
       
       if thirdCellSelected {
         return 200

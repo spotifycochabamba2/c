@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class IntroVC: UIViewController {
   
   @IBOutlet weak var signupButton: UIButton!
   @IBOutlet weak var loginButton: UIButton!
   @IBOutlet weak var instagramButton: UIButton!
-
+  
+  var wentToLoginScreen = false
+  var wentToInstagramScreen = false
+  var wentToSignupScreen = false
 }
 
 extension IntroVC {
@@ -31,12 +35,6 @@ extension IntroVC {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    User.logout()
-    
-    if User.currentUser != nil {
-      self.performSegue(withIdentifier: Storyboard.IntroToHome, sender: nil)
-    }
-    
     navigationBarIsHidden = true
 
     instagramButton.makeMeBordered(color: .white)
@@ -48,6 +46,23 @@ extension IntroVC {
     super.viewWillAppear(animated)
     
     navigationBarIsHidden = true
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    SVProgressHUD.show()
+    
+    if User.currentUser != nil,
+       !wentToLoginScreen,
+       !wentToSignupScreen,
+       !wentToInstagramScreen
+    {
+      DispatchQueue.main.async {
+        self.performSegue(withIdentifier: Storyboard.IntroToHome, sender: nil)
+      }
+    } else {
+      SVProgressHUD.dismiss()
+    }
   }
 }
 
@@ -63,7 +78,7 @@ extension IntroVC {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
       print(vc)
-      vc?.performSegueToHome = performSegueToHome
+      vc?.loggedSuccessfully = performSegueToHome
     }
   }
   
@@ -84,14 +99,17 @@ extension IntroVC {
 
 extension IntroVC {
   @IBAction func goToLoginView() {
+    wentToLoginScreen = true
     performSegue(withIdentifier: Storyboard.IntroToLogin, sender: nil)
   }
   
   @IBAction func goToSignupView() {
+    wentToSignupScreen = true
     performSegue(withIdentifier: Storyboard.IntroToSignup, sender: nil)
   }
   
   @IBAction func instagramButtonTouched() {
+    wentToInstagramScreen = true
     performSegue(withIdentifier: Storyboard.IntroToInstagram, sender: nil)
   }
 }

@@ -22,6 +22,11 @@ public class TagsListContainerVC: UIViewController {
   var didSelectTags: ([String: Any]) -> Void = { _ in }
   
   @IBAction func acceptButtonTouched() {
+    
+    let defaults = UserDefaults.standard
+    defaults.set(child?.tagsAlreadySelected, forKey: "tagsSelected")
+    defaults.synchronize()
+    
     if let child = child {
       didSelectTags(child.tagsAlreadySelected)
     }

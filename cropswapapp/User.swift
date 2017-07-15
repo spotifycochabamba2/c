@@ -25,6 +25,7 @@ struct User {
   var email: String? = nil
   var name: String
   var lastName: String? = nil
+  var username: String? = nil
   var phoneNumber: String? = nil
   var website: String? = nil
   
@@ -32,7 +33,7 @@ struct User {
   
   var profilePictureURL: String? = nil
   var instagramToken: String? = nil
-  
+  var instagramId: String? = nil
   var country: String?
   var street: String?
   var city: String?
@@ -43,7 +44,7 @@ struct User {
   
   var latitude: Double?
   var longitude: Double?
-  
+    
   var radiusFilterInMiles: Int?
   var enabledRadiusFilter: Bool?
   
@@ -74,6 +75,7 @@ struct User {
     self.zipCode = json["zipCode"] as? String
     self.showAddress = json["showAddress"] as? Bool
     self.about = json["about"] as? String
+    self.username = json["username"] as? String
     
     self.radiusFilterInMiles = json["radiusFilterInMiles"] as? Int
     self.enabledRadiusFilter = json["enabledRadiusFilter"] as? Bool
@@ -81,6 +83,9 @@ struct User {
     let publicLocation = json["publicGeoLoc"] as? [String: Any]
     let lat = publicLocation?["lat"] as? Double
     let lng = publicLocation?["lng"] as? Double
+    
+    self.instagramToken = json["instagramToken"] as? String
+    self.instagramId = json["instagramId"] as? String
     
     self.latitude = lat
     self.longitude = lng
@@ -141,6 +146,78 @@ extension User {
     
   }
   
+//  var senderId = req.body.senderId;
+//  var receiverId = req.body.receiverId;
+//  var dealId = req.body.dealId;
+  static func sendRequestLocationPushNotification(
+    senderId: String,
+    receiverId: String,
+    dealId: String,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    let url = "\(Constants.Server.stringURL)send-request-location-push"
+    
+    var data = [String: Any]()
+    data["senderId"] = senderId
+    data["receiverId"] = receiverId
+    data["dealId"] = dealId
+    
+    Alamofire
+      .request(
+        url,
+        method: .post,
+        parameters: data,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(_):
+          completion(nil)
+        case .failure(let error):
+          completion(error as NSError?)
+        }
+      }
+  }
+  
+  static func getProducesBy(
+    latitude: Double,
+    longitude: Double,
+    radius: Int,
+    completion: @escaping ([Produce], [String]) -> Void
+  ) {
+    let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
+    let url = "\(Constants.Server.stringURL)api/users/location/produces?\(query)"
+    var produces = [Produce]()
+    var userIds = [String]()
+    
+    print(query)
+    
+    Alamofire
+      .request(
+        url,
+        method: .get,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let data):
+          let dictionaries = data as? [String: Any]
+          
+          if let producesFound = dictionaries?["produces"] as? [[String: Any]] ,
+             let userIdsFound = dictionaries?["userIds"] as? [String] {
+            produces = producesFound.flatMap { Produce(json: $0) }
+            userIds = userIdsFound
+          }
+        case .failure(let error):
+          print(error)
+        }
+        
+        completion(produces, userIds)
+    }
+  }
+  
   static func getUsersBy(
     latitude: Double,
     longitude: Double,
@@ -167,10 +244,6 @@ extension User {
           let dictionaries = data as? [String: Any]
           
           if let usersFound = dictionaries?["users"] as? [[String: Any]] {
-            usersFound.forEach {
-              print($0)
-            }
-            
             users = usersFound
           }
         case .failure(let error):
@@ -660,16 +733,36 @@ extension User {
   
   static func signup(
     email: String,
-    andName name: String,
+    andFirstName firstName: String,
+    andLastName lastName: String,
+    andUsername username: String,
     andPassword password: String,
     andRepeatedPassword repeatedPassword: String,
     completion: @escaping (Result<User>) -> Void
   ) {
     var firebaseUser: FIRUser?
     
-    if name.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
+    if firstName.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
       let error = NSError(domain: "Auth", code: 0, userInfo: [
-        NSLocalizedDescriptionKey: "Name value is empty."
+        NSLocalizedDescriptionKey: "First Name value is empty."
+        ])
+      
+      completion(Result.fail(error: error))
+      return
+    }
+    
+    if lastName.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
+      let error = NSError(domain: "Auth", code: 0, userInfo: [
+        NSLocalizedDescriptionKey: "Last Name value is empty."
+        ])
+      
+      completion(Result.fail(error: error))
+      return
+    }
+    
+    if username.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
+      let error = NSError(domain: "Auth", code: 0, userInfo: [
+        NSLocalizedDescriptionKey: "Username value is empty."
         ])
       
       completion(Result.fail(error: error))
@@ -695,7 +788,7 @@ extension User {
       return
     }
     
-    var user = User(email: email, name: name)
+    var user = User(email: email, name: firstName)
 
     Ax.serial(tasks: [
       { done in
@@ -724,10 +817,15 @@ extension User {
         
         var data = [String: Any]()
         data["id"] = refUser.key
-        data["name"] = name
+        data["name"] = firstName
+        data["lastName"] = lastName
+        data["username"] = username
         data["email"] = email
         
         user.id = refUser.key
+        user.lastName = lastName
+        user.username = username
+        user.email = email
         
         refUser.setValue(data, withCompletionBlock: {(error, ref) in
           done(error as NSError?)
@@ -787,9 +885,15 @@ extension User {
               return
             }
             
+            var publicGeoLoc = [String: Any]()
+            publicGeoLoc["lat"] = Constants.Map.unitedStatesLat
+            publicGeoLoc["lng"] = Constants.Map.unitedStatesLng
+            
             var data = [String: Any]()
+            data["publicGeoLoc"] = publicGeoLoc
             data["id"] = userId
             data["name"] = user.name
+            data["instagramId"] = user.instagramId
             data["instagramToken"] = user.instagramToken
             data["profilePictureURL"] = user.profilePictureURL
             
@@ -814,7 +918,23 @@ extension User {
         }
       })
     }
+  }
+  
+  static func update(
+    byUserId userId: String,
+    withInstagramId instagramId: String,
+    andInstagramToken instagramToken: String,
+    completion: @escaping (NSError?) -> Void
+  ) {
+    var data = [String: Any]()
+    data["instagramId"] = instagramId
+    data["instagramToken"] = instagramToken
     
+    refDatabaseUsers
+          .child(userId)
+          .updateChildValues(data, withCompletionBlock: {(error, ref) in
+            completion(error as NSError?)
+          })
   }
   
   static func login(
@@ -894,6 +1014,7 @@ extension User {
     userId: String,
     firstName: String,
     lastName: String,
+    username: String,
     phoneNumber: String,
     website: String,
     location: String,
@@ -906,6 +1027,7 @@ extension User {
     var data = [String: Any]()
     data["name"] = firstName
     data["lastName"] = lastName
+    data["username"] = username
     data["phoneNumber"] = phoneNumber
     data["website"] = website
     data["location"] = location
@@ -983,6 +1105,61 @@ extension User {
     
   }
   
+  static func hasPendingDeal(
+    userIdOne: String?,
+    userIdTwo: String?,
+    completion: @escaping (Result<[String:Any]?>) -> Void
+  ) {
+    
+    guard let userIdOne = userIdOne else {
+      let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "User Id One invalid."])
+      completion(Result.fail(error: error))
+      return
+    }
+    
+    guard let userIdTwo = userIdTwo else {
+      let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "User Id Two invalid."])
+      completion(Result.fail(error: error))
+      return
+    }
+    
+    let url = "\(Constants.Server.stringURL)api/user/trade/progress"
+    
+    var data = [String: Any]()
+    data["userOneId"] = userIdOne
+    data["userTwoId"] = userIdTwo
+    
+    Alamofire
+      .request(
+        url,
+        method: .post,
+        parameters: data,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let data):
+          let dictionary = data as? [String: Any]
+          
+          print(data as? [String: Any])
+          print(dictionary?["deal"] as? [String: Any])
+          
+          if let _ = dictionary?["error"] as? Bool {
+            let message = dictionary?["message"]
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: message])
+            
+            completion(Result.fail(error: error))
+          } else {
+            completion(Result.success(data: dictionary?["deal"] as? [String: Any]))
+          }
+          
+        case .failure(let error):
+          completion(Result.fail(error: error as NSError))
+        }
+      }
+  }
+  
   static func sendDealPushNotification(
     ownerUserId: String,
     anotherUserId: String,
@@ -1033,6 +1210,7 @@ extension User {
           
           guard
             let instagramToken = json["user"]["instagramToken"].string,
+            let instagramId = json["user"]["instagramId"].string,
             let profilePictureURL = json["user"]["profilePictureURL"].string,
             let username = json["user"]["username"].string,
             let firebaseToken = json["firebaseToken"].string
@@ -1042,11 +1220,13 @@ extension User {
               return
           }
           
-          let user = User(
+          var user = User(
             name: username,
             profilePictureURL: profilePictureURL,
             instagramToken: instagramToken
           )
+          
+          user.instagramId = instagramId
           
           var result = [String: Any]()
           result["user"] = user

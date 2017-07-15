@@ -10,6 +10,8 @@ import UIKit
 
 class RelatedProduceCell: UICollectionViewCell {
   
+  static var identifierId = "RelatedProducesCellId"
+  
   @IBOutlet weak var imageView: UIImageView! {
     didSet {
 

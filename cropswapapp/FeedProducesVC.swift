@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import Ax
 
 class FeedProducesVC: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
@@ -15,8 +16,10 @@ class FeedProducesVC: UIViewController {
 //  var searchResultFeedVC: SearchResultFeedVC!
 //  var produceSearchController: UISearchController!
   
-  let cellIdentifier = "FeedCellId"
+  var userCoordinates = [String: Any]()
   
+  let cellIdentifier = "FeedCellId"
+  var currentUser: User?
   var produces = [Produce]()
   
   var time = Date()
@@ -38,6 +41,9 @@ class FeedProducesVC: UIViewController {
   
   var didSelectProduce: (Produce) -> Void = { _ in }
   
+  var isFilterEnabled = false
+  var userIdsAroundMe = [String]()
+  
   deinit {
     User.stopListeningToGetProducesByListeningAddedNewOnes(handlerId: getNewProducesHandlerId, fromTime: time)
     User.stopListeningToGetProducesByListeningRemovedOnes(handlerId: getRemovedProducesHandlerId)
@@ -47,6 +53,105 @@ class FeedProducesVC: UIViewController {
 //      name: NSNotification.Name(rawValue: "dismissModals"),
 //      object: nil
 //    )
+  }
+  
+  func didSelectDistance(_ distance: Int) {
+    isFilterEnabled = distance > 0
+    
+    if !isFilterEnabled {
+      User.getProducesOnce(byLimit: limitProducesBrought) { [weak self] (produces) in
+        print(produces.count)
+        SVProgressHUD.dismiss()
+        
+        self?.dataGotFromServer = true
+        
+        self?.ignoreItems = false
+        
+        self?.produces = produces.filter({ (produce) -> Bool in
+          return produce.liveState ?? "" != ProduceState.archived.rawValue
+        })
+        
+        self?.isGettingFirstDataFromServer = false
+        
+        if let this = self {
+          DispatchQueue.main.async {
+            UIView.transition(
+              with: this.collectionView,
+              duration: 0.35,
+              options: .transitionCrossDissolve,
+              animations: {
+                this.collectionView.reloadData()
+              },
+              completion: nil
+            )
+          }
+        }
+      }
+    } else {
+      SVProgressHUD.show()
+      Ax.serial(tasks: [
+        
+        { [weak self] done in
+          User.getUser(byUserId: User.currentUser?.uid, completion: { (result) in
+            switch result {
+            case .success(let user):
+              self?.currentUser = user
+              break
+            case .fail(let error):
+              print(error)
+              break
+            }
+            
+            done(nil)
+          })
+        },
+        
+        { [weak self] done in
+          
+          if let user = self?.currentUser,
+             let lat = user.latitude,
+             let lng = user.longitude
+          {
+            User.getProducesBy(
+              latitude: lat,
+              longitude: lng,
+              radius: distance,
+              completion: { (produces, userIds) in
+                self?.produces = produces.filter({ (produce) -> Bool in
+                  return produce.liveState != ProduceState.archived.rawValue
+                })
+
+                self?.userIdsAroundMe = userIds
+                
+                done(nil)
+            })
+          } else {
+            done(nil)
+          }
+        }
+      ], result: { [weak self] (error) in
+        DispatchQueue.main.async {
+          SVProgressHUD.dismiss()
+        }
+        
+        if let this = self {
+          DispatchQueue.main.async {
+            UIView.transition(
+              with: this.collectionView,
+              duration: 0.35,
+              options: .transitionCrossDissolve,
+              animations: {
+                this.collectionView.reloadData()
+              },
+              completion: nil
+            )
+          }
+        }
+        
+        print(error)
+      })
+
+    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -96,116 +201,138 @@ class FeedProducesVC: UIViewController {
     
     self.collectionView.register(UINib(nibName: "FeedCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
     
-    SVProgressHUD.show()
-    User.getProducesOnce(byLimit: limitProducesBrought) { [weak self] (produces) in
-      print(produces.count)
-      SVProgressHUD.dismiss()
-      
-      self?.dataGotFromServer = true
-      
-      self?.ignoreItems = false
-      
-      self?.produces = produces.filter({ (produce) -> Bool in
-        return produce.liveState ?? "" != ProduceState.archived.rawValue
-      })      
+    DispatchQueue.main.async {
+      SVProgressHUD.show()
+    }
+    Ax.serial(tasks: [
     
-      self?.isGettingFirstDataFromServer = false
+      { done in
+        User.getUser(byUserId: User.currentUser?.uid, completion: { [weak self] (result) in
+          guard let this = self else {
+            done(nil)
+            return
+          }
+          
+          switch result {
+          case .success(let user):
+            this.currentUser = user
+          case .fail(let error):
+            print(error)
+          }
+          
+          done(nil)
+        })
+      },
       
-      if let this = self {
-        DispatchQueue.main.async {
-          UIView.transition(
-            with: this.collectionView,
-            duration: 0.35,
-            options: .transitionCrossDissolve,
-            animations: {
-              this.collectionView.reloadData()
-            },
-            completion: nil
-          )
+      { [weak self] done in
+        guard let this = self else {
+          done(nil)
+          return
         }
+        
+        User.getProducesOnce(byLimit: this.limitProducesBrought) { [weak self] (produces) in
+          print(produces.count)
+          SVProgressHUD.dismiss()
+          
+          self?.dataGotFromServer = true
+          
+          self?.ignoreItems = false
+          
+          self?.produces = produces.filter({ (produce) -> Bool in
+            return produce.liveState ?? "" != ProduceState.archived.rawValue
+          })
+          
+          self?.isGettingFirstDataFromServer = false
+          
+          if let this = self {
+            DispatchQueue.main.async {
+              UIView.transition(
+                with: this.collectionView,
+                duration: 0.35,
+                options: .transitionCrossDissolve,
+                animations: {
+                  this.collectionView.reloadData()
+                },
+                completion: nil
+              )
+            }
+          }
+        }
+        
+        this.time = Date()
+        this.getNewProducesHandlerId = User.getProducesByListeningAddedNewOnes(fromTime: this.time) { [weak self] (newProduce) in
+          print(newProduce)
+          guard let this = self else { return }
+          
+          if this.userIdsAroundMe.contains(newProduce.ownerId) {
+            this.collectionView.performBatchUpdates({
+              
+              this.produces.insert(newProduce, at: 0)
+              let indexPath = IndexPath(item: 0, section: 0)
+              this.collectionView.insertItems(at: [indexPath])
+              }, completion: { (finished) in
+                
+            })
+          }
+        }
+        
+        
+        
+        this.getRemovedProducesHandlerId = User.getProducesByListeningRemovedOnes(completion: { [weak self] (produceIdRemoved) in
+          guard let this = self else { return }
+          
+          let produceIndex = this.produces.index(where: { (produce) -> Bool in
+            return produce.id == produceIdRemoved
+          })
+          
+          if let produceIndex = produceIndex {
+            this.collectionView.performBatchUpdates({
+              this.produces.remove(at: produceIndex)
+              let indexPath = IndexPath(item: produceIndex, section: 0)
+              this.collectionView.deleteItems(at: [indexPath])
+              }, completion: nil)
+          }
+          })
+        
+        
+        this.getUpdatedProducesHandlerId = User.getProducesByListeningUpdatedOnes(completion: { [weak self] (produceUpdated) in
+          
+          guard let this = self else { return }
+          
+          let produceIndex = this.produces.index(where: { (produce) -> Bool in
+            return produce.id == produceUpdated.id
+          })
+          
+          if let produceIndex = produceIndex {
+            
+            if produceUpdated.liveState ?? "" == ProduceState.archived.rawValue {
+              this.collectionView.performBatchUpdates({
+                this.produces.remove(at: produceIndex)
+                let indexPath = IndexPath(item: produceIndex, section: 0)
+                this.collectionView.deleteItems(at: [indexPath])
+                }, completion: nil)
+            } else {
+              this.collectionView.performBatchUpdates({
+                this.produces[produceIndex] = produceUpdated
+                let indexPath = IndexPath(item: produceIndex, section: 0)
+                this.collectionView.reloadItems(at: [indexPath])
+                }, completion: nil)
+            }
+          }
+          })
+        
+        done(nil)
+      }
+    
+    ]) { (error) in
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
       }
     }
-
-    
-    time = Date()
-    getNewProducesHandlerId = User.getProducesByListeningAddedNewOnes(fromTime: time) { [unowned self] (newProduce) in
-      print(newProduce)
-      self.collectionView.performBatchUpdates({
-        
-        self.produces.insert(newProduce, at: 0)
-        let indexPath = IndexPath(item: 0, section: 0)
-        self.collectionView.insertItems(at: [indexPath])
-        }, completion: { (finished) in
-          
-          
-          
-      })
-    }
-    
-    getRemovedProducesHandlerId = User.getProducesByListeningRemovedOnes(completion: { [unowned self] (produceIdRemoved) in
-      let produceIndex = self.produces.index(where: { (produce) -> Bool in
-        return produce.id == produceIdRemoved
-      })
-      
-      if let produceIndex = produceIndex {
-        self.collectionView.performBatchUpdates({
-          self.produces.remove(at: produceIndex)
-          let indexPath = IndexPath(item: produceIndex, section: 0)
-          self.collectionView.deleteItems(at: [indexPath])
-          }, completion: nil)
-      }
-      })
-    
-    
-    getUpdatedProducesHandlerId = User.getProducesByListeningUpdatedOnes(completion: { (produceUpdated) in
-      
-      let produceIndex = self.produces.index(where: { (produce) -> Bool in
-        return produce.id == produceUpdated.id
-      })
-      
-      if let produceIndex = produceIndex {
-        
-        if produceUpdated.liveState ?? "" == ProduceState.archived.rawValue {
-          self.collectionView.performBatchUpdates({
-            self.produces.remove(at: produceIndex)
-            let indexPath = IndexPath(item: produceIndex, section: 0)
-            self.collectionView.deleteItems(at: [indexPath])
-            }, completion: nil)
-        } else {
-          self.collectionView.performBatchUpdates({
-            self.produces[produceIndex] = produceUpdated
-            let indexPath = IndexPath(item: produceIndex, section: 0)
-            self.collectionView.reloadItems(at: [indexPath])
-            }, completion: nil)
-        }
-      }
-    })
-    
-    
-//    _ = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
-//    
-//    let rightBarButton = setNavIcon(imageName: "search-icon", size: CGSize(width: 17, height: 17), position: .right)
-//    rightBarButton.addTarget(self, action: #selector(rightBarButtonTouched), for: .touchUpInside)
-//    
-//    setNavHeaderIcon(imageName: "navbar-title-feed", size: CGSize(width: 124, height: 22))
-//    
-//    navigationController?.navigationBar.isHidden = false
-//    navigationController?.isNavigationBarHidden = false
-//    
-//    automaticallyAdjustsScrollViewInsets = false
     
     collectionView.alwaysBounceVertical = true
   }
   
-//  func rightBarButtonTouched() {
-////    navigationController?.pushViewController(produceSearchController, animated: true)
-//    print(presentedViewController)
-//    print(presentingViewController)
-//    
-//    tabBarController?.present(produceSearchController, animated: true) {
-//      
-//    }
-//  }
 }
 
 extension FeedProducesVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -218,7 +345,53 @@ extension FeedProducesVC: UICollectionViewDelegateFlowLayout, UICollectionViewDe
     cell.producePictureURL = produce.firstPictureURL ?? ""
     cell.produceName = produce.name
     cell.price = produce.price
-    cell.distance = 0
+    
+    if produce.distance == nil {
+      let ownerId = produce.ownerId
+      
+      if let currentUser = currentUser,
+         let currentUserLatitude = currentUser.latitude,
+         let currentUserLongitude = currentUser.longitude
+      {
+        User.getUser(byUserId: ownerId, completion: { [weak self] (result) in
+          switch result {
+          case .success(let user):
+            if let anotherUserLatitude = user.latitude,
+               let anotherUserLongitude = user.longitude
+            {
+              
+              let distance = Utils.getDistanceInKM(
+                              fromLatitude: currentUserLatitude,
+                              fromLongitude: currentUserLongitude,
+                              toLatitude: anotherUserLatitude,
+                              toLongitude: anotherUserLongitude
+                            )
+              
+              self?.produces[indexPath.row].distance = distance
+              DispatchQueue.main.async {
+                cell.distance = distance
+              }
+            } else {
+              DispatchQueue.main.async {
+                self?.produces[indexPath.row].distance = 0
+                cell.distance = 0
+              }
+            }
+          case .fail(let error):
+            DispatchQueue.main.async {
+              self?.produces[indexPath.row].distance = 0
+              cell.distance = 0
+            }
+            print(error)
+          }
+        })
+      } else {
+        produces[indexPath.row].distance = 0
+        cell.distance = 0
+      }
+    } else {
+      cell.distance = produce.distance!
+    }
     
     return cell
   }
@@ -295,11 +468,6 @@ extension FeedProducesVC {
             
             }, completion: { terminated in
               if terminated {
-//                if self.produces.count > 0 {
-//                  if lastProduceId != self.produces[self.produces.count - 1].id {
-//                    self.collectionView.scrollToItem(at: IndexPath(item: self.produces.count - 1, section: 0), at: .bottom, animated: true)
-//                  }
-//                }
               }
           })
           })
@@ -308,7 +476,10 @@ extension FeedProducesVC {
   }
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    checkHasScrolledToBottom()
+    
+    if !isFilterEnabled {
+      checkHasScrolledToBottom()
+    }
   }
 }
 

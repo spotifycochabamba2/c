@@ -11,6 +11,8 @@ import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 import Ax
+import Alamofire
+import SwiftyJSON
 
 enum ProduceState: String {
   case archived = "archived"
@@ -61,6 +63,8 @@ public struct Produce {
   var thirdPictureURL: String?
   var fourthPictureURL: String?
   var fifthPictureURL: String?
+  
+  var distance: Double? = nil
   
   var state = "Seed"
   
@@ -229,6 +233,86 @@ extension Produce {
   static var refProduceTypes = refDatabase.child("produce-types")
   
   static var refTags = refDatabase.child("tags")
+  
+//  static func getProducesFrom(
+  static func getRecentTenInstagramPictures(
+    instagramClientId: String,
+    instagramAccessToken: String,
+    completion: @escaping (Result<[(String, String)]>) -> Void
+  ) {
+    let url = Constants.Instagram.getURLToGetUserMedia(
+                instagramClientId: instagramClientId,
+                instagramAccessToken: instagramAccessToken
+              )
+    var images = [(String, String)]()
+    
+    Alamofire
+      .request(
+        url,
+        method: .get,
+        encoding: JSONEncoding.default
+      )
+      .validate()
+      .responseJSON { (response) in
+        switch response.result {
+        case .success(let data):
+          if
+            let data = data as? [String: Any],
+            let array = data["data"] as? [[String: Any]],
+            array.count > 0
+          {
+            print(array.count)
+            var counter = 0
+            for element in array {
+              if
+                let imagesFound = element["images"] as? [String: Any],
+                let thumbnail = imagesFound["thumbnail"] as? [String: Any],
+                let standard = imagesFound["standard_resolution"] as? [String: Any],
+                let smallImageURL = thumbnail["url"] as? String,
+                let bigImageURL = standard["url"] as? String
+              {
+                if counter < 10 {
+                  counter += 1
+                  images.append(smallImageURL, bigImageURL)
+                } else {
+                  break
+                }
+              }
+            }
+          }
+          
+          completion(Result.success(data: images))
+        case .failure(let error):
+          completion(Result.fail(error: error as NSError))
+        }
+    }
+  }
+  
+  static func getCoordinatesFrom(
+    userId: String,
+    completion: @escaping (_ latitude: Double, _ longitude: Double) -> Void
+  ) {
+    User.getUser(byUserId: userId) { (result) in
+      var latitude = Constants.Map.unitedStatesLat
+      var longitude = Constants.Map.unitedStatesLng
+      
+      switch result {
+      case .success(let user):
+        if
+          let lat = user.latitude,
+          let lng = user.longitude
+        {
+          latitude = lat
+          longitude = lng
+        }
+        break
+      case .fail(let error):
+        break
+      }
+      
+      completion(latitude, longitude)
+    }
+  }
   
   static func getTagNamesFrom(tags: [String: Any]) -> [String] {
     var tagNames = [String]()
@@ -603,6 +687,7 @@ extension Produce {
     valuesForProduceByUser["produceType"] = produceType
     valuesForProduceByUser["quantityType"] = quantityType
     valuesForProduceByUser["quantity"] = quantity
+    valuesForProduceByUser["price"] = price
     
     Ax.serial(tasks: [
       { done in

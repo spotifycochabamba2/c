@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import UserNotifications
 
+import SwiftyJSON
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -62,10 +64,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if let _ = userInfo["isChatNotification"] as? String {
         saveInUserDefaultsAboutNewMessagePushNotificationFromTerminatedState(userInfo)
+      } else if let _ = userInfo["isRequestLocationNotification"] as? String  {
+        saveInUserDefaultsAboutRequestLocationPushNotificationFromTerminatedState(userInfo)
       } else {
         saveInUserDefaultsAboutNewTradePushNotificationFromTerminatedState(userInfo)
       }
-      
     }
   }
   
@@ -80,6 +83,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       defaults.set(dealId, forKey: "dealId")
       defaults.set(senderId, forKey: "senderId")
       defaults.set(senderUsername, forKey: "senderUsername")
+      defaults.synchronize()
+    }
+  }
+  
+  func saveInUserDefaultsAboutRequestLocationPushNotificationFromTerminatedState(
+    _ userInfo: [String: Any]
+  ) {
+    if
+      let dealString = userInfo["deal"] as? String
+    {
+      let dealJSON = JSON(parseJSON: dealString)
+      print(dealJSON.dictionary)
+      
+      let defaults = UserDefaults.standard
+      defaults.set(dealJSON.dictionaryObject, forKey: "deal")
+      defaults.set(true, forKey: "isRequestLocationNotification")
       defaults.synchronize()
     }
   }
@@ -206,10 +225,32 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
       print(userInfo)
       if let _ = userInfo["isChatNotification"] as? String {
         notifyChatPushNotification(userInfo: userInfo)
+      } else if let _ = userInfo["isRequestLocationNotification"] as? String {
+        notifyRequestLocationPushNotification(userInfo: userInfo)
       } else {
         notifyTradePushNotification(userInfo: userInfo)
       }
       
+    }
+  }
+  
+  func notifyRequestLocationPushNotification(userInfo: [String: Any]) {
+    print(userInfo)
+    print(userInfo["deal"])
+    print(userInfo["deal"] as? [String: Any])
+    if
+      let dealString = userInfo["deal"] as? String
+    {
+      let dealJSON = JSON(parseJSON: dealString)
+      print(dealJSON.dictionary)
+      
+      var data = [String: Any]()
+      data["deal"] = dealJSON.dictionaryObject
+      
+      NotificationCenter.default.post(
+        name: Notification.Name(Constants.PushNotification.requestLocationPushNotificationId),
+        object: data
+      )
     }
   }
   

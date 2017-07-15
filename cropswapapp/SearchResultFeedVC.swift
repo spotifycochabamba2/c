@@ -8,9 +8,13 @@
 
 import UIKit
 import SVProgressHUD
+import Ax
 
 // Properties
 class SearchResultFeedVC: UICollectionViewController {
+  
+  var currentUser: User?
+  
   var produces = [Produce]() {
     didSet {
       DispatchQueue.main.async { [weak self] in
@@ -32,7 +36,15 @@ extension SearchResultFeedVC {
     automaticallyAdjustsScrollViewInsets = true
     collectionView?.alwaysBounceVertical = true
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+
+  }
 }
+
+
 
 // Methods
 extension SearchResultFeedVC {
@@ -60,6 +72,53 @@ extension SearchResultFeedVC: UICollectionViewDelegateFlowLayout {
     cell.produceName = produce.name
     cell.price = produce.price
     cell.distance = 0
+    
+    if produce.distance == nil {
+      let ownerId = produce.ownerId
+      
+      if let currentUser = currentUser,
+        let currentUserLatitude = currentUser.latitude,
+        let currentUserLongitude = currentUser.longitude
+      {
+        User.getUser(byUserId: ownerId, completion: { [weak self] (result) in
+          switch result {
+          case .success(let user):
+            if let anotherUserLatitude = user.latitude,
+              let anotherUserLongitude = user.longitude
+            {
+              
+              let distance = Utils.getDistanceInKM(
+                fromLatitude: currentUserLatitude,
+                fromLongitude: currentUserLongitude,
+                toLatitude: anotherUserLatitude,
+                toLongitude: anotherUserLongitude
+              )
+              
+              self?.produces[indexPath.row].distance = distance
+              DispatchQueue.main.async {
+                cell.distance = distance
+              }
+            } else {
+              DispatchQueue.main.async {
+                self?.produces[indexPath.row].distance = 0
+                cell.distance = 0
+              }
+            }
+          case .fail(let error):
+            DispatchQueue.main.async {
+              self?.produces[indexPath.row].distance = 0
+              cell.distance = 0
+            }
+            print(error)
+          }
+          })
+      } else {
+        produces[indexPath.row].distance = 0
+        cell.distance = 0
+      }
+    } else {
+      cell.distance = produce.distance!
+    }
     
     return cell
   }
@@ -111,15 +170,48 @@ extension SearchResultFeedVC: UISearchControllerDelegate, UISearchBarDelegate { 
     let text = searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
     if text.characters.count >= 3 {
       print("searching")
-      SVProgressHUD.show()
-      
-      Produce.searchFor(filter: text, completion: { [weak self] (produces) in
+      Ax.serial(tasks: [
+        
+        { done in
+          SVProgressHUD.show()
+          User.getUser(byUserId: User.currentUser?.uid) {
+            [weak self] (result) in
+            
+            DispatchQueue.main.async {
+              SVProgressHUD.dismiss()
+            }
+            
+            switch result {
+            case .success(let user):
+              self?.currentUser = user
+            case .fail(let error):
+              print(error)
+            }
+            
+            done(nil)
+          }
+        },
+        
+        { [weak self] done in
+          if self?.currentUser != nil {
+          Produce.searchFor(filter: text, completion: { [weak self] (produces) in
+          
+            self?.produces = produces
+            })
+            
+            done(nil)
+          } else {
+            done(nil)
+          }
+        }
+        
+      ], result: { (error) in
         DispatchQueue.main.async {
           SVProgressHUD.dismiss()
         }
-        
-        self?.produces = produces
-        })
+      })
+      
+
     } else {
       let alert = UIAlertController(title: "Info", message: "Please enter at least 3 or more characters", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default))

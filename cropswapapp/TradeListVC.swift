@@ -42,8 +42,25 @@ class TradeListVC: UIViewController {
 //    )
   }
   
+  func requestLocationPushNotificationGot(notification: Notification) {
+    if let data = notification.object as? [String: Any] {
+      if let deal = data["deal"] as? [String: Any] {
+        print(deal)
+        //performSegue(withIdentifier: Storyboard.TradeListToTradeDetail, sender: deal)
+      }
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+//    NotificationCenter.default.addObserver(
+//      self,
+//      selector: #selector(requestLocationPushNotificationGot),
+//      name: Notification.Name(
+//        Constants.PushNotification.chatPushNotificationId
+//      ),
+//      object: nil)
     
     if let userId = User.currentUser?.uid {
       
@@ -98,6 +115,8 @@ class TradeListVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    deselectCurrentRow()
+    
     if !dataGotFromServer {
       DispatchQueue.main.async {
         SVProgressHUD.show()
@@ -130,7 +149,7 @@ class TradeListVC: UIViewController {
       vc?.dealState = DealState(rawValue: deal?["state"] as? String ?? DealState.tradeRequest.rawValue)
       vc?.deselectCurrentRow = deselectCurrentRow
       
-      if let dealId = vc?.dealId,
+      if let dealId = deal?["id"] as? String,
         let userId = User.currentUser?.uid
       {
         CSNotification.clearTradeNotification(

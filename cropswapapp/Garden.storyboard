@@ -7,6 +7,109 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--New GardenVC-->
+        <scene sceneID="GEd-U8-dbJ">
+            <objects>
+                <viewController storyboardIdentifier="NewGardenVC" id="IAe-FS-3mP" customClass="NewGardenVC" customModule="cropswapapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fpy-EU-u5s"/>
+                        <viewControllerLayoutGuide type="bottom" id="0l9-Jp-ytw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2mH-R2-QO2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PE9-g5-gvp">
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W8D-lw-PV4">
+                                        <segments>
+                                            <segment title="GARDEN"/>
+                                            <segment title="UPDATES"/>
+                                            <segment title="PROFILE"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.97254901959999995" green="0.2470588235" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="segmentedControlChanged:" destination="IAe-FS-3mP" eventType="valueChanged" id="JtS-wj-avi"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="quE-Pc-MEV">
+                                        <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="oSq-Iq-QA4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="quE-Pc-MEV" secondAttribute="trailing" id="7Q5-Zi-Zt5"/>
+                                    <constraint firstItem="quE-Pc-MEV" firstAttribute="leading" secondItem="PE9-g5-gvp" secondAttribute="leading" id="ApP-mA-XOJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="W8D-lw-PV4" secondAttribute="trailing" constant="16" id="Li6-tS-afb"/>
+                                    <constraint firstAttribute="bottom" secondItem="quE-Pc-MEV" secondAttribute="bottom" id="SAs-Tm-zTR"/>
+                                    <constraint firstItem="W8D-lw-PV4" firstAttribute="leading" secondItem="PE9-g5-gvp" secondAttribute="leading" constant="16" id="Ypm-Fx-tYl"/>
+                                    <constraint firstAttribute="height" constant="44" id="g4Y-tK-pct"/>
+                                    <constraint firstItem="W8D-lw-PV4" firstAttribute="centerY" secondItem="PE9-g5-gvp" secondAttribute="centerY" id="jVA-oz-V4N"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXK-Hk-bF8">
+                                <connections>
+                                    <segue destination="YWg-Ca-mYH" kind="embed" id="A0G-wh-hL8"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Fj-QH-Qsk">
+                                <connections>
+                                    <segue destination="QVK-Ec-Dzw" kind="embed" identifier="NewGardenToWall" id="cm9-kX-2Jd"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOK-lF-AgQ">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="k1D-Yv-p4X" kind="embed" id="GN2-DW-Y1w"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9Fj-QH-Qsk" firstAttribute="top" secondItem="PE9-g5-gvp" secondAttribute="bottom" id="0Kg-2D-0e5"/>
+                            <constraint firstItem="0l9-Jp-ytw" firstAttribute="top" secondItem="pXK-Hk-bF8" secondAttribute="bottom" id="0Ov-rM-Vfp"/>
+                            <constraint firstAttribute="trailing" secondItem="PE9-g5-gvp" secondAttribute="trailing" id="9mU-6X-Ppk"/>
+                            <constraint firstItem="PE9-g5-gvp" firstAttribute="top" secondItem="2mH-R2-QO2" secondAttribute="top" id="EpD-gr-jy2"/>
+                            <constraint firstAttribute="trailing" secondItem="pXK-Hk-bF8" secondAttribute="trailing" id="Rh0-QU-S5T"/>
+                            <constraint firstAttribute="trailing" secondItem="aOK-lF-AgQ" secondAttribute="trailing" id="YRd-JT-Hdf"/>
+                            <constraint firstItem="pXK-Hk-bF8" firstAttribute="top" secondItem="PE9-g5-gvp" secondAttribute="bottom" id="b5G-H5-ICQ"/>
+                            <constraint firstItem="pXK-Hk-bF8" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="e26-wR-mRV"/>
+                            <constraint firstAttribute="trailing" secondItem="pXK-Hk-bF8" secondAttribute="trailing" id="eCb-Wl-46b"/>
+                            <constraint firstItem="0l9-Jp-ytw" firstAttribute="top" secondItem="9Fj-QH-Qsk" secondAttribute="bottom" id="hHT-Zb-Qvf"/>
+                            <constraint firstItem="aOK-lF-AgQ" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="jL8-ow-Fb2"/>
+                            <constraint firstItem="9Fj-QH-Qsk" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="jLb-zG-nq0"/>
+                            <constraint firstItem="PE9-g5-gvp" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="qkJ-Mg-WB0"/>
+                            <constraint firstItem="aOK-lF-AgQ" firstAttribute="top" secondItem="PE9-g5-gvp" secondAttribute="bottom" id="sFJ-Rh-sPN"/>
+                            <constraint firstItem="0l9-Jp-ytw" firstAttribute="top" secondItem="aOK-lF-AgQ" secondAttribute="bottom" id="xrx-KQ-ANw"/>
+                            <constraint firstAttribute="trailing" secondItem="9Fj-QH-Qsk" secondAttribute="trailing" id="ybR-un-Uzn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gardenContainerView" destination="pXK-Hk-bF8" id="KK2-6d-ae7"/>
+                        <outlet property="profileContainerView" destination="aOK-lF-AgQ" id="r19-bf-hf3"/>
+                        <outlet property="segmentedControl" destination="W8D-lw-PV4" id="A6S-Yk-Jp3"/>
+                        <outlet property="segmentedControlView" destination="PE9-g5-gvp" id="2VD-Y8-P5k"/>
+                        <outlet property="updatesContainerView" destination="9Fj-QH-Qsk" id="JSz-Kj-b9l"/>
+                        <segue destination="BoV-H7-tS2" kind="presentation" identifier="NewGardenToSettings" id="PKB-yv-qfU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8LK-5h-UR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2270" y="-187"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="l0H-cC-x7e">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="SettingsVC" id="7Ur-bX-hnu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="10S-fS-KYl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQN-re-Nh6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-539" y="-1054"/>
+        </scene>
         <!--GardenVC-->
         <scene sceneID="DNM-jB-tgc">
             <objects>
@@ -16,7 +119,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IaM-tI-hZm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8zc-Ca-vgh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Skk-hX-Qui">
@@ -59,8 +162,8 @@
                             <constraint firstItem="Skk-hX-Qui" firstAttribute="leading" secondItem="8zc-Ca-vgh" secondAttribute="leading" id="Aia-f9-ckY"/>
                             <constraint firstItem="IaM-tI-hZm" firstAttribute="top" secondItem="Skk-hX-Qui" secondAttribute="bottom" id="Oh4-If-2Oq"/>
                             <constraint firstAttribute="trailing" secondItem="Skk-hX-Qui" secondAttribute="trailing" id="hwP-Hs-G7Y"/>
-                            <constraint firstItem="IaM-tI-hZm" firstAttribute="top" secondItem="Tl6-a3-yIS" secondAttribute="bottom" constant="20" id="vnN-Xx-AUq"/>
-                            <constraint firstItem="Tl6-a3-yIS" firstAttribute="trailing" secondItem="8zc-Ca-vgh" secondAttribute="trailingMargin" id="vxn-81-hqX"/>
+                            <constraint firstItem="IaM-tI-hZm" firstAttribute="top" secondItem="Tl6-a3-yIS" secondAttribute="bottom" id="vnN-Xx-AUq"/>
+                            <constraint firstItem="Tl6-a3-yIS" firstAttribute="trailing" secondItem="8zc-Ca-vgh" secondAttribute="trailingMargin" constant="16" id="vxn-81-hqX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -73,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5g4-NF-n4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-345" y="102"/>
+            <point key="canvasLocation" x="-999" y="-188"/>
         </scene>
         <!--AddProduceContainerVC-->
         <scene sceneID="JAx-yt-P3W">
@@ -93,7 +196,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hci-O5-3GP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1692" y="-804"/>
+            <point key="canvasLocation" x="2631.1999999999998" y="-804.19790104947538"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lUP-hR-dU7">
@@ -157,7 +260,41 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8O8-e6-MFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832.79999999999995" y="-803.74812593703155"/>
+            <point key="canvasLocation" x="1772" y="-803.74812593703155"/>
+        </scene>
+        <!--ProfileChildVC-->
+        <scene sceneID="SIH-8R-bC3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileChildVC" id="k1D-Yv-p4X" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCy-68-ur3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1985" y="578"/>
+        </scene>
+        <!--WallContainerVC-->
+        <scene sceneID="V59-4j-3k0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wall" referencedIdentifier="WallContainerVC" id="QVK-Ec-Dzw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="frg-TF-D9W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2624" y="578"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uNP-zj-fbo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BoV-H7-tS2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LUS-8o-XsG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7Ur-bX-hnu" kind="relationship" relationship="rootViewController" id="Naf-fz-R8c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pX3-dm-jas" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1182" y="-1053"/>
         </scene>
     </scenes>
     <resources>

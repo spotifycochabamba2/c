@@ -122,6 +122,7 @@ class TradeHomeVC: UIViewController {
       vc?.anotherUserId = anotherUserId
       vc?.anotherUsername = anotherUsername
       vc?.userUpdatedStateDeal = userUpdatedStateDeal
+      vc?.goToItemsSegmentedSection = goToItemsSegmentedSection
       
       vc?.originalOwnerUserId = originalOwnerUserId
       vc?.originalOwnerProducesCount = originalOwnerProducesCount
@@ -149,6 +150,11 @@ class TradeHomeVC: UIViewController {
 //        })
 //      }
     }
+  }
+  
+  func goToItemsSegmentedSection() {
+    segmentedControl.selectedSegmentIndex = 1
+    segmentedControl.sendActions(for: .valueChanged)
   }
   
   func didMakeAnotherOffer() {

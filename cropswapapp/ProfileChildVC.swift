@@ -11,11 +11,19 @@ import SVProgressHUD
 
 class ProfileChildVC: UITableViewController {
   
+  
+  @IBOutlet weak var signinInstagramButton: UIButton!
+  @IBOutlet weak var siginInstagramShadowView: UIView!
+  
+  @IBOutlet weak var instagramCollectionView: UICollectionView!
+  
+  var instagramURLStrings = [(String, String)]()
+  
   var currentUserId: String?
   var currentUsername: String?
   var showBackButton = false
   
-  
+  @IBOutlet weak var instagramCell: UITableViewCell!
   @IBOutlet weak var aboutCell: UITableViewCell!
   @IBOutlet weak var streetCell: UITableViewCell!
   @IBOutlet weak var cityCell: UITableViewCell!
@@ -86,6 +94,12 @@ class ProfileChildVC: UITableViewController {
     }
   }
   
+  @IBOutlet weak var usernameLabel: UILabel! {
+    didSet {
+      usernameLabel.text = ""
+    }
+  }
+  
   @IBOutlet weak var showAddressSwitch: UISwitch!
   
   @IBOutlet weak var profileImageView: UIImageView!{
@@ -105,6 +119,20 @@ class ProfileChildVC: UITableViewController {
         profileImageView.sd_setImage(with: url)
       }
       
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if instagramCell == cell {
+      signinInstagramButton.layoutIfNeeded()
+      
+      siginInstagramShadowView.layoutIfNeeded()
+      siginInstagramShadowView.makeMeBordered()
+      
+      siginInstagramShadowView.layer.shadowColor = UIColor.lightGray.cgColor
+      siginInstagramShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+      siginInstagramShadowView.layer.shadowRadius = 3
+      siginInstagramShadowView.layer.shadowOpacity = 0.5
     }
   }
   
@@ -131,12 +159,29 @@ class ProfileChildVC: UITableViewController {
     }
   
     if cell === aboutCell {
-
-//      print("wtf cell \(cell.contentView.frame.height)")
-//      print("wtf label \(aboutLabel.frame.height)")
-//      print("wtf label.text \(aboutLabel.text)")
-//      return cell.contentView.frame.height
       return UITableViewAutomaticDimension
+    }
+    
+    if cell === instagramCell {
+      if instagramURLStrings.count > 0 {
+        let screenWidth = UIScreen.main.bounds.width
+        print(screenWidth)
+        let circleWidth: CGFloat = 60.0
+        let circleHeight: CGFloat = 60.0
+        let numCircles = screenWidth / circleWidth
+        print(numCircles)
+        let heightCircles = ceil(CGFloat(instagramURLStrings.count) / numCircles)
+        print(heightCircles)
+        
+        let totalHeight = heightCircles * circleHeight
+        let heightCirclesSpacing = 10 * (totalHeight / circleHeight)
+        print(heightCirclesSpacing)
+        
+        return totalHeight + heightCirclesSpacing
+      } else {
+        
+        return UITableViewAutomaticDimension
+      }      
     }
     
     return height
@@ -144,6 +189,10 @@ class ProfileChildVC: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    signinInstagramButton.isHidden = true
+    siginInstagramShadowView.isHidden = true
+    instagramCollectionView.isHidden = true
     
     tableView.estimatedRowHeight = 80
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -160,6 +209,28 @@ class ProfileChildVC: UITableViewController {
     dismiss(animated: true)
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Storyboard.ProfileChildToInstagramLogin {
+      let nc = segue.destination as? UINavigationController
+      let vc = nc?.viewControllers.first as? InstagramVC
+      
+      vc?.onlyForGettingPictures = true
+      vc?.loggedSuccessfully = loggedSuccesfully
+    } else if segue.identifier == Storyboard.ProfileChildToPhotoViewer {
+      let vc = segue.destination as? PhotoViewerVC
+      vc?.isImagesURLStrings = true
+      vc?.imagesURLStrings = instagramURLStrings.map { return $0.1 }
+    }
+  }
+  
+  func loggedSuccesfully(user: User) {
+    print(user)
+  }
+  
+  @IBAction func signinInstagramButtonTouched() {
+    performSegue(withIdentifier: Storyboard.ProfileChildToInstagramLogin, sender: nil)
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
@@ -172,7 +243,10 @@ class ProfileChildVC: UITableViewController {
     }
     
     User.getUser(byUserId: currentUserId) { [weak self] (result) in
-      SVProgressHUD.dismiss()
+      DispatchQueue.main.async {
+        SVProgressHUD.dismiss()
+      }
+      
       switch result {
       case .success(let user):
         DispatchQueue.main.async {
@@ -190,10 +264,61 @@ class ProfileChildVC: UITableViewController {
     
     setNavHeaderTitle(title: "\(user.name)'s Profile", color: UIColor.black)
     
+    if let instagramToken = user.instagramToken,
+       let instagramId = user.instagramId
+    {
+      signinInstagramButton.isHidden = true
+      siginInstagramShadowView.isHidden = true
+      instagramCollectionView.isHidden = false
+      
+      Produce.getRecentTenInstagramPictures(
+        instagramClientId: instagramId,
+        instagramAccessToken: instagramToken,
+//        instagramClientId: "2286383822",
+//        instagramAccessToken: "1631861081.3a81a9f.9d7b2e2bc94f42df935055677efb2c4d",
+        completion: { [weak self] (result) in
+          switch result {
+          case .success(let images):
+            self?.instagramURLStrings = images
+            
+            DispatchQueue.main.async {
+              self?.updateInstagramPicturesOnUI {
+                DispatchQueue.main.async {
+//                  self?.tableView.beginUpdates()
+//                  let indexPath = IndexPath(row: 4, section: 0)
+//                  self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+//                  self?.tableView.endUpdates()
+//                  
+                  self?.tableView.reloadData()
+                }
+              }
+            }
+          case .fail(let error):
+            print(error)
+          }
+      })
+    } else {
+      
+      if let currentUserId = User.currentUser?.uid,
+         let userId = user.id,
+         userId != currentUserId
+      {
+        signinInstagramButton.isHidden = true
+        siginInstagramShadowView.isHidden = true
+      } else {
+        signinInstagramButton.isHidden = false
+        siginInstagramShadowView.isHidden = false
+      }
+      
+      instagramCollectionView.isHidden = true
+    }
+    
+    
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"
     phoneNumberLabel.text = "\(user.phoneNumber ?? "")"
     websiteLabel.text = "\(user.website ?? "")"
 
+    usernameLabel.text = user.username
     emailLabel.text = user.email
     
     profileImageURL = user.profilePictureURL
@@ -209,12 +334,46 @@ class ProfileChildVC: UITableViewController {
     
     tableView.reloadData()
   }
+  
+  func updateInstagramPicturesOnUI(completion: @escaping () -> Void) {
+    instagramCollectionView.layoutIfNeeded()
+    instagramCollectionView.layoutSubviews()
+    
+    instagramCollectionView.reloadData()
+    instagramCollectionView.performBatchUpdates({
+      
+      }, completion: { (finished) in
+        if finished {
+          completion()
+        }
+    })
+  }
 }
 
+extension ProfileChildVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-
-
-
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    ProfileChildToPhotoViewer
+    performSegue(withIdentifier: Storyboard.ProfileChildToPhotoViewer, sender: indexPath.row)
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return instagramURLStrings.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: 60, height: 60)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileInstagramCell.identifierId, for: indexPath) as! ProfileInstagramCell
+    let instagramURLString = instagramURLStrings[indexPath.row]
+    
+    cell.instagramURLString = instagramURLString.0
+    
+    return cell
+  }
+}
 
 
 

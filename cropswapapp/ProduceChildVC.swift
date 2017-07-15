@@ -156,7 +156,7 @@ class ProduceChildVC: UITableViewController {
   var relatedProduces = [[String: Any]]() {
     didSet {
 //      DispatchQueue.main.async { [weak self] in
-        self.relatedProducesCollectionView.reloadData()
+//        self.relatedProducesCollectionView.reloadData()
 //      }
     }
   }
@@ -228,6 +228,11 @@ class ProduceChildVC: UITableViewController {
       let vc = nv?.viewControllers.first as? ProfileContainerVC
 //      let values = sender as? [String: Any]
 //      
+      print(vc)
+      print(vc?.currentUserId)
+      
+      print(produce)
+      print(produce?.ownerId)
       vc?.currentUserId = produce?.ownerId
       vc?.currentUsername = produce?.ownerUsername
       vc?.showBackButton = true
@@ -317,9 +322,13 @@ class ProduceChildVC: UITableViewController {
             
             done(nil)
             
-//            self?.updateRelatedProducesOnUI {
+            self?.updateRelatedProducesOnUI {
 //              done(nil)
-//            }
+              self?.tableView.beginUpdates()
+              let indexPath = IndexPath(row: 6, section: 0)
+              self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+              self?.tableView.endUpdates()
+            }
           })
         } else {
           done(nil)
@@ -346,14 +355,7 @@ class ProduceChildVC: UITableViewController {
       }
       
       if let produce = self?.produce {
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-//        DispatchQueue.main.async {
-        
         self?.tagsToDisplay = Produce.getTagNamesFrom(tags:produce.tags3)
-        
-//        self?.tags = produce.tags.map { return (name: $0.name, priority: $0.priority) }
-        //        }
         
         DispatchQueue.main.async {
           if let firstPictureURL = produce.firstPictureURL, firstPictureURL.characters.count > 0 {
@@ -399,11 +401,15 @@ class ProduceChildVC: UITableViewController {
             self?.produceImagesViewControllers.append(produceImageFive)
           }
           
-          self?.imagesPageControl.numberOfPages = self?.produceImagesViewControllers.count ?? 0
-          self?.imagesPageControl.currentPage = 0
+          if self?.produceImagesViewControllers.count ?? 0 > 1 {
+            self?.imagesPageControl.numberOfPages = self?.produceImagesViewControllers.count ?? 0
+            self?.imagesPageControl.currentPage = 0
+          } else {
+            self?.imagesPageControl.isHidden = true
+          }
           
-          self?.imagesPageControl.currentPageIndicatorTintColor = UIColor.hexStringToUIColor(hex: "#f83f39")
-          self?.imagesPageControl.pageIndicatorTintColor = UIColor.white
+          self?.imagesPageControl.currentPageIndicatorTintColor = UIColor.white // selected
+          self?.imagesPageControl.pageIndicatorTintColor = UIColor.hexStringToUIColor(hex: "#ab999d")  // not selected
           
 //          @IBOutlet weak var perQuantityTypeLabel: UILabel!
 //          @IBOutlet weak var quantityTypeAvailableLabel: UILabel!
@@ -639,15 +645,15 @@ extension ProduceChildVC {
         cell.contentView.insertSubview(pageContainer.view, at: 0)
         cell.contentView.layoutIfNeeded()
         
-        let shadowLayer = CALayer()
-        shadowLayer.frame = CGRect(x: 0, y: shadowView.frame.size.height, width: shadowView.frame.size.width, height: 70)
-        shadowLayer.backgroundColor = UIColor.white.cgColor
-        shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowRadius = 12
-        shadowLayer.shadowOpacity = 0.3
-        shadowLayer.shadowOffset = CGSize(width: 0, height: -60)
-        
-        shadowView.layer.addSublayer(shadowLayer)
+//        let shadowLayer = CALayer()
+//        shadowLayer.frame = CGRect(x: 0, y: shadowView.frame.size.height, width: shadowView.frame.size.width, height: 70)
+//        shadowLayer.backgroundColor = UIColor.white.cgColor
+//        shadowLayer.shadowColor = UIColor.black.cgColor
+//        shadowLayer.shadowRadius = 12
+//        shadowLayer.shadowOpacity = 0.3
+//        shadowLayer.shadowOffset = CGSize(width: 0, height: -60)
+//        
+//        shadowView.layer.addSublayer(shadowLayer)
         
         isFirstimeLoaded = false
       }
@@ -662,33 +668,8 @@ extension ProduceChildVC {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let height = super.tableView(tableView, heightForRowAt: indexPath)
     
+    // description cell
     if indexPath.row == 2 {
-      
-//      return descriptionProduceTextView.frame.size.height + 54 + 13 + 50
-//      descriptionProduceTextView.layoutIfNeeded()
-//      descriptionProduceTextView.layoutManager.allowsNonContiguousLayout = false
-//      descriptionProduceTextView.isScrollEnabled = false
-//      descriptionProduceTextView.sizeToFit()
-      
-//      print("row 2 (description) chinese from descriptionProduceTextView.text: \(descriptionProduceTextView.text)")
-//      
-//      print("row 2 (description) chinese from descriptionProduceTextView.contentSize.height: \(descriptionProduceTextView.contentSize.height)")
-//      
-//      print("row 2 (description) chinese from heightForRowAt descriptionProduceTextView.frame.size.height: \(descriptionProduceTextView.frame.size.height)")
-//            print("row 2 (description) chinese from heightForRowAt descriptionProduceTextView.bounds.size.height: \(descriptionProduceTextView.bounds.size.height)")
-      
-//      let size2 = descriptionProduceTextView.sizeThatFits(CGSize(width: descriptionProduceTextView.frame.width, height: CGFloat(MAXFLOAT)))
-//      print("chinese size2: \(size2)")
-//      
-//      let calculationView = UITextView()
-//      calculationView.attributedText = descriptionProduceTextView.attributedText
-//      let size = calculationView.sizeThatFits(CGSize(width: descriptionProduceTextView.frame.width, height: CGFloat(MAXFLOAT)))
-//      print("chinese size: \(size.height)")
-//      print("chinese size frame.height: \(descriptionProduceTextView.frame.size.height)")
-      
-
-//      return height
-//      return descriptionProduceTextView.frame.size.height + 13 + 20 + 10
       return UITableViewAutomaticDimension
     } else if indexPath.row == 4 {
       if tagsToDisplay.count > 0  {
@@ -696,23 +677,43 @@ extension ProduceChildVC {
         tagsCollectionView.collectionViewLayout.prepare()
         tagsCollectionView.layoutIfNeeded()
         tagsCollectionView.layoutSubviews()
-        
-        print("row 3 (tags) chinese from heightForRowAt tagsCollectionView.collectionViewLayout.collectionViewContentSize.height: \(tagsCollectionView.collectionViewLayout.collectionViewContentSize.height)")
-        return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height + 10
+        return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
+//        return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height + 10
       } else {
-        return 0
+        return UITableViewAutomaticDimension
       }
     } else if indexPath.row == 6 {
       if relatedProduces.count > 0 {
-        relatedProducesCollectionView.collectionViewLayout.invalidateLayout()
-        relatedProducesCollectionView.collectionViewLayout.prepare()
-        relatedProducesCollectionView.layoutIfNeeded()
-        relatedProducesCollectionView.layoutSubviews()
-        print(" heightForRowAt picky frame: \(relatedProducesCollectionView.frame)")
-        print(" heightForRowAt picky bounds: \(relatedProducesCollectionView.bounds)")
-        return relatedProducesCollectionView.collectionViewLayout.collectionViewContentSize.height
+//        let scale: CGFloat = 2 //UIScreen.main.scale
+//        let screenWidth = UIScreen.main.bounds.width / scale
+//        let cellHeight:CGFloat = 40.0 * scale
+//        let cellWidth:CGFloat = 40.0 * scale // 40
+//        
+//        print(screenWidth)
+//        print(cellWidth)
+//        let constraint = screenWidth / cellWidth
+//        print(constraint)
+//        let result = ceil(CGFloat(relatedProduces.count) / constraint)
+//        print(result)
+//        let totalHeight = result * cellHeight
+//        print(totalHeight)
+        
+        let screenWidth = UIScreen.main.bounds.width
+        print(screenWidth)
+        let circleWidth: CGFloat = 60.0
+        let circleHeight: CGFloat = 60.0
+        let numCircles = screenWidth / circleWidth
+        print(numCircles)
+        let heightCircles = ceil(CGFloat(relatedProduces.count) / numCircles)
+        print(heightCircles)
+
+        let totalHeight = heightCircles * circleHeight
+        let heightCirclesSpacing = 10 * (totalHeight / circleHeight)
+        print(heightCirclesSpacing)
+        
+        return totalHeight + heightCirclesSpacing
       } else {
-        return 0
+        return UITableViewAutomaticDimension
       }
     }
     
@@ -780,7 +781,7 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
       let tagSize = (tag as NSString).size(attributes: self.tagFontAttributes!)
       size = CGSize(width: tagSize.width + 10, height: tagSize.height + 10) //10
     } else {
-      size = CGSize(width: 60, height: 60)
+      size = CGSize(width: 60, height: 60) // 60
     }
     
     return size

@@ -3,9 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
@@ -23,26 +27,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-av-8gT">
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-qb-dPJ">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="78" id="8Xb-W8-gnv"/>
-                                            <constraint firstAttribute="width" constant="78" id="YYd-wP-bBA"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMc-zk-CGD">
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="40"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRk-ew-E42">
+                                <connections>
+                                    <segue destination="1Yn-Pi-5zc" kind="embed" id="26k-SP-6sg"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7bi-av-8gT" firstAttribute="centerX" secondItem="yc0-By-QtE" secondAttribute="centerX" id="85S-mT-3Ph"/>
-                            <constraint firstItem="7bi-av-8gT" firstAttribute="centerY" secondItem="yc0-By-QtE" secondAttribute="centerY" id="C3t-VF-HHx"/>
+                            <constraint firstItem="QRk-ew-E42" firstAttribute="leading" secondItem="yc0-By-QtE" secondAttribute="leading" id="57C-cA-cys"/>
+                            <constraint firstItem="pdr-ml-Pxc" firstAttribute="top" secondItem="QRk-ew-E42" secondAttribute="bottom" id="5C1-Wo-igG"/>
+                            <constraint firstItem="QRk-ew-E42" firstAttribute="top" secondItem="yc0-By-QtE" secondAttribute="top" id="B32-9z-6HK"/>
+                            <constraint firstAttribute="trailing" secondItem="QRk-ew-E42" secondAttribute="trailing" id="vUt-hb-BNN"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -50,8 +46,104 @@
             </objects>
             <point key="canvasLocation" x="-55.200000000000003" y="98.50074962518741"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="yfO-aA-1xB">
+            <objects>
+                <tableViewController id="1Yn-Pi-5zc" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" id="eci-o0-RJz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="97" id="KCx-30-xBE">
+                                <rect key="frame" x="0.0" y="28" width="375" height="97"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KCx-30-xBE" id="pOG-y4-Igm">
+                                    <frame key="frameInset" width="375" height="96"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YCB-fa-IJu">
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="563-0B-1a3"/>
+                                                <constraint firstAttribute="height" constant="70" id="GON-BL-BHc"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8kH-LI-xLk">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Rob's Farm sjdkhf sdkfsdkjf sdkfhds kfh sdfkjhs kjfdhsf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrz-y7-93h">
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="25 min agoa aa" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDH-yR-7hM">
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                    <color key="textColor" red="0.62352941176470589" green="0.66666666666666663" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gqy-rv-fsT">
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-iN-nyP">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropswap-location-icon" translatesAutoresizingMaskIntoConstraints="NO" id="jKZ-0u-ggF">
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="14" id="Anp-Tm-2hQ"/>
+                                                                <constraint firstAttribute="height" constant="15" id="ySm-eA-pU0"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234 N Harbor Blvd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-J0-H0L">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ywG-8H-Y3J">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropswap-user-icon" translatesAutoresizingMaskIntoConstraints="NO" id="34T-KR-8Bt">
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="14" id="6V9-SW-Qqh"/>
+                                                                <constraint firstAttribute="height" constant="14" id="TRH-qK-c3x"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="33 members are going" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1m-gf-hkj">
+                                                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="gqy-rv-fsT" secondAttribute="trailing" constant="8" id="30m-7c-QIY"/>
+                                        <constraint firstItem="gqy-rv-fsT" firstAttribute="leading" secondItem="YCB-fa-IJu" secondAttribute="trailing" constant="8" id="6uV-qY-prO"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8kH-LI-xLk" secondAttribute="trailing" constant="8" id="9oS-5R-kIE"/>
+                                        <constraint firstItem="YCB-fa-IJu" firstAttribute="leading" secondItem="pOG-y4-Igm" secondAttribute="leadingMargin" id="Lgk-dq-czR"/>
+                                        <constraint firstItem="YCB-fa-IJu" firstAttribute="centerY" secondItem="pOG-y4-Igm" secondAttribute="centerY" id="R7A-MV-PlE"/>
+                                        <constraint firstItem="gqy-rv-fsT" firstAttribute="top" secondItem="8kH-LI-xLk" secondAttribute="bottom" constant="8" id="WXM-ZT-bRv"/>
+                                        <constraint firstItem="8kH-LI-xLk" firstAttribute="top" secondItem="pOG-y4-Igm" secondAttribute="topMargin" constant="5" id="gCr-cm-g1p"/>
+                                        <constraint firstItem="8kH-LI-xLk" firstAttribute="leading" secondItem="YCB-fa-IJu" secondAttribute="trailing" constant="8" id="t95-p9-kn3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1Yn-Pi-5zc" id="KRM-kV-4gv"/>
+                            <outlet property="delegate" destination="1Yn-Pi-5zc" id="MXJ-dh-8KB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bo6-MV-3ss" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984.79999999999995" y="98.50074962518741"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="signup-logo" width="78" height="77"/>
+        <image name="cropswap-location-icon" width="10" height="15"/>
+        <image name="cropswap-user-icon" width="14" height="14"/>
     </resources>
 </document>

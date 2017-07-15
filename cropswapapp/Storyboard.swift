@@ -86,6 +86,24 @@ struct Storyboard {
   static let FeedContainerToFeedMap = "FeedContainerToFeedMap"
   static let FeedContainerToDistanceControl = "FeedContainerToDistanceControl"
   static let MapToProfileChild = "MapToProfileChild"
+  static let TradeChatToProfileContainer = "TradeChatToProfileContainer"
+  static let TradeStatusToProfileContainer = "TradeStatusToProfileContainer"
+  static let ProfileContainerToTradeDetail = "ProfileContainerToTradeDetail"
+  static let ProduceContainerToTradeDetail = "ProduceContainerToTradeDetail"
+  static let ProfileChildToInstagramLogin = "ProfileChildToInstagramLogin"
+  static let ProfileChildToPhotoViewer = "ProfileChildToPhotoViewer"
+  static let WallToPost = "WallToPost"
+  static let WallToComment = "WallToComment"
+  
+  static let NewGardenToProfileContainer = "NewGardenToProfileContainer"
+  static let NewGardenToWall = "NewGardenToWall"
+  
+  static let ProfileToWall = "ProfileToWall"
+  static let WallContainerToWallChild = "WallContainerToWallChild"
+  static let NewGardenToSettings = "NewGardenToSettings"
+  static let WallPostToCamera = "WallPostToCamera"
+  static let WallPostToViewPhoto = "WallPostToViewPhoto"
+  static let WallToShowImage = "WallToShowImage"
 }
 
 

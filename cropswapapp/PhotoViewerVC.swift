@@ -14,17 +14,18 @@ class PhotoViewerVC: UIViewController {
   let minimumScale = 0.5
   let maximunScale = 6.0
   
+  @IBOutlet var imagePageControl: UIPageControl!
   @IBOutlet weak var closeButton: UIButton!
   
   var images = [UIImage]()
+  var imagesURLStrings = [String]()
   var imageViewControllers = [UIViewController]()
+  
+  var isImagesURLStrings = false
   
   var pageContainer: UIPageViewController!
   var currentIndex = 0
   var pendingIndex = 0
-  
-  @IBOutlet weak var nextPictureButton: UIButton!
-  @IBOutlet weak var previousPictureButton: UIButton!
   
   var pictureIndexLeft: (Int) -> Void = { _ in }
   
@@ -52,72 +53,38 @@ class PhotoViewerVC: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .black
     
+    imagePageControl.isUserInteractionEnabled = false
+    imagePageControl.transform = CGAffineTransform(scaleX: 2, y: 2)
+    
+    imagePageControl.currentPageIndicatorTintColor = UIColor.white
+    imagePageControl.pageIndicatorTintColor = UIColor.hexStringToUIColor(hex: "#ab999d")
+    
     pageContainer = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     pageContainer.dataSource = self
     pageContainer.delegate = self
     
-    switch images.count {
-    case 1:
-      let image1 = images[0]
-      
-      let vc1 = createImageViewController(image1)
-      imageViewControllers.append(vc1)
-    case 2:
-      let image1 = images[0]
-      let image2 = images[1]
-      
-      let vc1 = createImageViewController(image1)
-      let vc2 = createImageViewController(image2)
-      imageViewControllers.append(vc1)
-      imageViewControllers.append(vc2)
-    case 3:
-      let image1 = images[0]
-      let image2 = images[1]
-      let image3 = images[2]
-      
-      let vc1 = createImageViewController(image1)
-      let vc2 = createImageViewController(image2)
-      let vc3 = createImageViewController(image3)
-      imageViewControllers.append(vc1)
-      imageViewControllers.append(vc2)
-      imageViewControllers.append(vc3)
-    case 4:
-      let image1 = images[0]
-      let image2 = images[1]
-      let image3 = images[2]
-      let image4 = images[3]
-      
-      let vc1 = createImageViewController(image1)
-      let vc2 = createImageViewController(image2)
-      let vc3 = createImageViewController(image3)
-      let vc4 = createImageViewController(image4)
-      imageViewControllers.append(vc1)
-      imageViewControllers.append(vc2)
-      imageViewControllers.append(vc3)
-      imageViewControllers.append(vc4)
-    case 5:
-      let image1 = images[0]
-      let image2 = images[1]
-      let image3 = images[2]
-      let image4 = images[3]
-      let image5 = images[4]
-      
-      let vc1 = createImageViewController(image1)
-      let vc2 = createImageViewController(image2)
-      let vc3 = createImageViewController(image3)
-      let vc4 = createImageViewController(image4)
-      let vc5 = createImageViewController(image5)
-      imageViewControllers.append(vc1)
-      imageViewControllers.append(vc2)
-      imageViewControllers.append(vc3)
-      imageViewControllers.append(vc4)
-      imageViewControllers.append(vc5)
-    default:
-      break
+    if isImagesURLStrings {
+      imagesURLStrings.forEach {
+        if let url = URL(string: $0) {
+          let vc = createImageViewController()
+          vc.produceImageView.image = UIImage()
+          vc.produceImageView.sd_setImage(with: url)
+          
+          imageViewControllers.append(vc)
+        }
+      }
+    } else {
+      images.forEach {
+        let vc = createImageViewController($0)
+        imageViewControllers.append(vc)
+      }
     }
     
+    imagePageControl.isHidden = imageViewControllers.count <= 1
+    imagePageControl.numberOfPages = imageViewControllers.count
+    
     if imageViewControllers.count > 0 {
-    pageContainer.setViewControllers([imageViewControllers[currentIndex]], direction: .forward, animated: true, completion: nil)
+      pageContainer.setViewControllers([imageViewControllers[currentIndex]], direction: .forward, animated: true, completion: nil)
     }
 
 //    let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(gesture:)))
@@ -126,8 +93,9 @@ class PhotoViewerVC: UIViewController {
     view.addSubview(pageContainer.view)
     view.backgroundColor = .black
     view.bringSubview(toFront: closeButton)
-    view.bringSubview(toFront: nextPictureButton)
-    view.bringSubview(toFront: previousPictureButton)
+//    view.bringSubview(toFront: nextPictureButton)
+//    view.bringSubview(toFront: previousPictureButton)
+    view.bringSubview(toFront: imagePageControl)
     
 //    pageControl.numberOfPages = tutorialViewControllers.count
 //    pageControl.currentPage = 0
@@ -186,6 +154,15 @@ class PhotoViewerVC: UIViewController {
     return produceImage
   }
   
+  func createImageViewController() -> ProduceImageZoomableVC {
+    let produceImage = getProduceImageViewController(name: "ProduceImageZoomableVC") as! ProduceImageZoomableVC
+    _ = produceImage.view
+//    produceImage.produceImageView.image = image
+    //    produceImage.produceImageView.backgroundColor = .black
+    //    produceImageTwo.produceImageURL = secondPictureURL
+    return produceImage
+  }
+  
   func getProduceImageViewController(name: String) -> UIViewController {
     return UIStoryboard(name: "Produce", bundle: nil).instantiateViewController(withIdentifier: "\(name)")
   }
@@ -200,6 +177,7 @@ extension PhotoViewerVC: UIPageViewControllerDataSource, UIPageViewControllerDel
   func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     if completed {
       currentIndex = pendingIndex
+      imagePageControl.currentPage = pendingIndex
     }
   }
   

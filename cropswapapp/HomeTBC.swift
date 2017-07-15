@@ -17,6 +17,13 @@ class HomeTBC: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(dismissModals(notification:)),
+      name: NSNotification.Name(rawValue: "dismissModals"),
+      object: nil
+    )
+    
     label.layer.borderColor = UIColor.clear.cgColor
     label.layer.borderWidth = 2
     label.layer.cornerRadius = label.bounds.size.height / 2
@@ -73,6 +80,41 @@ class HomeTBC: UITabBarController {
         defaults.set(nil, forKey: "isChatNotification")
         defaults.synchronize()
       }
+    } else if
+          let isRequestLocationNotification = defaults.object(forKey: "isRequestLocationNotification") as? Bool,
+          isRequestLocationNotification
+    {
+      print(defaults.object(forKey: "deal") as? [String: Any])
+      if
+        let deal = defaults.object(forKey: "deal") as? [String: Any],
+        let dealId = deal["dealId"] as? String,
+        let ownerUserId = deal["ownerUserId"] as? String,
+        let ownerUsername = deal["ownerUsername"] as? String,
+        let dealState = deal["state"] as? String,
+        let originalOwnerUserId = deal["originalOwnerUserId"] as? String,
+        let originalOwnerProducesCount = deal["originalOwnerProducesCount"] as? Int,
+        let originalAnotherProducesCount = deal["originalAnotherProducesCount"] as? Int
+      {
+        var data = [String: Any]()
+        data["dealId"] = dealId
+        data["ownerUserId"] = ownerUserId
+        data["ownerUsername"] = ownerUsername
+        data["state"] = dealState
+        data["originalOwnerUserId"] = originalOwnerUserId
+        data["originalOwnerProducesCount"] = originalOwnerProducesCount
+        data["originalAnotherProducesCount"] = originalAnotherProducesCount
+        showTradeDetail(data)
+        
+        defaults.set(nil, forKey: "dealId")
+        defaults.set(nil, forKey: "ownerUserId")
+        defaults.set(nil, forKey: "ownerUsername")
+        defaults.set(nil, forKey: "dealState")
+        defaults.set(nil, forKey: "originalOwnerUserId")
+        defaults.set(nil, forKey: "originalOwnerProducesCount")
+        defaults.set(nil, forKey: "originalAnotherProducesCount")
+        defaults.set(nil, forKey: "isRequestLocationNotification")
+        defaults.synchronize()
+      }
     } else {
       if
         let dealId = defaults.object(forKey: "dealId") as? String,
@@ -87,7 +129,7 @@ class HomeTBC: UITabBarController {
         data["dealId"] = dealId
         data["ownerUserId"] = ownerUserId
         data["ownerUsername"] = ownerUsername
-        data["dealState"] = dealState
+        data["state"] = dealState
         data["originalOwnerUserId"] = originalOwnerUserId
         data["originalOwnerProducesCount"] = originalOwnerProducesCount
         data["originalAnotherProducesCount"] = originalAnotherProducesCount
@@ -108,6 +150,14 @@ class HomeTBC: UITabBarController {
       self,
       selector: #selector(logoutNotification),
       name: Notification.Name(Constants.Ids.logoutId),
+      object: nil)
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(requestLocationPushNotificationGot),
+      name: Notification.Name(
+        Constants.PushNotification.requestLocationPushNotificationId
+      ),
       object: nil)
     
     NotificationCenter.default.addObserver(
@@ -166,6 +216,20 @@ class HomeTBC: UITabBarController {
     }
   }
   
+  func dismissModals(notification: Notification) {
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.dismiss(animated: true)
+      self?.selectedIndex = 1
+//      self?.tabBarController?.selectedIndex = 1
+    }
+    //    NotificationCenter.default.removeObserver(
+    //      self,
+    //      name: NSNotification.Name(rawValue: "dismissModals"),
+    //      object: nil
+    //    )
+  }
+  
   func logoutNotification() {
     User.logout()
     
@@ -192,6 +256,16 @@ class HomeTBC: UITabBarController {
   
   deinit {
     NotificationCenter.default.removeObserver(self, name: Notification.Name(Constants.PushNotification.tradePushNotificationId), object: nil)
+  }
+  
+  func requestLocationPushNotificationGot(notification: Notification) {
+    if let data = notification.object as? [String: Any] {
+      if let deal = data["deal"] as? [String: Any] {
+        print(deal)
+        showTradeDetail(deal)
+        //performSegue(withIdentifier: Storyboard.TradeListToTradeDetail, sender: deal)
+      }
+    }
   }
   
   func tradePushNotificationGot(notification: Notification) {

@@ -46,6 +46,11 @@ class FeedCell: UICollectionViewCell {
     shadowView.layer.addSublayer(shadowLayer)
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+  }
+  
   override func layoutSubviews() {
     super.layoutSubviews()    
     shadowView.layoutIfNeeded()
@@ -67,7 +72,7 @@ class FeedCell: UICollectionViewCell {
   
   @IBOutlet weak var distanceLabel: UILabel! {
     didSet {
-      distanceLabel.text = ""
+      distanceLabel.text = "0 miles   away"
     }
   }
   
@@ -87,9 +92,10 @@ class FeedCell: UICollectionViewCell {
     }
   }
   
-  var distance: Int = 0 {
+  var distance: Double = 0.0 {
     didSet {
-      distanceLabel.text = "\(distance) km"
+      let distanceString = String(format: "%.0f", distance)
+      distanceLabel.text = "\(distanceString) miles away"
     }
   }
   
