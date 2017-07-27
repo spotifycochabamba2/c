@@ -17,12 +17,17 @@ public class NewGardenVC: UIViewController {
   @IBOutlet weak var updatesContainerView: UIView!
   @IBOutlet weak var profileContainerView: UIView!
   
+  @IBOutlet weak var editProfileButton: UIButton!
+  
+  
   func showSettingsView() {
     performSegue(withIdentifier: Storyboard.NewGardenToSettings, sender: nil)
   }
   
   public override func viewDidLoad() {
     super.viewDidLoad()
+    
+    editProfileButton.isHidden = true
     
     let settingsButton = setNavIcon(imageName: "settings-icon", size: CGSize(width: 26, height: 26), position: .right)
     settingsButton.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
@@ -41,6 +46,8 @@ public class NewGardenVC: UIViewController {
       
       let vc = segue.destination as? WallContainerVC
       vc?.wallOwnerId = User.currentUser?.uid
+    } else if segue.identifier == Storyboard.WallToEditProfile {
+      
     }
   }
   
@@ -50,19 +57,28 @@ public class NewGardenVC: UIViewController {
       gardenContainerView.isHidden = false
       updatesContainerView.isHidden = true
       profileContainerView.isHidden = true
+      editProfileButton.isHidden = true
     } else if sender.selectedSegmentIndex == 1 {
       gardenContainerView.isHidden = true
       updatesContainerView.isHidden = false
       profileContainerView.isHidden = true
+      editProfileButton.isHidden = true
     } else {
       gardenContainerView.isHidden = true
       updatesContainerView.isHidden = true
       profileContainerView.isHidden = true
       gardenContainerView.isHidden = true
       profileContainerView.isHidden = false
+      editProfileButton.isHidden = false
     }
     
   }
+  
+  
+  @IBAction func editButttonTouched() {
+    performSegue(withIdentifier: Storyboard.WallToEditProfile, sender: nil)
+  }
+  
   
   func configureSegmentedControl(_ control: UISegmentedControl) {
     

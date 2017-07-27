@@ -27,6 +27,9 @@
 		6913AD1A1E5E6ED6002EB1BC /* MyGardenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913AD191E5E6ED6002EB1BC /* MyGardenCell.swift */; };
 		6913AD1C1E5F2EED002EB1BC /* AddProduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913AD1B1E5F2EED002EB1BC /* AddProduceVC.swift */; };
 		69140F721EFAB73500559470 /* CountryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69140F711EFAB73500559470 /* CountryDelegate.swift */; };
+		6914C6311F2036C300C06A6C /* SignupTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914C6301F2036C300C06A6C /* SignupTwoVC.swift */; };
+		6914C6331F20EBD300C06A6C /* LocationNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914C6321F20EBD300C06A6C /* LocationNoticeVC.swift */; };
+		6914C6351F22B8C800C06A6C /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914C6341F22B8C800C06A6C /* TutorialVC.swift */; };
 		6914F2871EA54B7100142CB8 /* ChooseDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914F2861EA54B7100142CB8 /* ChooseDetailVC.swift */; };
 		6914F2891EA54B8500142CB8 /* ChooseDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6914F2881EA54B8500142CB8 /* ChooseDetail.storyboard */; };
 		6914F28B1EA54E8B00142CB8 /* ChooseDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6914F28A1EA54E8B00142CB8 /* ChooseDetailCell.swift */; };
@@ -48,6 +51,8 @@
 		692169831E6EDE260053C0C8 /* ProduceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692169821E6EDE260053C0C8 /* ProduceDetailVC.swift */; };
 		692169851E7029650053C0C8 /* ProduceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692169841E7029650053C0C8 /* ProduceDetailCell.swift */; };
 		692308E91EB28C8A008F5CA3 /* FinalizeTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692308E81EB28C8A008F5CA3 /* FinalizeTradeVC.swift */; };
+		692524FE1F268DD400CF3187 /* TermsConditionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692524FD1F268DD400CF3187 /* TermsConditionsVC.swift */; };
+		692525001F268DFB00CF3187 /* PrivacyPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692524FF1F268DFB00CF3187 /* PrivacyPolicyVC.swift */; };
 		692735B41F0C4C3F00AD3FF2 /* ProfileInstagramCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692735B31F0C4C3F00AD3FF2 /* ProfileInstagramCell.swift */; };
 		69288E1F1EDC8227008A5179 /* SearchResultFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69288E1E1EDC8227008A5179 /* SearchResultFeedVC.swift */; };
 		69288E211EDC82A0008A5179 /* SearchResultFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69288E201EDC82A0008A5179 /* SearchResultFeed.storyboard */; };
@@ -203,6 +208,9 @@
 		6913AD191E5E6ED6002EB1BC /* MyGardenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGardenCell.swift; sourceTree = "<group>"; };
 		6913AD1B1E5F2EED002EB1BC /* AddProduceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProduceVC.swift; sourceTree = "<group>"; };
 		69140F711EFAB73500559470 /* CountryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDelegate.swift; sourceTree = "<group>"; };
+		6914C6301F2036C300C06A6C /* SignupTwoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTwoVC.swift; sourceTree = "<group>"; };
+		6914C6321F20EBD300C06A6C /* LocationNoticeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationNoticeVC.swift; sourceTree = "<group>"; };
+		6914C6341F22B8C800C06A6C /* TutorialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialVC.swift; sourceTree = "<group>"; };
 		6914F2861EA54B7100142CB8 /* ChooseDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDetailVC.swift; sourceTree = "<group>"; };
 		6914F2881EA54B8500142CB8 /* ChooseDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseDetail.storyboard; sourceTree = "<group>"; };
 		6914F28A1EA54E8B00142CB8 /* ChooseDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDetailCell.swift; sourceTree = "<group>"; };
@@ -224,6 +232,8 @@
 		692169821E6EDE260053C0C8 /* ProduceDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceDetailVC.swift; sourceTree = "<group>"; };
 		692169841E7029650053C0C8 /* ProduceDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProduceDetailCell.swift; sourceTree = "<group>"; };
 		692308E81EB28C8A008F5CA3 /* FinalizeTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizeTradeVC.swift; sourceTree = "<group>"; };
+		692524FD1F268DD400CF3187 /* TermsConditionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsConditionsVC.swift; sourceTree = "<group>"; };
+		692524FF1F268DFB00CF3187 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
 		692735B31F0C4C3F00AD3FF2 /* ProfileInstagramCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInstagramCell.swift; sourceTree = "<group>"; };
 		69288E1E1EDC8227008A5179 /* SearchResultFeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultFeedVC.swift; sourceTree = "<group>"; };
 		69288E201EDC82A0008A5179 /* SearchResultFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchResultFeed.storyboard; sourceTree = "<group>"; };
@@ -812,6 +822,11 @@
 				691ED5C91E43C6A0005F6E2A /* InstagramLoginVC.swift */,
 				69047E981EC4B55F00A8E554 /* ForgotPasswordVC.swift */,
 				69D7F36B1EC551A300C6A288 /* YourLocationVC.swift */,
+				6914C6301F2036C300C06A6C /* SignupTwoVC.swift */,
+				6914C6321F20EBD300C06A6C /* LocationNoticeVC.swift */,
+				6914C6341F22B8C800C06A6C /* TutorialVC.swift */,
+				692524FD1F268DD400CF3187 /* TermsConditionsVC.swift */,
+				692524FF1F268DFB00CF3187 /* PrivacyPolicyVC.swift */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -1062,9 +1077,11 @@
 				69C401341E81F42E00F5F5D8 /* HomeTBC.swift in Sources */,
 				69B685581EA8FC67003C8188 /* TradeHomeVC.swift in Sources */,
 				691ED5CD1E43C759005F6E2A /* Constants.swift in Sources */,
+				6914C6351F22B8C800C06A6C /* TutorialVC.swift in Sources */,
 				69EE4AFE1E3FE18400C95624 /* UITextFieldExtension.swift in Sources */,
 				691ED5CA1E43C6A0005F6E2A /* InstagramLoginVC.swift in Sources */,
 				69EDD8FA1F0E7A360086371A /* Event.swift in Sources */,
+				692524FE1F268DD400CF3187 /* TermsConditionsVC.swift in Sources */,
 				6906748C1EF2F73D00416C21 /* FeedContainerVC.swift in Sources */,
 				69823A8D1E9E7AE20066DEB1 /* AddItemToDealVC.swift in Sources */,
 				6934322A1ED32AC2005C2B48 /* ProduceImageZoomableVC.swift in Sources */,
@@ -1105,6 +1122,7 @@
 				691FE0F91E60BA2E0031DAA0 /* CameraConfirmVC.swift in Sources */,
 				6974BC921EA1191F00126732 /* Deal.swift in Sources */,
 				692169851E7029650053C0C8 /* ProduceDetailCell.swift in Sources */,
+				692525001F268DFB00CF3187 /* PrivacyPolicyVC.swift in Sources */,
 				69EDD8F81F0E7A090086371A /* EventsVC.swift in Sources */,
 				69941DC01E82FC850073760F /* ProduceChildVC.swift in Sources */,
 				692735B41F0C4C3F00AD3FF2 /* ProfileInstagramCell.swift in Sources */,
@@ -1113,6 +1131,7 @@
 				691FE0F71E60BA130031DAA0 /* CameraVC.swift in Sources */,
 				692308E91EB28C8A008F5CA3 /* FinalizeTradeVC.swift in Sources */,
 				69EF6E651E699E6B0033454F /* HomeCell.swift in Sources */,
+				6914C6311F2036C300C06A6C /* SignupTwoVC.swift in Sources */,
 				692E7AEE1E9716A5001ABF36 /* MakeDealVC.swift in Sources */,
 				6914F28D1EA5552F00142CB8 /* ChooseDetailListVC.swift in Sources */,
 				69B685601EAAC06D003C8188 /* Message.swift in Sources */,
@@ -1126,6 +1145,7 @@
 				69EE4AF81E3FD2F200C95624 /* UIViewExtension.swift in Sources */,
 				69B685541EA8FC37003C8188 /* TradeDetailVC.swift in Sources */,
 				69941DC21E8310430073760F /* ProduceImageVC.swift in Sources */,
+				6914C6331F20EBD300C06A6C /* LocationNoticeVC.swift in Sources */,
 				692169831E6EDE260053C0C8 /* ProduceDetailVC.swift in Sources */,
 				69288E1F1EDC8227008A5179 /* SearchResultFeedVC.swift in Sources */,
 				69D7F36C1EC551A300C6A288 /* YourLocationVC.swift in Sources */,

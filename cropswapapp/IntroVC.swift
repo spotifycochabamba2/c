@@ -77,13 +77,25 @@ extension IntroVC {
     } else if segue.identifier == Storyboard.IntroToInstagram {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
+      vc?.loggedSuccessfully = performSegueToHome
       print(vc)
       vc?.loggedSuccessfully = performSegueToHome
+    } else if segue.identifier == Storyboard.IntroToSignup2 {
+      let vc = segue.destination as? SignupTwoVC
+      vc?.didPerformSegueToHome = goToHome
     }
   }
   
-  func performSegueToHome(user: User) {
-    performSegue(withIdentifier: Storyboard.IntroToHome, sender: user)
+  func performSegueToHome(isUserNew: Bool) {
+    if isUserNew {
+      performSegue(withIdentifier: Storyboard.IntroToSignup2, sender: nil)
+    } else {
+      performSegue(withIdentifier: Storyboard.IntroToHome, sender: nil)
+    }
+  }
+  
+  func goToHome() {
+    performSegue(withIdentifier: Storyboard.IntroToHome, sender: nil)
   }
   
   func showSignupView() {

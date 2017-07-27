@@ -11,16 +11,12 @@ import SVProgressHUD
 
 class SignupVC: UITableViewController {
   
-  @IBOutlet weak var yourNameLabel: UILabel!
+//  @IBOutlet weak var yourNameLabel: UILabel!
   
   @IBOutlet weak var signupButton: UIButton!
   @IBOutlet weak var signupInstagramButton: UIButton!
 
   @IBOutlet weak var logoCell: UITableViewCell!
-  
-  @IBOutlet weak var usernameTextField: UITextField!
-  @IBOutlet weak var nameTextField: UITextField!
-  @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
@@ -36,7 +32,7 @@ class SignupVC: UITableViewController {
   }
   
   override func viewDidLoad() {
-    super.viewDidLoad()
+    super.viewDidLoad()        
     
     setNavHeaderTitle(title: "Sign Up", color: UIColor.black)
     
@@ -47,7 +43,6 @@ class SignupVC: UITableViewController {
     navigationController?.isNavigationBarHidden = false
     
 //    setupTableView()
-
   }
   
   override func viewWillLayoutSubviews() {
@@ -65,15 +60,20 @@ class SignupVC: UITableViewController {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
       
-      vc?.loggedSuccessfully = performSegueToHome
+      vc?.loggedSuccessfully = loggedSuccessfully
     } else if segue.identifier == Storyboard.SignupToHome {
       let vc = segue.destination as? HomeVC
       
       vc?.currentUser = sender as? User
-    } else if segue.identifier == Storyboard.SignupToYourLocation {
-      let vc = segue.destination as? YourLocationVC
-      vc?.user = sender as? User
+    } else if segue.identifier == Storyboard.SignupToSignup2 {
+      let vc = segue.destination as? SignupTwoVC
+      
+      let data = sender as? [String: Any]
+      print(sender)
+      
       vc?.didPerformSegueToHome = performSegueToHome
+      vc?.email = data?["email"] as? String
+      vc?.password = data?["password"] as? String
     }
   }
   
@@ -81,51 +81,49 @@ class SignupVC: UITableViewController {
     performSegue(withIdentifier: Storyboard.SignupToInstagram, sender: nil)
   }
   
+  func loggedSuccessfully(isNewUser: Bool) {
+    if isNewUser {
+      performSegue(withIdentifier: Storyboard.SignupToSignup2, sender: nil)
+    } else {
+      performSegue(withIdentifier: Storyboard.SignupToHome, sender: nil)
+    }
+  }
+  
   func performSegueToHome() {
     performSegue(withIdentifier: Storyboard.SignupToHome, sender: userCreated)
   }
   
   @IBAction func signupButtonTouched() {
-    signupButton.isEnabled = false
-    signupButton.alpha = 0.5
-    
-    let firstName = nameTextField.text ?? ""
-    let lastName = lastNameTextField.text ?? ""
-    let username = usernameTextField.text ?? ""
     let email = emailTextField.text ?? ""
     let password = passwordTextField.text ?? ""
     let repeatPassword = repeatPasswordTextField.text ?? ""
-        
-    SVProgressHUD.show()
-    User.signup(
-      email: email,
-      andFirstName: firstName,
-      andLastName: lastName,
-      andUsername: username,
-      andPassword: password,
-      andRepeatedPassword: repeatPassword) { [weak self] (result) in
-        DispatchQueue.main.async {
-          self?.signupButton.alpha = 1
-          self?.signupButton.isEnabled = true
-          SVProgressHUD.dismiss()
-        }
-        
-        switch result {
-        case .fail(let error):
-          let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: "OK", style: .default))
-          DispatchQueue.main.async {
-            self?.present(alert, animated: true)
-          }
-        case .success(let user):
-          self?.userCreated = user
-          
-          DispatchQueue.main.async {
-            self?.performSegue(withIdentifier: Storyboard.SignupToYourLocation, sender: user)
-          }
-        }
-        
+    
+    if case Result.fail(let error) = User.isValid(email: email) {
+      let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
     }
+    
+    if case Result.fail(let error) = User.isValid(password: password) {
+      let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    if password != repeatPassword {
+      let alert = UIAlertController(title: "Error", message: "Password and Repeat Password should contain the same value.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
+      return
+    }
+    
+    var dataToSend = [String: Any]()
+    dataToSend["email"] = email
+    dataToSend["password"] = password
+    
+    performSegue(withIdentifier: Storyboard.SignupToSignup2, sender: dataToSend)
   }
   
   func performSegueToHome(user: User) {
@@ -133,12 +131,6 @@ class SignupVC: UITableViewController {
   }
   
   func setupTextFields() {
-    nameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
-    
-    lastNameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
-    
-    usernameTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
-    
     emailTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     passwordTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
     repeatPasswordTextField.addBottomLine(color: UIColor.hexStringToUIColor(hex: "#cdd1d7"))
@@ -165,19 +157,26 @@ extension SignupVC {
 
 extension SignupVC {
   
-//  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//    var height = super.tableView(tableView, heightForRowAt: indexPath)
-//    
-//    if indexPath.row == 0 {
-//      height = view.frame.size.height - CGFloat(420 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
-//      
-//      if height < 0 {
-//        height = 0
-//      }
-//    }
-//    
-//    return height
-//  }
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    var height = super.tableView(tableView, heightForRowAt: indexPath)
+    
+    if indexPath.row == 0 {
+      
+//      let height = view.frame.size.height - 
+      
+      print(tableView.frame.height)
+      //420
+      height = view.frame.size.height - CGFloat(360 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
+      
+      print(height)
+      
+      if height <= 80 {
+        height = 0
+      }
+    }
+    
+    return height
+  }
 
 }
 

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BonMot.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,11 +35,6 @@
 			<false/>
 		</dict>
 		<key>JSQSystemSoundPlayer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>MapboxGeocoder.swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -82,22 +82,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0DCEBB1885E03BA541A435C3DBA915F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>125D9DDF363A50156C70DFCF6F4F4ADA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1AF435285127740120EDF34D5E5F1942</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1B48DB53F24169F0521EFFEC43C0C906</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1ED4DFAAD25E1999D0244868457A351E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3351065294369F50E630D31F4F840354</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>35952CF54EC35821088C3C062A071268</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,22 +122,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78A17BCFB9F723826B1664BAC620F30B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79DE55DE60DD46362A264D825A61D70B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7B822FBB41C6B3E0F0F48E34626A2BE8</key>
+		<key>91924C090242BA0843B0F278374FE8DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A54B389144AB1A5C0F472D5ADC137B75</key>
+		<key>BF2DF4443C39DC5241D33A51D633A41C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E445AB8B634BB65F3ED11C4B6B58005F</key>
+		<key>D305DB5DC65B5F0F3CED56B40C8F8224</key>
 		<dict>
 			<key>primary</key>
 			<true/>

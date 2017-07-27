@@ -15,8 +15,9 @@ class InstagramVC: UIViewController {
   var isCodePresent = false
   var wasLoggedIn = false
   var onlyForGettingPictures = false
+  var userIdOnlyForGettingPictures: String?
   
-  var loggedSuccessfully: (User) -> Void = { _ in print("what?") }
+  var loggedSuccessfully: (Bool) -> Void = { _ in print("what?") }
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -24,6 +25,10 @@ class InstagramVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if !onlyForGettingPictures {
+      User.logout()
+    }
     
     webView.scrollView.bounces = false
     webView.delegate = self
@@ -93,7 +98,7 @@ extension InstagramVC: UIWebViewDelegate {
           }
           
           if self?.onlyForGettingPictures ?? false,
-             let userId = User.currentUser?.uid,
+             let userId = self?.userIdOnlyForGettingPictures,
              let instagramId = user.instagramId,
              let instagramToken = user.instagramToken
           {
@@ -124,17 +129,21 @@ extension InstagramVC: UIWebViewDelegate {
             }
           }
         }
-      ], result: { [weak self] error in
+      ], result: { error in
         if let error = error {
           let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: "OK", style: .default))
-          self?.present(alert, animated: true)
+          self.present(alert, animated: true)
         } else {
-          if let user = userFound {
-            self?.wasLoggedIn = true
+          if userFound != nil {
+            print(self.loggedSuccessfully)
+            self.wasLoggedIn = true
             DispatchQueue.main.async {
-              self?.dismiss(animated: true) {
-                self?.loggedSuccessfully(user)
+              self.dismiss(animated: true) {
+                DispatchQueue.main.async {
+                  print(self.loggedSuccessfully)
+                  self.loggedSuccessfully(isNewUser)
+                }
               }
             }
           } else {
@@ -142,7 +151,7 @@ extension InstagramVC: UIWebViewDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             
             DispatchQueue.main.async {
-              self?.present(alert, animated: true)
+              self.present(alert, animated: true)
             }
           }
         }

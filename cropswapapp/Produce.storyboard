@@ -619,7 +619,7 @@ df dsfsdf</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AAs-Fc-kkv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s8H-qb-MtL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s8H-qb-MtL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -637,7 +637,7 @@ df dsfsdf</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2jr-jJ-FGt" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xQs-3G-dgZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xQs-3G-dgZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -655,7 +655,7 @@ df dsfsdf</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tyf-4e-5bs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yhE-3l-1KL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yhE-3l-1KL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

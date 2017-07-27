@@ -179,7 +179,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3l-sK-GGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="68" y="-736"/>
+            <point key="canvasLocation" x="-1066" y="-1257"/>
         </scene>
         <!--MakeDealVC-->
         <scene sceneID="j21-Xu-jrz">
@@ -756,7 +756,7 @@ trade requests</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RL8-ZN-p5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2870" y="-139"/>
+            <point key="canvasLocation" x="-3279" y="-180"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="7Zu-eG-PHp">
@@ -832,19 +832,36 @@ trade requests</string>
                         <outlet property="logoutTableViewCell" destination="s3L-JD-Tmt" id="CYM-q6-NwS"/>
                         <outlet property="privacyPolicyTableViewCell" destination="6SE-fh-uUp" id="c0a-Bn-ctf"/>
                         <outlet property="termsConditionsTableViewCell" destination="fKB-cS-xlx" id="R8e-kW-MxW"/>
+                        <segue destination="EXc-CV-nxD" kind="presentation" identifier="SettingsToTerms" modalPresentationStyle="overCurrentContext" id="IZr-bL-6hO"/>
+                        <segue destination="Iur-3g-gow" kind="presentation" identifier="SettingsToPrivacy" modalPresentationStyle="overCurrentContext" id="jKz-uA-HgN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2g-aj-Sc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1921" y="419"/>
         </scene>
+        <!--TermsConditionsVC-->
+        <scene sceneID="dDZ-GS-PL9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="TermsConditionsVC" id="EXc-CV-nxD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LD6-fe-q7u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2706" y="281"/>
+        </scene>
+        <!--PrivacyPolicyVC-->
+        <scene sceneID="wz5-kh-CMN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="PrivacyPolicyVC" id="Iur-3g-gow" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yhe-G9-hTY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2689" y="439"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Vo-bl-vgR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uuj-M4-SjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uvr-iv-DOK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qcd-L1-8BO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qcd-L1-8BO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -853,6 +870,7 @@ trade requests</string>
                         <segue destination="AgT-Ye-CgJ" kind="relationship" relationship="rootViewController" id="Gt7-Hf-6em"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uuj-M4-SjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2676" y="1117"/>
         </scene>
@@ -872,14 +890,14 @@ trade requests</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9c-DO-O6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055" y="-930"/>
+            <point key="canvasLocation" x="-2958" y="-1359"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KGp-uz-tVq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TdM-AU-tmd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xvL-IM-h7X">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xvL-IM-h7X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -890,14 +908,14 @@ trade requests</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4V-1A-NQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="-777"/>
+            <point key="canvasLocation" x="-1900" y="-1256"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0nv-Bs-NEo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z0G-81-CTN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eTU-yT-IsQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eTU-yT-IsQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -908,7 +926,7 @@ trade requests</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M45-Cg-vUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1834" y="-930"/>
+            <point key="canvasLocation" x="-3692" y="-1358"/>
         </scene>
         <!--WallContainerVC-->
         <scene sceneID="JJu-MX-UbW">

@@ -164,7 +164,7 @@ class YourLocationVC: UIViewController {
     let zipCode = zipCodeTextField.text ?? ""
     let showAddress = showAddressSwitch.isOn
     
-    guard let userId = user?.id else {
+    guard let userId = User.currentUser?.uid else {
       let alert = UIAlertController(
         title: "Error",
         message: "User Id not provided to User.saveLocation",
@@ -177,7 +177,6 @@ class YourLocationVC: UIViewController {
     }
     
     SVProgressHUD.show()
-    
     User.saveLocation(
       byUserId: userId,
       country: country,
@@ -186,7 +185,7 @@ class YourLocationVC: UIViewController {
       state: state,
       zipCode: zipCode,
       showAddress: showAddress
-    ) { [weak self] (error) in
+    ) { (error) in
       DispatchQueue.main.async {
         SVProgressHUD.dismiss()
       }
@@ -200,18 +199,19 @@ class YourLocationVC: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         
         DispatchQueue.main.async {
-          self?.present(alert, animated: true)
+          self.present(alert, animated: true)
         }
       } else {
         DispatchQueue.main.async {
-          self?.dismiss(animated: true) { [weak self] in
-            DispatchQueue.main.async {
-              self?.didPerformSegueToHome()
-            }
-          }
+          self.performSegue(withIdentifier: Storyboard.YourLocationToTerms, sender: nil)
+          //          self.dismiss(animated: true) {
+          //            DispatchQueue.main.async {
+          //
+          //            }
+          //          }
         }
       }
-    }
+    } // end save location
   }
 }
 

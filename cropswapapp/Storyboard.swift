@@ -104,6 +104,23 @@ struct Storyboard {
   static let WallPostToCamera = "WallPostToCamera"
   static let WallPostToViewPhoto = "WallPostToViewPhoto"
   static let WallToShowImage = "WallToShowImage"
+  static let WallToEditProfile = "WallToEditProfile"
+  
+  
+  static let SignupToSignup2 = "SignupToSignup2"
+  static let SignupTwoToLocationNotice = "SignupTwoToLocationNotice"
+  static let LocationNoticeToYourLocation = "LocationNoticeToYourLocation"
+  static let YourLocationToTutorial = "YourLocationToTutorial"
+  static let YourLocationToTerms = "YourLocationToTerms"
+  
+  static let LoginToSignup2 = "LoginToSignup2"
+  static let IntroToSignup2 = "IntroToSignup2"
+  
+  static let TermsToPrivacy = "TermsToPrivacy"
+  static let PrivacyToTutorial = "PrivacyToTutorial"
+  
+  static let SettingsToTerms = "SettingsToTerms"
+  static let SettingsToPrivacy = "SettingsToPrivacy"
 }
 
 

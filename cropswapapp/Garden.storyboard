@@ -66,6 +66,16 @@
                                     <segue destination="k1D-Yv-p4X" kind="embed" id="GN2-DW-Y1w"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34B-xr-acG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="K1X-0w-DGh"/>
+                                    <constraint firstAttribute="width" constant="69" id="tCn-ia-FLU"/>
+                                </constraints>
+                                <state key="normal" image="edit-profile-button-icon"/>
+                                <connections>
+                                    <action selector="editButttonTouched" destination="IAe-FS-3mP" eventType="touchUpInside" id="z7V-ah-qa7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -76,9 +86,11 @@
                             <constraint firstAttribute="trailing" secondItem="pXK-Hk-bF8" secondAttribute="trailing" id="Rh0-QU-S5T"/>
                             <constraint firstAttribute="trailing" secondItem="aOK-lF-AgQ" secondAttribute="trailing" id="YRd-JT-Hdf"/>
                             <constraint firstItem="pXK-Hk-bF8" firstAttribute="top" secondItem="PE9-g5-gvp" secondAttribute="bottom" id="b5G-H5-ICQ"/>
+                            <constraint firstItem="0l9-Jp-ytw" firstAttribute="top" secondItem="34B-xr-acG" secondAttribute="bottom" constant="-5" id="dTo-LT-cib"/>
                             <constraint firstItem="pXK-Hk-bF8" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="e26-wR-mRV"/>
                             <constraint firstAttribute="trailing" secondItem="pXK-Hk-bF8" secondAttribute="trailing" id="eCb-Wl-46b"/>
                             <constraint firstItem="0l9-Jp-ytw" firstAttribute="top" secondItem="9Fj-QH-Qsk" secondAttribute="bottom" id="hHT-Zb-Qvf"/>
+                            <constraint firstAttribute="trailing" secondItem="34B-xr-acG" secondAttribute="trailing" constant="-5" id="hk7-M7-YJw"/>
                             <constraint firstItem="aOK-lF-AgQ" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="jL8-ow-Fb2"/>
                             <constraint firstItem="9Fj-QH-Qsk" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="jLb-zG-nq0"/>
                             <constraint firstItem="PE9-g5-gvp" firstAttribute="leading" secondItem="2mH-R2-QO2" secondAttribute="leading" id="qkJ-Mg-WB0"/>
@@ -88,12 +100,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="editProfileButton" destination="34B-xr-acG" id="p8T-6a-Saw"/>
                         <outlet property="gardenContainerView" destination="pXK-Hk-bF8" id="KK2-6d-ae7"/>
                         <outlet property="profileContainerView" destination="aOK-lF-AgQ" id="r19-bf-hf3"/>
                         <outlet property="segmentedControl" destination="W8D-lw-PV4" id="A6S-Yk-Jp3"/>
                         <outlet property="segmentedControlView" destination="PE9-g5-gvp" id="2VD-Y8-P5k"/>
                         <outlet property="updatesContainerView" destination="9Fj-QH-Qsk" id="JSz-Kj-b9l"/>
                         <segue destination="BoV-H7-tS2" kind="presentation" identifier="NewGardenToSettings" id="PKB-yv-qfU"/>
+                        <segue destination="8YK-9M-NQ7" kind="presentation" identifier="WallToEditProfile" id="gN1-6p-g8R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8LK-5h-UR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,7 +217,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbB-lV-GXM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fxT-Aw-TBC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fxT-Aw-TBC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -231,7 +245,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DRa-aR-Fri" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1iZ-l6-o0S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1iZ-l6-o0S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -249,7 +263,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HHc-Jb-cXw" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3me-NG-zNH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3me-NG-zNH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -268,7 +282,17 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileChildVC" id="k1D-Yv-p4X" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCy-68-ur3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1985" y="578"/>
+            <point key="canvasLocation" x="-2529" y="522"/>
+        </scene>
+        <!--EditProfileContainerVC-->
+        <scene sceneID="FXl-KQ-OH1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditProfile" referencedIdentifier="EditProfileContainerVC" id="23f-Lo-2jk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="K6I-Al-Fgd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYo-lx-UUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1184" y="827"/>
         </scene>
         <!--WallContainerVC-->
         <scene sceneID="V59-4j-3k0">
@@ -276,14 +300,14 @@
                 <viewControllerPlaceholder storyboardName="Wall" referencedIdentifier="WallContainerVC" id="QVK-Ec-Dzw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frg-TF-D9W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2624" y="578"/>
+            <point key="canvasLocation" x="-3166" y="522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uNP-zj-fbo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BoV-H7-tS2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LUS-8o-XsG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LUS-8o-XsG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -296,8 +320,27 @@
             </objects>
             <point key="canvasLocation" x="-1182" y="-1053"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ivf-wk-ZkE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8YK-9M-NQ7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YFI-Of-OCL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="23f-Lo-2jk" kind="relationship" relationship="rootViewController" id="Q69-vf-3lc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LO9-Ev-Few" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1887" y="827"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add-item-button" width="57" height="57"/>
+        <image name="edit-profile-button-icon" width="69" height="69"/>
     </resources>
 </document>

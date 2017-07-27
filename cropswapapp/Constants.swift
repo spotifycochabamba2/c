@@ -7,8 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
+  
+  struct Fonts {
+    static let montserratBoldFont = UIFont(name: "Montserrat-Semibold", size: 15)
+    static let montserratLightFont = UIFont(name: "Montserrat-Light", size: 15)
+  }
   
   struct Texts {
     static let writePost = "Write a post..."
@@ -41,6 +47,8 @@ struct Constants {
   }
   
   struct Ids {
+    static let SignupTwoToHome = "SignupTwoToHome"
+    
     static let workerId = "worker"
     static let moneyId = "money"
     static let logoutId = "logoutId"

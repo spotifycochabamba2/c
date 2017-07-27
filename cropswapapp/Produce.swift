@@ -390,11 +390,29 @@ extension Produce {
     values["liveState"] = ProduceState.archived.rawValue
     values["quantity"] = 0
     
-    refDatabaseUserProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
-    }
-    
-    refDatabaseProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
-      completion(error as NSError?)
+    Ax.parallel(tasks: [
+      { done in
+        refDatabaseUserProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+          done(error as Optional<NSError>)
+        }
+      },
+      
+      { done in
+        
+        refDatabaseProduce.updateChildValues(values) { (error: Error?, ref: FIRDatabaseReference) in
+          done(error as NSError?)
+        }
+      }
+    ]) { (error) in
+      
+      if error == nil {
+        User.updateProduceCounter(
+          userId: ownerUserId,
+          valueToAddOrSubtract: -1
+        )
+      }
+      
+      completion(error)
     }
   }
   
@@ -826,6 +844,7 @@ extension Produce {
       if let error = error {
         completion(Result.fail(error: error))
       } else {
+        User.updateProduceCounter(userId: ownerId, valueToAddOrSubtract: 1)
         completion(Result.success(data: produceId))
       }
     }

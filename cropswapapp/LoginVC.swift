@@ -57,8 +57,12 @@ class LoginVC: UITableViewController {
     setupTextFields()
   }
   
-  func performSegueToHome(user: User) {
-    performSegue(withIdentifier: Storyboard.LoginToHome, sender: user)
+  func performSegueToHome(isNewUser: Bool) {
+    if isNewUser {
+      performSegue(withIdentifier: Storyboard.LoginToSignup2, sender: nil)
+    } else {
+      performSegue(withIdentifier: Storyboard.LoginToHome, sender: nil)
+    }
   }
   
   @IBAction func instagramButtonTouched() {
@@ -75,7 +79,14 @@ class LoginVC: UITableViewController {
       let vc = nv?.viewControllers.first as? InstagramVC
       
       vc?.loggedSuccessfully = performSegueToHome
+    } else if segue.identifier == Storyboard.LoginToSignup2 {
+      let vc = segue.destination as? SignupTwoVC
+      vc?.didPerformSegueToHome = goToHome
     }
+  }
+  
+  func goToHome() {
+    performSegue(withIdentifier: Storyboard.LoginToHome, sender: nil)
   }
   
   @IBAction func forgotPasswordButtonTouched() {

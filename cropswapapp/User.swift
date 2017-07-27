@@ -91,6 +91,10 @@ struct User {
     self.longitude = lng
   }
   
+  init(name: String) {
+    self.name = name
+  }
+  
   init(email: String, name: String) {
     self.email = email
     self.name = name
@@ -316,6 +320,29 @@ extension User {
   static var refStorageUsers = refStorage.child("users")
   
   
+  static func updateProduceCounter(
+    userId: String,
+    valueToAddOrSubtract: Int
+  ) {
+    let refDatabaseUser = refDatabaseUsers.child(userId)
+
+    refDatabaseUser.runTransactionBlock { (currentData) -> FIRTransactionResult in
+      
+      
+      if var user = currentData.value as? [String: Any] {
+        
+        var produceCounter = user["produceCounter"] as? Int ?? 0
+        produceCounter += valueToAddOrSubtract
+        
+        user["produceCounter"] = produceCounter
+        
+        currentData.value = user
+      }
+      
+      return FIRTransactionResult.success(withValue: currentData)
+    }
+  }
+  
   static func searchFor(
     filter: String,
     completion: @escaping ([[String: Any]]) -> Void
@@ -343,6 +370,7 @@ extension User {
         }
       }
     }
+    
     
     do {
       try FIRAuth.auth()?.signOut()
@@ -732,22 +760,19 @@ extension User {
   }
   
   static func signup(
-    email: String,
+    email: String?,
+    andPassword password: String?,
     andFirstName firstName: String,
     andLastName lastName: String,
     andUsername username: String,
-    andPassword password: String,
-    andRepeatedPassword repeatedPassword: String,
-    completion: @escaping (Result<User>) -> Void
+    completion: @escaping (NSError?) -> Void
   ) {
-    var firebaseUser: FIRUser?
-    
     if firstName.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
       let error = NSError(domain: "Auth", code: 0, userInfo: [
         NSLocalizedDescriptionKey: "First Name value is empty."
         ])
       
-      completion(Result.fail(error: error))
+      completion(error)
       return
     }
     
@@ -756,7 +781,7 @@ extension User {
         NSLocalizedDescriptionKey: "Last Name value is empty."
         ])
       
-      completion(Result.fail(error: error))
+      completion(error)
       return
     }
     
@@ -765,78 +790,61 @@ extension User {
         NSLocalizedDescriptionKey: "Username value is empty."
         ])
       
-      completion(Result.fail(error: error))
+      completion(error)
       return
     }
     
-    if case Result.fail(let error) = isValid(email: email) {
-      completion(Result.fail(error: error))
-      return
-    }
-    
-    if case Result.fail(let error) = isValid(password: password) {
-      completion(Result.fail(error: error))
-      return
-    }
-    
-    if password != repeatedPassword {
-      let error = NSError(domain: "Auth", code: 0, userInfo: [
-        NSLocalizedDescriptionKey: "Password and Repeat Password are not equal."
-      ])
-      
-      completion(Result.fail(error: error))
-      return
-    }
-    
-    var user = User(email: email, name: firstName)
+    var userId: String?
 
     Ax.serial(tasks: [
       { done in
-        
-        FIRAuth.auth()?.createUser(
-          withEmail: email,
-          password: password,
-          completion: { (user, error) in
-            firebaseUser = user
-            done(error as? NSError)
-        })
-
+        if let email = email,
+           let password = password
+        {
+          FIRAuth.auth()?.createUser(
+            withEmail: email,
+            password: password,
+            completion: { (user, error) in
+              userId = user?.uid
+              done(error as? NSError)
+          })
+        } else {
+          userId = User.currentUser?.uid
+          done(nil)
+        }
       },
       
       { done in
-        
-        guard let firebaseUser = firebaseUser else {
+        guard let userId = userId else {
           let error = NSError(domain: "Auth", code: 0, userInfo: [
-            NSLocalizedDescriptionKey: "No firebase user created."
+            NSLocalizedDescriptionKey: "No user id created."
           ])
           done(error)
           return
         }
         
-        let refUser = refDatabaseUsers.child(firebaseUser.uid)
+        let refUser = refDatabaseUsers.child(userId)
         
         var data = [String: Any]()
-        data["id"] = refUser.key
+        
+        if let email = email {
+          data["id"] = userId
+          data["email"] = email
+        }
+
         data["name"] = firstName
         data["lastName"] = lastName
         data["username"] = username
-        data["email"] = email
-        
-        user.id = refUser.key
-        user.lastName = lastName
-        user.username = username
-        user.email = email
-        
-        refUser.setValue(data, withCompletionBlock: {(error, ref) in
-          done(error as NSError?)
-        })
 
+        refUser.updateChildValues(data) { (error: Error?, _) in
+          done(error as NSError?)
+        }
       }
     ]) { (error) in
       if let error = error {
-        completion(Result.fail(error: error))
+        completion(error)
       } else {
-        completion(Result.success(data: user))
+        completion(nil)
       }
     }
   }
@@ -1215,7 +1223,7 @@ extension User {
             let username = json["user"]["username"].string,
             let firebaseToken = json["firebaseToken"].string
             else {
-              let error = NSError(domain: "Auth", code: 0, userInfo: [NSLocalizedDescriptionKey: "imcomplete data got from Instagram"])
+              let error = NSError(domain: "Auth", code: 0, userInfo: [NSLocalizedDescriptionKey: "incomplete data got from Instagram"])
               completion(Result.fail(error: error))
               return
           }

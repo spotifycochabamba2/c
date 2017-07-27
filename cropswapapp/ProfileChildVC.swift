@@ -214,6 +214,7 @@ class ProfileChildVC: UITableViewController {
       let nc = segue.destination as? UINavigationController
       let vc = nc?.viewControllers.first as? InstagramVC
       
+      vc?.userIdOnlyForGettingPictures = User.currentUser?.uid
       vc?.onlyForGettingPictures = true
       vc?.loggedSuccessfully = loggedSuccesfully
     } else if segue.identifier == Storyboard.ProfileChildToPhotoViewer {
@@ -223,8 +224,8 @@ class ProfileChildVC: UITableViewController {
     }
   }
   
-  func loggedSuccesfully(user: User) {
-    print(user)
+  func loggedSuccesfully(isNewUser: Bool) {
+//    print(user)
   }
   
   @IBAction func signinInstagramButtonTouched() {

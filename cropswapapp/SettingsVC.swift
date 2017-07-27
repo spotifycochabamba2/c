@@ -15,6 +15,17 @@ class SettingsVC: UITableViewController {
 }
 
 extension SettingsVC {
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Storyboard.SettingsToTerms {
+      let vc = segue.destination as? TermsConditionsVC
+      vc?.comesFromSettings = true
+    } else if segue.identifier == Storyboard.SettingsToPrivacy {
+      let vc = segue.destination as? PrivacyPolicyVC
+      vc?.comesFromSettings = true
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -59,9 +70,9 @@ extension SettingsVC {
         )
       })
     case privacyPolicyTableViewCell:
-      print("privacyPolicyTableViewCell")
+      performSegue(withIdentifier: Storyboard.SettingsToPrivacy, sender: nil)
     case termsConditionsTableViewCell:
-      print("termsConditionsTableViewCell")
+      performSegue(withIdentifier: Storyboard.SettingsToTerms, sender: nil)
     default:
       break
     }

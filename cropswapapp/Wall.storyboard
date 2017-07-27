@@ -50,7 +50,7 @@
                         <constraints>
                             <constraint firstItem="FNY-fC-bV0" firstAttribute="leading" secondItem="Iew-vM-500" secondAttribute="leading" id="6Hv-Vd-rT5"/>
                             <constraint firstItem="9bW-ix-KrZ" firstAttribute="top" secondItem="FNY-fC-bV0" secondAttribute="bottom" id="AKJ-N8-End"/>
-                            <constraint firstItem="Tk4-8s-Fna" firstAttribute="trailing" secondItem="Iew-vM-500" secondAttribute="trailingMargin" constant="10" id="Cw8-GJ-WRm"/>
+                            <constraint firstItem="Tk4-8s-Fna" firstAttribute="trailing" secondItem="Iew-vM-500" secondAttribute="trailingMargin" constant="15" id="Cw8-GJ-WRm"/>
                             <constraint firstAttribute="trailing" secondItem="FNY-fC-bV0" secondAttribute="trailing" id="Q1R-lS-wtF"/>
                             <constraint firstItem="9bW-ix-KrZ" firstAttribute="top" secondItem="Tk4-8s-Fna" secondAttribute="bottom" id="SHB-6m-fL2"/>
                             <constraint firstItem="FNY-fC-bV0" firstAttribute="top" secondItem="Iew-vM-500" secondAttribute="top" id="tFI-9P-s32"/>
@@ -567,7 +567,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yCW-68-eFi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p1X-3Z-buf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="p1X-3Z-buf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -593,7 +593,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Cf-Db-PR5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oe9-XM-3W5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oe9-XM-3W5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
