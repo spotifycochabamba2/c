@@ -693,7 +693,7 @@ trade requests</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmj-g7-99n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5671" y="3519"/>
+            <point key="canvasLocation" x="-4695" y="3550"/>
         </scene>
         <!--TutorialVC-->
         <scene sceneID="Tmw-2g-yV0">
@@ -762,16 +762,17 @@ trade requests</string>
                     <connections>
                         <outlet property="pageControl" destination="JMa-wF-zbJ" id="9a7-7c-7hm"/>
                         <outlet property="skipNextView" destination="o2c-qe-GJo" id="mZm-8G-fh3"/>
+                        <segue destination="cpO-lv-OEL" kind="presentation" identifier="TutorialToLocationNotice" id="hL3-a1-YyS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IgK-TG-68a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2666" y="3519"/>
+            <point key="canvasLocation" x="-6695" y="3549"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="rEO-6L-DwS">
             <objects>
-                <tableViewController storyboardIdentifier="FirstTutorial" automaticallyAdjustsScrollViewInsets="NO" id="dMe-7d-OqT" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SecondTutorial" automaticallyAdjustsScrollViewInsets="NO" id="dMe-7d-OqT" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="JDe-XF-Xo5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -817,7 +818,7 @@ trade requests</string>
         <!--Table View Controller-->
         <scene sceneID="v08-AG-IcP">
             <objects>
-                <tableViewController storyboardIdentifier="ThirdTutorial" id="C0a-wC-En5" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FirstTutorial" id="C0a-wC-En5" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BNn-O2-ggf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -862,7 +863,7 @@ trade requests</string>
         <!--View Controller-->
         <scene sceneID="TkL-Mv-sB9">
             <objects>
-                <viewController storyboardIdentifier="SecondTutorial" id="BAH-Hs-bqa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThirdTutorial" id="BAH-Hs-bqa" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zFG-FX-sMh"/>
                         <viewControllerLayoutGuide type="bottom" id="Bi8-Zg-VkQ"/>
@@ -991,7 +992,7 @@ When you trade with someone, YOU can decide if you want to trade addresses with 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-0A-aG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6614" y="3519"/>
+            <point key="canvasLocation" x="-5639" y="3550"/>
         </scene>
         <!--HomeTBC-->
         <scene sceneID="Eiw-l1-57v">
@@ -1475,12 +1476,12 @@ continue</string>
                         <outlet property="firstNameTextField" destination="CPK-1s-8VQ" id="XTP-MP-TJK"/>
                         <outlet property="lastNameTextField" destination="sPc-ME-3Ud" id="bd3-2a-bhs"/>
                         <outlet property="usernameTextField" destination="oXn-98-V4O" id="ESQ-II-bEG"/>
-                        <segue destination="cpO-lv-OEL" kind="presentation" identifier="SignupTwoToLocationNotice" modalPresentationStyle="overCurrentContext" id="HFn-Wz-nxo"/>
+                        <segue destination="7od-xo-xc4" kind="presentation" identifier="SignupTwoToTutorial" id="Z7H-Qf-1Bk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGv-1P-J1W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7841" y="3518"/>
+            <point key="canvasLocation" x="-7842" y="3548"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqM-jv-EtC">
@@ -1609,7 +1610,7 @@ continue</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cao-cR-ykF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4698" y="3519"/>
+            <point key="canvasLocation" x="-3722" y="3550"/>
         </scene>
         <!--Privacy PolicyVC-->
         <scene sceneID="9PG-Jh-5zE">
@@ -1697,12 +1698,11 @@ continue</string>
                         <outlet property="backgroundView" destination="9mV-2B-BgC" id="ENV-Bo-1lk"/>
                         <outlet property="textView" destination="fuH-Hh-faV" id="4tY-ty-rA8"/>
                         <outlet property="upperView" destination="N1T-5v-2Vc" id="gzu-Lp-3N5"/>
-                        <segue destination="7od-xo-xc4" kind="show" identifier="PrivacyToTutorial" id="FHA-PN-tmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMJ-DN-UjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3737" y="3518"/>
+            <point key="canvasLocation" x="-2762" y="3549"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hNl-WR-Afe">
@@ -1727,6 +1727,11 @@ continue</string>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="J8b-Ar-HTR">
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The fruits and vegetables from grocery stores are often:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-F0-ZtS">
+                                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bC-Fm-8om">
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0od-gH-S2h">
@@ -1737,7 +1742,7 @@ continue</string>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The fruits and vegetables from grocery stores are sprayed with chemicals" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bHy-q6-eG3">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sprayed with chemicals" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bHy-q6-eG3">
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1754,7 +1759,7 @@ continue</string>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picked before ripening" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-xL-OZF">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picked before ripe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-xL-OZF">
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1771,7 +1776,9 @@ continue</string>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipped 1000s of miles" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ggh-x8-2nE">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ggh-x8-2nE">
+                                                                <string key="text">Shipped thousands of miles
+</string>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1894,7 +1901,7 @@ continue</string>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bring communication together" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RFo-IM-XyU">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bring communities together" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RFo-IM-XyU">
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1942,7 +1949,7 @@ continue</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9yY-A9-OAH"/>
-        <segue reference="DqF-kZ-bHq"/>
-        <segue reference="xB3-Wy-GsM"/>
+        <segue reference="ohJ-ej-aaf"/>
+        <segue reference="7yu-gU-WSE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -108,7 +108,7 @@ struct Storyboard {
   
   
   static let SignupToSignup2 = "SignupToSignup2"
-  static let SignupTwoToLocationNotice = "SignupTwoToLocationNotice"
+  static let TutorialToLocationNotice = "TutorialToLocationNotice"
   static let LocationNoticeToYourLocation = "LocationNoticeToYourLocation"
   static let YourLocationToTutorial = "YourLocationToTutorial"
   static let YourLocationToTerms = "YourLocationToTerms"
@@ -121,6 +121,8 @@ struct Storyboard {
   
   static let SettingsToTerms = "SettingsToTerms"
   static let SettingsToPrivacy = "SettingsToPrivacy"
+  
+  static let SignupTwoToTutorial = "SignupTwoToTutorial"
 }
 
 

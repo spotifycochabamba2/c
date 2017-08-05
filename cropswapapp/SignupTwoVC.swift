@@ -22,8 +22,8 @@ public class SignupTwoVC: UITableViewController {
   var didPerformSegueToHome: () -> Void = { }
   
   public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Storyboard.SignupTwoToLocationNotice {
-      let vc = segue.destination as? LocationNoticeVC
+    if segue.identifier == Storyboard.SignupTwoToTutorial {
+      let vc = segue.destination as? TutorialVC
       
       vc?.modalPresentationCapturesStatusBarAppearance = true
     }
@@ -85,7 +85,7 @@ public class SignupTwoVC: UITableViewController {
     let firstName = firstNameTextField.text ?? ""
     let lastName = lastNameTextField.text ?? ""
     let username = usernameTextField.text ?? ""
-    
+
     SVProgressHUD.show()
     User.signup(
       email: email,
@@ -106,7 +106,7 @@ public class SignupTwoVC: UITableViewController {
           }
         } else {
           DispatchQueue.main.async {
-            self.performSegue(withIdentifier: Storyboard.SignupTwoToLocationNotice, sender: nil)
+            self.performSegue(withIdentifier: Storyboard.SignupTwoToTutorial, sender: nil)
           }
         }
     }

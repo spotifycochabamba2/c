@@ -283,6 +283,19 @@ extension User {
     return Result.success(data: true)
   }
   
+  static func isValidUsername(input: String) -> Result<Bool> {
+    let regex = "[^\\s]+"
+    let test = NSPredicate(format:"SELF MATCHES %@", regex)
+    
+    if !test.evaluate(with: input) {
+      let error = NSError(domain: "Signup", code: 0, userInfo: [NSLocalizedDescriptionKey: "Username must not contain spaces."])
+      
+      return Result.fail(error: error)
+    } else {
+      return Result.success(data: true)
+    }
+  }
+  
   static func isValid(password: String) -> Result<Bool> {
     
     guard !password.isEmpty
@@ -311,7 +324,7 @@ extension User {
   
   static var refDatabase = CSFirebase.refDatabase
   static var refDatabaseUsers = refDatabase.child("users")
-  
+  static var refActiveUsernames = refDatabase.child("active-usernames")
   static var refDatabaseProducesByUser = refDatabase.child("produces-by-user")
   
   static var refDatabaseProduces = refDatabase.child("produces")
@@ -767,6 +780,8 @@ extension User {
     andUsername username: String,
     completion: @escaping (NSError?) -> Void
   ) {
+    var username = username
+    
     if firstName.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
       let error = NSError(domain: "Auth", code: 0, userInfo: [
         NSLocalizedDescriptionKey: "First Name value is empty."
@@ -785,7 +800,11 @@ extension User {
       return
     }
     
-    if username.trimmingCharacters(in: CharacterSet.whitespaces).characters.count < 1 {
+    username = username.trimmingCharacters(in: CharacterSet.whitespaces)
+    
+    username = username.lowercased()
+    
+    if username.characters.count < 1 {
       let error = NSError(domain: "Auth", code: 0, userInfo: [
         NSLocalizedDescriptionKey: "Username value is empty."
         ])
@@ -794,9 +813,30 @@ extension User {
       return
     }
     
+    if case Result.fail(let error) = isValidUsername(input: username) {
+      completion(error)
+      return
+    }
+    
     var userId: String?
 
     Ax.serial(tasks: [
+      { done in
+        let refActiveUsername = refActiveUsernames
+                                  .queryOrdered(byChild: "username")
+                                  .queryEqual(toValue: username)
+        
+        refActiveUsername.observeSingleEvent(of: .value, with: { (snap) in
+          if snap.exists() {
+            let error = NSError(domain: "Auth", code: 0, userInfo: [
+              NSLocalizedDescriptionKey: "Username provided is already in use, please provide another one."
+            ])
+            done(error)
+          } else {
+            done(nil)
+          }
+        })
+      },
       { done in
         if let email = email,
            let password = password
@@ -839,6 +879,18 @@ extension User {
         refUser.updateChildValues(data) { (error: Error?, _) in
           done(error as NSError?)
         }
+      },
+      { done in
+        let refActiveUsername = refActiveUsernames.childByAutoId()
+        
+        var data = [String: Any]()
+        data["username"] = username
+        
+        refActiveUsername.updateChildValues(
+          data,
+          withCompletionBlock: { (error, ref) in
+            done(error as NSError?)
+        })
       }
     ]) { (error) in
       if let error = error {

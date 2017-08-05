@@ -91,7 +91,10 @@ public class PrivacyPolicyVC: UIViewController {
     if comesFromSettings {
       dismiss(animated: true)
     } else {
-      performSegue(withIdentifier: Storyboard.PrivacyToTutorial, sender: nil)
+      NotificationCenter.default.post(
+        name: NSNotification.Name(rawValue: Constants.Ids.SignupTwoToHome),
+        object: nil
+      )
     }
   }
   

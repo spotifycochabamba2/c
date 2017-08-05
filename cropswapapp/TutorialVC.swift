@@ -64,10 +64,7 @@ public class TutorialVC: UIViewController {
   }
   
   @IBAction func skipButtonTouched() {
-    NotificationCenter.default.post(
-      name: NSNotification.Name(rawValue: Constants.Ids.SignupTwoToHome),
-      object: nil
-    )
+    performSegue(withIdentifier: Storyboard.TutorialToLocationNotice, sender: nil)
   }
   
   func getProduceImageViewController(name: String) -> UIViewController {

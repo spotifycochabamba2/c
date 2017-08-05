@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,18 +28,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRk-ew-E42">
-                                <connections>
-                                    <segue destination="1Yn-Pi-5zc" kind="embed" id="26k-SP-6sg"/>
-                                </connections>
-                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nX-Sh-Ifp">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropswap-coming-soon" translatesAutoresizingMaskIntoConstraints="NO" id="VSL-qt-okw">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="VSL-qt-okw" secondAttribute="height" multiplier="332:451" id="TMu-sl-J9B"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="VSL-qt-okw" secondAttribute="bottom" constant="48" id="4w3-Jg-WTC"/>
+                                    <constraint firstItem="VSL-qt-okw" firstAttribute="top" secondItem="2nX-Sh-Ifp" secondAttribute="top" constant="49" id="HDq-jr-WNR"/>
+                                    <constraint firstItem="VSL-qt-okw" firstAttribute="leading" secondItem="2nX-Sh-Ifp" secondAttribute="leading" constant="21" id="keM-nj-3PD"/>
+                                    <constraint firstAttribute="trailing" secondItem="VSL-qt-okw" secondAttribute="trailing" constant="22" id="pvk-1Z-beB"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wry-CM-tQv">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="1yK-yJ-aSZ"/>
+                                    <constraint firstAttribute="height" constant="56.5" id="ntQ-i1-Gkf"/>
+                                </constraints>
+                                <string key="text">Coming
+Soon</string>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="23"/>
+                                <color key="textColor" red="0.21568627450980393" green="0.83921568627450982" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QRk-ew-E42" firstAttribute="leading" secondItem="yc0-By-QtE" secondAttribute="leading" id="57C-cA-cys"/>
-                            <constraint firstItem="pdr-ml-Pxc" firstAttribute="top" secondItem="QRk-ew-E42" secondAttribute="bottom" id="5C1-Wo-igG"/>
-                            <constraint firstItem="QRk-ew-E42" firstAttribute="top" secondItem="yc0-By-QtE" secondAttribute="top" id="B32-9z-6HK"/>
-                            <constraint firstAttribute="trailing" secondItem="QRk-ew-E42" secondAttribute="trailing" id="vUt-hb-BNN"/>
+                            <constraint firstAttribute="trailing" secondItem="2nX-Sh-Ifp" secondAttribute="trailing" id="0jM-2d-5ES"/>
+                            <constraint firstItem="Wry-CM-tQv" firstAttribute="top" secondItem="jQD-SZ-iPu" secondAttribute="bottom" constant="30" id="2hR-aT-ugI"/>
+                            <constraint firstItem="2nX-Sh-Ifp" firstAttribute="top" secondItem="Wry-CM-tQv" secondAttribute="bottom" constant="12.5" id="6cz-FM-klS"/>
+                            <constraint firstItem="Wry-CM-tQv" firstAttribute="centerX" secondItem="yc0-By-QtE" secondAttribute="centerX" id="Fe6-CJ-4d5"/>
+                            <constraint firstItem="2nX-Sh-Ifp" firstAttribute="leading" secondItem="yc0-By-QtE" secondAttribute="leading" id="OsG-uS-lnO"/>
+                            <constraint firstItem="pdr-ml-Pxc" firstAttribute="top" secondItem="2nX-Sh-Ifp" secondAttribute="bottom" id="vpe-HV-O54"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -143,6 +168,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cropswap-coming-soon" width="332" height="384"/>
         <image name="cropswap-location-icon" width="10" height="15"/>
         <image name="cropswap-user-icon" width="14" height="14"/>
     </resources>
