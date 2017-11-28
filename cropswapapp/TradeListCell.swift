@@ -34,7 +34,6 @@ class TradeListCell: UITableViewCell {
   
   func userImageViewTapped() {
     userImageTapped(anotherUserId, username ?? "")
-    print("user id touched was: \(anotherUserId)")
   }
   
   var hasNewNotifications = false {

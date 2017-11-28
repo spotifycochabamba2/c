@@ -171,7 +171,6 @@ extension Camera: AVCapturePhotoCaptureDelegate {
       }
       
       DispatchQueue.main.async { [weak self] in
-        print(capturedImage)
         if let image = capturedImage {
           self?.callback(image)
         }

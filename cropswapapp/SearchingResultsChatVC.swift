@@ -120,7 +120,6 @@ extension SearchingResultsChatVC: UISearchControllerDelegate, UISearchBarDelegat
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     let text = searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
     if text.characters.count >= 1 {
-      print("searching")
       SVProgressHUD.show()
       
       User.searchFor(filter: text, completion: { [weak self] (users) in

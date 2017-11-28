@@ -17,7 +17,7 @@ class InstagramVC: UIViewController {
   var onlyForGettingPictures = false
   var userIdOnlyForGettingPictures: String?
   
-  var loggedSuccessfully: (Bool) -> Void = { _ in print("what?") }
+  var loggedSuccessfully: (Bool) -> Void = { _ in  }
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -63,7 +63,6 @@ extension InstagramVC: UIWebViewDelegate {
   
   func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
-    print(request.url?.absoluteString)
     if let code = Utils.getQueryStringParameter(url: request.url, param: "code") {
       isCodePresent = true
       
@@ -118,7 +117,6 @@ extension InstagramVC: UIWebViewDelegate {
                 
                 userFound = userReturned
                 isNewUser = isNew ?? false
-                print(isNewUser)
                 
                 done(nil)
                 break
@@ -136,12 +134,10 @@ extension InstagramVC: UIWebViewDelegate {
           self.present(alert, animated: true)
         } else {
           if userFound != nil {
-            print(self.loggedSuccessfully)
             self.wasLoggedIn = true
             DispatchQueue.main.async {
               self.dismiss(animated: true) {
                 DispatchQueue.main.async {
-                  print(self.loggedSuccessfully)
                   self.loggedSuccessfully(isNewUser)
                 }
               }

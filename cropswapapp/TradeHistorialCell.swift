@@ -37,7 +37,6 @@ class TradeHistorialCell: UITableViewCell {
   var myProduces = [(Produce, Int)]() {
     didSet {
       myProduces.forEach { produce in
-        print(produce.0.id)
         if produce.0.id == Constants.Ids.moneyId {
           addProduceToMyList(
             pictureURL: "",
@@ -69,7 +68,6 @@ class TradeHistorialCell: UITableViewCell {
   var anotherProduces = [(Produce, Int)]() {
     didSet {
       anotherProduces.forEach { produce in
-        print(produce.0.id)
         if produce.0.id == Constants.Ids.moneyId {
           addProduceToAnothersList(
             pictureURL: "",

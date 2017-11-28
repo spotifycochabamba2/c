@@ -341,9 +341,6 @@ class TradeHomeVC: UIViewController {
     
     let newAnotherProduces = tradeDetailVC.anotherProduces.filter { return $0.1 > 0 }    
     
-    print(newOwnerProduces)
-    print(newAnotherProduces)
-    
     var transactionMethod = tradeStatusVC?.transactionMethod
     
     if let tMethod = tradeStatusVC?.transactionMethod,

@@ -19,9 +19,7 @@ class RelatedProduceCell: UICollectionViewCell {
   }
   
   override func awakeFromNib() {
-    super.awakeFromNib()
-    
-    print("RelatedProduceCell awakeFromNib")
+    super.awakeFromNib()    
     
     self.contentView.isOpaque = false
     self.backgroundView?.isOpaque = false

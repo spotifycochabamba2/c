@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 import Ax
@@ -116,7 +116,6 @@ public struct Produce {
   }
   
   init?(json: [String: Any]?) {
-    print(json?["id"])
     guard
       let json = json,
       let id = json["id"] as? String,
@@ -174,7 +173,6 @@ public struct Produce {
 //    }
     
     if let jsonTags = json["tags"] as? [String: Any] {
-      print(jsonTags)
       tags3 = jsonTags
 //      for (key, _) in jsonTags {
 //        if let jsonTag = jsonTags[key] as? [Any] {
@@ -245,46 +243,107 @@ extension Produce {
                 instagramAccessToken: instagramAccessToken
               )
     var images = [(String, String)]()
+    var userToken: String?
     
-    Alamofire
-      .request(
-        url,
-        method: .get,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let data):
-          if
-            let data = data as? [String: Any],
-            let array = data["data"] as? [[String: Any]],
-            array.count > 0
-          {
-            print(array.count)
-            var counter = 0
-            for element in array {
-              if
-                let imagesFound = element["images"] as? [String: Any],
-                let thumbnail = imagesFound["thumbnail"] as? [String: Any],
-                let standard = imagesFound["standard_resolution"] as? [String: Any],
-                let smallImageURL = thumbnail["url"] as? String,
-                let bigImageURL = standard["url"] as? String
-              {
-                if counter < 10 {
-                  counter += 1
-                  images.append(smallImageURL, bigImageURL)
-                } else {
-                  break
-                }
-              }
-            }
-          }
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-          completion(Result.success(data: images))
-        case .failure(let error):
-          completion(Result.fail(error: error as NSError))
+          done(error)
         }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .get,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let data):
+                let data = data as? [String: Any]
+                
+                if let array = data?["data"] as? [[String: Any]],
+                  array.count > 0
+                {
+                  var counter = 0
+                  for element in array {
+                    if
+                      let imagesFound = element["images"] as? [String: Any],
+                      let thumbnail = imagesFound["thumbnail"] as? [String: Any],
+                      let standard = imagesFound["standard_resolution"] as? [String: Any],
+                      let smallImageURL = thumbnail["url"] as? String,
+                      let bigImageURL = standard["url"] as? String
+                    {
+                      if counter < 10 {
+                        counter += 1
+                        images.append(smallImageURL, bigImageURL)
+                      } else {
+                        break
+                      }
+                    }
+                  }
+                  
+                  done(nil)
+                } else {
+                  let message = data?["message"] as? String ?? ""
+                  
+                  let error = NSError(
+                    domain: "Produce",
+                    code: 0,
+                    userInfo: [
+                      NSLocalizedDescriptionKey: message
+                    ]
+                  )
+                  
+                  done(error)
+                }
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      if let error = error {
+        completion(Result.fail(error: error))
+      } else {
+        completion(Result.success(data: images))
+      }
     }
   }
   
@@ -341,13 +400,10 @@ extension Produce {
       if snap.exists() {
         if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
           tags = dictionaries.flatMap {
-            print($0.key)
-            print($0.value)
             
             var value = [String: Any]()
             value[$0.key] = $0.value
             
-            print(value)
             
             return value
           }
@@ -355,6 +411,21 @@ extension Produce {
       }
       
       completion(tags)
+    }
+  }
+  static func searchFor(
+    filter: String,
+    radius: Int,
+    latitude: Double,
+    longitude: Double,
+    completion: @escaping(NSError?, [Produce]) -> Void
+  ) {
+    Algolia.searchFor(
+      filter: filter,
+      radius: radius,
+      latitude: latitude,
+      longitude: longitude) { (error, produces) in
+        completion(error, produces)
     }
   }
   
@@ -365,7 +436,7 @@ extension Produce {
     let producesFound = [Produce]()
     
     if (User.currentUser?.uid) != nil {
-      Algolia.searchFor(filter: filter, completion: { (produces) in
+      Algolia.searchFor(filter: filter, completion: { (error, produces) in
         completion(produces)
       })
     } else {
@@ -654,7 +725,6 @@ extension Produce {
     valuesForProduce["price"] = price
     valuesForProduce["state"] = state
     
-    print(tags)
     
 //    if tags.count > 0 {
 //      var val = [String: Any]()
@@ -967,7 +1037,6 @@ extension Produce {
         if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
           produceTypes = dictionaries.flatMap {
             let val = $0.value as? [String: Any]
-            print(val)
             if let name = val?["name"] as? String {
               return (name: name, quantityType: "")
             } else {

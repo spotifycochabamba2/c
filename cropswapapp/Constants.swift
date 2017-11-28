@@ -63,7 +63,10 @@ struct Constants {
   struct Server {
     static var stringURL: String {
 //      let url = "http://127.0.0.1:5000/"
-      let url = "https://aqueous-river-57184.herokuapp.com/"
+//      let url = "https://aqueous-river-57184.herokuapp.com/"
+//      let url = "http://localhost:5000/cropswap-60191/us-central1/app/"
+//       let url = "http://6efe4d52.ngrok.io/cropswap-60191/us-central1/app/"
+      let url = "https://us-central1-cropswap-60191.cloudfunctions.net/app/"
 //      let url = "http://192.168.1.6:5000/"
       
       return url
@@ -72,9 +75,10 @@ struct Constants {
   
   struct Instagram {
     private static let clientID = "265265bbe53b4934b9a30ae93597277e"
-//    private static let redirectURI = "http://127.0.0.1:5000//instagram-callback"
-    private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
-//    private static let redirectURI = "http://192.168.1.6:5000:5000/instagram-callback"
+    //    private static let redirectURI = "http://127.0.0.1:5000//instagram-callback"
+    //    private static let redirectURI = "https://aqueous-river-57184.herokuapp.com/instagram-callback"
+    //    private static let redirectURI = "http://192.168.1.6:5000:5000/instagram-callback"
+    private static let redirectURI = "https://us-central1-cropswap-60191.cloudfunctions.net/app/instagram-callback"
     
     static var authURL: String {
       let url = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=code"

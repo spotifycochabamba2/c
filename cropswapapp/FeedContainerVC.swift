@@ -22,6 +22,9 @@ public class FeedContainerVC: UIViewController {
   var isMapViewActive = false
   
   var leftBarButton: UIButton!
+  
+  var isEnabledFilter = false
+  var radiusFilterInMiles = 0
 }
 
 extension FeedContainerVC {
@@ -49,6 +52,10 @@ extension FeedContainerVC {
   public func didSelectDistance(_ distance: Int) {
     mapChild?.didSelectDistance(distance)
     producesChild?.didSelectDistance(distance)
+    
+    isEnabledFilter = distance > 0
+    radiusFilterInMiles = distance
+    
 //    mapChild?.loadUsers(
 //      radius: distance,
 //      completion: {
@@ -139,9 +146,8 @@ extension FeedContainerVC {
   }
   
   func rightBarButtonTouched() {
-    //    navigationController?.pushViewController(produceSearchController, animated: true)
-    print(presentedViewController)
-    print(presentingViewController)
+    searchResultFeedVC.isEnabledFilter = isEnabledFilter
+    searchResultFeedVC.radiusFilterInMiles = radiusFilterInMiles
     
     tabBarController?.present(produceSearchController, animated: true) {
       

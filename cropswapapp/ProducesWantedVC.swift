@@ -110,9 +110,9 @@ extension ProducesWantedVC: UICollectionViewDelegateFlowLayout {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     var produceType = produceTypes[indexPath.row]
-    print("before produceType: \(produceType.isSelected)")
+
     produceType.isSelected = !produceType.isSelected
-    print("before produceType: \(produceType.isSelected)")
+
     produceTypes[indexPath.row] = produceType
     guard let userId = User.currentUser?.uid else { return }
     
@@ -124,7 +124,7 @@ extension ProducesWantedVC: UICollectionViewDelegateFlowLayout {
         completion: { [weak self] (error) in
           SVProgressHUD.dismiss()
           if let error = error {
-            print(error)
+
           } else {
             self?.collectionView?.reloadItems(at: [indexPath])
           }
@@ -138,7 +138,7 @@ extension ProducesWantedVC: UICollectionViewDelegateFlowLayout {
         completion: { [weak self] (error) in
           SVProgressHUD.dismiss()
           if let error = error {
-            print(error)
+
           } else {
             self?.collectionView?.reloadItems(at: [indexPath])
           }
@@ -154,7 +154,7 @@ extension ProducesWantedVC: UICollectionViewDelegateFlowLayout {
     let produceType = produceTypes[indexPath.row]
 
     cell.name = produceType.produceType.name
-    print("changing produceType: \(produceType.isSelected)")
+
     cell.isProduceSelected = produceType.isSelected
     cell.configure()
 

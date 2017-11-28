@@ -126,7 +126,6 @@ class MakeDealVC: UIViewController {
   
   var currentPageOnMyGarden: Int = 0 {
     didSet {
-      print(currentPageOnMyGarden)
       if currentPageOnMyGarden >= 0 {
         let produce = myProduces[currentPageOnMyGarden]
         showProduceOnMyGardenUI(produce)
@@ -137,7 +136,6 @@ class MakeDealVC: UIViewController {
   
   var currentPageOnAnotherGarden: Int = 0 {
     didSet {
-      print(currentPageOnAnotherGarden)
       if currentPageOnAnotherGarden >= 0 {
         let produce = anotherProduces[currentPageOnAnotherGarden]
         showProduceOnAnothersGardenUI(produce)
@@ -367,15 +365,12 @@ class MakeDealVC: UIViewController {
             
             let produceIndex = self?.anotherProduces.index(where: { (produce) -> Bool in
               let produceId = produce["id"] as! String
-              print(produceId)
-              print(self?.currentProduceId)
               
               return produceId == self?.currentProduceId ?? ""
             })
             
             
             
-            print(produceIndex)
             
             DispatchQueue.main.async {
               self?.anotherGardenCollectionView.reloadData()
@@ -577,19 +572,10 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
   }
   
   func processQuantity(produceId: String, index: Int, whoseGarden: AddItemType, quantity: Int) {
-    print(produceId)
-    print(index)
-    print(whoseGarden)
-    print(quantity)
     
     switch whoseGarden {
     case .toGardensAnother:
-      print(currentPageOnAnotherGarden)
-      print(index)
       if currentPageOnAnotherGarden == index {
-        print(anotherProduces[index])
-        print(anotherProduces[index]["quantity"] as? Int)
-        
         let liveState = anotherProduces[index]["liveState"] as? String ?? ""
         let produceQuantity = anotherProduces[index]["quantity"] as? Int ?? 0
         let value = anotherProduces[index]["quantityAdded"] as? Int ?? 0
@@ -620,8 +606,6 @@ extension MakeDealVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         }
       }
     case .toMyGarden:
-      print(currentPageOnMyGarden)
-      print(index)
       if currentPageOnMyGarden == index {
         
         let produceQuantity = myProduces[index]["quantity"] as? Int ?? 0

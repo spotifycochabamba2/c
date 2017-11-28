@@ -42,7 +42,7 @@ class TradeHistorialVC: UITableViewController {
             case .success(let user):
               self?.anotherUser = user
             case .fail(let error):
-              print(error)
+              break
             }
             
             done(nil)
@@ -71,7 +71,7 @@ class TradeHistorialVC: UITableViewController {
             case .success(let deal):
               self?.deal = deal
             case .fail(let error):
-              print(error)
+              break
             }
             
             done(nil)

@@ -85,10 +85,8 @@ public class WallVC2: UITableViewController {
             case .fail(_):
               break
             }
-            
-            print(this.posts.count)
+
             this.posts.insert((post, false), at: 0)
-            print(this.posts.count)
             
             let indexSet = IndexSet(integer: 0)
             
@@ -219,7 +217,6 @@ public class WallVC2: UITableViewController {
     if section >= 0 {
       let post = posts[section].0
       
-      print(enabled)
       posts[section].1 = enabled
       
       if enabled {
@@ -257,7 +254,6 @@ public class WallVC2: UITableViewController {
         
         
         //        tableView.reloadRows(at: indexPaths, with: .none)
-        print(section)
         let indexSet = IndexSet(integer: section)
         tableView.reloadSections(indexSet, with: .automatic)
       }
@@ -410,7 +406,6 @@ extension WallVC2 {
           preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-          print("cancel touched")
           
           DispatchQueue.main.async {
             this.tableView.setEditing(false, animated: true)
@@ -418,7 +413,6 @@ extension WallVC2 {
         }))
         
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
-          print("ok touched")
           
           if let wallOwnerId = this.wallOwnerId,
              let comment = comment

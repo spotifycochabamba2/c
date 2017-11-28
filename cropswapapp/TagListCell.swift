@@ -25,7 +25,6 @@ public class TagListCell: UITableViewCell {
   var tagList: [String: Any]? {
     didSet {
       if let tagList = tagList {
-        print(tagList)
         if let keyGroup = tagList.keys.first {
           tagListNameLabel.text =  Constants.Tag.tagGroupNames[keyGroup]
           if let tags = tagList[keyGroup] as? [String: Any] {
@@ -49,7 +48,6 @@ extension TagListCell {
     super.prepareForReuse()
     
     tagListNameLabel.text = ""
-    print(" before einstein \(tagListSelectedStackView.frame.height)")
 //    labels.forEach {
 //      tagListSelectedStackView.removeArrangedSubview($0)
 //      $0.removeFromSuperview()
@@ -62,7 +60,6 @@ extension TagListCell {
     }
     views.removeAll()
     
-     print(" after einstein \(tagListSelectedStackView.frame.height)")
 //    tagListSelectedStackView.layoutIfNeeded()
   }
   

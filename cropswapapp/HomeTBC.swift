@@ -37,8 +37,6 @@ class HomeTBC: UITabBarController {
     let tradeListTabBarItem = tabBar.items?[1]
     let chatTabBarItem = tabBar.items?[4]
     
-    print(tradeListTabBarItem)
-    
     let tabBarFont = UIFont(name: "Montserrat-Light", size: 13)
     
     let tabBarAttributesDictionary: [String: AnyObject]? = [
@@ -52,7 +50,6 @@ class HomeTBC: UITabBarController {
     
     let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
     UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { [weak self] (_, _) in
-      print("belanova from requestAuthorization")
       self?.registerDeviceToken()
     })
     
@@ -84,7 +81,6 @@ class HomeTBC: UITabBarController {
           let isRequestLocationNotification = defaults.object(forKey: "isRequestLocationNotification") as? Bool,
           isRequestLocationNotification
     {
-      print(defaults.object(forKey: "deal") as? [String: Any])
       if
         let deal = defaults.object(forKey: "deal") as? [String: Any],
         let dealId = deal["dealId"] as? String,
@@ -184,7 +180,7 @@ class HomeTBC: UITabBarController {
         
         // call
         
-        CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+        CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (error, counter) in
           UIApplication.shared.applicationIconBadgeNumber = counter
         })
         
@@ -200,7 +196,7 @@ class HomeTBC: UITabBarController {
         DispatchQueue.main.async {
           
           // call
-          CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+          CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (error, counter) in
             UIApplication.shared.applicationIconBadgeNumber = counter
           })
           
@@ -237,18 +233,15 @@ class HomeTBC: UITabBarController {
   }
   
   func tokenRefreshNotification(notification: NSNotification) {
-    print("belanova from tokenRefreshNotification")
     registerDeviceToken()
   }
   
   func registerDeviceToken() {
-    print("belanova from registerDeviceToken \(FIRInstanceID.instanceID().token())")
-    
     if
       let deviceToken = FIRInstanceID.instanceID().token(),
       let userId = User.currentUser?.uid {
       User.updateUser(byId: userId, deviceToken: deviceToken, completion: { (error) in
-        print(error)
+
       })
     }
     
@@ -261,7 +254,6 @@ class HomeTBC: UITabBarController {
   func requestLocationPushNotificationGot(notification: Notification) {
     if let data = notification.object as? [String: Any] {
       if let deal = data["deal"] as? [String: Any] {
-        print(deal)
         showTradeDetail(deal)
         //performSegue(withIdentifier: Storyboard.TradeListToTradeDetail, sender: deal)
       }
@@ -269,16 +261,12 @@ class HomeTBC: UITabBarController {
   }
   
   func tradePushNotificationGot(notification: Notification) {
-    print(notification.object)
-    
     if let data = notification.object as? [String: Any] {
       showTradeDetail(data)
     }
   }
   
   func chatPushNotificationGot(notification: Notification) {
-    print(notification.object)
-    
     if let data = notification.object as? [String: Any] {
       showChat(data)
     }
@@ -287,11 +275,8 @@ class HomeTBC: UITabBarController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Storyboard.HomeToTradeHome {
       let nv = segue.destination as? UINavigationController
-      print(nv)
       let vc = nv?.viewControllers.first as? TradeHomeVC
-      print(vc)
       let data = sender as? [String: Any]
-      print(data)
       
       vc?.originalOwnerUserId = data?["originalOwnerUserId"] as? String
       vc?.originalOwnerProducesCount = data?["originalOwnerProducesCount"] as? Int ?? 0
@@ -319,9 +304,7 @@ class HomeTBC: UITabBarController {
       
       let storyboard = UIStoryboard(name: "TradeDetail", bundle: nil)
       let ncTradeChatVC = storyboard.instantiateViewController(withIdentifier: "NCTradeChatVC") as? UINavigationController
-      print(ncTradeChatVC)
       let vc = ncTradeChatVC?.viewControllers.first as? TradeChatVC
-      print(vc)
 //      let data = sender as? [String: Any]
       
       vc?.anotherUserId = data["senderId"] as? String
@@ -330,10 +313,8 @@ class HomeTBC: UITabBarController {
       
       if let ncTradeChatVC = ncTradeChatVC {
 //        self?.present(ncTradeChatVC, animated: true)
-        print(self)
 
         let rootVC = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController
-        print(rootVC?.visibleViewController);
         
         rootVC?.visibleViewController?.present(ncTradeChatVC, animated: true)
       }

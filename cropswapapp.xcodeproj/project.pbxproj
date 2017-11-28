@@ -135,6 +135,7 @@
 		69B685621EABA60E003C8188 /* TradeHistorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B685611EABA60E003C8188 /* TradeHistorialCell.swift */; };
 		69B685651EABAA20003C8188 /* TradeHistorialProduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B685641EABAA20003C8188 /* TradeHistorialProduceView.swift */; };
 		69B685671EABAA31003C8188 /* TradeHistorialProduceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B685661EABAA31003C8188 /* TradeHistorialProduceView.xib */; };
+		69C198721F8430C00045433F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C198711F8430C00045433F /* UILabelExtension.swift */; };
 		69C401341E81F42E00F5F5D8 /* HomeTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C401331E81F42E00F5F5D8 /* HomeTBC.swift */; };
 		69C401381E8201FA00F5F5D8 /* GardenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C401371E8201FA00F5F5D8 /* GardenVC.swift */; };
 		69C4013A1E82021600F5F5D8 /* TradeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C401391E82021600F5F5D8 /* TradeListVC.swift */; };
@@ -179,6 +180,7 @@
 		69EF6E631E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E621E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift */; };
 		69EF6E651E699E6B0033454F /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E641E699E6B0033454F /* HomeCell.swift */; };
 		69EF6E671E6AF24F0033454F /* UITableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF6E661E6AF24F0033454F /* UITableViewControllerExtension.swift */; };
+		69F28CAE1F88310E00AEBDEC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F28CAD1F88310E00AEBDEC /* StringExtension.swift */; };
 		69F85D7F1ECA24E6008E3835 /* CSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F85D7E1ECA24E6008E3835 /* CSTextView.swift */; };
 		69FB72511E9294C100D053FB /* ProfileChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB72501E9294C100D053FB /* ProfileChildVC.swift */; };
 		69FB72531E92D09700D053FB /* EditProfileContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB72521E92D09700D053FB /* EditProfileContainerVC.swift */; };
@@ -319,6 +321,7 @@
 		69B685611EABA60E003C8188 /* TradeHistorialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeHistorialCell.swift; sourceTree = "<group>"; };
 		69B685641EABAA20003C8188 /* TradeHistorialProduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeHistorialProduceView.swift; sourceTree = "<group>"; };
 		69B685661EABAA31003C8188 /* TradeHistorialProduceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeHistorialProduceView.xib; sourceTree = "<group>"; };
+		69C198711F8430C00045433F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		69C401331E81F42E00F5F5D8 /* HomeTBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTBC.swift; sourceTree = "<group>"; };
 		69C401371E8201FA00F5F5D8 /* GardenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GardenVC.swift; sourceTree = "<group>"; };
 		69C401391E82021600F5F5D8 /* TradeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeListVC.swift; sourceTree = "<group>"; };
@@ -363,6 +366,7 @@
 		69EF6E621E68ED0C0033454F /* CHTCollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHTCollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
 		69EF6E641E699E6B0033454F /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		69EF6E661E6AF24F0033454F /* UITableViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewControllerExtension.swift; sourceTree = "<group>"; };
+		69F28CAD1F88310E00AEBDEC /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		69F85D7E1ECA24E6008E3835 /* CSTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSTextView.swift; sourceTree = "<group>"; };
 		69FB72501E9294C100D053FB /* ProfileChildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileChildVC.swift; sourceTree = "<group>"; };
 		69FB72521E92D09700D053FB /* EditProfileContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileContainerVC.swift; sourceTree = "<group>"; };
@@ -841,6 +845,8 @@
 				69092ECD1E6467B4000C6952 /* UIImageExtension.swift */,
 				69EF6E661E6AF24F0033454F /* UITableViewControllerExtension.swift */,
 				6982CC9C1E85605B00A41E8D /* UIFontExtension.swift */,
+				69C198711F8430C00045433F /* UILabelExtension.swift */,
+				69F28CAD1F88310E00AEBDEC /* StringExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1069,6 +1075,7 @@
 				691FE0FD1E60DC530031DAA0 /* Camera.swift in Sources */,
 				69092ECE1E6467B4000C6952 /* UIImageExtension.swift in Sources */,
 				6900F8B21E5B3983002CF473 /* User.swift in Sources */,
+				69C198721F8430C00045433F /* UILabelExtension.swift in Sources */,
 				6906748E1EF2F74800416C21 /* FeedMapVC.swift in Sources */,
 				69288E231EDF15BB008A5179 /* Algolia.swift in Sources */,
 				69EDD9091F0FD8F80086371A /* Comment.swift in Sources */,
@@ -1136,6 +1143,7 @@
 				6914F28D1EA5552F00142CB8 /* ChooseDetailListVC.swift in Sources */,
 				69B685601EAAC06D003C8188 /* Message.swift in Sources */,
 				696A85EE1F141EB100948079 /* WallPostCell2.swift in Sources */,
+				69F28CAE1F88310E00AEBDEC /* StringExtension.swift in Sources */,
 				697B82C81EE062E20068673C /* Inbox.swift in Sources */,
 				69A5F1811EF0283000533FFA /* TagListChildVC.swift in Sources */,
 				696A85E71F14198000948079 /* WallVC2.swift in Sources */,
@@ -1313,8 +1321,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cropswap.cropswapapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "57b70b97-953e-4037-8bdf-ca764b0d9c04";
-				PROVISIONING_PROFILE_SPECIFIER = CropswapAppDisPush;
+				PROVISIONING_PROFILE = "ef93c0b6-01f8-45f3-8d66-63324beebba5";
+				PROVISIONING_PROFILE_SPECIFIER = CropswapAppDisPushLast;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

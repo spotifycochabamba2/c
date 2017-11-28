@@ -69,7 +69,6 @@ class SignupVC: UITableViewController {
       let vc = segue.destination as? SignupTwoVC
       
       let data = sender as? [String: Any]
-      print(sender)
       
       vc?.didPerformSegueToHome = performSegueToHome
       vc?.email = data?["email"] as? String
@@ -164,11 +163,9 @@ extension SignupVC {
       
 //      let height = view.frame.size.height - 
       
-      print(tableView.frame.height)
       //420
       height = view.frame.size.height - CGFloat(360 + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height ?? 0))
       
-      print(height)
       
       if height <= 80 {
         height = 0

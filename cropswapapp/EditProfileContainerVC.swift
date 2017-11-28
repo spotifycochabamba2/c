@@ -140,7 +140,6 @@ class EditProfileContainerVC: UIViewController {
               case .fail(let error):
                 done(error)
               case .success(let pictureURL):
-                print(pictureURL)
                 done(nil)
               }
           }

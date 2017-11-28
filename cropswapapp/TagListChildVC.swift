@@ -36,9 +36,6 @@ extension TagListChildVC {
       DispatchQueue.main.async {
         SVProgressHUD.dismiss()
       }
-      
-      print(tags.count)
-      print(tags)
       self?.tagList = tags
     }
     

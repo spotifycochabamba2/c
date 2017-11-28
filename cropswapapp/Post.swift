@@ -12,6 +12,7 @@ import Alamofire
 import SwiftyJSON
 import Ax
 import FirebaseStorage
+import FirebaseAuth
 
 struct Post {
   
@@ -305,36 +306,90 @@ extension Post {
     byUserId userId: String,
     completion: @escaping (Result<[Post]>) -> Void
   ) {
-    
     let url = "\(Constants.Server.stringURL)api/posts"
     
     var data = [String: Any]()
     data["userId"] = userId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let result):
-          if let result = result as? [String: Any],
-             let posts = result["posts"] as? [[String: Any]]
-          {
-            completion(Result.success(data: posts.flatMap{Post(json: $0)}))
-          } else {
-            let error = NSError(domain: "Posting", code: 0, userInfo: [
-              NSLocalizedDescriptionKey: "Couldn't get posts"
-            ])
-            completion(Result.fail(error: error))
-          }
-        case .failure(let error):
-          completion(Result.fail(error: error as NSError))
+    var userToken: String?
+    var posts = [Post]()
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let result):
+                let result = result as? [String: Any]
+                
+                if let postsFound = result?["posts"] as? [[String: Any]]
+                {
+                  posts = postsFound.flatMap{Post(json: $0)}
+                  done(nil)
+                } else {
+                  let message = result?["message"] as? String ?? "Couldn't get posts"
+                  let error = NSError(domain: "Posting", code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: message
+                    ])
+                  done(error)
+                }
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      if let error = error {
+        completion(Result.fail(error: error))
+      } else {
+        completion(Result.success(data: posts))
+      }
     }
   }
   

@@ -66,7 +66,6 @@ class HomeCell: UICollectionViewCell {
   }
   
   @IBAction func addButtonTouched() {
-    print("add button was touched.")
   }
 }
 

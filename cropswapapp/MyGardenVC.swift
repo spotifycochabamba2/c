@@ -56,7 +56,6 @@ class MyGardenVC: UICollectionViewController {
               
               done(nil)
             case .fail(let error):
-              print(error)
               done(error)
             }
           }
@@ -109,7 +108,6 @@ class MyGardenVC: UICollectionViewController {
     let rightButtonIcon = setNavIcon(imageName: "mygarden-settings-icon", size: CGSize(width: 28, height: 28), position: .right)
     rightButtonIcon.addTarget(self, action: #selector(rightButtonIconTouched), for: .touchUpInside)
     
-    print(leftButtonIcon)
   }
   
   func rightButtonIconTouched() {
@@ -143,7 +141,6 @@ class MyGardenVC: UICollectionViewController {
       let vc = nv?.viewControllers.first as? AddProduceVC
       vc?.currentState = sender as? AddProduceVCState
       vc?.currentProduceId = produceSelectedId
-      print(vc?.currentProduceId)
     }
   }
   
@@ -159,7 +156,6 @@ class MyGardenVC: UICollectionViewController {
   }
   
   func pictureTaken(image: UIImage, _: ProducePhotoNumber) {
-    print(image)
     
     guard let imageData = UIImageJPEGRepresentation(image, 0.2) else {
       let alert = UIAlertController(title: "Error", message: "Image provided not valid", preferredStyle: .alert)

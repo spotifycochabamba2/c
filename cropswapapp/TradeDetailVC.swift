@@ -52,7 +52,7 @@ class TradeDetailVC: UIViewController {
   
   var currentPageOnMyGarden: Int = 0 {
     didSet {
-      print(currentPageOnMyGarden)
+
       if currentPageOnMyGarden >= 0 {
         let produce = myProduces[currentPageOnMyGarden]
         showProduceOnMyGardenUI(produce)
@@ -63,7 +63,7 @@ class TradeDetailVC: UIViewController {
   
   var currentPageOnAnotherGarden: Int = 0 {
     didSet {
-      print(currentPageOnAnotherGarden)
+
       if currentPageOnAnotherGarden >= 0 {
         let produce = anotherProduces[currentPageOnAnotherGarden]
         showProduceOnAnothersGardenUI(produce)
@@ -195,9 +195,7 @@ class TradeDetailVC: UIViewController {
                 
                 let ownerPayWithWork = deal.anotherPayWithWork
                 let ownerPayWithMoney = deal.anotherPayWithMoney
-                
-                print(myProducesFound.count)
-                print(ownerProduces.count)
+
                 
                 anotherProducesFound.forEach { anotherProduce in
                   var exists = false
@@ -371,7 +369,7 @@ class TradeDetailVC: UIViewController {
       vc?.isReadOnly = true
       
       produceContainerVC = vc
-      print("backstreet \(produceContainerVC)")
+
 //      NotificationCenter.default.addObserver(
 //        self,
 //        selector: #selector(dismissModals(notification:)),
@@ -429,7 +427,7 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
       produceSelected = myProduces[indexPath.row].0
     }
     
-    print(dealState)
+
     if cell.isWorkerCircle,
        dealState?.rawValue ?? "" == DealState.tradeRequest.rawValue
     {
@@ -477,10 +475,6 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
       cell.isAnotherProduce = false
     }
     
-    print(produceTuple?.0)
-    print(produceTuple?.0.firstPictureURL)
-    
-    
     cell.imageURLString = produceTuple?.0.firstPictureURL
     cell.produceId = produceTuple?.0.id
     cell.tag = indexPath.row
@@ -495,15 +489,10 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
   }
   
   func processQuantity(produceId: String, index: Int, whoseGarden: AddItemType, quantity: Int) {
-    print(produceId)
-    print(index)
-    print(whoseGarden)
-    print(quantity)
     
     switch whoseGarden {
     case .toGardensAnother:
-      print(currentPageOnAnotherGarden)
-      print(index)
+
       if currentPageOnAnotherGarden == index {
         let produce = anotherProduces[index].0
         let value = anotherProduces[index].1
@@ -537,8 +526,6 @@ extension TradeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
       }
     case .toMyGarden:
-      print(currentPageOnMyGarden)
-      print(index)
       if currentPageOnMyGarden == index {
         let produce = myProduces[index].0
         let value = myProduces[index].1

@@ -146,11 +146,9 @@ class EditProfileChildVC: UITableViewController {
   
   var profileImageURL: String? {
     didSet {
-      print(profileImageURL)
       if let url = URL(string: profileImageURL ?? "") {
         profileImageView.contentMode = .scaleAspectFit
         
-        print(url)
         profileImageView.sd_setImage(with: url)
       }
     }
@@ -195,7 +193,6 @@ class EditProfileChildVC: UITableViewController {
           self?.loadUserInfoToUI(user: user)
         }
       case .fail(let error):
-        print(error)
         break
       }
     }

@@ -49,18 +49,13 @@ class AddItemToDealVC: UIViewController {
     
     deleteButton.isHidden = true
     
-    print(ownerId)
-    print(whoseGarden)
-    
     if let ownerId = ownerId {
       
       SVProgressHUD.show()
       User.getProducesByUser(byUserId: ownerId, completion: { [weak self] (newProduces) in
         SVProgressHUD.dismiss()
         if let this = self {
-          print(newProduces.count)
           this.produces = this.filter(produces: newProduces, by: this.producesAlreadySelected)
-          print(this.produces.count)
           
           if this.produces.count > 0 {
             this.loadOneProduceToUI(this.produces[0])

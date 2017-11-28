@@ -55,13 +55,11 @@ struct Offer {
     self.ownerProduces = [(produceId: String, quantity: Int)]()
     for (key, value) in ownerProducesTemp {
       self.ownerProduces.append((produceId: key, quantity: value))
-      print(self.ownerProduces.count)
     }
     
     self.anotherProduces = [(produceId: String, quantity: Int)]()
     for (key, value) in anotherProducesTemp {
       self.anotherProduces.append((produceId: key, quantity: value))
-      print(self.anotherProduces.count)
     }
     
     self.dealId = dealId
@@ -102,8 +100,6 @@ extension Offer {
     
     Ax.parallel(tasks: [
       { done in
-        print(ownerProduces.count)
-        print(anotherProduces.count)
         create(offer) { (error) in
           done(error)
         }

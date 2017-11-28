@@ -62,7 +62,6 @@ extension SettingsVC {
     
     switch cell {
     case logoutTableViewCell:
-      print("logoutTableViewCell touched")
       dismiss(animated: true, completion: {
         NotificationCenter.default.post(
           name: Notification.Name(Constants.Ids.logoutId),

@@ -8,8 +8,10 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 import SwiftyJSON
 import Alamofire
+import Ax
 
 struct Inbox {
   
@@ -32,7 +34,6 @@ extension Inbox {
       
       if snap.exists() {
         if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
-          print(dictionaries)
           dictionaries.forEach {
             var inbox = $0.value as? [String: Any]
             
@@ -60,35 +61,93 @@ extension Inbox {
   
   static func getInbox(
     byUserId userId: String,
-    completion: @escaping ([[String: Any]]) -> Void
+    completion: @escaping (NSError?, [[String: Any]]) -> Void
   ) {
     let url = "\(Constants.Server.stringURL)api/inbox"
     
     var data = [String: Any]()
     data["userId"] = userId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        var inbox = [[String: Any]]()
-        
-        switch response.result {
-        case .success(let result):
-          let result = result as? [String: Any]
-          inbox = result?["data"] as? [[String: Any]] ?? inbox
-          print(result)
-          print(inbox)
-        case .failure(let error):
-          print(error)
+    var userToken: String?
+    var inbox = [[String: Any]]()
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
-        
-        completion(inbox)
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let result):
+                let result = result as? [String: Any]
+                
+                if let data = result?["data"] as? [[String: Any]] {
+                  inbox = data
+                  done(nil)
+                } else {
+                  let message = result?["message"] as? String ?? ""
+                  
+                  let error = NSError(
+                    domain: "Inbox",
+                    code: 0,
+                    userInfo: [
+                      NSLocalizedDescriptionKey: message
+                    ]
+                  )
+                  
+                  done(error)
+                }
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      completion(error, inbox)
     }
   }
   

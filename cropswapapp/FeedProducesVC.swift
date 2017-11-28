@@ -60,7 +60,6 @@ class FeedProducesVC: UIViewController {
     
     if !isFilterEnabled {
       User.getProducesOnce(byLimit: limitProducesBrought) { [weak self] (produces) in
-        print(produces.count)
         SVProgressHUD.dismiss()
         
         self?.dataGotFromServer = true
@@ -98,7 +97,6 @@ class FeedProducesVC: UIViewController {
               self?.currentUser = user
               break
             case .fail(let error):
-              print(error)
               break
             }
             
@@ -116,14 +114,14 @@ class FeedProducesVC: UIViewController {
               latitude: lat,
               longitude: lng,
               radius: distance,
-              completion: { (produces, userIds) in
+              completion: { (produces, userIds, error) in
                 self?.produces = produces.filter({ (produce) -> Bool in
                   return produce.liveState != ProduceState.archived.rawValue
                 })
 
                 self?.userIdsAroundMe = userIds
                 
-                done(nil)
+                done(error)
             })
           } else {
             done(nil)
@@ -134,21 +132,37 @@ class FeedProducesVC: UIViewController {
           SVProgressHUD.dismiss()
         }
         
-        if let this = self {
-          DispatchQueue.main.async {
-            UIView.transition(
-              with: this.collectionView,
-              duration: 0.35,
-              options: .transitionCrossDissolve,
-              animations: {
-                this.collectionView.reloadData()
-              },
-              completion: nil
-            )
-          }
+        guard let this = self else {
+          return
         }
         
-        print(error)
+        if let error = error {
+          let alert = UIAlertController(
+            title: "Error",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+          )
+          
+          alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .default
+          ))
+          
+          this.present(alert, animated: true)
+          return
+        }
+        
+        DispatchQueue.main.async {
+          UIView.transition(
+            with: this.collectionView,
+            duration: 0.35,
+            options: .transitionCrossDissolve,
+            animations: {
+              this.collectionView.reloadData()
+            },
+            completion: nil
+          )
+        }
       })
 
     }
@@ -217,7 +231,7 @@ class FeedProducesVC: UIViewController {
           case .success(let user):
             this.currentUser = user
           case .fail(let error):
-            print(error)
+            break
           }
           
           done(nil)
@@ -231,7 +245,6 @@ class FeedProducesVC: UIViewController {
         }
         
         User.getProducesOnce(byLimit: this.limitProducesBrought) { [weak self] (produces) in
-          print(produces.count)
           SVProgressHUD.dismiss()
           
           self?.dataGotFromServer = true
@@ -261,7 +274,6 @@ class FeedProducesVC: UIViewController {
         
         this.time = Date()
         this.getNewProducesHandlerId = User.getProducesByListeningAddedNewOnes(fromTime: this.time) { [weak self] (newProduce) in
-          print(newProduce)
           guard let this = self else { return }
           
           if this.userIdsAroundMe.contains(newProduce.ownerId) {
@@ -382,7 +394,6 @@ extension FeedProducesVC: UICollectionViewDelegateFlowLayout, UICollectionViewDe
               self?.produces[indexPath.row].distance = 0
               cell.distance = 0
             }
-            print(error)
           }
         })
       } else {
@@ -436,7 +447,6 @@ extension FeedProducesVC {
     
     if bottomEdge >= collectionView.contentSize.height {
       if produces.count > 0 && !isGettingPaginatedDataFromServer && !isGettingFirstDataFromServer {
-        print("getting paginated data......")
         let lastProduceId = produces[produces.count - 1].id
         isGettingPaginatedDataFromServer = true
         SVProgressHUD.show()

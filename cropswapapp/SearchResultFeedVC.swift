@@ -14,6 +14,8 @@ import Ax
 class SearchResultFeedVC: UICollectionViewController {
   
   var currentUser: User?
+  var radiusFilterInMiles = 0
+  var isEnabledFilter = false
   
   var produces = [Produce]() {
     didSet {
@@ -109,7 +111,6 @@ extension SearchResultFeedVC: UICollectionViewDelegateFlowLayout {
               self?.produces[indexPath.row].distance = 0
               cell.distance = 0
             }
-            print(error)
           }
           })
       } else {
@@ -169,7 +170,6 @@ extension SearchResultFeedVC: UISearchControllerDelegate, UISearchBarDelegate { 
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     let text = searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
     if text.characters.count >= 3 {
-      print("searching")
       Ax.serial(tasks: [
         
         { done in
@@ -185,7 +185,7 @@ extension SearchResultFeedVC: UISearchControllerDelegate, UISearchBarDelegate { 
             case .success(let user):
               self?.currentUser = user
             case .fail(let error):
-              print(error)
+              break
             }
             
             done(nil)
@@ -193,13 +193,33 @@ extension SearchResultFeedVC: UISearchControllerDelegate, UISearchBarDelegate { 
         },
         
         { [weak self] done in
-          if self?.currentUser != nil {
-          Produce.searchFor(filter: text, completion: { [weak self] (produces) in
-          
-            self?.produces = produces
-            })
-            
+          guard let this = self else {
             done(nil)
+            return
+          }
+          
+          if let user = self?.currentUser {
+            let lat = user.latitude ?? 0
+            let lng = user.longitude ?? 0
+            var radius = this.radiusFilterInMiles
+
+            if !this.isEnabledFilter {
+              radius = 0
+            }
+            
+            Produce.searchFor(
+              filter: text,
+              radius: radius,
+              latitude: lat,
+              longitude: lng) { error, produces in
+                if let _ = error {
+                  
+                } else {
+                  this.produces = produces
+                }
+                
+                done(nil)
+            }
           } else {
             done(nil)
           }

@@ -46,7 +46,7 @@ class ProfileContainerVC: UIViewController {
 //      vc?.currentUserId = User.currentUser?.uid
       vc?.currentUserId = currentUserId
       vc?.currentUsername = currentUsername
-      print(showBackButton)
+
       vc?.showBackButton = showBackButton
     } else if segue.identifier == Storyboard.ProfileContainerToGarden {
       let vc = segue.destination as? GardenVC
@@ -123,8 +123,7 @@ class ProfileContainerVC: UIViewController {
   @IBAction func makeDealButtonTouched() {
     makeDealButton.isEnabled = false
     makeDealButton.alpha = 0.5
-    print(currentUserId)
-    print(currentUsername)
+
     
     guard dealPending == nil else {
       makeDealButton.isEnabled = true
@@ -153,7 +152,6 @@ class ProfileContainerVC: UIViewController {
           SVProgressHUD.dismiss()
           self?.enableMakeDealButton()
         }
-        print(hoursLeft)
         
         if hoursLeft > 0 {
           let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
@@ -312,10 +310,7 @@ class ProfileContainerVC: UIViewController {
   }
   
   func backButtonTouched() {
-    print("gaytan from profile container navigation controller vc count: \(navigationController?.viewControllers.count)")
     dismiss(animated: true)
-//    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
-    
   }
   
   @IBAction func editProfileButtonTouched() {

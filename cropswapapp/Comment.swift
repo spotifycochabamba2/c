@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import FirebaseDatabase
+import Ax
+import FirebaseAuth
 
 struct Comment {
   var id: String
@@ -161,37 +163,91 @@ extension Comment {
   ) {
     
     let url = "\(Constants.Server.stringURL)api/comments"
-    
     var data = [String: Any]()
     data["postId"] = postId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let result):
-          if let result = result as? [String: Any],
-            let comments = result["comments"] as? [[String: Any]]
-          {
-            completion(Result.success(data: comments.flatMap{Comment(json: $0)}))
-          } else {
-            let error = NSError(domain: "Posting", code: 0, userInfo: [
-              NSLocalizedDescriptionKey: "Couldn't get comments"
-              ])
-            completion(Result.fail(error: error))
-          }
-        case .failure(let error):
-          completion(Result.fail(error: error as NSError))
+    var comments = [Comment]()
+    
+    var userToken: String?
+    
+    Ax.serial(tasks: [
+    
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
+      },
+      
+      { done in
+        if let token = userToken {
+          
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let result):
+                if let result = result as? [String: Any],
+                  let commentsFound = result["comments"] as? [[String: Any]]
+                {
+                  comments = commentsFound.flatMap{Comment(json: $0)}
+                  done(nil)
+                } else {
+                  let error = NSError(domain: "Posting", code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: "Couldn't get comments"
+                    ])
+
+                  done(error)
+                }
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Comments",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      if let error = error {
+        completion(Result.fail(error: error))
+      } else {
+        completion(Result.success(data: comments))
+      }
     }
   }
-  
 }
 
 

@@ -45,7 +45,6 @@ class TradeListVC: UIViewController {
   func requestLocationPushNotificationGot(notification: Notification) {
     if let data = notification.object as? [String: Any] {
       if let deal = data["deal"] as? [String: Any] {
-        print(deal)
         //performSegue(withIdentifier: Storyboard.TradeListToTradeDetail, sender: deal)
       }
     }
@@ -90,7 +89,7 @@ class TradeListVC: UIViewController {
         
         SVProgressHUD.dismiss()
         self?.deals = deals.filter({ (deal) -> Bool in
-          let dealState = deal["state"] as? String ?? ""
+          let dealState = deal["state"] as? String ?? DealState.tradeDeleted.rawValue
           
           return dealState != DealState.tradeDeleted.rawValue
         })
@@ -156,7 +155,6 @@ class TradeListVC: UIViewController {
           withDealId: dealId,
           andUserId: userId,
           completion: { (error) in
-            print(error)
         })
       }
     } else if segue.identifier == Storyboard.TradeListToProfile {
@@ -198,7 +196,6 @@ extension TradeListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      print("delete at indexPath.row: \(indexPath.row)")
       
       let confirmationAlert = UIAlertController(title: "Confirmation", message: "Are you sure to delete this trade?", preferredStyle: .alert)
       confirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak self] (_) in

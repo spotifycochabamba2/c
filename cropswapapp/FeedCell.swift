@@ -35,7 +35,6 @@ class FeedCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    print("from awakeFromNib")
     
     shadowLayer.backgroundColor = UIColor.white.cgColor
     shadowLayer.shadowColor = UIColor.black.cgColor

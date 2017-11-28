@@ -102,7 +102,6 @@ public class WallSectionHeaderCell: UITableViewHeaderFooterView {
   }
   
   @IBAction func commentButtonTouched(_ sender: AnyObject) {
-    print(!sectionEnabled)
 //    commentsButton.setTitle("WTF?", for: .normal)
     commentsButton.isEnabled = false
     commentsButton.alpha = 0.5

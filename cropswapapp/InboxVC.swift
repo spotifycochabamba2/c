@@ -68,11 +68,10 @@ extension InboxVC {
     if let userId = User.currentUser?.uid {
       SVProgressHUD.show()
       
-      Inbox.getInbox(byUserId: userId, completion: { [weak self] (items) in
+      Inbox.getInbox(byUserId: userId, completion: { [weak self] (error, items) in
         DispatchQueue.main.async {
           SVProgressHUD.dismiss()
         }
-        print(" creative from once")
         self?.items = items.filter({ (item) -> Bool in
           let anotherUserId = item["anotherUserId"] as? String
           
@@ -81,7 +80,7 @@ extension InboxVC {
       })
       
       listenUpdateInboxHandlerId = Inbox.listenUpdatesInbox(byUserId: userId, completion: { [weak self] (numberOfNotifications) in
-        Inbox.getInbox(byUserId: userId, completion: { (items) in
+        Inbox.getInbox(byUserId: userId, completion: { (error, items) in
           self?.items = items.filter({ (item) -> Bool in
             let anotherUserId = item["anotherUserId"] as? String
             
@@ -94,7 +93,7 @@ extension InboxVC {
   
   func updateInboxVC() {
     if let userId = User.currentUser?.uid {
-      Inbox.getInbox(byUserId: userId, completion: { [weak self] (items) in
+      Inbox.getInbox(byUserId: userId, completion: { [weak self] (error, items) in
         self?.items = items.filter({ (item) -> Bool in
           let anotherUserId = item["anotherUserId"] as? String
           

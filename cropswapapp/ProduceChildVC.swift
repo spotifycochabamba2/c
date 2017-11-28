@@ -227,12 +227,7 @@ class ProduceChildVC: UITableViewController {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? ProfileContainerVC
 //      let values = sender as? [String: Any]
-//      
-      print(vc)
-      print(vc?.currentUserId)
-      
-      print(produce)
-      print(produce?.ownerId)
+//
       vc?.currentUserId = produce?.ownerId
       vc?.currentUsername = produce?.ownerUsername
       vc?.showBackButton = true
@@ -658,8 +653,7 @@ extension ProduceChildVC {
         isFirstimeLoaded = false
       }
     } else if indexPath.row == 5 {
-      print(" willDisplay picky frame: \(relatedProducesCollectionView.frame)")
-      print(" willDisplay picky bounds: \(relatedProducesCollectionView.bounds)")
+
     } else if indexPath.row == 2 {
 
     }
@@ -699,17 +693,16 @@ extension ProduceChildVC {
 //        print(totalHeight)
         
         let screenWidth = UIScreen.main.bounds.width
-        print(screenWidth)
         let circleWidth: CGFloat = 60.0
         let circleHeight: CGFloat = 60.0
         let numCircles = screenWidth / circleWidth
-        print(numCircles)
+
         let heightCircles = ceil(CGFloat(relatedProduces.count) / numCircles)
-        print(heightCircles)
+
 
         let totalHeight = heightCircles * circleHeight
         let heightCirclesSpacing = 10 * (totalHeight / circleHeight)
-        print(heightCirclesSpacing)
+
         
         return totalHeight + heightCirclesSpacing
       } else {
@@ -762,7 +755,7 @@ extension ProduceChildVC: UICollectionViewDataSource, UICollectionViewDelegate, 
       cell = tagCell
     } else {
       let relatedProduceCell = collectionView.dequeueReusableCell(withReuseIdentifier: relatedProducesCellId, for: indexPath) as! RelatedProduceCell
-      print(indexPath.row)
+
       let relatedProduce = relatedProduces[indexPath.row]
       let picURL = relatedProduce["firstPictureURL"] as? String
       

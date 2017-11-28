@@ -110,7 +110,6 @@ class GardenVC: UIViewController {
       }
       
       addedOnesHandlerId = User.getProducesByUserByListeningAddedOnes(fromTime: time, fromUserId: userId, completion: { (newProduce) in
-        print(newProduce)
         
         self.collectionView.performBatchUpdates({
           
@@ -281,7 +280,7 @@ extension GardenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
               )
             }
           case .fail(let error):
-            print(error)
+            break
           }
         })
       }

@@ -37,7 +37,6 @@ class InboxCell: UITableViewCell {
   
   var hasNewNotifications = false {
     didSet {
-      print(" creative hasNewNotifications \(hasNewNotifications) name: \(name)")
       if hasNewNotifications {
         usernameLabel.font = usernameSemiboldFont
         messageLabel.font = messageSemiboldFont
@@ -50,7 +49,6 @@ class InboxCell: UITableViewCell {
   
   var userImageURLString: String? {
     didSet {
-      print(userImageURLString)
       if let url = URL(string: userImageURLString ?? "") {
         userImageView.sd_setImage(with: url)
       }

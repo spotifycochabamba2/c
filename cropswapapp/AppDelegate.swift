@@ -94,7 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let dealString = userInfo["deal"] as? String
     {
       let dealJSON = JSON(parseJSON: dealString)
-      print(dealJSON.dictionary)
       
       let defaults = UserDefaults.standard
       defaults.set(dealJSON.dictionaryObject, forKey: "deal")
@@ -161,7 +160,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
     UNUserNotificationCenter.current().delegate = self
 //    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
 //    UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { [weak self] (_, _) in
-//      print("belanova from requestAuthorization")
 //      self?.registerDeviceToken()
 //    })
     
@@ -187,7 +185,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
   
   // foreground
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    print(notification.request.content.userInfo)
     let rootVC = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController
 
     if let tradeChatVC = rootVC?.visibleViewController as? TradeChatVC {
@@ -196,7 +193,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
         let _ = userInfo["isChatNotification"] as? String,
         let dealId = userInfo["dealId"] as? String
       {
-        print(tradeChatVC.dealId)
         if tradeChatVC.dealId == dealId {
           // don't show the remote notification
         } else {
@@ -211,18 +207,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
   }
   
 //  func tokenRefreshNotification(notification: NSNotification) {
-//    print("belanova from tokenRefreshNotification")
 //    registerDeviceToken()
 //  }
 //  
 //  func registerDeviceToken() {
-//    print("belanova from registerDeviceToken \(FIRInstanceID.instanceID().token())")
 //  }
   
   func handlePushNotification(userInfo: [String: Any]?) {
     if let userInfo = userInfo {
-      
-      print(userInfo)
       if let _ = userInfo["isChatNotification"] as? String {
         notifyChatPushNotification(userInfo: userInfo)
       } else if let _ = userInfo["isRequestLocationNotification"] as? String {
@@ -235,14 +227,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
   }
   
   func notifyRequestLocationPushNotification(userInfo: [String: Any]) {
-    print(userInfo)
-    print(userInfo["deal"])
-    print(userInfo["deal"] as? [String: Any])
     if
       let dealString = userInfo["deal"] as? String
     {
       let dealJSON = JSON(parseJSON: dealString)
-      print(dealJSON.dictionary)
       
       var data = [String: Any]()
       data["deal"] = dealJSON.dictionaryObject
@@ -291,10 +279,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate, FIRMessagingDelegate {
       data["originalOwnerUserId"] = originalOwnerUserId
       data["originalOwnerProducesCount"] = Int(originalOwnerProducesCount) ?? 0
       data["originalAnotherProducesCount"] = Int(originalAnotherProducesCount) ?? 0
-      
-      print(" Bob Marley originalOwnerUserId: \(originalOwnerUserId)")
-      print(" Bob Marley originalOwnerUserId: \(originalOwnerProducesCount)")
-      print(" Bob Marley originalOwnerUserId: \(originalAnotherProducesCount)")
       
       NotificationCenter.default.post(name: Notification.Name(Constants.PushNotification.tradePushNotificationId), object: data)
     }

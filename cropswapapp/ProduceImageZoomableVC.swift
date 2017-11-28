@@ -33,7 +33,6 @@ extension ProduceImageZoomableVC {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print(hideCloseButton)
     closeButton.isHidden = hideCloseButton
     view.backgroundColor = .black
     produceScrollView.minimumZoomScale = 1.0

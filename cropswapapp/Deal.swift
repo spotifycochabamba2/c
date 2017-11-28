@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 import Ax
 import Alamofire
 import SwiftyJSON
@@ -65,13 +66,11 @@ struct Deal {
     self.ownerProduces = [(produceId: String, quantity: Int)]()
     for (key, value) in ownerProducesTemp {
       self.ownerProduces.append((produceId: key, quantity: value))
-      print(self.ownerProduces.count)
     }
     
     self.anotherProduces = [(produceId: String, quantity: Int)]()
     for (key, value) in anotherProducesTemp {
       self.anotherProduces.append((produceId: key, quantity: value))
-      print(self.anotherProduces.count)
     }
     
     self.state = DealState(rawValue: json["state"] as? String ?? DealState.waitingAnswer.rawValue)
@@ -190,31 +189,81 @@ extension Deal {
     data["userOneId"] = userOneId
     data["userTwoId"] = userTwoId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let result):
-          let result = result as? [String: Any]
-          if result?["anyTradeActive"] as? Bool ?? false {
-            completion(Result.success(data: true))
-          } else {
-            completion(Result.success(data: false))
-          }
+    var userToken: String?
+    var anyActive = false
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-        case .failure(let error):
-          print(error)
-          let customError = NSError(domain: "Deal", code: 0, userInfo: [
-            NSLocalizedDescriptionKey: error.localizedDescription
-            ])
-          completion(Result.fail(error: customError))
+          done(error)
         }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let result):
+                let result = result as? [String: Any]
+                if result?["anyTradeActive"] as? Bool ?? false {
+                  anyActive = true
+                }
+                
+                done(nil)
+              case .failure(let error):
+                let customError = NSError(domain: "Deal", code: 0, userInfo: [
+                  NSLocalizedDescriptionKey: error.localizedDescription
+                  ])
+                done(customError)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      if let error = error {
+        completion(Result.fail(error: error))
+      } else {
+        completion(Result.success(data: anyActive))
+      }
     }
   }
   
@@ -250,7 +299,7 @@ extension Deal {
             dealId: dealId,
             field: "trade",
             withValue: 0) { (error) in
-              print(error)
+
           }
           
           if case DealState.tradeDeleted = dealState {
@@ -402,17 +451,12 @@ extension Deal {
     refDatabaseDeal.updateChildValues(valuesForDeal, withCompletionBlock: {
       (error: Error?, ref: FIRDatabaseReference) in
       
-      
-      print(ownerUserId)
-      print(anotherUserId)
-      
       User.sendDealPushNotification(
         ownerUserId: anotherUserId,
         anotherUserId: ownerUserId,
         dealId: dealId,
         dealState: DealState.tradeCancelled.rawValue,
         completion: { (error) in
-          print(error)
       })
       
       CSNotification.saveOrUpdateTradeNotification(
@@ -420,14 +464,12 @@ extension Deal {
         dealId: dealId,
         field: "trade",
         withValue: 1) { (error) in
-          print(error)
       }
       
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
         andUserId: ownerUserId,
         completion: { (error) in
-          print(error)
         }
       )
       
@@ -544,7 +586,6 @@ extension Deal {
         dealId: dealId,
         dealState: DealState.tradeCompleted.rawValue,
         completion: { (error) in
-          print(error)
       })
       
       CSNotification.saveOrUpdateTradeNotification(
@@ -552,14 +593,12 @@ extension Deal {
         dealId: dealId,
         field: "trade",
         withValue: 1) { (error) in
-          print(error)
       }
       
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
         andUserId: ownerUserId,
         completion: { (error) in
-          print(error)
         }
       )
       
@@ -772,7 +811,7 @@ extension Deal {
         dealId: dealId,
         dealState: DealState.waitingAnswer.rawValue,
         completion: { (error) in
-          print(error)
+
       })
       
       CSNotification.saveOrUpdateTradeNotification(
@@ -780,14 +819,14 @@ extension Deal {
         dealId: dealId,
         field: "trade",
         withValue: 1) { (error) in
-          print(error)
+
       }
       
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealId,
         andUserId: anotherId,
         completion: { (error) in
-          print(error)
+
         }
       )
       
@@ -906,11 +945,11 @@ extension Deal {
               User.getUser(byUserId: userId, completion: { (result) in
                 switch result {
                 case .success(let user):
-                  print(index)
+
                   deals[index]["anotherUsername"] = user.name
                   deals[index]["anotherProfilePictureURL"] = user.profilePictureURL
                 case .fail(let error):
-                  print(error)
+                  break
                 }
                 
                 group.leave()
@@ -1134,7 +1173,7 @@ extension Deal {
     refDatabaseUserDealAnother.setValue(valuesForUserDealOwner)
     
     Offer.create(offer) { (error) in
-      print(error)
+
     }
     
     
@@ -1148,7 +1187,7 @@ extension Deal {
         dealId: dealKey,
         dealState: DealState.waitingAnswer.rawValue,
         completion: { (error) in
-          print(error)
+
       })
       
       CSNotification.saveOrUpdateTradeNotification(
@@ -1156,14 +1195,14 @@ extension Deal {
         dealId: dealKey,
         field: "trade",
         withValue: 1) { (error) in
-          print(error)
+
       }
 
       CSNotification.createOrUpdateTradeNotification(
         withDealId: dealKey,
         andUserId: deal.anotherUserId,
         completion: { (error) in
-          print(error)
+
         }
       )
     })

@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 import Ax
 import Alamofire
+import FirebaseAuth
 
 struct Message {
   var senderId: String
@@ -120,21 +121,66 @@ extension Message {
     data["receiverId"] = receiverId
     data["message"] = text
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(_):
-          completion(nil)
-        case .failure(let error):
-          completion(error as NSError?)
+    var userToken: String?
+    
+    Ax.serial(tasks: [
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(_):
+                done(nil)
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+    ]) { (error) in
+      completion(error as NSError?)
     }
   }
   

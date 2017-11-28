@@ -82,7 +82,7 @@ public class DistanceControlVC: UIViewController {
         }
         break
       case .fail(let error):
-        print(error)
+        break
       }
     }
   }
@@ -133,7 +133,6 @@ public class DistanceControlVC: UIViewController {
             
             self?.dismiss(animated: true)
             
-            print(error)
           })
       } else {
         didSelectDistance(0)

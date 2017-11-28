@@ -266,10 +266,7 @@ class AddProduceVC: UIViewController {
         switch state {
         case .add:
           currentState = .add
-          print("add")
           form(enable: true)
-          print(navigationItem)
-          print(navigationItem.leftBarButtonItems)
           navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView:backLeftButton))
           navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:saveRightButton))
         case .edit:
@@ -280,7 +277,6 @@ class AddProduceVC: UIViewController {
           navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:doneRightButton))
           break
         case .read:
-          print("read")
           currentState = .read
           form(enable: false)
           navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView:backLeftButton))
@@ -318,7 +314,6 @@ class AddProduceVC: UIViewController {
   
   
   @IBAction func pictureButtonTouched(_ sender: UIButton) {
-    print(sender.tag)
     
     switch sender.tag {
     case 1:
@@ -509,7 +504,6 @@ class AddProduceVC: UIViewController {
   var produceTypeSelected: (name: String, quantityType: String)?
   
   func didProduceTypeSelect(_ produceType: (name: String, quantityType: String)) {
-    print(produceType)
 //    produceTypeTextField.text = produceType.name
     produceTypeSelected = produceType
     quantityTypeLabel.text = produceType.quantityType
@@ -529,7 +523,7 @@ class AddProduceVC: UIViewController {
         case .success(let userFound):
           self?.currentUser = userFound
         case .fail(let error):
-          print(error)
+          break
         }
       }
     }
@@ -816,7 +810,6 @@ class AddProduceVC: UIViewController {
       present(alert, animated: true)
       return
     } catch {
-      print(error)
     }
   }
   
@@ -912,7 +905,6 @@ class AddProduceVC: UIViewController {
 //    saveRightButton = setNavIcon(imageName: "addproduce-save-icon", size: CGSize(width: 41, height: 40), position: .right)
 
     
-    print(navigationItem.rightBarButtonItems)
     
     
 //    var backLeftButton: UIButton!
@@ -977,11 +969,9 @@ class AddProduceVC: UIViewController {
   func deleteButtonTouched() {
     let alert = UIAlertController(title: "Info", message: "Are you sure you want to delete this produce?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-      print("cancel touched")
     })
     
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] (action) in
-      print("OK touched")
       guard
         let produceId = self?.currentProduceId,
         let ownerId = self?.currentUser?.id
@@ -1215,12 +1205,6 @@ class AddProduceVC: UIViewController {
         },
         { done in
           
-          print("first pic \(firstPicURL)")
-          print("second pic \(secondPicURL)")
-          print("third pic \(thirdPicURL)")
-          print("fourth pic \(fourthPicURL)")
-          print("fifth pic \(fifthPicURL)")
-          
           Produce.updateProduce(
             produceId: produceId,
             name: name,
@@ -1270,7 +1254,6 @@ class AddProduceVC: UIViewController {
       present(alert, animated: true)
       return
     } catch {
-      print(error)
     }
   }
   
@@ -1438,7 +1421,6 @@ class AddProduceVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    print(currentState)
     state = currentState ?? .read
     
     edgesForExtendedLayout = []
@@ -1483,8 +1465,6 @@ class AddProduceVC: UIViewController {
     rect.size.height -= keyboardHeight
 //    originalContentInsets = scrollView.contentInset
     
-//    print(scrollView.contentInset)
-//    print(scrollView.scrollIndicatorInsets)
     let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
     
     UIView.animate(withDuration: 0.5) { [weak self] in
@@ -1505,7 +1485,6 @@ class AddProduceVC: UIViewController {
   
   func keyboardIsDimissed(_ notification: Notification) {
 //    let contentInset = UIEdgeInsets.zero
-    print(originalContentInsets)
     scrollView.contentInset = originalContentInsets
     scrollView.scrollIndicatorInsets = originalContentInsets
   }

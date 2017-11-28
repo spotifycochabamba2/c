@@ -21,7 +21,6 @@ class ChooseDetailListVC: UITableViewController {
       SVProgressHUD.dismiss()
 
       self?.tags = details.flatMap {
-        print($0)
         let name = $0["name"] as! String
         let priority = $0["priority"] as! Int
         let key = $0["key"] as! String
@@ -46,9 +45,7 @@ class ChooseDetailListVC: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("selected")
     tags[indexPath.row].1 = !tags[indexPath.row].1
-    print(tags[indexPath.row])
     DispatchQueue.main.async {
       self.tableView.reloadData()
     }
@@ -56,9 +53,6 @@ class ChooseDetailListVC: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: ChooseDetailCell.cellId, for: indexPath) as! ChooseDetailCell
-    print(tags)
-    print(indexPath.row)
-    print(tags[indexPath.row])
     
     let tag = tags[indexPath.row]
     

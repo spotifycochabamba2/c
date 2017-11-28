@@ -50,7 +50,6 @@ class DealSubmittedVC: UIViewController {
           }
         }
       case .fail(let error):
-        print(error)
         break
       }
     }
@@ -79,12 +78,9 @@ class DealSubmittedVC: UIViewController {
   }
   
   @IBAction func acceptButtonTouched() {
-    print(presentedViewController)
-    print(presentingViewController)
     let makeDealVC = presentingViewController
     
-    dismiss(animated: true) { 
-      print(makeDealVC)
+    dismiss(animated: true) {
       DispatchQueue.main.async {
         makeDealVC?.dismiss(animated: true)
       }

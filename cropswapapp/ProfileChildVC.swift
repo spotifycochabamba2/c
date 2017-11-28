@@ -11,7 +11,6 @@ import SVProgressHUD
 
 class ProfileChildVC: UITableViewController {
   
-  
   @IBOutlet weak var signinInstagramButton: UIButton!
   @IBOutlet weak var siginInstagramShadowView: UIView!
   
@@ -67,6 +66,14 @@ class ProfileChildVC: UITableViewController {
   @IBOutlet weak var websiteLabel: UILabel! {
     didSet {
       websiteLabel.text = ""
+      
+      websiteLabel.isUserInteractionEnabled = true
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(websiteLabelTouched))
+      tapGesture.numberOfTapsRequired = 1
+      tapGesture.numberOfTouchesRequired = 1
+      
+      websiteLabel.addGestureRecognizer(tapGesture)
     }
   }
   
@@ -122,6 +129,38 @@ class ProfileChildVC: UITableViewController {
     }
   }
   
+  func websiteLabelTouched() {
+    var urlString = websiteLabel.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
+    
+    if urlString.isEmpty {
+      return
+    }
+    
+    if !urlString.matches("^https?://.+") {
+      urlString = "https://\(urlString)"
+    }
+    
+    if
+      let url = URL(string: urlString),
+      UIApplication.shared.canOpenURL(url)
+    {
+      UIApplication.shared.open(url, options: [:])
+    } else {
+      let alert = UIAlertController(
+        title: "Error",
+        message: "Link cannot be opened, it should be in a format as http://example.com",
+        preferredStyle: .alert
+      )
+      
+      alert.addAction(UIAlertAction(
+        title: "OK",
+        style: .default
+      ))
+      
+      present(alert, animated: true)
+    }
+  }
+  
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if instagramCell == cell {
       signinInstagramButton.layoutIfNeeded()
@@ -165,17 +204,17 @@ class ProfileChildVC: UITableViewController {
     if cell === instagramCell {
       if instagramURLStrings.count > 0 {
         let screenWidth = UIScreen.main.bounds.width
-        print(screenWidth)
+
         let circleWidth: CGFloat = 60.0
         let circleHeight: CGFloat = 60.0
         let numCircles = screenWidth / circleWidth
-        print(numCircles)
+
         let heightCircles = ceil(CGFloat(instagramURLStrings.count) / numCircles)
-        print(heightCircles)
+
         
         let totalHeight = heightCircles * circleHeight
         let heightCirclesSpacing = 10 * (totalHeight / circleHeight)
-        print(heightCirclesSpacing)
+
         
         return totalHeight + heightCirclesSpacing
       } else {
@@ -254,7 +293,6 @@ class ProfileChildVC: UITableViewController {
           self?.loadUserInfoToUI(user: user)
         }
       case .fail(let error):
-        print(error)
         break
       }
     }
@@ -295,7 +333,7 @@ class ProfileChildVC: UITableViewController {
               }
             }
           case .fail(let error):
-            print(error)
+            break
           }
       })
     } else {
@@ -318,6 +356,7 @@ class ProfileChildVC: UITableViewController {
     nameLabel.text = "\(user.name) \(user.lastName ?? "")"
     phoneNumberLabel.text = "\(user.phoneNumber ?? "")"
     websiteLabel.text = "\(user.website ?? "")"
+    websiteLabel.underline()
 
     usernameLabel.text = user.username
     emailLabel.text = user.email

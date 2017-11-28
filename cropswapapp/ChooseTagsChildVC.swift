@@ -61,7 +61,7 @@ extension ChooseTagsChildVC {
 extension ChooseTagsChildVC {
   
   public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print(indexPath.row)
+
   }
   
   public override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

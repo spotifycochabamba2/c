@@ -41,7 +41,7 @@ class ProduceContainerVC: UIViewController {
           }
         }
       case .fail(let error):
-        print(error)
+        break
       }
     }
   }
@@ -165,7 +165,6 @@ class ProduceContainerVC: UIViewController {
           self?.makeDealButton.isEnabled = true
           self?.makeDealButton.alpha = 1
         }
-        print(hoursLeft)
         
         if hoursLeft > 0 {
           let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
@@ -186,7 +185,6 @@ class ProduceContainerVC: UIViewController {
   }
   
   func backButtonTouched() {
-    print("gaytan from produce container navigation controller vc count: \(navigationController?.viewControllers.count)")
     dismiss(animated: true)
 //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissModals"), object: nil)
   }
@@ -230,7 +228,6 @@ class ProduceContainerVC: UIViewController {
       vc?.enableMakeDealButton = enableMakeDealButton
       vc?.isReadOnly = isReadOnly
       showProfileFromChild = vc?.showProfileFromChild
-      print(showProfileFromChild)
     }
   }
   

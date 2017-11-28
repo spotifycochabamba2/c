@@ -55,7 +55,6 @@ class UserCalloutView: UIView, MGLCalloutView {
   func calloutTapped() {
     
     let userAnnotation = representedObject as? UserAnnotationView
-    print(userAnnotation?.reuseIdentifier)
     
     
     if isCalloutTappable() && delegate!.responds(to: #selector(MGLCalloutViewDelegate.calloutViewTapped)) {

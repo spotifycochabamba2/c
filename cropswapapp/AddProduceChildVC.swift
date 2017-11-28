@@ -311,7 +311,6 @@ class AddProduceChildVC: UITableViewController {
   }
   
   @IBAction func takePhotoButtonTouched() {
-    print("take photo button touched")
     
     changeTitleButton("SAVE")
 //    var currentPhotoNumber: ProducePhotoNumber?
@@ -384,7 +383,6 @@ class AddProduceChildVC: UITableViewController {
       showConfirmationAlert(
         message: "Are you sure you want to delete this picture?",
         completion: { [weak self] (confirmed) in
-        print(confirmed)
           if confirmed,
             let this = self {
 //            switch this.currentIndex {
@@ -416,11 +414,7 @@ class AddProduceChildVC: UITableViewController {
   }
   
   func printImagesAreSaved() {
-    print("firstPhotoSaved: \(firstPhotoSaved)")
-    print("secondPhotoSaved: \(secondPhotoSaved)")
-    print("thirdPhotoSaved: \(thirdPhotoSaved)")
-    print("fourthPhotoSaved: \(fourthPhotoSaved)")
-    print("fifthPhotoSaved: \(fifthPhotoSaved)")
+
   }
   
   @IBAction func secondPhotoDeleteButtonTouched() {
@@ -428,7 +422,6 @@ class AddProduceChildVC: UITableViewController {
       showConfirmationAlert(
         message: "Are you sure you want to delete this picture?",
         completion: { [weak self] (confirmed) in
-          print(confirmed)
           
           if confirmed,
             let this = self {
@@ -458,7 +451,6 @@ class AddProduceChildVC: UITableViewController {
       })
     }
     
-    print("delete button touched")
   }
   
   @IBAction func thirdPhotoDeleteButtonTouched() {
@@ -466,7 +458,6 @@ class AddProduceChildVC: UITableViewController {
       showConfirmationAlert(
         message: "Are you sure you want to delete this picture?",
         completion: { [weak self] (confirmed) in
-          print(confirmed)
           
           if confirmed,
             let this = self {
@@ -496,7 +487,6 @@ class AddProduceChildVC: UITableViewController {
           }
       })
     }
-    print("delete button touched")
   }
   
   @IBAction func fourthPhotoDeleteButtonTouched() {
@@ -504,7 +494,6 @@ class AddProduceChildVC: UITableViewController {
       showConfirmationAlert(
         message: "Are you sure you want to delete this picture?",
         completion: { [weak self] (confirmed) in
-          print(confirmed)
           
           if confirmed,
             let this = self {
@@ -534,7 +523,6 @@ class AddProduceChildVC: UITableViewController {
           }
       })
     }
-    print("delete button touched")
   }
   
   @IBAction func fifthPhotoDeleteButtonTouched() {
@@ -542,7 +530,6 @@ class AddProduceChildVC: UITableViewController {
       showConfirmationAlert(
         message: "Are you sure you want to delete this picture?",
         completion: { [weak self] (confirmed) in
-          print(confirmed)
           
           if confirmed,
             let this = self {
@@ -598,7 +585,6 @@ class AddProduceChildVC: UITableViewController {
       showPhotoOptionsView = true
       currentIndex = 1
     }
-    print("photo button touched")
   }
   
   @IBAction func thirdPhotoButtonTouched() {
@@ -611,7 +597,6 @@ class AddProduceChildVC: UITableViewController {
       showPhotoOptionsView = true
       currentIndex = 2
     }
-    print("photo button touched")
   }
   
   @IBAction func fourthPhotoButtonTouched() {
@@ -624,7 +609,6 @@ class AddProduceChildVC: UITableViewController {
       showPhotoOptionsView = true
       currentIndex = 3
     }
-    print("photo button touched")
   }
   
   @IBAction func fifthPhotoButtonTouched() {
@@ -637,7 +621,6 @@ class AddProduceChildVC: UITableViewController {
       showPhotoOptionsView = true
       currentIndex = 4
     }
-    print("photo button touched")
   }
   
   var showPhotoOptionsView = false {
@@ -731,7 +714,6 @@ class AddProduceChildVC: UITableViewController {
   var produceTypeSelected: (name: String, quantityType: String)?
   
   func didCategorySelect(_ produceType: (name: String, quantityType: String)) {
-    print(produceType)
     changeTitleButton("SAVE")
 
     produceTypeSelected = produceType
@@ -860,7 +842,6 @@ class AddProduceChildVC: UITableViewController {
       tagsToSave = produce.tags3
       
 //      tagsSelected = produce.tags.map {
-//        print($0)
 //        return ($0.name, false, $0.priority, $0.key)
 //      }
       
@@ -876,7 +857,6 @@ class AddProduceChildVC: UITableViewController {
   }
   
   func firstCellTapped() {
-    print("firstCellTapped")
     showPhotoOptionsView = false
   }
     
@@ -1032,7 +1012,6 @@ class AddProduceChildVC: UITableViewController {
   }
   
   @IBAction func nextButtonTouched(_ sender: AnyObject) {
-    print("currentIndex: \(currentIndex)")
     if currentIndex < 4 {
       currentIndex += 1
       
@@ -1138,10 +1117,8 @@ class AddProduceChildVC: UITableViewController {
   }
   
   func didSelectTags(_ tags: [String: Any]) {
-    print(tags)
     tagsToSave = tags
     tagsToDisplay = Produce.getTagNamesFrom(tags: tags)
-    print(tagsToDisplay)
 //    tagsSelected = tags
 //
     DispatchQueue.main.async { [weak self] in
@@ -1172,7 +1149,6 @@ class AddProduceChildVC: UITableViewController {
 //  }
   
   @IBAction func previousButtonTouched() {
-    print("currentIndex: \(currentIndex)")
     if currentIndex > 0 {
       currentIndex -= 1
       let vc = produceImagesViewControllers[currentIndex] as! ProduceImageVC
@@ -1459,9 +1435,7 @@ class AddProduceChildVC: UITableViewController {
       shadowViewForPickStateButton.layer.shadowRadius = 3
       shadowViewForPickStateButton.layer.shadowOpacity = 0.5
     }else if indexPath.row == 7 {
-      print(pickProductsButton.frame.size)
       pickProductsButton.layoutIfNeeded()
-      print(pickProductsButton.frame.size)
       
       shadowViewForPickProductsButton.layoutIfNeeded()
       shadowViewForPickProductsButton.makeMeBordered()
@@ -1501,8 +1475,6 @@ extension AddProduceChildVC {
     } else if indexPath.row == 7 {
       tagsCollectionView.collectionViewLayout.invalidateLayout()
       tagsCollectionView.collectionViewLayout.prepare()
-      print(tagsSelected.count)
-      print(tagsCollectionView.collectionViewLayout.collectionViewContentSize.height + 100)
       return tagsCollectionView.collectionViewLayout.collectionViewContentSize.height + 100
     }
     

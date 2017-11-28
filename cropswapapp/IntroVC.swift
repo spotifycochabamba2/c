@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import FirebaseAuth
 
 class IntroVC: UIViewController {
   
@@ -78,7 +79,6 @@ extension IntroVC {
       let nv = segue.destination as? UINavigationController
       let vc = nv?.viewControllers.first as? InstagramVC
       vc?.loggedSuccessfully = performSegueToHome
-      print(vc)
       vc?.loggedSuccessfully = performSegueToHome
     } else if segue.identifier == Storyboard.IntroToSignup2 {
       let vc = segue.destination as? SignupTwoVC

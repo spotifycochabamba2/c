@@ -44,7 +44,6 @@ class ChooseDetailVC: UIViewController {
   
   @IBAction func acceptButtonTouched() {
     if let chooseDetailListVC = chooseDetailListVC {
-      print(chooseDetailListVC.tags[0])
       didSelectTags(chooseDetailListVC.tags.filter { $0.1  == true })
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 import Ax
 import Alamofire
 import SwiftyJSON
@@ -43,33 +44,77 @@ extension CSNotification {
   
   static func getNotificationsForAppIcon(
     userId: String,
-    completion: @escaping (Int) -> Void
+    completion: @escaping (NSError?, Int) -> Void
   ) {
     let url = "\(Constants.Server.stringURL)api/notifications"
-    
     var data = [String: Any]()
     data["userId"] = userId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        var counter = 0
-        
-        switch response.result {
-        case .success(let result):
-          let result = result as? [String: Any]
-          counter = result?["counter"] as? Int ?? 0
-        case .failure(let error):
-          print(error)
+    var userToken: String?
+    var counter = 0
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
-        
-        completion(counter)
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let result):
+                let result = result as? [String: Any]
+                counter = result?["counter"] as? Int ?? 0
+                done(nil)
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Notifications",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      completion(error, counter)
     }
   }
   
@@ -103,22 +148,15 @@ extension CSNotification {
       var totalTradeNotifications = 0
       
       if snap.exists() {
-        print(snap.children.allObjects.count)
+
         if let children = snap.children.allObjects as? [FIRDataSnapshot] {
-          
-          print(children.count)
           
           for dictionary in children {
             if let child = dictionary.value as? [String: Any] {
-              print(child)
               let chat = child["chat"] as? Int ?? 0
               let trade = child["trade"] as? Int ?? 0
               
-              print(chat)
-              print(trade)
-              
               let value = (chat + trade) > 0 ? 1 : 0
-              print(value)
               
               totalTradeNotifications += value
             }
@@ -146,7 +184,6 @@ extension CSNotification {
 //    let refDatabaseNotificationUser = refDatabaseNotification
 //                                              .child(userId)
 //                                              .child("chat")
-    print(refDatabaseNotificationUser.url)
     
     return refDatabaseNotificationUser.observe(.value, with: { (snap: FIRDataSnapshot) in
       if snap.exists() {
@@ -250,7 +287,7 @@ extension CSNotification {
       field: "chat",
       withValue: 0
     ) { (error) in
-      print(error)
+
     }
     
     refDatabaseNotificationUser.updateChildValues(values, withCompletionBlock: { (error: Error?, ref: FIRDatabaseReference) in
@@ -310,7 +347,6 @@ extension CSNotification {
       field: "trade",
       withValue: 0
     ) { (error) in
-        print(error)
     }
     
     refDatabaseNotificationUser.updateChildValues(values, withCompletionBlock: { (error: Error?, ref: FIRDatabaseReference) in

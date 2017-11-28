@@ -185,7 +185,7 @@ class TradeChatVC: JSQMessagesViewController {
             ofUserId: userId,
             withUserId: anotherUserId,
             completion: { [weak self] in
-              CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (counter) in
+              CSNotification.getNotificationsForAppIcon(userId: userId, completion: { (error, counter) in
                 UIApplication.shared.applicationIconBadgeNumber = counter
               })
               self?.updateInboxVC()
@@ -193,7 +193,7 @@ class TradeChatVC: JSQMessagesViewController {
         }
       } else {
         CSNotification.clearChatNotification(withDealId: dealId, andUserId: currentUserId) { (error) in
-          print(error)
+
         }
       }
       
@@ -202,7 +202,7 @@ class TradeChatVC: JSQMessagesViewController {
   }
   
   deinit {
-    print("deinit of trade chat vc")
+
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -278,7 +278,7 @@ class TradeChatVC: JSQMessagesViewController {
                 DispatchQueue.main.async {
                   SVProgressHUD.dismiss()
                 }
-                print(hoursLeft)
+
                 
                 if hoursLeft > 0 {
                   let alert = UIAlertController(title: "Error", message: "You already have a trade in progress with \(ownerName), Please wait \(hoursLeft) seconds before you submit a new request to \(ownerName) or wait for his response!", preferredStyle: .alert)
@@ -312,7 +312,7 @@ class TradeChatVC: JSQMessagesViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    print(inputToolbar.contentView.frame.height)
+
     date = Date()
     
     if let dealId = dealId {
@@ -359,7 +359,7 @@ class TradeChatVC: JSQMessagesViewController {
               self?.userImageView.sd_setImage(with: url)
             }
           case .fail(let error):
-            print(error)
+            break
           }
           
           done(nil)
@@ -493,7 +493,6 @@ extension TradeChatVC {
       }
     }
     
-    print("new message: \(statusMessageText)")
     
     let attributedString = NSAttributedString(string: statusMessageText, attributes: attributesStringStatusMessage)
     return attributedString
@@ -538,7 +537,6 @@ extension TradeChatVC {
         receiverId: anotherUserId,
         text: text,
         date: date) { [weak self] (error) in
-          print(error)
           
           if let this = self {
             if this.usedForInbox {
@@ -549,17 +547,18 @@ extension TradeChatVC {
                 date: Date(),
                 inboxId: dealId,
                 completion: { (error) in
-                  print(error)
                   
-                  //                  // test - probably to delete
-                  //                  Message.sendMessagePushNotification(
-                  //                    dealId: dealId,
-                  //                    senderId: senderId,
-                  //                    receiverId: this.anotherUserId,
-                  //                    text: text,
-                  //                    completion: { (_) in
-                  //
-                  //                  })
+                  if error == nil {
+                    // test - probably to delete
+                    Message.sendMessagePushNotification(
+                      dealId: dealId,
+                      senderId: senderId,
+                      receiverId: this.anotherUserId,
+                      text: text,
+                      completion: { (_) in
+                        
+                    })
+                  }
               })
             } else {
               // test
@@ -577,7 +576,7 @@ extension TradeChatVC {
                 withDealId: dealId,
                 andUserId: this.anotherUserId,
                 completion: { (error) in
-                  print(error)
+                  
                 }
               )
               
@@ -588,7 +587,7 @@ extension TradeChatVC {
                 field: "chat",
                 withValue: 1,
                 completion: { (error) in
-                  print(error)
+
               })
               // /test
             }

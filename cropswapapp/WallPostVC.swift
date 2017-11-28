@@ -131,7 +131,6 @@ public class WallPostVC: UITableViewController {
       self?.attachedPhotoStackView.isHidden = false
     }
     
-    print(image)
   }
   
   func cameraCancelled() {

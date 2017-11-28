@@ -92,14 +92,6 @@ class AddProduceContainerVC: UIViewController {
       let tags = addProduceChildVC.tagsToSave
       
       
-      
-      print("images: \(images)")
-      print("produce name: \(produceName)")
-      print("category: \(category)")
-      print("quantity: \(quantity)")
-      print("price: \(price)")
-      print("description: \(description)")
-      
       var firstImageData: Data?
       var secondImageData: Data?
       var thirdImageData: Data?
@@ -266,8 +258,6 @@ class AddProduceContainerVC: UIViewController {
         },
 
         { done in
-          print(firstPicURL)
-          print(secondPicURL)
           
           
           if self?.currentProduceId == nil {
@@ -397,8 +387,7 @@ class AddProduceContainerVC: UIViewController {
               self?.addItemButton.alpha = 1
             }
           }
-        case .fail(let error):
-          print(error)
+        case .fail(let error):break
         }
       }
     }
@@ -435,7 +424,6 @@ class AddProduceContainerVC: UIViewController {
   }
   
   func deleteButtonTouched() {
-    print("delete button touched")
     guard let produceId = currentProduceId else {
       return
     }
@@ -447,7 +435,6 @@ class AddProduceContainerVC: UIViewController {
     let alert = UIAlertController(title: "Info", message: "Are you sure you want to delete this produce?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
     alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
-      print("OK button option selected.")
       
       DispatchQueue.main.async {
         SVProgressHUD.show()

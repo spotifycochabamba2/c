@@ -125,7 +125,7 @@ extension HomeVC {
     
     time = Date()
     getNewProducesHandlerId = User.getProducesByListeningAddedNewOnes(fromTime: time) { [unowned self] (newProduce) in
-      print(newProduce)
+
       self.collectionView.performBatchUpdates({
         
         self.produces.insert(newProduce, at: 0)
@@ -152,7 +152,6 @@ extension HomeVC {
     
     
     getUpdatedProducesHandlerId = User.getProducesByListeningUpdatedOnes(completion: { (produceUpdated) in
-      print(produceUpdated)
       let produceIndex = self.produces.index(where: { (produce) -> Bool in
         return produce.id == produceUpdated.id
       })
@@ -331,7 +330,6 @@ extension HomeVC {
   
   func setNavBarButtons() {
     let leftButtonIcon = setNavIcon(imageName: "", size: CGSize(width: 0, height: 0), position: .left)
-    print(leftButtonIcon)
     
     let rightButtonIcon = setNavIcon(imageName: "home-nav-right-icon", size: CGSize(width: 27, height: 7), position: .right)
     rightButtonIcon.addTarget(self, action: #selector(rightButtonIconTouched), for: .touchUpInside)
@@ -341,8 +339,6 @@ extension HomeVC {
   }
   
   func rightButtonIconTouched() {
-    print("right button icon was touched")
-    
     performSegue(withIdentifier: Storyboard.HomeToProducesWanted, sender: nil)
     
 //    User.logout()
@@ -390,7 +386,6 @@ extension HomeVC {
     
     if bottomEdge >= collectionView.contentSize.height {
       if produces.count > 0 && !isGettingPaginatedDataFromServer && !isGettingFirstDataFromServer {
-        print("getting paginated data......")
         let lastProduceId = produces[produces.count - 1].id
         isGettingPaginatedDataFromServer = true
         SVProgressHUD.show()

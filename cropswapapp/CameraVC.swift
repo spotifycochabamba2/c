@@ -34,15 +34,13 @@ class CameraVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-  
-    print(photoNumber)
     
     do {
       if try cameraController.setupSession() {
         cameraView.setSession(cameraController.captureSession)
       }
     } catch {
-      print(error)
+
     }
 
   }
@@ -51,7 +49,7 @@ class CameraVC: UIViewController {
     do {
       try cameraController.switchCameras()
     } catch {
-      print(error)
+
     }
   }
   
@@ -86,10 +84,8 @@ class CameraVC: UIViewController {
   @IBAction func takeButtonTouched(_ sender: AnyObject) {
     
     cameraController.captureStillImage { [weak self] (image) in
-      print(image)
       let deviceSize = UIScreen.main.bounds.size
       let resizedImage = image.resizeImage(withTargerSize: deviceSize)
-      print(resizedImage)
       
       self?.performSegue(withIdentifier: Storyboard.CameraToCameraConfirm, sender: resizedImage)
     }

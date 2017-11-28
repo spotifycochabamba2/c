@@ -48,6 +48,8 @@ struct User {
   var radiusFilterInMiles: Int?
   var enabledRadiusFilter: Bool?
   
+  var produceCount: Int?
+  
   init?(json: [String: Any]?) {
     guard
       let json = json,
@@ -76,6 +78,8 @@ struct User {
     self.showAddress = json["showAddress"] as? Bool
     self.about = json["about"] as? String
     self.username = json["username"] as? String
+    
+    self.produceCount = json["produceCount"] as? Int
     
     self.radiusFilterInMiles = json["radiusFilterInMiles"] as? Int
     self.enabledRadiusFilter = json["enabledRadiusFilter"] as? Bool
@@ -110,7 +114,7 @@ struct User {
 extension User {
   static func getCoordinates(
     from: String,
-    completion: @escaping (_ latitude: Double, _ longitude: Double) -> Void
+    completion: @escaping (NSError?, _ latitude: Double, _ longitude: Double) -> Void
   ) {
     let url = "\(Constants.Server.stringURL)api/users/geocode"
     var latitude = Constants.Map.unitedStatesLat
@@ -119,35 +123,81 @@ extension User {
     var data = [String: Any]()
     data["query"] = from
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let data):
-          let dictionaries = data as? [String: Any]
-          
-          print(dictionaries)
-          print(dictionaries?["latitude"])
-          print(dictionaries?["longitude"])
-          if let lat = dictionaries?["latitude"] as? Double,
-             let lng = dictionaries?["longitude"] as? Double
-          {
-            latitude = lat
-            longitude = lng
-          }
-        case .failure(let error):
-          print(error)
-        }
-        
-        completion(latitude, longitude)
-    }
+    var userToken: String?
     
+    Ax.serial(tasks: [
+     
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let data):
+                let dictionaries = data as? [String: Any]
+                
+                if let lat = dictionaries?["latitude"] as? Double,
+                   let lng = dictionaries?["longitude"] as? Double
+                {
+                  latitude = lat
+                  longitude = lng
+                  
+                  done(nil)
+                } else {
+                  let message = dictionaries?["message"] as? String ?? ""
+                  
+                  let error = NSError(
+                    domain: "User",
+                    code: 0,
+                    userInfo: [
+                      NSLocalizedDescriptionKey: message
+                    ]
+                  )
+                  
+                  done(error)
+                }
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          done(nil)
+        }
+      }
+    ]) { (error) in
+      completion(error, latitude, longitude)
+    }
   }
   
 //  var senderId = req.body.senderId;
@@ -166,60 +216,153 @@ extension User {
     data["receiverId"] = receiverId
     data["dealId"] = dealId
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(_):
-          completion(nil)
-        case .failure(let error):
-          completion(error as NSError?)
+    var userToken: String?
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(_):
+                done(nil)
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "User",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
       }
+      
+    ]) { (error) in
+      completion(error)
+    }
   }
   
   static func getProducesBy(
     latitude: Double,
     longitude: Double,
     radius: Int,
-    completion: @escaping ([Produce], [String]) -> Void
+    completion: @escaping ([Produce], [String], NSError?) -> Void
   ) {
-    let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
-    let url = "\(Constants.Server.stringURL)api/users/location/produces?\(query)"
+    
+    var userToken: String?
     var produces = [Produce]()
     var userIds = [String]()
     
-    print(query)
-    
-    Alamofire
-      .request(
-        url,
-        method: .get,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let data):
-          let dictionaries = data as? [String: Any]
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-          if let producesFound = dictionaries?["produces"] as? [[String: Any]] ,
-             let userIdsFound = dictionaries?["userIds"] as? [String] {
-            produces = producesFound.flatMap { Produce(json: $0) }
-            userIds = userIdsFound
-          }
-        case .failure(let error):
-          print(error)
+          done(error)
         }
-        
-        completion(produces, userIds)
+      },
+      
+      { done in
+        if let token = userToken {
+          let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
+          let url = "\(Constants.Server.stringURL)api/users/location/produces?\(query)"
+          
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .get,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let data):
+                let dictionaries = data as? [String: Any]
+                
+                if let producesFound = dictionaries?["produces"] as? [[String: Any]] ,
+                  let userIdsFound = dictionaries?["userIds"] as? [String] {
+                  produces = producesFound.flatMap { Produce(json: $0) }
+                  userIds = userIdsFound
+                }
+              case .failure(let error):
+                break
+              }
+              
+              done(nil)
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      completion(produces, userIds, error)
     }
+
   }
   
   static func getUsersBy(
@@ -227,36 +370,79 @@ extension User {
     longitude: Double,
     radius: Int,
     completion: @escaping ([[String: Any]]) -> Void
-    ) {
+  ) {
     
-    let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
-    let url = "\(Constants.Server.stringURL)api/users/location?\(query)"
     var users = [[String: Any]]()
+    var userToken: String?
     
-    print(query)
-    
-    Alamofire
-      .request(
-        url,
-        method: .get,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let data):
-          let dictionaries = data as? [String: Any]
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-          if let usersFound = dictionaries?["users"] as? [[String: Any]] {
-            users = usersFound
-          }
-        case .failure(let error):
-          print(error)
+          done(error)
         }
-        
-        completion(users)
+      },
+      
+      { done in
+        if let token = userToken {
+          let query = "lat=\(latitude)&lng=\(longitude)&radius=\(radius)"
+          let url = "\(Constants.Server.stringURL)api/users/location?\(query)"
+          
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .get,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let data):
+                let dictionaries = data as? [String: Any]
+                
+                if let usersFound = dictionaries?["users"] as? [[String: Any]] {
+                  users = usersFound
+                }
+                done(nil)
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      }
+      
+    ]) { (error) in
+      completion(users)
     }
-    
   }
   
   static func isValid(email: String?) -> Result<Bool> {
@@ -332,6 +518,19 @@ extension User {
   static var refStorage = FIRStorage.storage().reference()
   static var refStorageUsers = refStorage.child("users")
   
+  static func listenChangesOnUsers(
+    completion: @escaping(User) -> Void
+  ) {
+    refDatabaseUsers.observe(.childChanged) { (snap: FIRDataSnapshot) in
+      if
+         let json = snap.value as? [String: Any],
+         let user = User.init(json: json)
+      {
+        completion(user)
+      }
+    }
+  }
+
   
   static func updateProduceCounter(
     userId: String,
@@ -344,10 +543,10 @@ extension User {
       
       if var user = currentData.value as? [String: Any] {
         
-        var produceCounter = user["produceCounter"] as? Int ?? 0
+        var produceCounter = user["produceCount"] as? Int ?? 0
         produceCounter += valueToAddOrSubtract
         
-        user["produceCounter"] = produceCounter
+        user["produceCount"] = produceCounter
         
         currentData.value = user
       }
@@ -362,7 +561,7 @@ extension User {
   ) {
     Algolia.searchForUsers(
       filter: filter
-    ) { (users) in
+    ) { (error, users) in
       completion(users)
     }
   }
@@ -375,7 +574,6 @@ extension User {
       for cookie in cookies {
 
         let domain = cookie.domain
-        print(domain)
         
         if domain == "www.instagram.com" ||
           domain == "api.instagram.com" {
@@ -388,7 +586,7 @@ extension User {
     do {
       try FIRAuth.auth()?.signOut()
     } catch let signoutError as NSError {
-      print(signoutError)
+
     }
     
   }
@@ -502,7 +700,6 @@ extension User {
   }
   
   static func getProducesOnce(byLimit: UInt, startingFrom: String, completion: @escaping ([Produce]) -> Void) {
-    print(startingFrom)
     let refProduces = refDatabaseProduces
                           .queryOrderedByKey()
                           .queryEnding(atValue: startingFrom)
@@ -534,7 +731,6 @@ extension User {
   }
   
   static func getProducesOnce(byLimit limit: UInt, completion: @escaping([Produce]) -> Void) -> Void {
-    print(limit)
     let refDescOrder = refDatabaseProduces
                             .queryOrdered(byChild: "timestamp")
                             .queryLimited(toFirst: limit + 1)
@@ -543,11 +739,9 @@ extension User {
     refDescOrder.observeSingleEvent(of: .value, with: { (snap: FIRDataSnapshot) in
       var produces = [Produce]()
       
-      print(snap.children.allObjects.count)
       snap.children.allObjects.forEach {
         let children = $0 as? FIRDataSnapshot
         let json = children?.value as? [String: Any]
-        print(json?["id"])
       }
       
       if snap.exists() {
@@ -573,7 +767,6 @@ extension User {
         
         if let dictionaries = snap.children.allObjects as? [FIRDataSnapshot] {
           produces = dictionaries.flatMap {
-            print($0.value)
             var item = $0.value as? [String: Any]
             
             item?["id"] = $0.key
@@ -590,7 +783,6 @@ extension User {
         }
 
       }
-      print(produces)
       completion(produces)
     }
     
@@ -608,8 +800,6 @@ extension User {
     
     if let userId = userId {
       let refUser = refDatabaseUsers.child(userId)
-      
-      print(refUser.url)
       
       refUser.observeSingleEvent(of: .value, with: { (snap) in
         if snap.exists() {
@@ -745,7 +935,7 @@ extension User {
       query += "\(zipCode) "
     }
     
-    User.getCoordinates(from: query, completion: { (latitude, longitude) in
+    User.getCoordinates(from: query, completion: { (error, latitude, longitude) in
 //      User.saveLatLong(
 //        byUserId: userId,
 //        latitude: latitude,
@@ -911,15 +1101,12 @@ extension User {
     var userExists = false
     
     if let firebaseToken = firebaseToken {
-      print(FIRAuth.auth()?.currentUser)
       
       Ax.serial(tasks: [
         
         { done in
           FIRAuth.auth()?.signIn(withCustomToken: firebaseToken) { (authUser, error) in
-            print(user)
             user.id = authUser?.uid
-            print(error)
             done(error as NSError?)
           }
         },
@@ -1170,7 +1357,6 @@ extension User {
     userIdTwo: String?,
     completion: @escaping (Result<[String:Any]?>) -> Void
   ) {
-    
     guard let userIdOne = userIdOne else {
       let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "User Id One invalid."])
       completion(Result.fail(error: error))
@@ -1189,35 +1375,86 @@ extension User {
     data["userOneId"] = userIdOne
     data["userTwoId"] = userIdTwo
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(let data):
-          let dictionary = data as? [String: Any]
+    var userToken: String?
+    var deals: [String: Any]?
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-          print(data as? [String: Any])
-          print(dictionary?["deal"] as? [String: Any])
+          done(error)
+        }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
           
-          if let _ = dictionary?["error"] as? Bool {
-            let message = dictionary?["message"]
-            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: message])
-            
-            completion(Result.fail(error: error))
-          } else {
-            completion(Result.success(data: dictionary?["deal"] as? [String: Any]))
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(let data):
+                let dictionary = data as? [String: Any]
+                
+                if let _ = dictionary?["error"] as? Bool {
+                  let message = dictionary?["message"]
+                  let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: message])
+
+                  done(error)
+                } else {
+                  deals = dictionary?["deal"] as? [String: Any]
+                  
+                  done(nil)
+                }
+                
+              case .failure(let error):
+                done(error as NSError?)
+              }
           }
+        } else {
+          let error = NSError(
+            domain: "User",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
           
-        case .failure(let error):
-          completion(Result.fail(error: error as NSError))
+          done(error)
         }
       }
+      
+    ]) { (error) in
+      if let error = error {
+        completion(Result.fail(error: error))
+      } else {
+        completion(Result.success(data: deals))
+      }
+    }
   }
   
   static func sendDealPushNotification(
@@ -1236,23 +1473,70 @@ extension User {
     data["dealId"] = dealId
     data["dealState"] = dealState
     
-    Alamofire
-      .request(
-        url,
-        method: .post,
-        parameters: data,
-        encoding: JSONEncoding.default
-      )
-      .validate()
-      .responseJSON { (response) in
-        switch response.result {
-        case .success(_):
-          completion(nil)
-        case .failure(let error):
-          completion(error as NSError?)
+    var userToken: String?
+    
+    Ax.serial(tasks: [
+      
+      { done in
+        if let user = FIRAuth.auth()?.currentUser {
+          user.getTokenForcingRefresh(true, completion: { (token, error) in
+            userToken = token
+            done(error as NSError?)
+          })
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
+        }
+      },
+      
+      { done in
+        if let token = userToken {
+          let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Accept": "application/json"
+          ]
+          
+          Alamofire
+            .request(
+              url,
+              method: .post,
+              parameters: data,
+              encoding: JSONEncoding.default,
+              headers: headers
+            )
+            .validate()
+            .responseJSON { (response) in
+              switch response.result {
+              case .success(_):
+                completion(nil)
+                done(nil)
+              case .failure(let error):
+                done(error as NSError?)
+              }
+          }
+        } else {
+          let error = NSError(
+            domain: "Auth",
+            code: 0,
+            userInfo: [
+              NSLocalizedDescriptionKey: "User Token was expired, log in again please."
+            ]
+          )
+          
+          done(error)
         }
       }
-    
+      
+    ]) { (error) in
+      completion(error)
+    }
   }
   
 
@@ -1265,7 +1549,6 @@ extension User {
       .responseJSON { (response) in
         switch response.result {
         case .success(let data):
-          print(data)
           let json = JSON(data)
           
           guard

@@ -306,7 +306,7 @@ class TradeStatusVC: UIViewController {
 //                )
               }
             case .fail(let error):
-              print(error)
+              break
             }
             done(nil)
           })
@@ -371,7 +371,7 @@ class TradeStatusVC: UIViewController {
                         self?.anotherImageView.sd_setImage(with: url)
                       }
                     case .fail(let error):
-                      print(error)
+                      break
                     }
                     
                     done(nil)
@@ -403,7 +403,7 @@ class TradeStatusVC: UIViewController {
                         self?.yourImageView.sd_setImage(with: url)
                       }
                     case .fail(let error):
-                      print(error)
+                      break
                     }
                     
                     done(nil)
@@ -459,7 +459,6 @@ class TradeStatusVC: UIViewController {
                 }
               }
             case .fail(let error):
-              print(error)
               break
             }
             

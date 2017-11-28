@@ -27,7 +27,7 @@ class SearchingResultCell: UITableViewCell {
       }
       
       nameLabel.text = "\(name) \(lastName)"
-      print(about)
+
       statusLabel.text = about
     }
   }

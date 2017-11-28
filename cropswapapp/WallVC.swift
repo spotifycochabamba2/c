@@ -59,7 +59,6 @@ extension WallVC {
     let cell = tableView.dequeueReusableCell(withIdentifier: WallPostCell.identifier, for: indexPath) as! WallPostCell
     let post = posts[indexPath.row]
     
-    print(post.1)
     cell.index = indexPath.row
     cell.post = post.0
     cell.commentsExpanded = post.1

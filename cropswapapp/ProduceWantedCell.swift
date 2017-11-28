@@ -41,7 +41,7 @@ class ProduceWantedCell: UICollectionViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    print(circleView.frame.size.width)
+
     circleView.layer.cornerRadius = 90.5 / 2
   }
 }
